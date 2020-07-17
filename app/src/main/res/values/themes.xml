@@ -1,9 +1,13 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorSurface">@color/surfaceColor</item>
+        <item name="backgroundColor">@color/backgroundColor</item>
+
+        <item name="textAppearanceHeadline6">@style/TextAppearance.H6</item>
+
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
 
 </resources>
