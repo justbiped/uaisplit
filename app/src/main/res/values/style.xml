@@ -16,4 +16,9 @@
         <item name="android:textAppearance">?textAppearanceBody2</item>
         <item name="android:textColor">?android:textColorSecondary</item>
     </style>
+
+    <style name="Widget.TextView.Caption" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?textAppearanceCaption</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
 </resources>

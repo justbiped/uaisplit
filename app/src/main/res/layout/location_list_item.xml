@@ -57,7 +57,7 @@
 
         <TextView
             android:id="@+id/textView3"
-            style="?textAppearanceCaption"
+            style="?textViewCaptionStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

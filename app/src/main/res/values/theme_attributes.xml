@@ -2,4 +2,5 @@
 <resources>
     <attr name="textViewH6Style" format="reference" />
     <attr name="textViewBody2Style" format="reference" />
+    <attr name="textViewCaptionStyle" format="reference" />
 </resources>
