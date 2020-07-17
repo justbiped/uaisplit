@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/locationImageView"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:adjustViewBounds="true"
@@ -24,29 +24,30 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/locationNameText"
             style="?textViewH6Style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintBottom_toTopOf="@+id/locationTypeText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/locationImageView"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Some Place" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/locationTypeText"
             style="?textViewBody2Style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/textView3"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintBottom_toTopOf="@+id/locationRatingText"
+            app:layout_constraintEnd_toEndOf="@+id/locationNameText"
+            app:layout_constraintStart_toStartOf="@+id/locationNameText"
+            app:layout_constraintTop_toBottomOf="@+id/locationNameText"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="Some Type" />
 
         <RatingBar
@@ -56,21 +57,22 @@
             android:layout_height="wrap_content"
             android:isIndicator="true"
             android:numStars="5"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintBottom_toBottomOf="@+id/locationRatingText"
+            app:layout_constraintStart_toStartOf="@+id/locationTypeText"
+            app:layout_constraintTop_toTopOf="@+id/locationRatingText"
             tools:rating="2" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/locationRatingText"
             style="?textViewCaptionStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="@+id/locationTypeText"
             app:layout_constraintStart_toEndOf="@+id/ratingBar"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/locationTypeText"
             tools:text="3.5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
