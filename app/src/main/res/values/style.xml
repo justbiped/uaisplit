@@ -12,8 +12,8 @@
         <item name="android:textColor">?colorPrimary</item>
     </style>
 
-    <style name="Widget.TextView.Body1" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textAppearance">?textAppearanceHeadline6</item>
-        <item name="android:textColor">?colorPrimary</item>
+    <style name="Widget.TextView.Body2" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?textAppearanceBody2</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 </resources>
