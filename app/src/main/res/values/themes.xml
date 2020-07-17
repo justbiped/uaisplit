@@ -1,5 +1,5 @@
 <resources>
-    <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorSurface">@color/surfaceColor</item>

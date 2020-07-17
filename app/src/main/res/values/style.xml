@@ -7,6 +7,7 @@
         <item name="android:maxHeight">10dp</item>
     </style>
 
+    <!--Text View-->
     <style name="Widget.TextView.H6" parent="Widget.MaterialComponents.TextView">
         <item name="android:textAppearance">?textAppearanceHeadline6</item>
         <item name="android:textColor">?colorPrimary</item>
