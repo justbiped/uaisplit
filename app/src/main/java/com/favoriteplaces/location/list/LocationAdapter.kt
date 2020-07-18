@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
+
 import com.favoriteplaces.R
 import kotlinx.android.synthetic.main.location_list_item.view.*
 
@@ -28,6 +30,7 @@ class LocationAdapter :
             itemView.locationNameText.text = location.name
             itemView.locationTypeText.text = location.type
             itemView.locationRatingText.text = "${location.review}"
+            itemView.locationImageView.load(location.image)
         }
     }
 

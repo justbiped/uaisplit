@@ -32,7 +32,10 @@ android {
 
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
 
             buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:8080/\"")
         }
@@ -40,6 +43,10 @@ android {
         getByName("debug") {
             buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:8080/\"")
         }
+    }
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
+        kotlinOptions.jvmTarget = "1.8"
     }
 }
 
@@ -61,6 +68,8 @@ dependencies {
     implementation(Dependencies.Androidx.lifecycleLiveData)
     implementation(Dependencies.Androidx.lifecycleViewModel)
     implementation(Dependencies.Androidx.lifecycleExtensions)
+
+    implementation(Dependencies.coil)
 
     testImplementation(Dependencies.Test.jUnit)
     testImplementation(Dependencies.Test.mockitoInline)

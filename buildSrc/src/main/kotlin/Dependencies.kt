@@ -32,18 +32,6 @@ object Dependencies {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     }
 
-    const val materialDesign = "com.google.android.material:material:1.1.0"
-
-    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-    const val httpLogging = "com.squareup.okhttp3:logging-interceptor:3.8.0"
-
-    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
-    const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
-    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-    const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
-
     object Test {
         const val jUnit = "junit:junit:4.13"
         const val mockitoInline = "org.mockito:mockito-inline:2.28.2"
@@ -62,6 +50,20 @@ object Dependencies {
         const val runner = "androidx.test:runner:1.2.0"
         const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
     }
+
+    const val materialDesign = "com.google.android.material:material:1.1.0"
+
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    const val httpLogging = "com.squareup.okhttp3:logging-interceptor:3.8.0"
+
+    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
+    const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
+
+    const val coil = "io.coil-kt:coil:0.11.0"
 }
 
 object Plugins {
