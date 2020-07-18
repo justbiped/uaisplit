@@ -16,9 +16,11 @@
         <ImageView
             android:id="@+id/locationImageView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
             android:scaleType="centerCrop"
+            android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="214dp"
+            app:layout_constraintHeight_min="136dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

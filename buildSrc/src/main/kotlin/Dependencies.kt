@@ -13,17 +13,13 @@ object Dependencies {
         const val activity = "androidx.activity:activity-ktx:1.1.0"
         const val fragment = "androidx.fragment:fragment-ktx:1.2.4"
 
-        const val lifecycleLiveData =
-            "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-        const val lifecycleExtensions =
-            "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
-        const val lifecycleViewModel =
-            "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+        const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
 
-        const val navigationFragment =
-            "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     }
 

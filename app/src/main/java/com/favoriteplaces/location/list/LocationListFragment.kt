@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.favoriteplaces.R
+import com.favoriteplaces.location.list.data.LocationUIModel
 import kotlinx.android.synthetic.main.location_list_fragment.*
 
 class LocationListFragment : Fragment(R.layout.location_list_fragment) {

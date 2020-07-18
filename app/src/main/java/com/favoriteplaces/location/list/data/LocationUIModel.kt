@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.list
+package com.favoriteplaces.location.list.data
 
 data class LocationUIModel(
     val id: Int,
