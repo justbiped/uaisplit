@@ -1,5 +1,6 @@
 package com.favoriteplaces.location.list
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import coil.api.load
 import com.favoriteplaces.R
 import com.favoriteplaces.location.list.data.LocationUIModel
 import kotlinx.android.synthetic.main.location_list_item.view.*
+import kotlin.random.Random
 
 class LocationAdapter :
     ListAdapter<LocationUIModel, LocationAdapter.LocationViewHolder>(diffTool) {
@@ -31,9 +33,18 @@ class LocationAdapter :
             itemView.locationNameText.text = location.name
             itemView.locationTypeText.text = location.type
             itemView.locationRatingText.text = "${location.review}"
-            itemView.locationImageView.load(location.image)
+            itemView.locationImageView.load(location.image) {
+                placeholder(getPlaceHolder())
+            }
         }
     }
+
+    private fun getPlaceHolder() = when (Random.nextInt(0, 4)) {
+        0 -> R.color.turquoise_100
+        1 -> R.color.red_100
+        else -> R.color.yellow_200
+    }
+
 
     companion object {
         val diffTool = object : DiffUtil.ItemCallback<LocationUIModel>() {

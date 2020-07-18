@@ -7,5 +7,10 @@
     <color name="gray_900">#333333</color>
     <color name="black">#000000</color>
 
+    <color name="turquoise_100">#d0fdef</color>
     <color name="turquoise_600">#14ADB8</color>
+
+    <color name="red_100">#ffdae0</color>
+
+    <color name="yellow_200">#fcffb1</color>
 </resources>
