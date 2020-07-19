@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getCoreComponent
-import com.favoriteplaces.core.injection.CoreInjector
 import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.data.LocationUIModel
 import kotlinx.android.synthetic.main.location_list_fragment.*

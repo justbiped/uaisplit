@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.data
+package com.favoriteplaces.location.list.data
 
 import com.favoriteplaces.location.Location
 import com.squareup.moshi.Json

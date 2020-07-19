@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.favoriteplaces.location.data.LocationHttpClient
+import com.favoriteplaces.location.LocationInteractor
 import com.favoriteplaces.location.list.data.LocationUIModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LocationListViewModel @Inject constructor(locationHttpClient: LocationHttpClient) :
+class LocationListViewModel @Inject constructor(private val locationInteractor: LocationInteractor) :
     ViewModel() {
 
     private val _locationList = MutableLiveData<List<LocationUIModel>>()
@@ -18,11 +18,12 @@ class LocationListViewModel @Inject constructor(locationHttpClient: LocationHttp
     init {
 
         viewModelScope.launch {
-            val locationsListRemote = locationHttpClient.fetchLocations()
-            val locations = locationsListRemote.toDomainLocations()
-            val locationsUI = locations.map { LocationUIModel.fromDomain(it) }
+            val locationResult = locationInteractor.loadLocations()
 
-            _locationList.postValue(locationsUI)
+            locationResult.onSuccess { locations ->
+                val locationsUI = locations.map { LocationUIModel.fromDomain(it) }
+                _locationList.postValue(locationsUI)
+            }
         }
     }
 }
