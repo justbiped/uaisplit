@@ -46,6 +46,17 @@ class LocationListViewModelTest {
         verify(observer).onChanged(isA<State.Success>())
     }
 
+    @Test
+    fun `emits failed state when locations loading was failure`() = runBlocking {
+        val observer = mock<Observer<Instruction>>()
+        whenever(locationInteractor.loadLocations()).thenReturn(Result.failure(Exception("")))
+
+        val viewModel = getViewModel()
+        viewModel.viewInstruction.observeForever(observer)
+
+        verify(observer).onChanged(isA<State.Failed>())
+    }
+
 
     private fun getViewModel() =
         LocationListViewModel(LocationListViewInstruction(), locationInteractor)
