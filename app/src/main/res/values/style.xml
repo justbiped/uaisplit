@@ -22,4 +22,9 @@
         <item name="android:textAppearance">?textAppearanceCaption</item>
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
+
+    <!--Bars-->
+    <style name="Widget.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconTint">@color/bottom_menu_home_item_color_selector</item>
+    </style>
 </resources>
