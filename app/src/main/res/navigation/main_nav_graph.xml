@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/locationListFragment">
-    <fragment
-        android:id="@+id/locationListFragment"
-        android:name="com.favoriteplaces.location.list.LocationListFragment"
-        android:label="LocationListFragment"
-        tools:layout="@layout/location_list_fragment">
-        <action
-            android:id="@+id/fromLocationListToLocationDetails"
-            app:destination="@id/locationDetailsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/locationDetailsFragment"
-        android:name="com.favoriteplaces.location.details.LocationDetailsFragment"
-        android:label="LocationDetailsFragment"
-        tools:layout="@layout/location_details_fragment" />
+    app:startDestination="@id/location_nav_graph">
+
+    <include app:graph="@navigation/location_nav_graph" />
 </navigation>
