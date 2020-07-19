@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="BaseTheme">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorSurface">@color/surfaceColor</item>
         <item name="backgroundColor">@color/backgroundColor</item>
@@ -23,4 +23,7 @@
         <item name="bottomNavigationStyle">@style/Widget.BottomNavigationView</item>
     </style>
 
+    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimaryDark">?colorPrimary</item>
+    </style>
 </resources>
