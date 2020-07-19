@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.downstairs.eatat.core.tools.Instruction
+import com.downstairs.eatat.core.tools.SingleLiveEvent
 import com.favoriteplaces.location.Location
 import com.favoriteplaces.location.LocationInteractor
 import com.favoriteplaces.location.list.data.LocationUIModel
@@ -17,7 +18,7 @@ class LocationListViewModel
     private val locationInteractor: LocationInteractor
 ) : ViewModel() {
 
-    private val _viewInstruction = MutableLiveData<Instruction>()
+    private val _viewInstruction = SingleLiveEvent<Instruction>()
     val viewInstruction: LiveData<Instruction> = _viewInstruction
 
     private val _locationList = MutableLiveData<List<LocationUIModel>>()
