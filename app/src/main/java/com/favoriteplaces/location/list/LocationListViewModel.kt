@@ -24,11 +24,7 @@ class LocationListViewModel
     private val _locationList = MutableLiveData<List<LocationUIModel>>()
     val locationList: LiveData<List<LocationUIModel>> = _locationList
 
-    init {
-        loadLocations()
-    }
-
-    private fun loadLocations() {
+    fun loadLocations() {
         _viewInstruction.postValue(instruction.loading())
 
         viewModelScope.launch {

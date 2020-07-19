@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.details
+package com.favoriteplaces.location.detail
 
 import android.content.Context
 import android.graphics.Color

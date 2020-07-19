@@ -1,3 +1,10 @@
-package com.favoriteplaces.location.details.data
+package com.favoriteplaces.location.detail.data
 
-data class LocationDetailRemoteEntity(val id: Int)
+import com.favoriteplaces.location.detail.LocationDetail
+
+data class LocationDetailRemoteEntity(val id: Int) {
+
+    fun toDomain(): LocationDetail {
+        return LocationDetail(2)
+    }
+}

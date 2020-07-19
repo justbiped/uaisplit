@@ -31,9 +31,11 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupLocationsRecycler()
         setupObservers()
         setupListeners()
+        setupLocationsRecycler()
+
+        viewModel.loadLocations()
     }
 
     private fun setupLocationsRecycler() {

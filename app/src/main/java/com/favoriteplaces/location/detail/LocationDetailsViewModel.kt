@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.details
+package com.favoriteplaces.location.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +18,7 @@ class LocationDetailsViewModel @Inject constructor(
 //    private val _locationList = MutableLiveData<List<LocationUIModel>>()
 //    val locationList: LiveData<List<LocationUIModel>> = _locationList
 
-    fun loadLocationDetails(locationId:Int) {
+    suspend fun loadLocationDetails(locationId: Int) {
         interactor.loadLocationDetails(locationId)
     }
 }

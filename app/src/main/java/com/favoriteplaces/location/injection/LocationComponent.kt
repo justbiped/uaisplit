@@ -2,6 +2,7 @@ package com.favoriteplaces.location.injection
 
 import com.favoriteplaces.core.injection.CoreComponent
 import com.favoriteplaces.core.injection.FeatureScope
+import com.favoriteplaces.location.detail.LocationDetailsFragment
 import com.favoriteplaces.location.list.LocationListFragment
 import dagger.Component
 
@@ -15,4 +16,6 @@ interface LocationComponent {
     }
 
     fun inject(fragment: LocationListFragment)
+
+    fun inject(fragment: LocationDetailsFragment)
 }
