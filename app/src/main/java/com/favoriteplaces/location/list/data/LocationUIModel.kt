@@ -5,7 +5,7 @@ import com.favoriteplaces.location.Location
 data class LocationUIModel(
     val id: Int,
     val name: String,
-    val review: Number,
+    val review: Double,
     val type: String,
     val image: String
 ) {

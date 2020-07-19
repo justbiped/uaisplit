@@ -40,10 +40,9 @@ class LocationAdapter :
         fun bind(location: LocationUIModel) {
             itemView.locationNameText.text = location.name
             itemView.locationTypeText.text = location.type
+            itemView.locationImageView.load(location.image) { placeholder(getPlaceHolder()) }
             itemView.locationRatingText.text = "${location.review}"
-            itemView.locationImageView.load(location.image) {
-                placeholder(getPlaceHolder())
-            }
+            itemView.ratingBar.rating = location.review.toFloat()
         }
     }
 
