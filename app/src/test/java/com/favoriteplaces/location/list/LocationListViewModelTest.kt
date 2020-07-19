@@ -3,12 +3,11 @@ package com.favoriteplaces.location.list
 import androidx.lifecycle.Observer
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.State
+import com.favoriteplaces.location.Location
 import com.favoriteplaces.location.LocationInteractor
+import com.favoriteplaces.location.list.data.LocationUIModel
 import com.favoriteplaces.tools.InstantTaskRule
-import com.nhaarman.mockitokotlin2.isA
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
@@ -24,6 +23,27 @@ class LocationListViewModelTest {
 
     @Mock
     lateinit var locationInteractor: LocationInteractor
+
+    @Test
+    fun `emits location list when fetch locations is successfully done`() = runBlocking {
+        val observer = mock<Observer<List<LocationUIModel>>>()
+        val locationList = listOf(Location(0, "Some Location", 4.5, "Pub"))
+        whenever(locationInteractor.loadLocations()).thenReturn(Result.success(locationList))
+
+        val viewModel = getViewModel()
+        viewModel.locationList.observeForever(observer)
+
+        verify(observer).onChanged(argThat {
+            first() == LocationUIModel(
+                0,
+                "Some Location",
+                4.5,
+                "Pub",
+                "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=adult-beard-boy-casual-220453.jpg&fm=jpg"
+            )
+        })
+    }
+
 
     @Test
     fun `emits loading state when starts to fetch locations`() = runBlocking {
