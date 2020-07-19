@@ -56,12 +56,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
+                android:isIndicator="true"
                 android:numStars="5"
+                tools:rating="3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/locationDetailsNameText"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/locationDetailsNameText"
                 app:layout_constraintTop_toBottomOf="@+id/locationDetailsNameText" />
+
+            <TextView
+                style="?textViewBody2Style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="?colorOnPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/locationDetailsRatingBar"
+                app:layout_constraintEnd_toEndOf="@+id/locationDetailsNameText"
+                app:layout_constraintStart_toEndOf="@+id/locationDetailsRatingBar"
+                app:layout_constraintTop_toTopOf="@+id/locationDetailsRatingBar"
+                tools:text="4.1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
