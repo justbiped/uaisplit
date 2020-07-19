@@ -14,6 +14,8 @@
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
 
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Rounded.16</item>
+
         <item name="textViewH6Style">@style/Widget.TextView.H6</item>
         <item name="textViewBody2Style">@style/Widget.TextView.Body2</item>
         <item name="textViewCaptionStyle">@style/Widget.TextView.Caption</item>
