@@ -2,6 +2,7 @@ package com.favoriteplaces.location.list
 
 import androidx.lifecycle.Observer
 import com.downstairs.eatat.core.tools.Instruction
+import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.location.Location
 import com.favoriteplaces.location.LocationInteractor
@@ -34,13 +35,7 @@ class LocationListViewModelTest {
         viewModel.locationList.observeForever(observer)
 
         verify(observer).onChanged(argThat {
-            first() == LocationUIModel(
-                0,
-                "Some Location",
-                4.5,
-                "Pub",
-                "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=adult-beard-boy-casual-220453.jpg&fm=jpg"
-            )
+            first() == getLocationUIModel()
         })
     }
 
@@ -77,7 +72,33 @@ class LocationListViewModelTest {
         verify(observer).onChanged(isA<State.Failed>())
     }
 
+    @Test
+    fun `navigates to location details when a location was selected`() {
+        runBlocking {
+            val observer = mock<Observer<Instruction>>()
+            val instruction = spy(LocationListViewInstruction())
+            val locationUIModel = getLocationUIModel()
+            whenever(locationInteractor.loadLocations()).thenReturn(Result.success(emptyList()))
 
-    private fun getViewModel() =
-        LocationListViewModel(LocationListViewInstruction(), locationInteractor)
+            val viewModel = getViewModel(instruction)
+            viewModel.viewInstruction.observeForever(observer)
+            viewModel.onLocationSelected(locationUIModel)
+
+            verify(instruction).navigateToLocationDetails(locationUIModel)
+            verify(observer).onChanged(isA<Navigation>())
+        }
+    }
+
+    private fun getViewModel(instruction: LocationListViewInstruction = LocationListViewInstruction()) =
+        LocationListViewModel(instruction, locationInteractor)
+
+    private fun getLocationUIModel(): LocationUIModel {
+        return LocationUIModel(
+            0,
+            "Some Location",
+            4.5,
+            "Pub",
+            "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=adult-beard-boy-casual-220453.jpg&fm=jpg"
+        )
+    }
 }

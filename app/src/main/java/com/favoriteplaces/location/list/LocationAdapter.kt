@@ -15,6 +15,12 @@ import kotlin.random.Random
 class LocationAdapter :
     ListAdapter<LocationUIModel, LocationAdapter.LocationViewHolder>(diffTool) {
 
+    private var onItemClicked: (location: LocationUIModel) -> Unit = {}
+
+    fun setItemClickListener(listener: (location: LocationUIModel) -> Unit) {
+        onItemClicked = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.location_list_item, parent, false)
@@ -26,6 +32,10 @@ class LocationAdapter :
     }
 
     inner class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        init {
+            itemView.setOnClickListener { onItemClicked(getItem(adapterPosition)) }
+        }
 
         fun bind(location: LocationUIModel) {
             itemView.locationNameText.text = location.name
@@ -43,12 +53,10 @@ class LocationAdapter :
         else -> R.color.yellow_200
     }
 
-
     companion object {
         val diffTool = object : DiffUtil.ItemCallback<LocationUIModel>() {
             override fun areItemsTheSame(oldItem: LocationUIModel, newItem: LocationUIModel) =
                 oldItem == newItem
-
 
             override fun areContentsTheSame(oldItem: LocationUIModel, newItem: LocationUIModel) =
                 oldItem.id == newItem.id

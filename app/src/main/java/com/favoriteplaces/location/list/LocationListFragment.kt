@@ -6,8 +6,10 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.downstairs.eatat.core.tools.Instruction
+import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getCoreComponent
@@ -31,6 +33,7 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupLocationsRecycler()
         setupObservers()
+        setupListeners()
     }
 
     private fun setupLocationsRecycler() {
@@ -43,11 +46,21 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
         viewModel.locationList.observe(viewLifecycleOwner, Observer { onLocationListResult(it) })
     }
 
+    private fun setupListeners() {
+        getLocationAdapter()?.setItemClickListener {
+            viewModel.onLocationSelected(it)
+        }
+    }
+
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
             is State.Success -> toDefaultState()
             is State.Loading -> toLoadingState()
             is State.Failed -> toDefaultState()
+            is Navigation -> findNavController().navigate(
+                instruction.destination,
+                instruction.bundledArgs
+            )
         }
     }
 

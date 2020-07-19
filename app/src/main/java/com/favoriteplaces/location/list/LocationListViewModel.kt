@@ -49,4 +49,8 @@ class LocationListViewModel
         _locationList.postValue(locationsUI)
         _viewInstruction.postValue(instruction.success())
     }
+
+    fun onLocationSelected(locationUIModel: LocationUIModel) {
+        _viewInstruction.postValue(instruction.navigateToLocationDetails(locationUIModel))
+    }
 }

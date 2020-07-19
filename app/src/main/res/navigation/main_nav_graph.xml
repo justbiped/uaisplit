@@ -8,5 +8,13 @@
         android:id="@+id/locationListFragment"
         android:name="com.favoriteplaces.location.list.LocationListFragment"
         android:label="LocationListFragment"
-        tools:layout="@layout/location_list_fragment" />
+        tools:layout="@layout/location_list_fragment" >
+        <action
+            android:id="@+id/fromLocationListToLocationDetails"
+            app:destination="@id/locationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationDetailsFragment"
+        android:name="com.favoriteplaces.location.details.LocationDetailsFragment"
+        android:label="LocationDetailsFragment" />
 </navigation>
