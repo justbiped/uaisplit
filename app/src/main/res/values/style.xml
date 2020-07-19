@@ -7,7 +7,18 @@
         <item name="android:maxHeight">10dp</item>
     </style>
 
+    <style name="Widget.RatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/ic_normal_rating</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">16dp</item>
+    </style>
+
     <!--Text View-->
+    <style name="Widget.TextView.H4" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?textAppearanceHeadline4</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
     <style name="Widget.TextView.H6" parent="Widget.MaterialComponents.TextView">
         <item name="android:textAppearance">?textAppearanceHeadline6</item>
         <item name="android:textColor">?colorPrimary</item>

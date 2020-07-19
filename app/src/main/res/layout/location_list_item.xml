@@ -16,8 +16,8 @@
         <ImageView
             android:id="@+id/locationImageView"
             android:layout_width="match_parent"
-            android:scaleType="centerCrop"
             android:layout_height="0dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="214dp"
             app:layout_constraintHeight_min="136dp"
@@ -54,7 +54,7 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
-            style="@style/Widget.RatingBar.Small"
+            style="?ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:isIndicator="true"

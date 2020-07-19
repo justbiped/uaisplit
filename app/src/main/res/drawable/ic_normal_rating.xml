@@ -2,13 +2,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@android:id/background"
-        android:drawable="@drawable/ic_star_small_off" />
+        android:drawable="@drawable/ic_star_normal_off" />
     <item
         android:id="@android:id/secondaryProgress"
-        android:drawable="@drawable/ic_star_small_on" />
+        android:drawable="@drawable/ic_star_normal_on" />
     <item android:id="@android:id/progress">
         <bitmap
-            android:src="@drawable/ic_star_small_on"
+            android:src="@drawable/ic_star_normal_on"
             android:tileModeX="repeat" />
     </item>
 </layer-list>
