@@ -1,17 +1,29 @@
 package com.favoriteplaces.location.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.favoriteplaces.R
+import com.favoriteplaces.core.injection.CoreInjector
+import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.data.LocationUIModel
 import kotlinx.android.synthetic.main.location_list_fragment.*
+import javax.inject.Inject
 
 class LocationListFragment : Fragment(R.layout.location_list_fragment) {
 
-    private val viewModel = LocationListViewModel()
+    @Inject
+    lateinit var viewModel: LocationListViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        DaggerLocationComponent.factory()
+            .create((context.applicationContext as CoreInjector).coreComponent)
+            .inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupLocationsRecycler()

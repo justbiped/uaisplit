@@ -37,11 +37,11 @@ android {
                 "proguard-rules.pro"
             )
 
-            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:8080/\"")
+            buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
 
         getByName("debug") {
-            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:8080/\"")
+            buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }
 
@@ -70,6 +70,16 @@ dependencies {
     implementation(Dependencies.Androidx.lifecycleExtensions)
 
     implementation(Dependencies.coil)
+
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.retrofitMoshi)
+    implementation(Dependencies.httpLogging)
+
+    implementation(Dependencies.dagger)
+    implementation(Dependencies.daggerAndroid)
+    implementation(Dependencies.daggerSupport)
+    kapt(Dependencies.daggerCompiler)
+    kapt(Dependencies.daggerProcessor)
 
     testImplementation(Dependencies.Test.jUnit)
     testImplementation(Dependencies.Test.mockitoInline)
