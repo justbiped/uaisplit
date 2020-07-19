@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/home_navigation_bar_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
