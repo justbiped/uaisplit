@@ -4,17 +4,17 @@
 
     <item
         android:id="@id/location_nav_graph"
-        android:icon="@drawable/ic_home_on"
+        android:icon="@drawable/bottom_navigation_home_icon_selector"
         android:title="@string/home"
         app:showAsAction="always" />
 
     <item
-        android:icon="@drawable/ic_map_on"
+        android:icon="@drawable/bottom_navigation_map_icon_selector"
         android:title="@string/map"
         app:showAsAction="always" />
 
     <item
-        android:icon="@drawable/ic_profile_on"
+        android:icon="@drawable/bottom_navigation_profile_icon_selector"
         android:title="@string/map"
         app:showAsAction="always" />
 </menu>
