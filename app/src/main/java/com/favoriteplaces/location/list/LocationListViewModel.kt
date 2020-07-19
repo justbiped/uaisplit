@@ -16,7 +16,10 @@ class LocationListViewModel @Inject constructor(private val locationInteractor: 
     val locationList: LiveData<List<LocationUIModel>> = _locationList
 
     init {
+        loadLocations()
+    }
 
+    private fun loadLocations() {
         viewModelScope.launch {
             val locationResult = locationInteractor.loadLocations()
 
