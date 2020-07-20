@@ -34,7 +34,9 @@ class LocationAdapter :
     inner class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         init {
-            itemView.setOnClickListener { onItemClicked(getItem(adapterPosition)) }
+            itemView.setOnClickListener {
+                onItemClicked(getItem(adapterPosition))
+            }
         }
 
         fun bind(location: LocationUIModel) {

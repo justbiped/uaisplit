@@ -1,6 +1,8 @@
 package com.favoriteplaces.location
 
 import com.favoriteplaces.location.data.LocationRepository
+import com.favoriteplaces.location.detail.data.LocationDetail
+import com.favoriteplaces.location.detail.data.Schedule
 import com.favoriteplaces.location.list.data.Location
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
@@ -49,6 +51,44 @@ class LocationInteractorTest {
             assertThat(result.exceptionOrNull()).isEqualTo(exception)
         }
     }
+
+    @Test
+    fun `returns success result with location detail when location detail fetch was successful`() {
+        runBlocking {
+            val locationDetail = getLocationDetail()
+            whenever(repository.findLocationById(0)).thenReturn(locationDetail)
+
+            val result = interactor.loadLocationDetails(0)
+
+            assertThat(result.isSuccess).isTrue()
+            assertThat(result.getOrNull()).isEqualTo(locationDetail)
+        }
+    }
+
+    @Test
+    fun `returns failure result with launched exception when fetch location detail was failed`() {
+        runBlocking {
+            val exception = Throwable("")
+            whenever(repository.findLocationById(0)).then { throw exception }
+
+            val result = interactor.loadLocationDetails(0)
+
+            assertThat(result.isFailure).isTrue()
+            assertThat(result.exceptionOrNull()).isEqualTo(exception)
+        }
+    }
+
+    private fun getLocationDetail() = LocationDetail(
+        0,
+        "Some Place",
+        3.5,
+        "Pub",
+        "About",
+        "123",
+        "address",
+        listOf(Schedule("10h", "19h"))
+
+    )
 
     private fun getLocationList() = listOf(
         Location(

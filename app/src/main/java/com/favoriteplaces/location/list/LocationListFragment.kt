@@ -13,6 +13,7 @@ import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getCoreComponent
+import com.favoriteplaces.core.extensions.navigate
 import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.data.LocationUIModel
 import kotlinx.android.synthetic.main.location_list_fragment.*
@@ -31,9 +32,9 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupLocationsRecycler()
         setupObservers()
         setupListeners()
-        setupLocationsRecycler()
 
         viewModel.loadLocations()
     }
@@ -59,10 +60,7 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
             is State.Success -> toDefaultState()
             is State.Loading -> toLoadingState()
             is State.Failed -> toDefaultState()
-            is Navigation -> findNavController().navigate(
-                instruction.destination,
-                instruction.bundledArgs
-            )
+            is Navigation -> findNavController().navigate(instruction)
         }
     }
 

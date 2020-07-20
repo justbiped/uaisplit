@@ -1,6 +1,7 @@
 package com.favoriteplaces.location.detail
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.downstairs.eatat.core.tools.Instruction
@@ -17,12 +18,13 @@ class LocationDetailViewModel @Inject constructor(
     private val _viewInstruction = SingleLiveEvent<Instruction>()
     val viewInstruction: LiveData<Instruction> = _viewInstruction
 
-//    private val _locationList = MutableLiveData<List<LocationUIModel>>()
-//    val locationList: LiveData<List<LocationUIModel>> = _locationList
+    private val _locationDetail = MutableLiveData<LocationDetailUIModel>()
+    val locationList: LiveData<LocationDetailUIModel> = _locationDetail
 
     fun loadLocationDetails(locationId: Int) {
         viewModelScope.launch {
-            interactor.loadLocationDetails(locationId)
+            val result = interactor.loadLocationDetails(locationId)
+            print(result)
         }
     }
 }

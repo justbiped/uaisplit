@@ -39,12 +39,7 @@ class LocationRepositoryTest {
             val locations = locationRepository.fetchLocations()
 
             assertThat(locations).contains(
-                Location(
-                    0,
-                    "Some Place",
-                    3.4,
-                    "Pub"
-                )
+                Location(0, "Some Place", 3.4, "Pub")
             )
         }
     }
