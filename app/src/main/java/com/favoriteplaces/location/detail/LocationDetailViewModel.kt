@@ -7,7 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.SingleLiveEvent
 import com.favoriteplaces.location.LocationInteractor
+import com.favoriteplaces.location.detail.data.LocationDetail
 import kotlinx.coroutines.launch
+import java.time.DayOfWeek
 import javax.inject.Inject
 
 class LocationDetailViewModel @Inject constructor(
@@ -24,7 +26,14 @@ class LocationDetailViewModel @Inject constructor(
     fun loadLocationDetails(locationId: Int) {
         viewModelScope.launch {
             val result = interactor.loadLocationDetails(locationId)
-            print(result)
+
+            result.onSuccess {
+                onLoadLocationDetailSuccess(it)
+            }
         }
+    }
+
+    private fun onLoadLocationDetailSuccess(location: LocationDetail) {
+        _locationDetail.postValue(LocationDetailUIModel.fromDomain(location))
     }
 }

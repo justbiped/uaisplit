@@ -1,5 +1,7 @@
 package com.favoriteplaces.location.detail.data
 
+import java.time.DayOfWeek
+
 data class LocationDetail(
     val id: Int,
     val name: String,
@@ -12,6 +14,7 @@ data class LocationDetail(
 )
 
 data class Schedule(
+    val dayOfWeek: DayOfWeek,
     val open: String,
     val close: String
 )
