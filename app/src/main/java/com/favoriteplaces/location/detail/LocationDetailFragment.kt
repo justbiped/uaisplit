@@ -5,21 +5,30 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import coil.api.load
 import com.favoriteplaces.R
+import com.favoriteplaces.core.extensions.getCoreComponent
 import com.favoriteplaces.core.extensions.hideHomeNavigationBar
-import kotlinx.android.synthetic.main.location_details_fragment.*
+import com.favoriteplaces.location.injection.DaggerLocationComponent
+import com.favoriteplaces.location.list.LocationListViewInstruction.Companion.LOCATION_ID_KEY
+import javax.inject.Inject
 
-class LocationDetailsFragment : Fragment(R.layout.location_details_fragment) {
+class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
+
+    @Inject
+    lateinit var viewModel: LocationDetailViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         hideHomeNavigationBar()
+
+        DaggerLocationComponent.factory().create(context.getCoreComponent()).inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupStatusBar()
-        locationDetailsImageView.load("https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=adult-beard-boy-casual-220453.jpg&fm=jpg")
+
+        val locationId = arguments?.getInt(LOCATION_ID_KEY) ?: -1
+        viewModel.loadLocationDetails(locationId)
     }
 
     private fun setupStatusBar() {

@@ -4,8 +4,8 @@ import androidx.lifecycle.Observer
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.State
-import com.favoriteplaces.location.Location
 import com.favoriteplaces.location.LocationInteractor
+import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.LocationUIModel
 import com.favoriteplaces.tools.InstantTaskRule
 import com.nhaarman.mockitokotlin2.*
@@ -38,7 +38,14 @@ class LocationListViewModelTest {
     @Test
     fun `emits location list when fetch locations is successfully done`() = runBlocking {
         val observer = mock<Observer<List<LocationUIModel>>>()
-        val locationList = listOf(Location(0, "Some Location", 4.5, "Pub"))
+        val locationList = listOf(
+            Location(
+                0,
+                "Some Location",
+                4.5,
+                "Pub"
+            )
+        )
         whenever(locationInteractor.loadLocations()).thenReturn(Result.success(locationList))
 
         viewModel.locationList.observeForever(observer)

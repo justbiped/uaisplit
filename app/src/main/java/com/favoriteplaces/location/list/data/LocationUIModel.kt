@@ -1,7 +1,5 @@
 package com.favoriteplaces.location.list.data
 
-import com.favoriteplaces.location.Location
-
 data class LocationUIModel(
     val id: Int,
     val name: String,

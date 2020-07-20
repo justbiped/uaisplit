@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.data
 
-import com.favoriteplaces.location.Location
+import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.LocationRemoteEntity
 import com.nhaarman.mockitokotlin2.whenever
@@ -38,7 +38,14 @@ class LocationRepositoryTest {
 
             val locations = locationRepository.fetchLocations()
 
-            assertThat(locations).contains(Location(0, "Some Place", 3.4, "Pub"))
+            assertThat(locations).contains(
+                Location(
+                    0,
+                    "Some Place",
+                    3.4,
+                    "Pub"
+                )
+            )
         }
     }
 

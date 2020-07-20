@@ -1,6 +1,7 @@
 package com.favoriteplaces.location
 
 import com.favoriteplaces.location.data.LocationRepository
+import com.favoriteplaces.location.list.data.Location
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
@@ -50,8 +51,18 @@ class LocationInteractorTest {
     }
 
     private fun getLocationList() = listOf(
-        Location(0, "Some Place", 3.5, "Pub"),
-        Location(1, "Some Other Place", 3.5, "Bar")
+        Location(
+            0,
+            "Some Place",
+            3.5,
+            "Pub"
+        ),
+        Location(
+            1,
+            "Some Other Place",
+            3.5,
+            "Bar"
+        )
     )
 
 
