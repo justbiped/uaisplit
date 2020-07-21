@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="singleDayScheduleTemplate">"%s: %s às %s"</string>
+    <string name="daysInSequenceScheduleTemplate">%s a %s: %s às %s</string>
+    <string name="daysScheduleTemplate">%s e %s: %s às %s</string>
+</resources>

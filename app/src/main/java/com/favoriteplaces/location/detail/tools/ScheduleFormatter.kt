@@ -26,8 +26,8 @@ class ScheduleFormatter(private val context: Context) {
                 scheduleGroup.close
             )
             else -> daysTemplate(
-                getDaysFormatted(shortWeekDays)
-                , shortWeekDays.last(),
+                getDaysFormatted(shortWeekDays),
+                shortWeekDays.last(),
                 scheduleGroup.open,
                 scheduleGroup.close
             )
