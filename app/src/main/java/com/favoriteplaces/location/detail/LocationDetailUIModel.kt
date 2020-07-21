@@ -2,6 +2,7 @@ package com.favoriteplaces.location.detail
 
 import com.favoriteplaces.location.detail.data.LocationDetail
 import com.favoriteplaces.location.detail.data.ScheduleGroup
+import com.favoriteplaces.location.detail.tools.ScheduleFormatter
 
 class LocationDetailUIModel(
     val name: String,
@@ -25,36 +26,12 @@ class LocationDetailUIModel(
         )
     }
 
-    fun formattedSchedule(): String {
+    fun formattedSchedule(scheduleFormatter: ScheduleFormatter): String {
         val stringBuilder = StringBuilder()
-
-        scheduleGroups.forEach { group ->
-            val formattedShortWeekDays = formatShortWeekDays(group)
-            stringBuilder.append("$formattedShortWeekDays: ${group.open} às ${group.close}\n")
+        scheduleGroups.forEach {
+            stringBuilder.append("${scheduleFormatter.format(it)}\n")
         }
 
         return stringBuilder.toString()
-
-    }
-
-    private fun formatShortWeekDays(group: ScheduleGroup): String {
-        val shortWeekDays = group.shortWeekDays()
-
-        fun isOneDay() = shortWeekDays.size == 1
-        fun isFewDaysInSequence() = group.isInSequence() && shortWeekDays.size > 3
-
-        return when {
-            isOneDay() -> shortWeekDays.first()
-            isFewDaysInSequence() -> "${shortWeekDays.first()} a ${shortWeekDays.last()}"
-            else -> joinWithComma(shortWeekDays)
-        }
-    }
-
-    private fun joinWithComma(shortWeekDays: List<String>): String {
-        return shortWeekDays.joinToString().let {
-            val separator = ", "
-            val lastCommaIndex = it.lastIndexOf(separator)
-            it.replaceRange(lastCommaIndex, lastCommaIndex + separator.length, " e ")
-        }
     }
 }

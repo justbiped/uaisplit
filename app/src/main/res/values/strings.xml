@@ -2,4 +2,8 @@
     <string name="app_name">Favorite Places</string>
     <string name="home">Home</string>
     <string name="map">Map</string>
+
+    <string name="singleDayScheduleTemplate">"%s: %s at %s"</string>
+    <string name="daysInSequenceScheduleTemplate">%s to %s: %s at %s</string>
+    <string name="daysScheduleTemplate">%s and %s: %s at %s</string>
 </resources>

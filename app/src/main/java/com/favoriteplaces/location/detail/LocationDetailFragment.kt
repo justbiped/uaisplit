@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getCoreComponent
 import com.favoriteplaces.core.extensions.hideHomeNavigationBar
+import com.favoriteplaces.location.detail.tools.ScheduleFormatter
 import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.LocationListViewInstruction.Companion.LOCATION_ID_KEY
 import kotlinx.android.synthetic.main.location_detail_fragment.*
@@ -41,8 +42,8 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupObservers() {
-        viewModel.locationDetail.observe(viewLifecycleOwner, Observer {
-            scheduleTextView.text = it.formattedSchedule()
+        viewModel.locationDetail.observe(viewLifecycleOwner, Observer { locationDetail ->
+            scheduleTextView.text = locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
         })
     }
 }
