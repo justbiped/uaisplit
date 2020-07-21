@@ -21,6 +21,11 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextAppearance.Body2.Overlay" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/open_sans_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:textSize">12sp</item>

@@ -33,4 +33,9 @@
     <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimaryDark">?colorPrimary</item>
     </style>
+
+    <style name="AppTheme.Overlay.LightText" parent="AppTheme">
+        <item name="textAppearanceBody2">@style/TextAppearance.Body2.Overlay</item>
+        <item name="textViewBody2Style">@style/Widget.TextView.Body2.Overlay</item>
+    </style>
 </resources>

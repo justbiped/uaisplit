@@ -54,9 +54,11 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         locationDetailRatingText.text = "${locationDetail.review}"
         locationDetailAboutText.text = locationDetail.about
 
-        scheduleTextView.text =
+        locationDetailScheduleText.text =
             locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
 
+        locationDetailPhoneText.text = locationDetail.phone
+        locationDetailAddressText.text = locationDetail.address
     }
 
     override fun onDetach() {

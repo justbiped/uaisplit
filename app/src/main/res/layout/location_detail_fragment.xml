@@ -122,20 +122,81 @@
                 android:layout_marginEnd="28dp"
                 tools:text="@tools:sample/lorem" />
 
-            <TextView
-                android:id="@+id/locationDetailScheduleText"
-                style="?textViewBody2Style"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="28dp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="28dp"
+                android:orientation="vertical"
+                android:theme="@style/AppTheme.Overlay.LightText">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_time" />
+
+                    <TextView
+                        android:id="@+id/locationDetailScheduleText"
+                        style="?textViewBody2Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        tools:text="Some schedule\nSub text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_phone" />
+
+                    <TextView
+                        android:id="@+id/locationDetailPhoneText"
+                        style="?textViewBody2Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        tools:text="+55 12341324" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_pin" />
+
+                    <TextView
+                        android:id="@+id/locationDetailAddressText"
+                        style="?textViewBody2Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        tools:text="Some Avenue" />
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/scheduleTextView"
+                style="?textViewH6Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="28dp"
+                android:text="@string/reviews" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
