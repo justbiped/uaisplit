@@ -6,4 +6,6 @@
     <string name="singleDayScheduleTemplate">"%s: %s at %s"</string>
     <string name="daysInSequenceScheduleTemplate">%s to %s: %s at %s</string>
     <string name="daysScheduleTemplate">%s and %s: %s at %s</string>
+    <string name="pictures">Fotos</string>
+    <string name="about">Sobre</string>
 </resources>

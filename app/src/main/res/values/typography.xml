@@ -11,6 +11,11 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/open_sans_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:textSize">14sp</item>

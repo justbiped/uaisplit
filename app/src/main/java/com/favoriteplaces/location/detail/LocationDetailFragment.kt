@@ -43,7 +43,18 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
 
     private fun setupObservers() {
         viewModel.locationDetail.observe(viewLifecycleOwner, Observer { locationDetail ->
-            scheduleTextView.text = locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
+            bindLocationDetail(locationDetail)
         })
+    }
+
+    private fun bindLocationDetail(locationDetail: LocationDetailUIModel) {
+        locationDetailsNameText.text = locationDetail.name
+        locationDetailsRatingBar.rating = locationDetail.review.toFloat()
+        locationDetailRatingText.text = "${locationDetail.review}"
+        locationDetailAboutText.text = locationDetail.about
+
+        scheduleTextView.text =
+            locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
+
     }
 }
