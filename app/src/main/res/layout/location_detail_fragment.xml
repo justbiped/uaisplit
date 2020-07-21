@@ -18,9 +18,9 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="280dp"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll">
 
             <ImageView
                 android:id="@+id/locationDetailsImageView"
@@ -30,6 +30,14 @@
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
                 tools:src="@tools:sample/avatars" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/locationDetailToolbar"
+                app:menu="@menu/location_detail_toolbar_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_arrow_back" />
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +46,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/locationDetailsNameText"
+                android:id="@+id/locationDetailNameText"
                 style="?textViewH5Style"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -59,10 +67,10 @@
                 android:isIndicator="true"
                 android:numStars="5"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/locationDetailsNameText"
+                app:layout_constraintEnd_toEndOf="@+id/locationDetailNameText"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/locationDetailsNameText"
-                app:layout_constraintTop_toBottomOf="@+id/locationDetailsNameText"
+                app:layout_constraintStart_toStartOf="@+id/locationDetailNameText"
+                app:layout_constraintTop_toBottomOf="@+id/locationDetailNameText"
                 tools:rating="3" />
 
             <TextView
@@ -73,7 +81,7 @@
                 android:layout_marginStart="8dp"
                 android:textColor="?colorOnPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/locationDetailsRatingBar"
-                app:layout_constraintEnd_toEndOf="@+id/locationDetailsNameText"
+                app:layout_constraintEnd_toEndOf="@+id/locationDetailNameText"
                 app:layout_constraintStart_toEndOf="@+id/locationDetailsRatingBar"
                 app:layout_constraintTop_toTopOf="@+id/locationDetailsRatingBar"
                 tools:text="4.1" />
@@ -122,71 +130,13 @@
                 android:layout_marginEnd="28dp"
                 tools:text="@tools:sample/lorem" />
 
-            <LinearLayout
+            <include
+                layout="@layout/location_detail_schedule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="28dp"
-                android:orientation="vertical"
-                android:theme="@style/AppTheme.Overlay.LightText">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_time" />
-
-                    <TextView
-                        android:id="@+id/locationDetailScheduleText"
-                        style="?textViewBody2Style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        tools:text="Some schedule\nSub text" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_phone" />
-
-                    <TextView
-                        android:id="@+id/locationDetailPhoneText"
-                        style="?textViewBody2Style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        tools:text="+55 12341324" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_pin" />
-
-                    <TextView
-                        android:id="@+id/locationDetailAddressText"
-                        style="?textViewBody2Style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        tools:text="Some Avenue" />
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_marginEnd="28dp" />
 
             <TextView
                 style="?textViewH6Style"
