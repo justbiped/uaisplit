@@ -9,7 +9,6 @@ import com.downstairs.eatat.core.tools.SingleLiveEvent
 import com.favoriteplaces.location.LocationInteractor
 import com.favoriteplaces.location.detail.data.LocationDetail
 import kotlinx.coroutines.launch
-import java.time.DayOfWeek
 import javax.inject.Inject
 
 class LocationDetailViewModel @Inject constructor(
@@ -21,13 +20,14 @@ class LocationDetailViewModel @Inject constructor(
     val viewInstruction: LiveData<Instruction> = _viewInstruction
 
     private val _locationDetail = MutableLiveData<LocationDetailUIModel>()
-    val locationList: LiveData<LocationDetailUIModel> = _locationDetail
+    val locationDetail: LiveData<LocationDetailUIModel> = _locationDetail
 
     fun loadLocationDetails(locationId: Int) {
         viewModelScope.launch {
             val result = interactor.loadLocationDetails(locationId)
 
             result.onSuccess {
+                val bla = it.schedules.groupByWorkingTime()
                 onLoadLocationDetailSuccess(it)
             }
         }

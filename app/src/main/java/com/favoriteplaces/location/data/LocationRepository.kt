@@ -1,8 +1,11 @@
 package com.favoriteplaces.location.data
 
-import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.detail.data.LocationDetail
+import com.favoriteplaces.location.detail.data.LocationDetailRemoteEntity
+import com.favoriteplaces.location.list.data.Location
+import okhttp3.ResponseBody
 import javax.inject.Inject
+
 
 class LocationRepository @Inject constructor(private val locationHttpClient: LocationHttpClient) {
 
@@ -12,7 +15,11 @@ class LocationRepository @Inject constructor(private val locationHttpClient: Loc
     }
 
     suspend fun findLocationById(locationId: Int): LocationDetail {
-        val locationDetail = locationHttpClient.byId(locationId)
-        return locationDetail.toDomain()
+        val locationDetailResponse = locationHttpClient.byId(locationId)
+        return parseLocationDetailResponse(locationDetailResponse)
+    }
+
+    private fun parseLocationDetailResponse(responseBody: ResponseBody): LocationDetail {
+        return LocationDetailRemoteEntity.fromResponseBody(responseBody).toDomain()
     }
 }

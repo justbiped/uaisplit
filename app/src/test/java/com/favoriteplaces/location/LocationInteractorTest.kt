@@ -3,6 +3,7 @@ package com.favoriteplaces.location
 import com.favoriteplaces.location.data.LocationRepository
 import com.favoriteplaces.location.detail.data.LocationDetail
 import com.favoriteplaces.location.detail.data.Schedule
+import com.favoriteplaces.location.detail.data.Schedules
 import com.favoriteplaces.location.list.data.Location
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
@@ -12,6 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import java.time.DayOfWeek
 
 @RunWith(MockitoJUnitRunner::class)
 class LocationInteractorTest {
@@ -86,7 +88,7 @@ class LocationInteractorTest {
         "About",
         "123",
         "address",
-        listOf(Schedule("10h", "19h"))
+        Schedules(listOf(Schedule(DayOfWeek.valueOf("MONDAY"), "10h", "19h")))
 
     )
 

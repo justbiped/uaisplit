@@ -1,7 +1,8 @@
 package com.favoriteplaces.location.detail.data
 
 import com.squareup.moshi.Json
-import java.time.DayOfWeek
+import com.squareup.moshi.Moshi
+import okhttp3.ResponseBody
 
 data class LocationDetailRemoteEntity(
     @field:Json(name = "id") val id: Int,
@@ -14,28 +15,41 @@ data class LocationDetailRemoteEntity(
     @field:Json(name = "schedule") val schedule: SchedulesRemoteEntity
 ) {
 
+    companion object {
+        fun fromResponseBody(responseBody: ResponseBody): LocationDetailRemoteEntity {
+            val fixedPayload = responseBody.string().replace("[", "").replace("]", "")
+
+            val moshi = Moshi.Builder().build()
+            val jsonAdapter = moshi.adapter(LocationDetailRemoteEntity::class.java)
+
+            return jsonAdapter.fromJson(fixedPayload)!!
+        }
+    }
+
     fun toDomain() = LocationDetail(
-        id, name, review, type, about, phone, address, schedule.toScheduleList()
+        id, name, review, type, about, phone, address, schedule.toDomain()
     )
 }
 
 data class SchedulesRemoteEntity(
-    @field:Json(name = "monday") val monday: ScheduleRemoteEntity,
-    @field:Json(name = "tuesday") val tuesday: ScheduleRemoteEntity,
-    @field:Json(name = "wednesday") val wednesday: ScheduleRemoteEntity,
-    @field:Json(name = "thursday") val thursday: ScheduleRemoteEntity,
-    @field:Json(name = "friday") val friday: ScheduleRemoteEntity,
-    @field:Json(name = "saturday") val saturday: ScheduleRemoteEntity,
-    @field:Json(name = "sunday") val sunday: ScheduleRemoteEntity
+    @field:Json(name = "monday") val monday: ScheduleRemoteEntity?,
+    @field:Json(name = "tuesday") val tuesday: ScheduleRemoteEntity?,
+    @field:Json(name = "wednesday") val wednesday: ScheduleRemoteEntity?,
+    @field:Json(name = "thursday") val thursday: ScheduleRemoteEntity?,
+    @field:Json(name = "friday") val friday: ScheduleRemoteEntity?,
+    @field:Json(name = "saturday") val saturday: ScheduleRemoteEntity?,
+    @field:Json(name = "sunday") val sunday: ScheduleRemoteEntity?
 ) {
-    fun toScheduleList() = listOf(
-        Schedule(DayOfWeek.valueOf("MONDAY"), monday.open, monday.close),
-        Schedule(DayOfWeek.valueOf("TUESDAY"), monday.open, monday.close),
-        Schedule(DayOfWeek.valueOf("WEDNESDAY"), monday.open, monday.close),
-        Schedule(DayOfWeek.valueOf("THURSDAY"), monday.open, monday.close),
-        Schedule(DayOfWeek.valueOf("FRIDAY"), monday.open, monday.close),
-        Schedule(DayOfWeek.valueOf("SATURDAY"), monday.open, monday.close),
-        Schedule(DayOfWeek.valueOf("SUNDAY"), monday.open, monday.close)
+    fun toDomain() = Schedules(
+        listOf(
+            Schedule(Day.MONDAY, monday?.open ?: "", monday?.close ?: ""),
+            Schedule(Day.TUESDAY, tuesday?.open ?: "", tuesday?.close ?: ""),
+            Schedule(Day.WEDNESDAY, wednesday?.open ?: "", wednesday?.close ?: ""),
+            Schedule(Day.THURSDAY, thursday?.open ?: "", thursday?.close ?: ""),
+            Schedule(Day.FRIDAY, friday?.open ?: "", friday?.close ?: ""),
+            Schedule(Day.SATURDAY, saturday?.open ?: "", saturday?.close ?: ""),
+            Schedule(Day.SUNDAY, sunday?.open ?: "", sunday?.close ?: "")
+        )
     )
 }
 

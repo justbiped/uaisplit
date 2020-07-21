@@ -5,11 +5,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getCoreComponent
 import com.favoriteplaces.core.extensions.hideHomeNavigationBar
 import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.LocationListViewInstruction.Companion.LOCATION_ID_KEY
+import kotlinx.android.synthetic.main.location_detail_fragment.*
 import javax.inject.Inject
 
 class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
@@ -26,6 +28,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupStatusBar()
+        setupObservers()
 
         val locationId = arguments?.getInt(LOCATION_ID_KEY) ?: -1
         viewModel.loadLocationDetails(locationId)
@@ -35,5 +38,11 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         requireActivity().window.apply {
             statusBarColor = Color.TRANSPARENT
         }
+    }
+
+    private fun setupObservers() {
+        viewModel.locationDetail.observe(viewLifecycleOwner, Observer {
+            scheduleTextView.text = it.formattedSchedule()
+        })
     }
 }

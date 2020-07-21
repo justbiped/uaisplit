@@ -28,7 +28,7 @@
         <item name="ratingBarStyleSmall">@style/Widget.RatingBar.Small</item>
     </style>
 
-    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimaryDark">?colorPrimary</item>
     </style>
 </resources>
