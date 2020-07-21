@@ -98,7 +98,7 @@
                 style="?textViewH6Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="28dp"
                 android:text="@string/pictures" />
@@ -107,7 +107,7 @@
                 style="?textViewH6Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="28dp"
                 android:text="@string/about" />
@@ -117,10 +117,19 @@
                 style="?textViewBody1Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="28dp"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/locationDetailScheduleText"
+                style="?textViewBody2Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="28dp" />
 
             <TextView
                 android:id="@+id/scheduleTextView"

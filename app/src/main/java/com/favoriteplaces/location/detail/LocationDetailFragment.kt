@@ -3,6 +3,7 @@ package com.favoriteplaces.location.detail
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -56,5 +57,15 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         scheduleTextView.text =
             locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
 
+    }
+
+    override fun onDetach() {
+        requireActivity().window.apply {
+            val typedValue = TypedValue()
+            context.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
+            statusBarColor = typedValue.data
+        }
+
+        super.onDetach()
     }
 }
