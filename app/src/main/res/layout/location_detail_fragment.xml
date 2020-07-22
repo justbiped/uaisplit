@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:theme="@style/AppTheme.Overlay.LightText"
     tools:context=".location.detail.LocationDetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -33,9 +34,9 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/locationDetailToolbar"
-                app:menu="@menu/location_detail_toolbar_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:menu="@menu/location_detail_toolbar_menu"
                 app:navigationIcon="@drawable/ic_arrow_back" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -111,6 +112,16 @@
                 android:layout_marginEnd="28dp"
                 android:text="@string/pictures" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/locationDetailPictureRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/location_detail_picture_list_item" />
+
             <TextView
                 style="?textViewH6Style"
                 android:layout_width="match_parent"
@@ -147,6 +158,15 @@
                 android:layout_marginEnd="28dp"
                 android:text="@string/reviews" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/locationReviewRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="28dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/location_detail_review_list_item" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -26,22 +26,17 @@
 
     <style name="Widget.TextView.Body1" parent="Widget.MaterialComponents.TextView">
         <item name="android:textAppearance">?textAppearanceBody1</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textColor">?android:textColor</item>
     </style>
 
     <style name="Widget.TextView.Body2" parent="Widget.MaterialComponents.TextView">
         <item name="android:textAppearance">?textAppearanceBody2</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
-    </style>
-
-    <style name="Widget.TextView.Body2.Overlay" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textAppearance">@style/TextAppearance.Body2.Overlay</item>
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
 
     <style name="Widget.TextView.Caption" parent="Widget.MaterialComponents.TextView">
         <item name="android:textAppearance">?textAppearanceCaption</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textColor">?android:textColor</item>
     </style>
 
     <!--Bars-->

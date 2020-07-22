@@ -13,8 +13,9 @@
         <item name="textAppearanceBody1">@style/TextAppearance.Body1</item>
         <item name="textAppearanceCaption">@style/TextAppearance.Caption</item>
 
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:textColor">@color/gray_900</item>
+        <item name="android:textColorPrimary">@color/gray_700</item>
+        <item name="android:textColorSecondary">@color/gray_500</item>
 
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Rounded.16</item>
 
@@ -35,7 +36,8 @@
     </style>
 
     <style name="AppTheme.Overlay.LightText" parent="AppTheme">
+        <item name="textAppearanceBody1">@style/TextAppearance.Body1.Overlay</item>
         <item name="textAppearanceBody2">@style/TextAppearance.Body2.Overlay</item>
-        <item name="textViewBody2Style">@style/Widget.TextView.Body2.Overlay</item>
+        <item name="android:textColorPrimary">@color/gray_900</item>
     </style>
 </resources>
