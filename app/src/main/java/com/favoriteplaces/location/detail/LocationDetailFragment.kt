@@ -52,6 +52,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupReviewRecycler() {
+        locationReviewRecycler.isNestedScrollingEnabled = false
         locationReviewRecycler.adapter = LocationReviewAdapter()
     }
 
