@@ -1,14 +1,22 @@
 package com.favoriteplaces.location.detail
 
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import com.favoriteplaces.R
 import kotlinx.android.synthetic.main.location_detail_review_list_item.view.*
 import kotlin.random.Random
+
 
 class LocationReviewAdapter :
     ListAdapter<LocationReviewUIModel, LocationReviewAdapter.LocationReviewViewHolder>(diffTool) {
@@ -30,13 +38,30 @@ class LocationReviewAdapter :
             itemView.locationReviewTitleText.text = locationReview.title
             itemView.locationReviewCommentText.text = locationReview.comment
             itemView.locationReviewAuthorText.text = locationReview.author
+
+
+            itemView.locationReviewAuthorImage.load("") {
+                val placeholder = getPlaceHolder(itemView.context)
+
+                placeholder(placeholder)
+                error(placeholder)
+                transformations(CircleCropTransformation())
+            }
         }
     }
 
-    private fun getPlaceHolder() = when (Random.nextInt(0, 4)) {
-        0 -> R.color.turquoise_100
-        1 -> R.color.red_100
-        else -> R.color.yellow_200
+    private fun getPlaceHolder(context: Context): Drawable {
+        val color = when (Random.nextInt(0, 4)) {
+            0 -> R.color.turquoise_500
+            1 -> R.color.red_500
+            else -> R.color.green_500
+        }
+
+        return ShapeDrawable(OvalShape()).apply {
+            paint.color = ContextCompat.getColor(context, color)
+            intrinsicWidth = 1
+            intrinsicHeight = 1
+        }
     }
 
     companion object {

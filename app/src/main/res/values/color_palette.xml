@@ -8,9 +8,13 @@
     <color name="black">#000000</color>
 
     <color name="turquoise_100">#d0fdef</color>
+    <color name="turquoise_500">#13ceda</color>
     <color name="turquoise_600">#14ADB8</color>
 
+    <color name="green_500">#16e5a3</color>
+
     <color name="red_100">#ffdae0</color>
+    <color name="red_500">#ff5876</color>
 
     <color name="yellow_200">#fcffb1</color>
 </resources>
