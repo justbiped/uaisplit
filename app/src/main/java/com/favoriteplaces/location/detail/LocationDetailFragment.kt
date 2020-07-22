@@ -68,7 +68,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun onInstructionChange(instruction: Instruction) {
-        when(instruction){
+        when (instruction) {
             is Failure -> onDetailLoadFailure()
         }
     }
@@ -89,7 +89,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun onDetailLoadFailure() {
-Toast.makeText(context, R.string.location_detail_load_error_msg, Toast.LENGTH_LONG)
+        Toast.makeText(context, R.string.location_detail_load_error_msg, Toast.LENGTH_LONG).show()
     }
 
     private fun getReviewAdapter(): LocationReviewAdapter? {
