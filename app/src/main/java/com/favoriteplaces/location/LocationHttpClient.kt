@@ -1,6 +1,6 @@
 package com.favoriteplaces.location
 
-import com.favoriteplaces.location.list.data.LocationListRemoteEntity
+import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Path

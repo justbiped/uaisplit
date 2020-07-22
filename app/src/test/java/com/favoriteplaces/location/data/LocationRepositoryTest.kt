@@ -3,8 +3,8 @@ package com.favoriteplaces.location.data
 import com.favoriteplaces.location.LocationHttpClient
 import com.favoriteplaces.location.LocationRepository
 import com.favoriteplaces.location.list.data.Location
-import com.favoriteplaces.location.list.data.LocationListRemoteEntity
-import com.favoriteplaces.location.list.data.LocationRemoteEntity
+import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
+import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
@@ -35,7 +35,14 @@ class LocationRepositoryTest {
 
             whenever(locationHttpClient.fetchLocations()).thenReturn(
                 LocationListRemoteEntity(
-                    listOf(LocationRemoteEntity(0, "Some Place", 3.4, "Pub"))
+                    listOf(
+                        LocationRemoteEntity(
+                            0,
+                            "Some Place",
+                            3.4,
+                            "Pub"
+                        )
+                    )
                 )
             )
 
