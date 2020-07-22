@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.favoriteplaces.R
+import com.favoriteplaces.location.detail.data.ui.LocationReviewUIModel
 import kotlinx.android.synthetic.main.location_detail_review_list_item.view.*
 import kotlin.random.Random
 

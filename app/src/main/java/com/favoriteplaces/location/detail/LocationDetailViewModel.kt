@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.SingleLiveEvent
 import com.favoriteplaces.location.LocationInteractor
+import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import kotlinx.coroutines.launch
 import javax.inject.Inject

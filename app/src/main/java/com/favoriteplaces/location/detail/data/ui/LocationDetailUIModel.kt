@@ -1,5 +1,6 @@
-package com.favoriteplaces.location.detail
+package com.favoriteplaces.location.detail.data.ui
 
+import com.favoriteplaces.location.detail.ScheduleFormatter
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.ScheduleGroup
 
@@ -15,16 +16,17 @@ class LocationDetailUIModel(
 ) {
 
     companion object {
-        fun fromDomain(locationDetail: LocationDetail) = LocationDetailUIModel(
-            locationDetail.name,
-            locationDetail.review,
-            locationDetail.type,
-            locationDetail.about,
-            locationDetail.phone,
-            locationDetail.address,
-            buildMockedReviews(),
-            locationDetail.schedules.groupByWorkingTime()
-        )
+        fun fromDomain(locationDetail: LocationDetail) =
+            LocationDetailUIModel(
+                locationDetail.name,
+                locationDetail.review,
+                locationDetail.type,
+                locationDetail.about,
+                locationDetail.phone,
+                locationDetail.address,
+                buildMockedReviews(),
+                locationDetail.schedules.groupByWorkingTime()
+            )
 
         private fun buildMockedReviews(): List<LocationReviewUIModel> {
             return listOf(
@@ -34,13 +36,15 @@ class LocationDetailUIModel(
                     "Tortas deliciosas. Os waffles também estavam muito bons. Equipe muito atenciosa. :)",
                     "Tomás Montenegro, Belo Horizonte - MG",
                     5.0
-                ), LocationReviewUIModel(
+                ),
+                LocationReviewUIModel(
                     "",
                     "Café da manhã delicioso",
                     "Nós fomos para o brunch e estava realmente delicioso. Pães, ovos, café, sucos naturais. Não é muito barato mas vale a pena.",
                     "Glória Ruiz, São João Del Rey - MG",
                     4.0
-                ), LocationReviewUIModel(
+                ),
+                LocationReviewUIModel(
                     "",
                     "Ótima comida",
                     "Comidas frescas e de boa qualidade. Pães e quitandas saindo do forno toda hora. Cafés especiais e ambiente agradável.",
@@ -61,10 +65,3 @@ class LocationDetailUIModel(
     }
 }
 
-data class LocationReviewUIModel(
-    val picture: String,
-    val title: String,
-    val comment: String,
-    val author: String,
-    val rating: Double
-)
