@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:numStars="5"
         android:rating="3"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/locationReviewTitleText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -21,49 +21,49 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/locationReviewTitleText"
         style="?textViewBody1Style"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="?colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/locationReviewCommentText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ratingBar2"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar2"
         tools:text="The best location ever" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/locationReviewCommentText"
         style="?textViewBody2Style"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:textColor="?android:textColorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/locationReviewAuthorText"
+        app:layout_constraintEnd_toEndOf="@+id/locationReviewTitleText"
+        app:layout_constraintStart_toStartOf="@+id/locationReviewTitleText"
+        app:layout_constraintTop_toBottomOf="@+id/locationReviewTitleText"
         tools:text="Some comment to my favorite location, it is awesome" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/locationReviewAuthorText"
         style="?textViewCaptionStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textColor="?android:textColorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/locationReviewCommentText"
+        app:layout_constraintStart_toStartOf="@+id/locationReviewCommentText"
+        app:layout_constraintTop_toBottomOf="@+id/locationReviewCommentText"
         tools:text="Shirley Jones, Mountain View - CA" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintBottom_toBottomOf="@+id/locationReviewAuthorText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ratingBar2"
         app:layout_constraintVertical_bias="0.0"

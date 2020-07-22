@@ -139,7 +139,8 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="28dp"
-                tools:text="@tools:sample/lorem" />
+                tools:lines="4"
+                tools:text="@tools:sample/lorem/random" />
 
             <include
                 layout="@layout/location_detail_schedule"
@@ -166,7 +167,22 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="28dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
                 tools:listitem="@layout/location_detail_review_list_item" />
+
+            <TextView
+                style="?textViewBody2Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="30dp"
+                android:drawableEnd="@drawable/ic_next_arrows"
+                android:drawablePadding="8dp"
+                android:gravity="end"
+                android:textColor="?colorPrimary"
+                android:text="@string/more_reviews_click_msg" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
