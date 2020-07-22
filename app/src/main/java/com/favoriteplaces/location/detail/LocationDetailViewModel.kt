@@ -27,10 +27,8 @@ class LocationDetailViewModel @Inject constructor(
         viewModelScope.launch {
             val result = interactor.loadLocationDetails(locationId)
 
-            result.onSuccess {
-                val bla = it.schedules.groupByWorkingTime()
-                onLoadLocationDetailSuccess(it)
-            }
+            result.onSuccess { onLoadLocationDetailSuccess(it) }
+            result.onFailure { _viewInstruction.postValue(instruction.failure()) }
         }
     }
 

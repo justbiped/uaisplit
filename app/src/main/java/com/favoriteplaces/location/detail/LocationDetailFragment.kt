@@ -5,9 +5,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.downstairs.eatat.core.tools.Failure
+import com.downstairs.eatat.core.tools.Instruction
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getCoreComponent
 import com.favoriteplaces.core.extensions.hideHomeNavigationBar
@@ -58,9 +61,16 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupObservers() {
+        viewModel.viewInstruction.observe(viewLifecycleOwner, Observer { onInstructionChange(it) })
         viewModel.locationDetail.observe(viewLifecycleOwner, Observer { locationDetail ->
             bindLocationDetail(locationDetail)
         })
+    }
+
+    private fun onInstructionChange(instruction: Instruction) {
+        when(instruction){
+            is Failure -> onDetailLoadFailure()
+        }
     }
 
     private fun bindLocationDetail(locationDetail: LocationDetailUIModel) {
@@ -76,6 +86,10 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         locationDetailAddressText.text = locationDetail.address
 
         getReviewAdapter()?.submitList(locationDetail.locationReviews)
+    }
+
+    private fun onDetailLoadFailure() {
+Toast.makeText(context, R.string.location_detail_load_error_msg, Toast.LENGTH_LONG)
     }
 
     private fun getReviewAdapter(): LocationReviewAdapter? {
