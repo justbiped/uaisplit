@@ -7,7 +7,7 @@
     android:theme="@style/AppTheme">
 
     <RatingBar
-        android:id="@+id/ratingBar2"
+        android:id="@+id/locationReviewRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toTopOf="@+id/locationReviewTitleText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/locationReviewAuthorImage"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -29,8 +29,8 @@
         android:textColor="?colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/locationReviewCommentText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ratingBar2"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar2"
+        app:layout_constraintStart_toStartOf="@+id/locationReviewRatingBar"
+        app:layout_constraintTop_toBottomOf="@+id/locationReviewRatingBar"
         tools:text="The best location ever" />
 
     <TextView
@@ -60,12 +60,12 @@
         tools:text="Shirley Jones, Mountain View - CA" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/locationReviewAuthorImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="@+id/locationReviewAuthorText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ratingBar2"
+        app:layout_constraintTop_toTopOf="@+id/locationReviewRatingBar"
         app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

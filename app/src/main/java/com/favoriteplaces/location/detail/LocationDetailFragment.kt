@@ -32,10 +32,17 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupStatusBar()
         setupToolBar()
+        setupReviewRecycler()
         setupObservers()
 
         val locationId = arguments?.getInt(LOCATION_ID_KEY) ?: -1
         viewModel.loadLocationDetails(locationId)
+    }
+
+    private fun setupStatusBar() {
+        requireActivity().window.apply {
+            statusBarColor = Color.TRANSPARENT
+        }
     }
 
     private fun setupToolBar() {
@@ -44,10 +51,8 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         }
     }
 
-    private fun setupStatusBar() {
-        requireActivity().window.apply {
-            statusBarColor = Color.TRANSPARENT
-        }
+    private fun setupReviewRecycler() {
+        locationReviewRecycler.adapter = LocationReviewAdapter()
     }
 
     private fun setupObservers() {
@@ -58,19 +63,21 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
 
     private fun bindLocationDetail(locationDetail: LocationDetailUIModel) {
         locationDetailNameText.text = locationDetail.name
-        locationDetailsRatingBar.rating = locationDetail.review.toFloat()
-        locationDetailRatingText.text = "${locationDetail.review}"
+        locationDetailsRatingBar.rating = locationDetail.rating.toFloat()
+        locationDetailRatingText.text = "${locationDetail.rating}"
         locationDetailAboutText.text = locationDetail.about
 
         locationDetailScheduleText.text =
-            locationDetail.formattedSchedule(
-                ScheduleFormatter(
-                    requireContext()
-                )
-            )
+            locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
 
         locationDetailPhoneText.text = locationDetail.phone
         locationDetailAddressText.text = locationDetail.address
+
+        getReviewAdapter()?.submitList(locationDetail.locationReviews)
+    }
+
+    private fun getReviewAdapter(): LocationReviewAdapter? {
+        return locationReviewRecycler.adapter as? LocationReviewAdapter
     }
 
     override fun onDetach() {
