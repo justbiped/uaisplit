@@ -1,7 +1,6 @@
 package com.favoriteplaces.location
 
-import com.favoriteplaces.location.data.LocationRepository
-import com.favoriteplaces.location.detail.data.LocationDetail
+import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.list.data.Location
 import javax.inject.Inject
 

@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getCoreComponent
 import com.favoriteplaces.core.extensions.hideHomeNavigationBar
-import com.favoriteplaces.location.detail.tools.ScheduleFormatter
 import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.LocationListViewInstruction.Companion.LOCATION_ID_KEY
 import kotlinx.android.synthetic.main.location_detail_fragment.*
@@ -64,7 +63,11 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         locationDetailAboutText.text = locationDetail.about
 
         locationDetailScheduleText.text =
-            locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
+            locationDetail.formattedSchedule(
+                ScheduleFormatter(
+                    requireContext()
+                )
+            )
 
         locationDetailPhoneText.text = locationDetail.phone
         locationDetailAddressText.text = locationDetail.address

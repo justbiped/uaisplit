@@ -1,9 +1,8 @@
 package com.favoriteplaces.location
 
-import com.favoriteplaces.location.data.LocationRepository
-import com.favoriteplaces.location.detail.data.LocationDetail
-import com.favoriteplaces.location.detail.data.Schedule
-import com.favoriteplaces.location.detail.data.Schedules
+import com.favoriteplaces.location.detail.data.domain.LocationDetail
+import com.favoriteplaces.location.detail.data.domain.Schedule
+import com.favoriteplaces.location.detail.data.domain.Schedules
 import com.favoriteplaces.location.list.data.Location
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
@@ -80,17 +79,26 @@ class LocationInteractorTest {
         }
     }
 
-    private fun getLocationDetail() = LocationDetail(
-        0,
-        "Some Place",
-        3.5,
-        "Pub",
-        "About",
-        "123",
-        "address",
-        Schedules(listOf(Schedule(DayOfWeek.valueOf("MONDAY"), "10h", "19h")))
+    private fun getLocationDetail() =
+        LocationDetail(
+            0,
+            "Some Place",
+            3.5,
+            "Pub",
+            "About",
+            "123",
+            "address",
+            Schedules(
+                listOf(
+                    Schedule(
+                        DayOfWeek.valueOf("MONDAY"),
+                        "10h",
+                        "19h"
+                    )
+                )
+            )
 
-    )
+        )
 
     private fun getLocationList() = listOf(
         Location(

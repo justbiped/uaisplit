@@ -1,7 +1,8 @@
-package com.favoriteplaces.location.data
+package com.favoriteplaces.location
 
-import com.favoriteplaces.location.detail.data.LocationDetail
-import com.favoriteplaces.location.detail.data.LocationDetailRemoteEntity
+import com.favoriteplaces.location.LocationHttpClient
+import com.favoriteplaces.location.detail.data.domain.LocationDetail
+import com.favoriteplaces.location.detail.data.remote.LocationDetailRemoteEntity
 import com.favoriteplaces.location.list.data.Location
 import okhttp3.ResponseBody
 import javax.inject.Inject

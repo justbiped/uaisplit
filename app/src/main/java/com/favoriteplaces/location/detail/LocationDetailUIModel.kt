@@ -1,8 +1,7 @@
 package com.favoriteplaces.location.detail
 
-import com.favoriteplaces.location.detail.data.LocationDetail
-import com.favoriteplaces.location.detail.data.ScheduleGroup
-import com.favoriteplaces.location.detail.tools.ScheduleFormatter
+import com.favoriteplaces.location.detail.data.domain.LocationDetail
+import com.favoriteplaces.location.detail.data.domain.ScheduleGroup
 
 class LocationDetailUIModel(
     val name: String,

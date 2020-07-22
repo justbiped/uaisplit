@@ -1,8 +1,8 @@
-package com.favoriteplaces.location.detail.tools
+package com.favoriteplaces.location.detail
 
 import android.content.Context
 import com.favoriteplaces.R
-import com.favoriteplaces.location.detail.data.ScheduleGroup
+import com.favoriteplaces.location.detail.data.domain.ScheduleGroup
 
 class ScheduleFormatter(private val context: Context) {
 
