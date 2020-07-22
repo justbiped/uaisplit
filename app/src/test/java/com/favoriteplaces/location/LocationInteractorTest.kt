@@ -1,5 +1,6 @@
 package com.favoriteplaces.location
 
+import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.Schedule
 import com.favoriteplaces.location.detail.data.domain.Schedules
@@ -89,15 +90,8 @@ class LocationInteractorTest {
             "123",
             "address",
             Schedules(
-                listOf(
-                    Schedule(
-                        DayOfWeek.valueOf("MONDAY"),
-                        "10h",
-                        "19h"
-                    )
-                )
+                listOf(Schedule(Day.MONDAY, "10h", "19h"))
             )
-
         )
 
     private fun getLocationList() = listOf(

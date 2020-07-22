@@ -38,14 +38,7 @@ class LocationListViewModelTest {
     @Test
     fun `emits location list when fetch locations is successfully done`() = runBlocking {
         val observer = mock<Observer<List<LocationUIModel>>>()
-        val locationList = listOf(
-            Location(
-                0,
-                "Some Location",
-                4.5,
-                "Pub"
-            )
-        )
+        val locationList = listOf(Location(0, "Some Location", 4.5, "Pub"))
         whenever(locationInteractor.loadLocations()).thenReturn(Result.success(locationList))
 
         viewModel.locationList.observeForever(observer)
@@ -109,7 +102,7 @@ class LocationListViewModelTest {
             "Some Location",
             4.5,
             "Pub",
-            "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=adult-beard-boy-casual-220453.jpg&fm=jpg"
+            ""
         )
     }
 }
