@@ -1,4 +1,4 @@
-package com.favoriteplaces.tools
+package com.favoriteplaces.core.tools
 
 import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.arch.core.executor.TaskExecutor

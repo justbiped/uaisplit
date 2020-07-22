@@ -7,7 +7,7 @@ import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.location.LocationInteractor
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.LocationUIModel
-import com.favoriteplaces.tools.InstantTaskRule
+import com.favoriteplaces.core.tools.InstantTaskRule
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

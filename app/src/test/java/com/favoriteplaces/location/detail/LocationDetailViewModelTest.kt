@@ -9,7 +9,7 @@ import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.Schedule
 import com.favoriteplaces.location.detail.data.domain.Schedules
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import com.favoriteplaces.tools.InstantTaskRule
+import com.favoriteplaces.core.tools.InstantTaskRule
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
