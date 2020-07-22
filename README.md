@@ -19,3 +19,14 @@ As fotos não foram carregadas por meio de uma api de terceiros pois em tempo h�
 
 Podem ser observados no seguinte documento: [Padrões de desenvolvimento](https://hackmd.io/@roubertedgar/r1-oUxLu8)
 
+### Modulos
+O modulo core não foi adicionado a um modulo lib por se tratar de um projeto simples, mas idealmente essa estrutura seria extraída, de modo a servir a outros produtos que futuramente poderiam ser desenvolvidos.
+
+Há também o modulo buildSrc para gerenciamento das dependencias do app, que juntamente com arquivos gradle kotlin disponibiliza autocomplete além de facilitar a manutenção e criação de tasks de build, já que esse arquivo utiliza a mesma linguagem do projeto, diminuíndo a carga cognitiva.
+
+### Tests
+Apenas testes unitários foram criados, mas a cobertura não está muito alta.
+Os testes de espresso (teste de caixa cinza) não foram criados pois demandaria um pouco mais de tempo de configuração.
+Não há testes end to end, nesse caso poderia ser feito uso do Appium ou UIAutomator.
+
+Para rodar os testes unitários, na pasta root do projeto, digite ./gradlew test
