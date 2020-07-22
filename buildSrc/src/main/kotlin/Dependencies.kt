@@ -70,13 +70,5 @@ object Plugins {
         const val kapt: String = "kotlin-kapt"
     }
 
-    const val googleServices = "com.google.gms.google-services"
     const val androidApplication = "com.android.application"
-    const val androidLibrary = "com.android.library"
-}
-
-object Path {
-    const val androidGradle = "com.android.tools.build:gradle:4.0.0"
-    const val playServices = "com.google.gms:google-services:4.3.3"
-    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 }
