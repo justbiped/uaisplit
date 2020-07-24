@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.favoriteplaces.R
-import com.favoriteplaces.location.list.data.LocationUIModel
+import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import kotlinx.android.synthetic.main.location_list_item.view.*
-import kotlin.random.Random
 
 class LocationAdapter :
     ListAdapter<LocationUIModel, LocationAdapter.LocationViewHolder>(diffTool) {
@@ -45,19 +44,11 @@ class LocationAdapter :
             itemView.locationRatingText.text = "${location.review}"
             itemView.ratingBar.rating = location.review.toFloat()
 
-            itemView.locationImageView.load(location.image) {
-                val placeholder = getPlaceHolder()
-
-                placeholder(placeholder)
-                error(placeholder)
+            itemView.locationImageView.load(location.image.url) {
+                placeholder(location.image.placeHolderResource)
+                error(location.image.placeHolderResource)
             }
         }
-    }
-
-    private fun getPlaceHolder() = when (Random.nextInt(0, 4)) {
-        0 -> R.color.turquoise_100
-        1 -> R.color.red_100
-        else -> R.color.yellow_200
     }
 
     companion object {

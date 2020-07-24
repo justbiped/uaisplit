@@ -15,7 +15,7 @@ import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getComponent
 import com.favoriteplaces.core.extensions.navigate
 import com.favoriteplaces.location.injection.LocationComponent
-import com.favoriteplaces.location.list.data.LocationUIModel
+import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import kotlinx.android.synthetic.main.location_list_fragment.*
 import javax.inject.Inject
 
@@ -30,12 +30,15 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
         getComponent<LocationComponent>().inject(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.loadLocations()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupLocationsRecycler()
         setupObservers()
         setupListeners()
-
-        viewModel.loadLocations()
     }
 
     private fun setupLocationsRecycler() {

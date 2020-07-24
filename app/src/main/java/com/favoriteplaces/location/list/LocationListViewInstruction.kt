@@ -3,7 +3,7 @@ package com.favoriteplaces.location.list
 import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.ViewInstruction
 import com.favoriteplaces.R
-import com.favoriteplaces.location.list.data.LocationUIModel
+import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import javax.inject.Inject
 
 class LocationListViewInstruction @Inject constructor() : ViewInstruction() {

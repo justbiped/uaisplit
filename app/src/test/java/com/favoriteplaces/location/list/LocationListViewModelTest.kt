@@ -6,8 +6,9 @@ import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.location.LocationInteractor
 import com.favoriteplaces.location.list.data.Location
-import com.favoriteplaces.location.list.data.LocationUIModel
+import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import com.favoriteplaces.core.tools.InstantTaskRule
+import com.favoriteplaces.location.list.data.ui.LocationImageUIModel
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -45,7 +46,9 @@ class LocationListViewModelTest {
         viewModel.loadLocations()
 
         verify(observer).onChanged(argThat {
-            first() == getLocationUIModel()
+            val locationUIModel = first()
+            locationUIModel.name == "Some Location"
+                    && locationUIModel.type == "Pub"
         })
     }
 
@@ -102,7 +105,7 @@ class LocationListViewModelTest {
             "Some Location",
             4.5,
             "Pub",
-            ""
+            LocationImageUIModel(-1, "")
         )
     }
 }
