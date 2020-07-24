@@ -1,7 +1,5 @@
 package com.favoriteplaces.location.detail.data.domain
 
-import com.favoriteplaces.location.detail.data.domain.Schedules
-
 data class LocationDetail(
     val id: Int,
     val name: String,
