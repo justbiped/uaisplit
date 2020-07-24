@@ -12,10 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.downstairs.eatat.core.tools.Failure
 import com.downstairs.eatat.core.tools.Instruction
 import com.favoriteplaces.R
-import com.favoriteplaces.core.extensions.getCoreComponent
+import com.favoriteplaces.core.extensions.getComponent
 import com.favoriteplaces.core.extensions.hideHomeNavigationBar
+import com.favoriteplaces.core.extensions.onBackPressCallback
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import com.favoriteplaces.location.injection.DaggerLocationComponent
+import com.favoriteplaces.location.injection.LocationComponent
 import com.favoriteplaces.location.list.LocationListViewInstruction.Companion.LOCATION_ID_KEY
 import kotlinx.android.synthetic.main.location_detail_fragment.*
 import kotlinx.android.synthetic.main.location_detail_schedule.*
@@ -30,7 +31,15 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         super.onAttach(context)
         hideHomeNavigationBar()
 
-        DaggerLocationComponent.factory().create(context.getCoreComponent()).inject(this)
+        getComponent<LocationComponent>().inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        onBackPressCallback {
+            findNavController().navigateUp()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
