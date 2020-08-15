@@ -6,7 +6,7 @@ import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.location.LocationInteractor
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
-import com.favoriteplaces.location.detail.data.domain.Schedule
+import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.Schedules
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.core.tools.InstantTaskRule
@@ -71,6 +71,6 @@ class LocationDetailViewModelTest {
             "something about",
             "314142",
             "some address",
-            Schedules(listOf(Schedule(Day.MONDAY, "10h", "11h")))
+            Schedules(listOf(DaySchedule(Day.MONDAY, "10h", "11h")))
         )
 }

@@ -1,7 +1,7 @@
 package com.favoriteplaces.location.detail.data.remote
 
 import com.favoriteplaces.location.detail.data.domain.Day
-import com.favoriteplaces.location.detail.data.domain.Schedule
+import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.Schedules
 import com.squareup.moshi.Json
 
@@ -14,43 +14,17 @@ data class SchedulesRemoteEntity(
     @field:Json(name = "saturday") val saturday: ScheduleRemoteEntity?,
     @field:Json(name = "sunday") val sunday: ScheduleRemoteEntity?
 ) {
-    fun toDomain() = Schedules(
-        listOf(
-            Schedule(
-                Day.MONDAY,
-                monday?.open ?: "",
-                monday?.close ?: ""
-            ),
-            Schedule(
-                Day.TUESDAY,
-                tuesday?.open ?: "",
-                tuesday?.close ?: ""
-            ),
-            Schedule(
-                Day.WEDNESDAY,
-                wednesday?.open ?: "",
-                wednesday?.close ?: ""
-            ),
-            Schedule(
-                Day.THURSDAY,
-                thursday?.open ?: "",
-                thursday?.close ?: ""
-            ),
-            Schedule(
-                Day.FRIDAY,
-                friday?.open ?: "",
-                friday?.close ?: ""
-            ),
-            Schedule(
-                Day.SATURDAY,
-                saturday?.open ?: "",
-                saturday?.close ?: ""
-            ),
-            Schedule(
-                Day.SUNDAY,
-                sunday?.open ?: "",
-                sunday?.close ?: ""
-            )
-        )
-    )
+    fun toDomain(): Schedules {
+        val schedules = mutableListOf<DaySchedule>()
+
+        monday?.also { schedules.add(DaySchedule(Day.MONDAY, it.open, it.close)) }
+        tuesday?.also { schedules.add(DaySchedule(Day.TUESDAY, it.open, it.close)) }
+        wednesday?.also { schedules.add(DaySchedule(Day.WEDNESDAY, it.open, it.close)) }
+        thursday?.also { schedules.add(DaySchedule(Day.WEDNESDAY, it.open, it.close)) }
+        friday?.also { schedules.add(DaySchedule(Day.WEDNESDAY, it.open, it.close)) }
+        saturday?.also { schedules.add(DaySchedule(Day.WEDNESDAY, it.open, it.close)) }
+        sunday?.also { schedules.add(DaySchedule(Day.WEDNESDAY, it.open, it.close)) }
+
+        return Schedules(schedules)
+    }
 }

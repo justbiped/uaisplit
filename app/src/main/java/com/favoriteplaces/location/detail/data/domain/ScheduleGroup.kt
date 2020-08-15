@@ -3,7 +3,7 @@ package com.favoriteplaces.location.detail.data.domain
 import java.text.DateFormatSymbols
 import java.util.*
 
-data class ScheduleGroup(private val schedules: List<Schedule>) {
+data class ScheduleGroup(private val schedules: List<DaySchedule>) {
     val open = schedules.first().open
     val close = schedules.first().close
 

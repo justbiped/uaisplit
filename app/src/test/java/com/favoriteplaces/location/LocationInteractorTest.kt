@@ -2,7 +2,7 @@ package com.favoriteplaces.location
 
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
-import com.favoriteplaces.location.detail.data.domain.Schedule
+import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.Schedules
 import com.favoriteplaces.location.list.data.Location
 import com.nhaarman.mockitokotlin2.whenever
@@ -13,7 +13,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import java.time.DayOfWeek
 
 @RunWith(MockitoJUnitRunner::class)
 class LocationInteractorTest {
@@ -90,7 +89,7 @@ class LocationInteractorTest {
             "123",
             "address",
             Schedules(
-                listOf(Schedule(Day.MONDAY, "10h", "19h"))
+                listOf(DaySchedule(Day.MONDAY, "10h", "19h"))
             )
         )
 
