@@ -4,6 +4,7 @@ import androidx.annotation.MainThread
 import androidx.collection.ArraySet
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
 open class SingleLiveEvent<T> : MediatorLiveData<T>() {
@@ -26,7 +27,7 @@ open class SingleLiveEvent<T> : MediatorLiveData<T>() {
 
     @MainThread
     override fun removeObserver(observer: Observer<in T>) {
-        if (observers.remove(observer)) {
+        if (observers.remove<Observer<in T>?>(observer)) {
             super.removeObserver(observer)
             return
         }

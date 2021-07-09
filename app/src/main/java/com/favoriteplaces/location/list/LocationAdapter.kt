@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.favoriteplaces.R
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import kotlinx.android.synthetic.main.location_list_item.view.*

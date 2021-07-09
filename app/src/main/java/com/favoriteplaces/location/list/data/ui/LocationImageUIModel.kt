@@ -1,5 +1,5 @@
 package com.favoriteplaces.location.list.data.ui
 
-import androidx.annotation.IntegerRes
+import androidx.annotation.DrawableRes
 
-data class LocationImageUIModel(@IntegerRes val placeHolderResource: Int, val url: String)
+data class LocationImageUIModel(@DrawableRes val placeHolderResource: Int, val url: String)

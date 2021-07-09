@@ -1,32 +1,14 @@
 plugins {
-    id(Plugins.androidApplication)
+    id(Plugins.Android.application)
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.androidExtensions)
     id(Plugins.Kotlin.kapt)
+   // id(Plugins.Kotlin.serialization)
 }
 
 android {
-    compileSdkVersion(29)
-    buildToolsVersion("29.0.3")
-
-    defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(29)
-
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    testOptions {
-        unitTests.isIncludeAndroidResources = true
-    }
+    compileSdkVersion(30)
+    buildToolsVersion("30.0.3")
 
     buildTypes {
 
@@ -44,11 +26,6 @@ android {
             buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }
-
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
-        kotlinOptions.jvmTarget = "1.8"
-        kotlinOptions.freeCompilerArgs += "-Xallow-result-return-type"
-    }
 }
 
 dependencies {
@@ -56,7 +33,7 @@ dependencies {
 
     implementation(Dependencies.Androidx.core)
     implementation(Dependencies.Androidx.appCompat)
-    implementation(Dependencies.materialDesign)
+    implementation(Dependencies.Androidx.materialDesign)
 
     implementation(Dependencies.Androidx.constraintLayout)
 
@@ -68,13 +45,13 @@ dependencies {
 
     implementation(Dependencies.Androidx.lifecycleLiveData)
     implementation(Dependencies.Androidx.lifecycleViewModel)
-    implementation(Dependencies.Androidx.lifecycleExtensions)
 
     implementation(Dependencies.coil)
 
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofitMoshi)
     implementation(Dependencies.httpLogging)
+ //   implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     implementation(Dependencies.dagger)
     implementation(Dependencies.daggerAndroid)
