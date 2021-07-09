@@ -14,15 +14,17 @@ import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getComponent
 import com.favoriteplaces.core.extensions.navigate
+import com.favoriteplaces.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.injection.LocationComponent
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
-import kotlinx.android.synthetic.main.location_list_fragment.*
 import javax.inject.Inject
 
 class LocationListFragment : Fragment(R.layout.location_list_fragment) {
 
     @Inject
     lateinit var viewModel: LocationListViewModel
+
+    private lateinit var binding: LocationListFragmentBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,14 +38,15 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding = LocationListFragmentBinding.bind(view)
         setupLocationsRecycler()
         setupObservers()
         setupListeners()
     }
 
     private fun setupLocationsRecycler() {
-        locationRecyclerView.adapter = LocationAdapter()
-        (locationRecyclerView.layoutManager as StaggeredGridLayoutManager).spanCount = 2
+        binding.locationRecyclerView.adapter = LocationAdapter()
+        (binding.locationRecyclerView.layoutManager as StaggeredGridLayoutManager).spanCount = 2
     }
 
     private fun setupObservers() {
@@ -73,12 +76,12 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     }
 
     private fun toDefaultState() {
-        locationListProgressBar.isVisible = false
+        binding.locationListProgressBar.isVisible = false
     }
 
     private fun toLoadingState() {
-        locationListProgressBar.isVisible = true
+        binding.locationListProgressBar.isVisible = true
     }
 
-    private fun getLocationAdapter() = (locationRecyclerView.adapter as? LocationAdapter)
+    private fun getLocationAdapter() = (binding.locationRecyclerView.adapter as? LocationAdapter)
 }
