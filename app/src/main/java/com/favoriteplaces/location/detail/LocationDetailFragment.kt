@@ -15,6 +15,7 @@ import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getComponent
 import com.favoriteplaces.core.extensions.hideHomeNavigationBar
 import com.favoriteplaces.core.extensions.onBackPressCallback
+import com.favoriteplaces.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.injection.LocationComponent
 import com.favoriteplaces.location.list.LocationListViewInstruction.Companion.LOCATION_ID_KEY

@@ -7,27 +7,30 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.favoriteplaces.R
 import com.favoriteplaces.core.HomeController
-import kotlinx.android.synthetic.main.activity_main.*
+import com.favoriteplaces.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(R.layout.activity_main),
-    HomeController {
+class MainActivity : AppCompatActivity(), HomeController {
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setupNavigationBar()
     }
 
     private fun setupNavigationBar() {
-        homeBottomNavigationView.setupWithNavController(getNavController())
+        binding.homeBottomNavigationView.setupWithNavController(getNavController())
     }
 
     override fun hideNavigationBar() {
-        homeBottomNavigationView.isGone = true
+        binding.homeBottomNavigationView.isGone = true
     }
 
     override fun showNavigationBar() {
-        homeBottomNavigationView.isGone = false
+        binding.homeBottomNavigationView.isGone = false
     }
 
     private fun getNavController() = findNavController(R.id.mainFragmentContainer)
