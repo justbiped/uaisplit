@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.SingleLiveEvent
-import com.favoriteplaces.location.LocationInteractor
+import com.favoriteplaces.location.detail.LoadLocations
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class LocationListViewModel
 @Inject constructor(
     private val instruction: LocationListViewInstruction,
-    private val locationInteractor: LocationInteractor
+    private val loadLocations: LoadLocations
 ) : ViewModel() {
 
     private val _viewInstruction = SingleLiveEvent<Instruction>()
@@ -24,11 +24,11 @@ class LocationListViewModel
     private val _locationList = MutableLiveData<List<LocationUIModel>>()
     val locationList: LiveData<List<LocationUIModel>> = _locationList
 
-    fun loadLocations() {
+    fun fetchLocations() {
         _viewInstruction.postValue(instruction.loading())
 
         viewModelScope.launch {
-            val locationResult = locationInteractor.loadLocations()
+            val locationResult = loadLocations()
 
             locationResult.onSuccess { locations ->
                 onLocationLoadSuccess(locations)

@@ -1,17 +1,17 @@
 package com.favoriteplaces.location
 
 import com.favoriteplaces.location.detail.data.domain.Day
-import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
+import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.Schedules
-import com.favoriteplaces.location.list.data.Location
-import com.nhaarman.mockitokotlin2.whenever
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -19,45 +19,21 @@ class LocationInteractorTest {
 
     private lateinit var interactor: LocationInteractor
 
-    @Mock
+    @MockK
     lateinit var repository: LocationRepository
 
     @Before
     fun setUp() {
+        MockKAnnotations.init(this)
+
         interactor = LocationInteractor(repository)
-    }
-
-    @Test
-    fun `returns success result with locations list when fetch locations was successful`() {
-        runBlocking {
-            val locationList = getLocationList()
-            whenever(repository.fetchLocations()).thenReturn(locationList)
-
-            val result = interactor.loadLocations()
-
-            assertThat(result.isSuccess).isTrue()
-            assertThat(result.getOrNull()).isEqualTo(locationList)
-        }
-    }
-
-    @Test
-    fun `returns failure result with launched exception when fetch locations was failed`() {
-        runBlocking {
-            val exception = Throwable("")
-            whenever(repository.fetchLocations()).then { throw exception }
-
-            val result = interactor.loadLocations()
-
-            assertThat(result.isFailure).isTrue()
-            assertThat(result.exceptionOrNull()).isEqualTo(exception)
-        }
     }
 
     @Test
     fun `returns success result with location detail when location detail fetch was successful`() {
         runBlocking {
             val locationDetail = getLocationDetail()
-            whenever(repository.findLocationById(0)).thenReturn(locationDetail)
+            coEvery { repository.findLocationById(0) } returns locationDetail
 
             val result = interactor.loadLocationDetails(0)
 
@@ -70,7 +46,7 @@ class LocationInteractorTest {
     fun `returns failure result with launched exception when fetch location detail was failed`() {
         runBlocking {
             val exception = Throwable("")
-            whenever(repository.findLocationById(0)).then { throw exception }
+            coEvery { repository.findLocationById(0) } throws exception
 
             val result = interactor.loadLocationDetails(0)
 
@@ -92,21 +68,4 @@ class LocationInteractorTest {
                 listOf(DaySchedule(Day.MONDAY, "10h", "19h"))
             )
         )
-
-    private fun getLocationList() = listOf(
-        Location(
-            0,
-            "Some Place",
-            3.5,
-            "Pub"
-        ),
-        Location(
-            1,
-            "Some Other Place",
-            3.5,
-            "Bar"
-        )
-    )
-
-
 }

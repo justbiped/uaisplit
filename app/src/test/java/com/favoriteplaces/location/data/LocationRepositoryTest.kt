@@ -5,59 +5,49 @@ import com.favoriteplaces.location.LocationRepository
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
-import com.nhaarman.mockitokotlin2.whenever
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class LocationRepositoryTest {
 
-    @Mock
+    @MockK
     lateinit var locationHttpClient: LocationHttpClient
 
     private lateinit var locationRepository: LocationRepository
 
     @Before
     fun setUp() {
-        locationRepository =
-            LocationRepository(locationHttpClient)
+        MockKAnnotations.init(this)
+
+        locationRepository = LocationRepository(locationHttpClient)
     }
 
     @Test
     fun `returns list of location when fetch location was successfully done`() {
         runBlocking {
-
-            whenever(locationHttpClient.fetchLocations()).thenReturn(
-                LocationListRemoteEntity(
-                    listOf(
-                        LocationRemoteEntity(
-                            0,
-                            "Some Place",
-                            3.4,
-                            "Pub"
-                        )
-                    )
-                )
+            coEvery { locationHttpClient.fetchLocations() } returns LocationListRemoteEntity(
+                listOf(LocationRemoteEntity(0, "Some Place", 3.4, "Pub"))
             )
 
             val locations = locationRepository.fetchLocations()
 
-            assertThat(locations).contains(
-                Location(0, "Some Place", 3.4, "Pub")
-            )
+            assertThat(locations).contains(Location(0, "Some Place", 3.4, "Pub"))
         }
     }
 
     @Test
     fun `exposes caught exception on fetch locations failure`() {
         runBlocking {
-            whenever(locationHttpClient.fetchLocations()).then { throw Throwable("Failed to fetch locations") }
+            coEvery { locationHttpClient.fetchLocations() } throws Throwable("Failed to fetch locations")
 
             assertThatThrownBy {
                 runBlocking { locationRepository.fetchLocations() }

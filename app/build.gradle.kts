@@ -60,15 +60,12 @@ dependencies {
     kapt(Dependencies.daggerProcessor)
 
     testImplementation(Dependencies.Test.jUnit)
-    testImplementation(Dependencies.Test.mockitoInline)
-    testImplementation(Dependencies.Test.mockitoKotlin)
+    testImplementation(Dependencies.Test.mockk)
     testImplementation(Dependencies.Test.assertJ)
 
     testImplementation(Dependencies.Test.androidxCore)
     testImplementation(Dependencies.Test.androidxJunit)
-
     testImplementation(Dependencies.Test.robolectric)
-
     testImplementation(Dependencies.Test.archCore)
     testImplementation(Dependencies.Test.coroutines)
     testImplementation(Dependencies.Test.fragment)

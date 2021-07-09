@@ -1,21 +1,21 @@
 package com.favoriteplaces.location.list
 
-import androidx.lifecycle.Observer
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.State
-import com.favoriteplaces.location.LocationInteractor
-import com.favoriteplaces.location.list.data.Location
-import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import com.favoriteplaces.core.tools.InstantTaskRule
+import com.favoriteplaces.location.detail.LoadLocations
+import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationImageUIModel
-import com.nhaarman.mockitokotlin2.*
+import com.favoriteplaces.location.list.data.ui.LocationUIModel
+import io.mockk.*
+import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -24,78 +24,99 @@ class LocationListViewModelTest {
     @get:Rule
     val instantTaskRule = InstantTaskRule()
 
-    @Mock
-    lateinit var locationInteractor: LocationInteractor
+    @MockK(relaxed = true)
+    lateinit var loadLocations: LoadLocations
 
-    private val instruction = spy(LocationListViewInstruction())
+    private val instruction = spyk(LocationListViewInstruction())
 
     private lateinit var viewModel: LocationListViewModel
 
     @Before
     fun setUp() {
-        viewModel = LocationListViewModel(instruction, locationInteractor)
+        MockKAnnotations.init(this)
+
+        viewModel = LocationListViewModel(instruction, loadLocations)
     }
 
     @Test
     fun `emits location list when fetch locations is successfully done`() = runBlocking {
-        val observer = mock<Observer<List<LocationUIModel>>>()
+        val observer = mockk<(List<LocationUIModel>) -> Unit>(relaxed = true)
         val locationList = listOf(Location(0, "Some Location", 4.5, "Pub"))
-        whenever(locationInteractor.loadLocations()).thenReturn(Result.success(locationList))
+        coEvery { loadLocations() } returns Result.success(locationList)
 
         viewModel.locationList.observeForever(observer)
-        viewModel.loadLocations()
+        viewModel.fetchLocations()
 
-        verify(observer).onChanged(argThat {
-            val locationUIModel = first()
-            locationUIModel.name == "Some Location"
-                    && locationUIModel.type == "Pub"
-        })
+        verify {
+            observer.invoke(withArg { locations ->
+                assertThat(locations.first().name).isEqualTo("Some Location")
+                assertThat(locations.first().type).isEqualTo("Pub")
+
+            })
+        }
     }
 
 
     @Test
     fun `emits loading state when starts to fetch locations`() = runBlocking {
-        val observer = mock<Observer<Instruction>>()
+        val observer = mockk<(Instruction) -> Unit>(relaxed = true)
+        coEvery { loadLocations() } returns Result.success(emptyList())
 
         viewModel.viewInstruction.observeForever(observer)
-        viewModel.loadLocations()
+        viewModel.fetchLocations()
 
-        verify(observer).onChanged(isA<State.Loading>())
+        verify {
+            observer.invoke(withArg { instruction ->
+                assertThat(instruction).isInstanceOf(State.Loading::class.java)
+            })
+        }
     }
 
     @Test
     fun `emits success state when locations loading was successful`() = runBlocking {
-        val observer = mock<Observer<Instruction>>()
-        whenever(locationInteractor.loadLocations()).thenReturn(Result.success(emptyList()))
+        val observer = mockk<(Instruction) -> Unit>(relaxed = true)
+        coEvery { loadLocations() } returns Result.success(emptyList())
 
         viewModel.viewInstruction.observeForever(observer)
-        viewModel.loadLocations()
+        viewModel.fetchLocations()
 
-        verify(observer).onChanged(isA<State.Success>())
+        verify {
+            observer.invoke(withArg { instruction ->
+                assertThat(instruction).isInstanceOf(State.Success::class.java)
+            })
+        }
     }
 
     @Test
     fun `emits failed state when locations loading was failure`() = runBlocking {
-        val observer = mock<Observer<Instruction>>()
-        whenever(locationInteractor.loadLocations()).thenReturn(Result.failure(Exception("")))
+        val observer = mockk<(Instruction) -> Unit>(relaxed = true)
+        coEvery { loadLocations() } returns Result.failure(Exception(""))
 
         viewModel.viewInstruction.observeForever(observer)
-        viewModel.loadLocations()
+        viewModel.fetchLocations()
 
-        verify(observer).onChanged(isA<State.Failed>())
+        verify {
+            observer.invoke(withArg { instruction ->
+                assertThat(instruction).isInstanceOf(State.Failed::class.java)
+            })
+        }
     }
 
     @Test
     fun `navigates to location details when a location was selected`() {
         runBlocking {
-            val observer = mock<Observer<Instruction>>()
+            val observer = mockk<(Instruction) -> Unit>(relaxed = true)
             val locationUIModel = getLocationUIModel()
 
             viewModel.viewInstruction.observeForever(observer)
             viewModel.onLocationSelected(locationUIModel)
 
-            verify(instruction).navigateToLocationDetails(locationUIModel)
-            verify(observer).onChanged(isA<Navigation>())
+            verify { instruction.navigateToLocationDetails(locationUIModel) }
+            verify {
+                observer.invoke(withArg { instruction ->
+                    assertThat(instruction).isInstanceOf(Navigation::class.java)
+                })
+            }
         }
     }
 

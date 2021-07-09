@@ -34,7 +34,7 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.loadLocations()
+        viewModel.fetchLocations()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
