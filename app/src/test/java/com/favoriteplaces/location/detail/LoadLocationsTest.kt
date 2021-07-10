@@ -1,6 +1,7 @@
 package com.favoriteplaces.location.detail
 
 import com.favoriteplaces.location.LocationRepository
+import com.favoriteplaces.location.list.LoadLocations
 import com.favoriteplaces.location.list.data.Location
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery

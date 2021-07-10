@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.detail
+package com.favoriteplaces.location.list
 
 import com.favoriteplaces.location.LocationRepository
 import com.favoriteplaces.location.list.data.Location

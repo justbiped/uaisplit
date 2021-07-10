@@ -3,7 +3,6 @@ package com.favoriteplaces.location.detail
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.core.tools.InstantTaskRule
-import com.favoriteplaces.location.LocationInteractor
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -28,8 +27,7 @@ class LocationDetailViewModelTest {
     @get:Rule
     val instantTaskRule = InstantTaskRule()
 
-    @MockK
-    lateinit var locationInteractor: LocationInteractor
+    @MockK lateinit var getLocationDetails: GetLocationDetails
 
     private lateinit var viewModel: LocationDetailViewModel
 
@@ -37,14 +35,14 @@ class LocationDetailViewModelTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        viewModel = LocationDetailViewModel(LocationDetailInstruction(), locationInteractor)
+        viewModel = LocationDetailViewModel(LocationDetailInstruction(), getLocationDetails)
     }
 
     @Test
     fun `emits location detail when fetch detail is successfully done`() = runBlocking {
         val observer = mockk<(LocationDetailUIModel) -> Unit>(relaxed = true)
         val locationDetail = getLocationDetail()
-        coEvery { locationInteractor.loadLocationDetails(0) } returns Result.success(locationDetail)
+        coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
 
         viewModel.locationDetail.observeForever(observer)
         viewModel.loadLocationDetails(0)
@@ -61,7 +59,7 @@ class LocationDetailViewModelTest {
     @Test
     fun `emits error state when fetch details fail`() = runBlocking {
         val observer = mockk<(Instruction) -> Unit>(relaxed = true)
-        coEvery { locationInteractor.loadLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
+        coEvery { getLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
 
         viewModel.viewInstruction.observeForever(observer)
         viewModel.loadLocationDetails(0)

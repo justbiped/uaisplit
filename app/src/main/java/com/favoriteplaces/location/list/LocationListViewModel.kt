@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.SingleLiveEvent
-import com.favoriteplaces.location.detail.LoadLocations
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import kotlinx.coroutines.launch

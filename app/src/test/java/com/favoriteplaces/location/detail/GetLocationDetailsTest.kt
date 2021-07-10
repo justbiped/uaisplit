@@ -1,5 +1,6 @@
-package com.favoriteplaces.location
+package com.favoriteplaces.location.detail
 
+import com.favoriteplaces.location.LocationRepository
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -8,16 +9,14 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
-class LocationInteractorTest {
 
-    private lateinit var interactor: LocationInteractor
+class GetLocationDetailsTest {
+
+    private lateinit var getLocationDetails: GetLocationDetails
 
     @MockK
     lateinit var repository: LocationRepository
@@ -26,7 +25,7 @@ class LocationInteractorTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        interactor = LocationInteractor(repository)
+        getLocationDetails = GetLocationDetails(repository)
     }
 
     @Test
@@ -35,10 +34,10 @@ class LocationInteractorTest {
             val locationDetail = getLocationDetail()
             coEvery { repository.findLocationById(0) } returns locationDetail
 
-            val result = interactor.loadLocationDetails(0)
+            val result = getLocationDetails(0)
 
-            assertThat(result.isSuccess).isTrue()
-            assertThat(result.getOrNull()).isEqualTo(locationDetail)
+            Assertions.assertThat(result.isSuccess).isTrue()
+            Assertions.assertThat(result.getOrNull()).isEqualTo(locationDetail)
         }
     }
 
@@ -48,10 +47,10 @@ class LocationInteractorTest {
             val exception = Throwable("")
             coEvery { repository.findLocationById(0) } throws exception
 
-            val result = interactor.loadLocationDetails(0)
+            val result = getLocationDetails(0)
 
-            assertThat(result.isFailure).isTrue()
-            assertThat(result.exceptionOrNull()).isEqualTo(exception)
+            Assertions.assertThat(result.isFailure).isTrue()
+            Assertions.assertThat(result.exceptionOrNull()).isEqualTo(exception)
         }
     }
 
