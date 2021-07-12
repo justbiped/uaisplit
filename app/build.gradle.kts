@@ -18,11 +18,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
 
-        getByName("debug") {
+        getByName("local") {
+            buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:8080/\"")
+        }
+
+        getByName("production") {
             buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }
@@ -60,10 +62,10 @@ dependencies {
     kapt(Dependencies.daggerCompiler)
     kapt(Dependencies.daggerProcessor)
 
-    debugImplementation(Dependencies.Test.androidxCore)
-    debugImplementation(Dependencies.Test.fragment)
-    debugImplementation(Dependencies.Test.navigation)
-    debugImplementation(Dependencies.Test.mockServer)
+    localImplementation(Dependencies.Test.androidxCore)
+    localImplementation(Dependencies.Test.fragment)
+    localImplementation(Dependencies.Test.navigation)
+    localImplementation(Dependencies.Test.mockServer)
 
     testImplementation(Dependencies.Test.mockk)
     testImplementation(Dependencies.Test.coroutines)

@@ -78,6 +78,17 @@ fun AndroidExtension.applyCommonConfigs() {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
 
+    buildTypes{
+        create("local") {
+            initWith(getByName("debug"))
+            applicationIdSuffix = ".local"
+        }
+
+        create("production") {
+            initWith(getByName("release"))
+        }
+    }
+
     sourceSets {
         val sharedTest = "src/sharedTest"
         getByName("test") {
@@ -91,13 +102,15 @@ fun AndroidExtension.applyCommonConfigs() {
 
     testOptions {
         unitTests.isIncludeAndroidResources = true
+        testBuildType = "local"
     }
 
-//    variantFilter {
-//        if (buildType.name.contains("release") || buildType.name.contains("debug")) {
-//            ignore = true
-//        }
-//    }
+
+    variantFilter {
+        if (buildType.name.contains("release") || buildType.name.contains("debug")) {
+            ignore = true
+        }
+    }
 }
 
 tasks.create<Delete>("clean") {
