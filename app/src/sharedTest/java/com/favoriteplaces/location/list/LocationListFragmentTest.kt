@@ -52,6 +52,7 @@ class LocationListFragmentTest {
                 )
                 .setBodyDelay(100, TimeUnit.MILLISECONDS)
         )
+
         onView(withId(R.id.locationListProgressBar)).check(matches(isDisplayed()))
     }
 }
