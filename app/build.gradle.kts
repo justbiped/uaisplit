@@ -77,7 +77,6 @@ dependencies {
     testImplementation(Dependencies.Test.espresso)
     testImplementation(Dependencies.Test.robolectric)
     testImplementation(Dependencies.Test.assertJ)
-    testImplementation(Dependencies.Test.mockServer)
 
     androidTestImplementation(Dependencies.Test.mockkAndroid)
     androidTestImplementation(Dependencies.Test.androidxJunit)
@@ -86,6 +85,5 @@ dependencies {
     androidTestImplementation(Dependencies.Test.espresso)
     androidTestImplementation(Dependencies.Test.robolectricAnnotations)
     androidTestImplementation(Dependencies.Test.assertJ)
-    androidTestImplementation(Dependencies.Test.mockServer)
     kaptTest(Dependencies.daggerCompiler)
 }
