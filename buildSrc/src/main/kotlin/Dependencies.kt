@@ -4,10 +4,11 @@ object Versions {
     const val kotlin = "1.5.0"
     const val navigation = "2.3.5"
     const val lifecycle = "2.3.1"
-    const val retrofit = "2.6.1"
+    const val retrofit = "2.9.0"
     const val hilt = "2.35.1"
     const val room = "2.3.0"
     const val dagger = "2.37"
+    const val okHttp = "4.9.1"
 }
 
 object Dependencies {
@@ -28,9 +29,9 @@ object Dependencies {
 
         const val inAppBilling = "com.android.billingclient:billing-ktx:4.0.0"
 
-        const val roomRuntime= "androidx.room:room-runtime:${Versions.room}"
-        const val roomCompiler ="androidx.room:room-compiler:${Versions.room}"
-        const val roomKtx =  "androidx.room:room-ktx:${Versions.room}"
+        const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+        const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+        const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
     }
 
     object Kotlin {
@@ -41,7 +42,7 @@ object Dependencies {
     object Firebase {
         const val bom = "com.google.firebase:firebase-bom:28.0.1"
         const val messaging = "com.google.firebase:firebase-messaging"
-        const val analytics =  "com.google.firebase:firebase-analytics"
+        const val analytics = "com.google.firebase:firebase-analytics"
         const val auth = "com.google.firebase:firebase-auth-ktx:19.3.2"
         const val playServicesAuth = "com.google.android.gms:play-services-auth:18.1.0"
     }
@@ -55,12 +56,11 @@ object Dependencies {
         private const val mockkVersion = "1.12.0"
 
         const val jUnit = "junit:junit:4.13"
-        const val mockitoInline = "org.mockito:mockito-inline:2.28.2"
-        const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
         const val assertJ = "org.assertj:assertj-core:3.20.2"
         const val mockk = "io.mockk:mockk:$mockkVersion"
         const val mockkAndroid = "io.mockk:mockk-android:$mockkVersion"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
+        const val mockServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
 
         const val robolectric = "org.robolectric:robolectric:${robolectricVersion}"
         const val robolectricAnnotations = "org.robolectric:annotations:${robolectricVersion}"
@@ -77,7 +77,9 @@ object Dependencies {
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-    const val httpLogging = "com.squareup.okhttp3:logging-interceptor:3.8.0"
+    const val httpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+    const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+
 
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
@@ -112,5 +114,5 @@ object Path {
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
-    const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.38.0"
+    const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
 }

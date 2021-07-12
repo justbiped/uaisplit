@@ -12,10 +12,10 @@ import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.R
-import com.favoriteplaces.core.extensions.getComponent
+import com.favoriteplaces.core.extensions.getCoreComponent
 import com.favoriteplaces.core.extensions.navigate
 import com.favoriteplaces.databinding.LocationListFragmentBinding
-import com.favoriteplaces.location.injection.LocationComponent
+import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import javax.inject.Inject
 
@@ -29,12 +29,7 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        getComponent<LocationComponent>().inject(this)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.fetchLocations()
+        DaggerLocationComponent.factory().create(context.getCoreComponent()).inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +37,8 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
         setupLocationsRecycler()
         setupObservers()
         setupListeners()
+
+        viewModel.fetchLocations()
     }
 
     private fun setupLocationsRecycler() {

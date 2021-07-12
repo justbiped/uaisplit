@@ -3,7 +3,7 @@ plugins {
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.androidExtensions)
     id(Plugins.Kotlin.kapt)
-   // id(Plugins.Kotlin.serialization)
+    // id(Plugins.Kotlin.serialization)
 }
 
 android {
@@ -51,7 +51,8 @@ dependencies {
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofitMoshi)
     implementation(Dependencies.httpLogging)
- //   implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation(Dependencies.okHttp)
+    //implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     implementation(Dependencies.dagger)
     implementation(Dependencies.daggerAndroid)
@@ -59,19 +60,30 @@ dependencies {
     kapt(Dependencies.daggerCompiler)
     kapt(Dependencies.daggerProcessor)
 
-    testImplementation(Dependencies.Test.jUnit)
-    testImplementation(Dependencies.Test.mockk)
-    testImplementation(Dependencies.Test.assertJ)
+    debugImplementation(Dependencies.Test.androidxCore)
+    debugImplementation(Dependencies.Test.fragment)
+    debugImplementation(Dependencies.Test.navigation)
+    debugImplementation(Dependencies.Test.mockServer)
 
+    testImplementation(Dependencies.Test.mockk)
+    testImplementation(Dependencies.Test.coroutines)
     testImplementation(Dependencies.Test.androidxCore)
     testImplementation(Dependencies.Test.androidxJunit)
-    testImplementation(Dependencies.Test.robolectric)
     testImplementation(Dependencies.Test.archCore)
-    testImplementation(Dependencies.Test.coroutines)
-    testImplementation(Dependencies.Test.fragment)
+    testImplementation(Dependencies.Test.navigation)
+    testImplementation(Dependencies.Test.runner)
+    testImplementation(Dependencies.Test.espresso)
+    testImplementation(Dependencies.Test.robolectric)
+    testImplementation(Dependencies.Test.assertJ)
+    testImplementation(Dependencies.Test.mockServer)
 
+    androidTestImplementation(Dependencies.Test.mockkAndroid)
+    androidTestImplementation(Dependencies.Test.androidxJunit)
+    androidTestImplementation(Dependencies.Test.navigation)
     androidTestImplementation(Dependencies.Test.runner)
     androidTestImplementation(Dependencies.Test.espresso)
-
+    androidTestImplementation(Dependencies.Test.robolectricAnnotations)
+    androidTestImplementation(Dependencies.Test.assertJ)
+    androidTestImplementation(Dependencies.Test.mockServer)
     kaptTest(Dependencies.daggerCompiler)
 }

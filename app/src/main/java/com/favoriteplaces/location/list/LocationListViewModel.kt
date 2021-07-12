@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.SingleLiveEvent
+import com.favoriteplaces.core.tools.DispatcherProvider
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import kotlinx.coroutines.launch
@@ -26,7 +27,7 @@ class LocationListViewModel
     fun fetchLocations() {
         _viewInstruction.postValue(instruction.loading())
 
-        viewModelScope.launch {
+        viewModelScope.launch(DispatcherProvider.IO) {
             val locationResult = loadLocations()
 
             locationResult.onSuccess { locations ->
