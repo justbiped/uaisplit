@@ -16,6 +16,8 @@ buildscript {
         classpath(Path.kotlinGradle)
        // classpath(Path.serialization)
         classpath(Path.dependenciesUpdate)
+        classpath("org.ow2.asm:asm-util:9.2")
+        classpath("org.ow2.asm:asm-commons:9.2")
     }
 }
 

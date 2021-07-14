@@ -10,6 +10,9 @@ android {
     compileSdkVersion(30)
     buildToolsVersion("30.0.3")
 
+    defaultConfig{
+        testInstrumentationRunner = "com.favoriteplaces.LocationTestRunner"
+    }
     buildTypes {
 
         getByName("release") {
@@ -66,6 +69,7 @@ dependencies {
     localImplementation(Dependencies.Test.fragment)
     localImplementation(Dependencies.Test.navigation)
     localImplementation(Dependencies.Test.mockServer)
+    kaptTest(Dependencies.daggerCompiler)
 
     testImplementation(Dependencies.Test.mockk)
     testImplementation(Dependencies.Test.coroutines)
@@ -77,6 +81,7 @@ dependencies {
     testImplementation(Dependencies.Test.espresso)
     testImplementation(Dependencies.Test.robolectric)
     testImplementation(Dependencies.Test.assertJ)
+    kaptTest(Dependencies.daggerCompiler)
 
     androidTestImplementation(Dependencies.Test.mockkAndroid)
     androidTestImplementation(Dependencies.Test.androidxJunit)
@@ -85,5 +90,5 @@ dependencies {
     androidTestImplementation(Dependencies.Test.espresso)
     androidTestImplementation(Dependencies.Test.robolectricAnnotations)
     androidTestImplementation(Dependencies.Test.assertJ)
-    kaptTest(Dependencies.daggerCompiler)
+    kaptAndroidTest(Dependencies.daggerCompiler)
 }

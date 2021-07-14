@@ -27,8 +27,6 @@ object Dependencies {
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
 
-        const val inAppBilling = "com.android.billingclient:billing-ktx:4.0.0"
-
         const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
         const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
@@ -52,7 +50,7 @@ object Dependencies {
 
     object Test {
 
-        private const val robolectricVersion = "4.5.1"
+        private const val robolectricVersion = "4.6.1"
         private const val mockkVersion = "1.12.0"
 
         const val jUnit = "junit:junit:4.13"
@@ -87,7 +85,7 @@ object Dependencies {
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 
-    const val coil = "io.coil-kt:coil:1.2.2"
+    const val coil = "io.coil-kt:coil:1.3.0"
 }
 
 object Plugins {

@@ -20,9 +20,9 @@ class CoreModule {
 
     @Provides
     @Singleton
-    internal fun providesHttpClient() = HttpClient().instantiate()
+    internal fun providesHttpClient(): OkHttpClient = HttpClient().instantiate()
 
     @Provides
     @Singleton
-    internal fun providesMoshiConverter() = MoshiConverterFactory.create()
+    internal fun providesMoshiConverter(): MoshiConverterFactory = MoshiConverterFactory.create()
 }

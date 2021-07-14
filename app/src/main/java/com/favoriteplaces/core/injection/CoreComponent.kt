@@ -1,9 +1,11 @@
 package com.favoriteplaces.core.injection
 
 import android.content.Context
+import com.favoriteplaces.core.http.HttpClient
 import com.favoriteplaces.core.http.HttpManager
 import dagger.BindsInstance
 import dagger.Component
+import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 @Singleton
@@ -19,4 +21,6 @@ interface CoreComponent {
     fun getContext(): Context
 
     fun getHttpManager(): HttpManager
+
+    fun getOkHttpClient(): OkHttpClient
 }
