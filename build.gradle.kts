@@ -14,10 +14,8 @@ buildscript {
     dependencies {
         classpath(Path.androidGradle)
         classpath(Path.kotlinGradle)
-       // classpath(Path.serialization)
+        // classpath(Path.serialization)
         classpath(Path.dependenciesUpdate)
-        classpath("org.ow2.asm:asm-util:9.2")
-        classpath("org.ow2.asm:asm-commons:9.2")
     }
 }
 
@@ -33,7 +31,7 @@ allprojects {
 
         rejectVersionIf {
             candidate.version.contains("alpha") ||
-            candidate.version.contains("beta") ||
+                    candidate.version.contains("beta") ||
                     candidate.version.contains("SNAPSHOT")
         }
     }
@@ -80,7 +78,7 @@ fun AndroidExtension.applyCommonConfigs() {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
 
-    buildTypes{
+    buildTypes {
         create("local") {
             initWith(getByName("debug"))
             applicationIdSuffix = ".local"
@@ -104,6 +102,7 @@ fun AndroidExtension.applyCommonConfigs() {
 
     testOptions {
         unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
         testBuildType = "local"
     }
 

@@ -1,6 +1,5 @@
 package com.favoriteplaces.location.list
 
-import android.content.Context
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.fragment.app.testing.withFragment
 import androidx.lifecycle.Lifecycle
@@ -9,17 +8,14 @@ import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.favoriteplaces.R
-import com.favoriteplaces.core.extensions.getCoreComponent
-import com.favoriteplaces.injection.DaggerTestComponent
 import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
 import com.favoriteplaces.tools.HttpResources
+import com.favoriteplaces.tools.findView
 import com.squareup.moshi.Moshi
-import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import org.hamcrest.CoreMatchers.not
 import org.junit.AfterClass
@@ -28,14 +24,10 @@ import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 
 @RunWith(AndroidJUnit4::class)
 class LocationListFragmentTest {
-
-    @Inject
-    lateinit var httpClient: OkHttpClient
 
     private val scenario = launchFragmentInContainer<LocationListFragment>(
         themeResId = R.style.AppTheme,
@@ -44,9 +36,9 @@ class LocationListFragmentTest {
 
     @Before
     fun setUp() {
-        DaggerTestComponent.factory()
-            .create(ApplicationProvider.getApplicationContext<Context>().getCoreComponent())
-            .inject(this)
+//        DaggerTestComponent.factory()
+//            .create(ApplicationProvider.getApplicationContext<Context>().getCoreComponent())
+//            .inject(this)
 
         val navHost = TestNavHostController(ApplicationProvider.getApplicationContext())
         scenario.withFragment {
@@ -70,12 +62,12 @@ class LocationListFragmentTest {
     }
 
     @Test
-    fun hide_progress_bar_after_load_locations() {
-        externalResources.registerIdling(httpClient)
+    fun hide_progress_bar_after_show_loaded_locations() {
         externalResources.mockHttpResponse(MockResponse().setResponseCode(200).setBody(toJson()))
 
         scenario.moveToState(Lifecycle.State.RESUMED)
 
+        findView(withText("Lugarzinho")).check(matches(isDisplayed()))
         onView(withId(R.id.locationListProgressBar)).check(matches(not(isDisplayed())))
     }
 

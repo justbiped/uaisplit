@@ -1,7 +1,6 @@
 package com.favoriteplaces.tools
 
 import androidx.test.espresso.IdlingRegistry
-import com.favoriteplaces.tools.OkHttpIdlingResource
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse

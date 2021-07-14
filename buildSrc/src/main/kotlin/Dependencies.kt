@@ -50,7 +50,7 @@ object Dependencies {
 
     object Test {
 
-        private const val robolectricVersion = "4.6.1"
+        private const val robolectricVersion = "4.5.1"
         private const val mockkVersion = "1.12.0"
 
         const val jUnit = "junit:junit:4.13"

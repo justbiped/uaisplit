@@ -69,7 +69,6 @@ dependencies {
     localImplementation(Dependencies.Test.fragment)
     localImplementation(Dependencies.Test.navigation)
     localImplementation(Dependencies.Test.mockServer)
-    kaptTest(Dependencies.daggerCompiler)
 
     testImplementation(Dependencies.Test.mockk)
     testImplementation(Dependencies.Test.coroutines)
