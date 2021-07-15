@@ -16,7 +16,6 @@ import com.favoriteplaces.core.extensions.getCoreComponent
 import com.favoriteplaces.core.extensions.navigate
 import com.favoriteplaces.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.injection.DaggerLocationComponent
-import com.favoriteplaces.location.injection.LocationComponent
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import javax.inject.Inject
 

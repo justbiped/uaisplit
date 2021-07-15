@@ -82,6 +82,7 @@ fun AndroidExtension.applyCommonConfigs() {
         create("local") {
             initWith(getByName("debug"))
             applicationIdSuffix = ".local"
+            isTestCoverageEnabled = true
         }
 
         create("production") {
