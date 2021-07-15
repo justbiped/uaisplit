@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.detail
+package com.favoriteplaces.location.detail.ui
 
 import android.content.Context
 import com.favoriteplaces.R

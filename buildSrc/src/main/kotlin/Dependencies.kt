@@ -94,7 +94,6 @@ object Plugins {
 
     object Kotlin {
         const val android = "kotlin-android"
-        const val androidExtensions = "kotlin-android-extensions"
         const val kapt: String = "kotlin-kapt"
     }
 

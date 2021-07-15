@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.detail
+package com.favoriteplaces.location.detail.ui
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -14,19 +14,23 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.favoriteplaces.R
+import com.favoriteplaces.databinding.LocationDetailReviewListItemBinding
 import com.favoriteplaces.location.detail.data.ui.LocationReviewUIModel
-import kotlinx.android.synthetic.main.location_detail_review_list_item.view.*
 import kotlin.random.Random
 
 
 class LocationReviewAdapter :
     ListAdapter<LocationReviewUIModel, LocationReviewAdapter.LocationReviewViewHolder>(diffTool) {
 
+    private lateinit var binding: LocationDetailReviewListItemBinding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationReviewViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.location_detail_review_list_item, parent, false)
-        return LocationReviewViewHolder(view)
+        binding = LocationDetailReviewListItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent, false
+        )
+
+        return LocationReviewViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: LocationReviewViewHolder, position: Int) {
@@ -35,13 +39,13 @@ class LocationReviewAdapter :
 
     inner class LocationReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(locationReview: LocationReviewUIModel) {
-            itemView.locationReviewRatingBar.rating = locationReview.rating.toFloat()
-            itemView.locationReviewTitleText.text = locationReview.title
-            itemView.locationReviewCommentText.text = locationReview.comment
-            itemView.locationReviewAuthorText.text = locationReview.author
+            binding.locationReviewRatingBar.rating = locationReview.rating.toFloat()
+            binding.locationReviewTitleText.text = locationReview.title
+            binding.locationReviewCommentText.text = locationReview.comment
+            binding.locationReviewAuthorText.text = locationReview.author
 
 
-            itemView.locationReviewAuthorImage.load("") {
+            binding.locationReviewAuthorImage.load("") {
                 val placeholder = getPlaceHolder(itemView.context)
 
                 placeholder(placeholder)

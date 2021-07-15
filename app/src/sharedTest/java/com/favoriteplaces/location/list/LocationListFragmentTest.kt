@@ -13,6 +13,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.favoriteplaces.R
 import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
+import com.favoriteplaces.location.list.ui.LocationListFragment
 import com.favoriteplaces.tools.HttpResources
 import com.favoriteplaces.tools.findView
 import com.squareup.moshi.Moshi

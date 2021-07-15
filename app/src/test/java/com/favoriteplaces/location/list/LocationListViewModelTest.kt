@@ -7,6 +7,8 @@ import com.favoriteplaces.core.tools.InstantTaskRule
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationImageUIModel
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
+import com.favoriteplaces.location.list.ui.LocationListViewInstruction
+import com.favoriteplaces.location.list.ui.LocationListViewModel
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking

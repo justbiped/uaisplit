@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.detail
+package com.favoriteplaces.location.detail.ui
 
 import android.content.Context
 import android.graphics.Color
@@ -18,15 +18,14 @@ import com.favoriteplaces.core.extensions.onBackPressCallback
 import com.favoriteplaces.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.injection.LocationComponent
-import com.favoriteplaces.location.list.LocationListViewInstruction.Companion.LOCATION_ID_KEY
-import kotlinx.android.synthetic.main.location_detail_fragment.*
-import kotlinx.android.synthetic.main.location_detail_schedule.*
+import com.favoriteplaces.location.list.ui.LocationListViewInstruction.Companion.LOCATION_ID_KEY
 import javax.inject.Inject
 
 class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
-
     @Inject
     lateinit var viewModel: LocationDetailViewModel
+
+    private lateinit var biding: LocationDetailFragmentBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,6 +43,8 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        biding = LocationDetailFragmentBinding.bind(view)
+
         setupStatusBar()
         setupToolBar()
         setupReviewRecycler()
@@ -60,14 +61,14 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupToolBar() {
-        locationDetailToolbar.setNavigationOnClickListener {
+        biding.locationDetailToolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
     }
 
     private fun setupReviewRecycler() {
-        locationReviewRecycler.isNestedScrollingEnabled = false
-        locationReviewRecycler.adapter = LocationReviewAdapter()
+        biding.locationReviewRecycler.isNestedScrollingEnabled = false
+        biding.locationReviewRecycler.adapter = LocationReviewAdapter()
     }
 
     private fun setupObservers() {
@@ -84,16 +85,16 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun bindLocationDetail(locationDetail: LocationDetailUIModel) {
-        locationDetailNameText.text = locationDetail.name
-        locationDetailsRatingBar.rating = locationDetail.rating.toFloat()
-        locationDetailRatingText.text = "${locationDetail.rating}"
-        locationDetailAboutText.text = locationDetail.about
+        biding.locationDetailNameText.text = locationDetail.name
+        biding.locationDetailsRatingBar.rating = locationDetail.rating.toFloat()
+        biding.locationDetailRatingText.text = "${locationDetail.rating}"
+        biding.locationDetailAboutText.text = locationDetail.about
 
-        locationDetailScheduleText.text =
+        biding.locationDetailSchedule.locationDetailScheduleText.text =
             locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
 
-        locationDetailPhoneText.text = locationDetail.phone
-        locationDetailAddressText.text = locationDetail.address
+        biding.locationDetailSchedule.locationDetailPhoneText.text = locationDetail.phone
+        biding.locationDetailSchedule.locationDetailAddressText.text = locationDetail.address
 
         getReviewAdapter()?.submitList(locationDetail.locationReviews)
     }
@@ -103,7 +104,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun getReviewAdapter(): LocationReviewAdapter? {
-        return locationReviewRecycler.adapter as? LocationReviewAdapter
+        return biding.locationReviewRecycler.adapter as? LocationReviewAdapter
     }
 
     override fun onDetach() {

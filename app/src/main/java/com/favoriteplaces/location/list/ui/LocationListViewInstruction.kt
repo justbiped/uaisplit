@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.list
+package com.favoriteplaces.location.list.ui
 
 import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.ViewInstruction

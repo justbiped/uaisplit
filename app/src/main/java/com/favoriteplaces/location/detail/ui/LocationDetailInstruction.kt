@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.detail
+package com.favoriteplaces.location.detail.ui
 
 import com.downstairs.eatat.core.tools.ViewInstruction
 import javax.inject.Inject

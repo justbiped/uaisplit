@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.list
+package com.favoriteplaces.location.list.ui
 
 import android.content.Context
 import android.os.Bundle

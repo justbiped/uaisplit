@@ -1,7 +1,6 @@
 plugins {
     id(Plugins.Android.application)
     id(Plugins.Kotlin.android)
-    id(Plugins.Kotlin.androidExtensions)
     id(Plugins.Kotlin.kapt)
     // id(Plugins.Kotlin.serialization)
 }

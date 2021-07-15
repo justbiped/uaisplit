@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.list
+package com.favoriteplaces.location.list.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.favoriteplaces.R
+import com.favoriteplaces.databinding.LocationListItemBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
-import kotlinx.android.synthetic.main.location_list_item.view.*
 
 class LocationAdapter :
     ListAdapter<LocationUIModel, LocationAdapter.LocationViewHolder>(diffTool) {
 
+    private lateinit var binding: LocationListItemBinding
     private var onItemClicked: (location: LocationUIModel) -> Unit = {}
 
     fun setItemClickListener(listener: (location: LocationUIModel) -> Unit) {
@@ -21,9 +21,9 @@ class LocationAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.location_list_item, parent, false)
-        return LocationViewHolder(view)
+        binding =
+            LocationListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return LocationViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
@@ -39,12 +39,12 @@ class LocationAdapter :
         }
 
         fun bind(location: LocationUIModel) {
-            itemView.locationNameText.text = location.name
-            itemView.locationTypeText.text = location.type
-            itemView.locationRatingText.text = "${location.review}"
-            itemView.ratingBar.rating = location.review.toFloat()
+            binding.locationNameText.text = location.name
+            binding.locationTypeText.text = location.type
+            binding.locationRatingText.text = "${location.review}"
+            binding.ratingBar.rating = location.review.toFloat()
 
-            itemView.locationImageView.load(location.image.url) {
+            binding.locationImageView.load(location.image.url) {
                 placeholder(location.image.placeHolderResource)
                 error(location.image.placeHolderResource)
             }

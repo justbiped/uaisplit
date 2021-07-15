@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/locationListFragment"
-        android:name="com.favoriteplaces.location.list.LocationListFragment"
+        android:name="com.favoriteplaces.location.list.ui.LocationListFragment"
         android:label="LocationListFragment"
         tools:layout="@layout/location_list_fragment">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationDetailsFragment"
-        android:name="com.favoriteplaces.location.detail.LocationDetailFragment"
+        android:name="com.favoriteplaces.location.detail.ui.LocationDetailFragment"
         android:label="LocationDetailsFragment"
         tools:layout="@layout/location_detail_fragment" />
 </navigation>

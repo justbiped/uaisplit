@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.detail.data.ui
 
-import com.favoriteplaces.location.detail.ScheduleFormatter
+import com.favoriteplaces.location.detail.ui.ScheduleFormatter
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.ScheduleGroup
 
