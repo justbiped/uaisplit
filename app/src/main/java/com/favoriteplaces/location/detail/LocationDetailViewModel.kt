@@ -8,6 +8,7 @@ import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.SingleLiveEvent
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +24,7 @@ class LocationDetailViewModel @Inject constructor(
     val locationDetail: LiveData<LocationDetailUIModel> = _locationDetail
 
     fun loadLocationDetails(locationId: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val result = getLocationDetails(locationId)
 
             result.onSuccess { onLoadLocationDetailSuccess(it) }

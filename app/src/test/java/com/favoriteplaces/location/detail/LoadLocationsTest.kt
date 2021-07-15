@@ -16,7 +16,6 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LoadLocationsTest {
 
-
     private lateinit var loadLocations: LoadLocations
 
     @MockK

@@ -17,12 +17,10 @@ class InstantTaskRule
     override fun starting(description: Description?) {
         super.starting(description)
         DispatcherProvider.forceDispatcher(testDispatcher)
-        Dispatchers.setMain(testDispatcher)
     }
 
     override fun finished(description: Description?) {
         DispatcherProvider.reset()
-        Dispatchers.resetMain()
         ArchTaskExecutor.getInstance().setDelegate(null)
     }
 }

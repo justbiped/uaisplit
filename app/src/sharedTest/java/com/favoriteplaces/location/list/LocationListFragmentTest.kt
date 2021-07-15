@@ -29,18 +29,13 @@ import java.util.concurrent.TimeUnit
 @RunWith(AndroidJUnit4::class)
 class LocationListFragmentTest {
 
-    private val scenario = launchFragmentInContainer<LocationListFragment>(
-        themeResId = R.style.AppTheme,
-        initialState = Lifecycle.State.RESUMED
-    )
+    private val scenario =
+        launchFragmentInContainer<LocationListFragment>(themeResId = R.style.AppTheme)
 
     @Before
     fun setUp() {
-//        DaggerTestComponent.factory()
-//            .create(ApplicationProvider.getApplicationContext<Context>().getCoreComponent())
-//            .inject(this)
-
         val navHost = TestNavHostController(ApplicationProvider.getApplicationContext())
+
         scenario.withFragment {
             navHost.setGraph(R.navigation.main_nav_graph)
             Navigation.setViewNavController(requireView(), navHost)
