@@ -1,6 +1,7 @@
-package com.favoriteplaces.core.tools
+package com.favoriteplaces
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.favoriteplaces.core.tools.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.runner.Description

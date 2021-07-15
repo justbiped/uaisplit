@@ -3,7 +3,7 @@ package com.favoriteplaces.location.list
 import com.downstairs.eatat.core.tools.Instruction
 import com.downstairs.eatat.core.tools.Navigation
 import com.downstairs.eatat.core.tools.State
-import com.favoriteplaces.core.tools.InstantTaskRule
+import com.favoriteplaces.InstantTaskRule
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationImageUIModel
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
