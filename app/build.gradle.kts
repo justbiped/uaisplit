@@ -6,8 +6,6 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
 
     defaultConfig {
         testInstrumentationRunner = "com.favoriteplaces.LocationTestRunner"
