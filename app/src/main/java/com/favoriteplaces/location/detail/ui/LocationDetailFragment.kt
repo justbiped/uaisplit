@@ -67,8 +67,8 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupReviewRecycler() {
-        biding.locationReviewRecycler.isNestedScrollingEnabled = false
-        biding.locationReviewRecycler.adapter = LocationReviewAdapter()
+        biding.locationReviewList.isNestedScrollingEnabled = false
+        biding.locationReviewList.adapter = LocationReviewAdapter()
     }
 
     private fun setupObservers() {
@@ -104,7 +104,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun getReviewAdapter(): LocationReviewAdapter? {
-        return biding.locationReviewRecycler.adapter as? LocationReviewAdapter
+        return biding.locationReviewList.adapter as? LocationReviewAdapter
     }
 
     override fun onDetach() {

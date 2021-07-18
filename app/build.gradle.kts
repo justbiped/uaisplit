@@ -10,6 +10,16 @@ android {
     defaultConfig {
         testInstrumentationRunner = "com.favoriteplaces.LocationTestRunner"
     }
+
+    signingConfigs {
+        create("production") {
+            storeFile = File("${rootProject.rootDir}/location_key")
+            storePassword = "mmXdww)}M&}*0n2Hw"
+            keyAlias = "locations_production"
+            keyPassword = "mmXdww)}M&}*0n2Hw"
+        }
+    }
+
     buildTypes {
 
         getByName("release") {
@@ -25,6 +35,8 @@ android {
         }
 
         getByName("production") {
+            signingConfig = signingConfigs.getByName("production")
+
             buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }

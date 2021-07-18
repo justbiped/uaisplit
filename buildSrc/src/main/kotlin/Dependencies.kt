@@ -19,15 +19,12 @@ object Dependencies {
         const val activity = "androidx.activity:activity-ktx:1.2.3"
         const val fragment = "androidx.fragment:fragment-ktx:1.3.5"
 
-        const val lifecycleLiveData =
-            "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-        const val lifecycleViewModel =
-            "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
 
-        const val navigationFragment =
-            "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
 
         const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
@@ -66,6 +63,9 @@ object Dependencies {
         const val robolectric = "org.robolectric:robolectric:${robolectricVersion}"
         const val robolectricAnnotations = "org.robolectric:annotations:${robolectricVersion}"
 
+        const val fragment = "androidx.fragment:fragment-testing:1.3.5"
+        const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
+
         const val androidxCore = "androidx.test:core-ktx:1.4.0"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
         const val androidxJunit = "androidx.test.ext:junit-ktx:1.1.3"
@@ -73,8 +73,7 @@ object Dependencies {
         const val runner = "androidx.test:runner:1.4.0"
         const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
         const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.4.0"
-        const val fragment = "androidx.fragment:fragment-testing:1.3.5"
-        const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
+        const val uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
     }
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"

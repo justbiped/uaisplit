@@ -8,6 +8,13 @@ android {
     compileSdkVersion(30)
     buildToolsVersion("30.0.3")
 
+    defaultConfig {
+        minSdkVersion(23)
+        targetSdkVersion(30)
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
     buildTypes {
         create("local") {
             initWith(getByName("debug"))
@@ -25,7 +32,6 @@ android {
 
 dependencies {
     //localImplementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
-
     localImplementation(Dependencies.Test.assertJ)
     localImplementation(Dependencies.Test.mockkAndroid)
     localImplementation(Dependencies.Test.mockServer)
@@ -37,5 +43,5 @@ dependencies {
     localImplementation(Dependencies.Test.espresso)
     localImplementation(Dependencies.Test.espressoContrib)
     localImplementation(Dependencies.Test.runner)
-    localImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    localImplementation(Dependencies.Test.uiAutomator)
 }

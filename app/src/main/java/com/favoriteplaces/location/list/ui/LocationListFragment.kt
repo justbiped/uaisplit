@@ -32,13 +32,17 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
         DaggerLocationComponent.factory().create(context.getCoreComponent()).inject(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.fetchLocations()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = LocationListFragmentBinding.bind(view)
         setupLocationsRecycler()
         setupObservers()
         setupListeners()
-
-        viewModel.fetchLocations()
     }
 
     private fun setupLocationsRecycler() {
