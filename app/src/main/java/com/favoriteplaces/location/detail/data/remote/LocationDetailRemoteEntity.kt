@@ -22,7 +22,7 @@ data class LocationDetailRemoteEntity(
     companion object {
         fun fromResponseBody(responseBody: ResponseBody): LocationDetailRemoteEntity {
             val fixedPayload = responseBody.string().replace("[", "").replace("]", "")
-            return Json.decodeFromString<LocationDetailRemoteEntity>(fixedPayload)
+            return Json.decodeFromString(fixedPayload)
         }
     }
 
