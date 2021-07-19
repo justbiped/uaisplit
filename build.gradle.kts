@@ -86,6 +86,7 @@ fun AndroidExtension.applyCommonConfigs() {
         }
 
         create("production") {
+            isMinifyEnabled = true
             initWith(getByName("release"))
         }
     }

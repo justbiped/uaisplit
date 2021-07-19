@@ -43,13 +43,6 @@ class LocationListSteps {
         val locationListView = UiScrollable(UiSelector().scrollable(true))
         assertThat(locationListView.childCount).isGreaterThan(0)
     }
-//    @Test
-//    fun checkPreconditions() {
-//        selectPadariaPelicano()
-//        seePadariaPalermoDetails()
-//        scrollToTheCommendSession()
-//        seeThreeComments()
-//    }
 
     private fun seeThreeComments() {
         val reviewList = UiScrollable(
