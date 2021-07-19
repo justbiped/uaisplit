@@ -1,56 +1,54 @@
-package com.hotmart.tests
+package com.hotmart.test
 
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.view.ViewGroup
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.*
+import io.cucumber.java.en.Given
+import io.cucumber.java.en.Then
+import io.cucumber.java.en.When
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
 
+class LocationListSteps {
 
-@RunWith(AndroidJUnit4::class)
-class TestandoQualquerCoisa {
-
-    private lateinit var device: UiDevice
+    private val device = UiDevice.getInstance(getInstrumentation())
+    private val context = getApplicationContext<Context>()
 
     @Before
     fun startMainActivityFromHomeScreen() {
-        // Initialize UiDevice instance
-        device = UiDevice.getInstance(getInstrumentation())
-
-        // Start from the home screen
         device.pressHome()
+    }
 
-        // Wait for launcher
+    @Given("I have the Location app")
+    fun isLocationAppInstalled() {
         val launcherPackage: String = getLauncherPackageName()
         device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), LAUNCH_TIMEOUT)
+    }
 
-        // Launch the blueprint app
-        val context: Context = getApplicationContext()
+    @When("I open it")
+    fun launchLocationApp() {
         val intent: Intent? = context.packageManager.getLaunchIntentForPackage(PACKAGE)
-
-        // Clear out any previous instances
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
-
-        // Wait for the app to appear
-        device.wait(Until.hasObject(By.pkg(PACKAGE).depth(0)), LAUNCH_TIMEOUT)
+        device.wait(Until.hasObject(By.clazz("com.favoriteplaces.home.MainActivity")), LAUNCH_TIMEOUT)
     }
 
-    @Test
-    fun checkPreconditions() {
-        seeLocationList()
-        selectPadariaPelicano()
-        seePadariaPalermoDetails()
-        scrollToTheCommendSession()
-        seeThreeComments()
+    @Then("I can see the list of location at home screen")
+    fun checkLocationListIsDisplayed() {
+        val locationListView = UiScrollable(UiSelector().scrollable(true))
+        assertThat(locationListView.childCount).isGreaterThan(0)
     }
+//    @Test
+//    fun checkPreconditions() {
+//        selectPadariaPelicano()
+//        seePadariaPalermoDetails()
+//        scrollToTheCommendSession()
+//        seeThreeComments()
+//    }
 
     private fun seeThreeComments() {
         val reviewList = UiScrollable(
@@ -79,21 +77,15 @@ class TestandoQualquerCoisa {
             .click()
     }
 
-    private fun seeLocationList() {
-        val locationListView = UiScrollable(UiSelector().scrollable(true))
-        assertThat(locationListView.childCount).isGreaterThan(0)
-    }
-
     private fun getLauncherPackageName(): String {
-        // Create launcher Intent
         val intent = Intent(Intent.ACTION_MAIN)
         intent.addCategory(Intent.CATEGORY_HOME)
 
-        // Use PackageManager to get the launcher package name
-        val packageManager = getApplicationContext<Context>().packageManager
-        val resolveInfo = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
-        return resolveInfo?.activityInfo?.packageName
-            ?: throw Throwable("Unable to start main activity for package $PACKAGE")
+        val resolveInfo = getApplicationContext<Context>()
+            .packageManager
+            .resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
+
+        return resolveInfo?.activityInfo?.packageName ?: throw Throwable("Unable to start $PACKAGE")
     }
 
     companion object {

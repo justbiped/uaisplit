@@ -1,5 +1,6 @@
 plugins {
-    id("com.android.test")
+    id(Plugins.Android.library)
+    //id("com.android.test")
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.kapt)
 }
@@ -12,15 +13,11 @@ android {
         minSdkVersion(23)
         targetSdkVersion(30)
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.hotmart.test.CucumberRunner"
     }
 
     buildTypes {
-        create("local") {
-            initWith(getByName("debug"))
-        }
-
-        targetProjectPath(":app")
+        //targetProjectPath(":app")
     }
 
     variantFilter {
@@ -44,4 +41,7 @@ dependencies {
     localImplementation(Dependencies.Test.espressoContrib)
     localImplementation(Dependencies.Test.runner)
     localImplementation(Dependencies.Test.uiAutomator)
+
+    localImplementation("io.cucumber:cucumber-android:4.8.4")
+    localImplementation("io.cucumber:cucumber-picocontainer:4.8.1")
 }

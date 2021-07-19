@@ -18,7 +18,11 @@ class HttpResources : ExternalResource() {
     }
 
     override fun after() {
-        mockWebServer.shutdown()
+        try {
+            mockWebServer.close()
+        } catch (error: Throwable) {
+            print("Forced server shutdown")
+        }
     }
 
     fun init() {

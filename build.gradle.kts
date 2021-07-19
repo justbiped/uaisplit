@@ -1,5 +1,6 @@
 import Build_gradle.*
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 typealias App = com.android.build.gradle.AppPlugin
 typealias Library = com.android.build.gradle.LibraryPlugin
@@ -81,7 +82,6 @@ fun AndroidExtension.applyCommonConfigs() {
     buildTypes {
         create("local") {
             initWith(getByName("debug"))
-            applicationIdSuffix = ".local"
             isTestCoverageEnabled = true
         }
 
@@ -103,8 +103,20 @@ fun AndroidExtension.applyCommonConfigs() {
     }
 
     testOptions {
+        unitTests.all {
+            it.testLogging {
+                events = setOf(
+                    TestLogEvent.FAILED,
+                    TestLogEvent.PASSED,
+                    TestLogEvent.SKIPPED,
+                    TestLogEvent.STANDARD_OUT,
+                    TestLogEvent.STANDARD_ERROR
+                )
+            }
+        }
         unitTests.isIncludeAndroidResources = true
         unitTests.isReturnDefaultValues = true
+        animationsDisabled = true
         testBuildType = "local"
     }
 

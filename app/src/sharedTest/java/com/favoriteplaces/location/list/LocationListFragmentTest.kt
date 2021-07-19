@@ -3,7 +3,6 @@ package com.favoriteplaces.location.list
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.fragment.app.testing.withFragment
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
@@ -41,10 +40,7 @@ class LocationListFragmentTest {
     @Before
     fun setUp() {
         scenario = launchFragmentInContainer(themeResId = R.style.AppTheme)
-        scenario.withFragment {
-            navHost.setGraph(R.navigation.location_nav_graph)
-            Navigation.setViewNavController(requireView(), navHost)
-        }
+        setScenarioNavGraph()
     }
 
     @Test
@@ -65,8 +61,6 @@ class LocationListFragmentTest {
     fun show_loaded_locations_hiding_progress_bar() {
         externalResources.mockHttpResponse(MockResponse().setResponseCode(200).setBody(toJson()))
 
-        scenario.moveToState(Lifecycle.State.RESUMED)
-
         findView(withText("Lugarzinho")).check(matches(isDisplayed()))
         onView(withId(R.id.locationListProgressBar)).check(matches(not(isDisplayed())))
     }
@@ -75,12 +69,20 @@ class LocationListFragmentTest {
     fun navigate_to_details_on_tap_on_a_location() {
         externalResources.mockHttpResponse(MockResponse().setResponseCode(200).setBody(toJson()))
 
-        scenario.moveToState(Lifecycle.State.RESUMED)
+        scenario.recreate()
+        setScenarioNavGraph()
 
         onView(withId(R.id.locationRecyclerView))
             .perform(actionOnItemAtPosition<LocationAdapter.LocationViewHolder>(0, click()))
 
         assertThat(navHost.currentDestination?.label).isEqualTo("LocationDetailsFragment")
+    }
+
+    private fun setScenarioNavGraph() {
+        scenario.withFragment {
+            navHost.setGraph(R.navigation.location_nav_graph)
+            Navigation.setViewNavController(requireView(), navHost)
+        }
     }
 
     private fun toJson(): String {
