@@ -29,4 +29,4 @@ Apenas testes unitários foram criados, mas a cobertura não está muito alta.
 Os testes de espresso (teste de caixa cinza) não foram criados pois demandaria um pouco mais de tempo de configuração.
 Não há testes end to end, nesse caso poderia ser feito uso do Appium ou UIAutomator.
 
-Para rodar os testes unitários, na pasta root do projeto, digite `./gradlew test`
+Para rodar os testes unitários, na pasta root do projeto, digite `./gradlew com.hotmart.test.test`

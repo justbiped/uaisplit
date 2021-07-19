@@ -1,6 +1,7 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
-    id(Plugins.Android.library)
-    //id("com.android.test")
+    id("com.android.test")
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.kapt)
 }
@@ -13,11 +14,16 @@ android {
         minSdkVersion(23)
         targetSdkVersion(30)
 
+        testApplicationId = "com.hotmart.test"
         testInstrumentationRunner = "com.hotmart.test.CucumberRunner"
     }
 
     buildTypes {
-        //targetProjectPath(":app")
+        create("local") {
+            initWith(getByName("debug"))
+        }
+
+        targetProjectPath(":app")
     }
 
     variantFilter {
@@ -43,5 +49,5 @@ dependencies {
     localImplementation(Dependencies.Test.uiAutomator)
 
     localImplementation("io.cucumber:cucumber-android:4.8.4")
-    localImplementation("io.cucumber:cucumber-picocontainer:4.8.1")
+    // localImplementation("io.cucumber:cucumber-picocontainer:4.8.1")
 }

@@ -67,7 +67,7 @@ fun AndroidExtension.applyCommonConfigs() {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.com.hotmart.test.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures.apply {

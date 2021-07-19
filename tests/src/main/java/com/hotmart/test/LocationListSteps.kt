@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.*
+import com.favoriteplaces.home.MainActivity
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -23,21 +24,21 @@ class LocationListSteps {
         device.pressHome()
     }
 
-    @Given("I have the Location app")
+    @Given("that i have the Location app")
     fun isLocationAppInstalled() {
         val launcherPackage: String = getLauncherPackageName()
         device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), LAUNCH_TIMEOUT)
     }
 
-    @When("I open it")
+    @When("i open it")
     fun launchLocationApp() {
         val intent: Intent? = context.packageManager.getLaunchIntentForPackage(PACKAGE)
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
-        device.wait(Until.hasObject(By.clazz("com.favoriteplaces.home.MainActivity")), LAUNCH_TIMEOUT)
+        device.wait(Until.hasObject(By.clazz(MainActivity::class.java)), LAUNCH_TIMEOUT)
     }
 
-    @Then("I can see the list of location at home screen")
+    @Then("i see the list of location at home screen")
     fun checkLocationListIsDisplayed() {
         val locationListView = UiScrollable(UiSelector().scrollable(true))
         assertThat(locationListView.childCount).isGreaterThan(0)
