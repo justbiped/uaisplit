@@ -19,7 +19,9 @@ import com.favoriteplaces.location.list.ui.LocationAdapter
 import com.favoriteplaces.location.list.ui.LocationListFragment
 import com.favoriteplaces.tools.HttpResources
 import com.favoriteplaces.tools.findView
-import com.squareup.moshi.Moshi
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+
 import okhttp3.mockwebserver.MockResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.CoreMatchers.not
@@ -86,9 +88,7 @@ class LocationListFragmentTest {
     }
 
     private fun toJson(): String {
-        val moshi = Moshi.Builder().build()
-        val adapter = moshi.adapter(LocationListRemoteEntity::class.java)
-        return adapter.toJson(
+        return Json.encodeToString(
             LocationListRemoteEntity(
                 listOf(LocationRemoteEntity(1, "Lugarzinho", 4.3, "Pub"))
             )
