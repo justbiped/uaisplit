@@ -2,7 +2,7 @@ plugins {
     id(Plugins.Android.application)
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.kapt)
-    // id(Plugins.Kotlin.serialization)
+    id(Plugins.Kotlin.serialization)
 }
 
 android {
@@ -35,6 +35,13 @@ android {
             buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:8080/\"")
         }
 
+        getByName("internal") {
+            applicationIdSuffix = ".internal"
+            signingConfig = signingConfigs.getByName("production")
+
+            buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
+        }
+
         getByName("production") {
             signingConfig = signingConfigs.getByName("production")
 
@@ -64,10 +71,10 @@ dependencies {
     implementation(Dependencies.coil)
 
     implementation(Dependencies.retrofit)
-    implementation(Dependencies.retrofitMoshi)
+    implementation(Dependencies.serializationConverter)
     implementation(Dependencies.httpLogging)
     implementation(Dependencies.okHttp)
-    //implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation(Dependencies.serialization)
 
     implementation(Dependencies.dagger)
     implementation(Dependencies.daggerAndroid)

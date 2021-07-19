@@ -1,8 +1,10 @@
 package com.favoriteplaces.location.detail.data.remote
 
-import com.squareup.moshi.Json
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ScheduleRemoteEntity(
-    @field:Json(name = "open") val open: String,
-    @field:Json(name = "close") val close: String
+    @SerialName("open") val open: String,
+    @SerialName("close") val close: String
 )

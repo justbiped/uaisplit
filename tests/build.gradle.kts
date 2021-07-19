@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-    //localImplementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
     localImplementation(Dependencies.Test.assertJ)
     localImplementation(Dependencies.Test.mockkAndroid)
     localImplementation(Dependencies.Test.mockServer)
@@ -49,5 +48,4 @@ dependencies {
     localImplementation(Dependencies.Test.uiAutomator)
 
     localImplementation("io.cucumber:cucumber-android:4.8.4")
-    // localImplementation("io.cucumber:cucumber-picocontainer:4.8.1")
 }

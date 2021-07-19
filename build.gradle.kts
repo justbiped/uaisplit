@@ -15,7 +15,7 @@ buildscript {
     dependencies {
         classpath(Path.androidGradle)
         classpath(Path.kotlinGradle)
-        // classpath(Path.serialization)
+        classpath(Path.serialization)
         classpath(Path.dependenciesUpdate)
     }
 }
@@ -84,10 +84,16 @@ fun AndroidExtension.applyCommonConfigs() {
             initWith(getByName("debug"))
             isTestCoverageEnabled = true
         }
-
+        
         create("production") {
             isMinifyEnabled = true
             initWith(getByName("release"))
+        }
+
+        create("internal") {
+            initWith(getByName("production"))
+            isDebuggable = true
+            isMinifyEnabled = false
         }
     }
 

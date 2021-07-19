@@ -12,6 +12,25 @@ object Versions {
 }
 
 object Dependencies {
+    const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
+    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+
+    const val serialization ="org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
+
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val serializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+    const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    const val httpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+    const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+    
+    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
+    const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
+
+    const val coil = "io.coil-kt:coil:1.3.0"
+
     object Androidx {
         const val core = "androidx.core:core-ktx:1.6.0"
         const val appCompat = "androidx.appcompat:appcompat:1.3.0"
@@ -45,9 +64,6 @@ object Dependencies {
         const val playServicesAuth = "com.google.android.gms:play-services-auth:18.1.0"
     }
 
-    const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
-    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
-
     object Test {
 
         private const val robolectricVersion = "4.5.1"
@@ -75,20 +91,6 @@ object Dependencies {
         const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.4.0"
         const val uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
     }
-
-    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-    const val httpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
-    const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
-
-
-    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
-    const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
-    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-    const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
-
-    const val coil = "io.coil-kt:coil:1.3.0"
 }
 
 object Plugins {
@@ -96,6 +98,7 @@ object Plugins {
     const val dependenciesUpdate = "com.github.ben-manes.versions"
 
     object Kotlin {
+        const val serialization = "kotlinx-serialization"
         const val android = "kotlin-android"
         const val kapt: String = "kotlin-kapt"
     }

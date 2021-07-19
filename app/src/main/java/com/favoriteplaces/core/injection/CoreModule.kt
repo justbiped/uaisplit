@@ -2,10 +2,12 @@ package com.favoriteplaces.core.injection
 
 import com.favoriteplaces.core.http.HttpClient
 import com.favoriteplaces.core.http.HttpManager
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
-import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -13,16 +15,13 @@ class CoreModule {
 
     @Provides
     @Singleton
-    internal fun providesHttpManager(
-        okHttpClient: OkHttpClient,
-        converterFactory: MoshiConverterFactory
-    ) = HttpManager(okHttpClient, converterFactory)
+    internal fun providesHttpManager(okHttpClient: OkHttpClient): HttpManager {
+        val contentType = "application/json".toMediaType()
+        val converterFactory = Json.asConverterFactory(contentType)
+        return HttpManager(okHttpClient, converterFactory)
+    }
 
     @Provides
     @Singleton
     internal fun providesHttpClient(): OkHttpClient = HttpClient().instantiate()
-
-    @Provides
-    @Singleton
-    internal fun providesMoshiConverter(): MoshiConverterFactory = MoshiConverterFactory.create()
 }

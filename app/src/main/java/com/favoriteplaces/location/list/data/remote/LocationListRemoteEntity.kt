@@ -1,9 +1,12 @@
 package com.favoriteplaces.location.list.data.remote
 
-import com.squareup.moshi.Json
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-data class LocationListRemoteEntity(@field:Json(name = "listLocations") val locations: List<LocationRemoteEntity>) {
-
+@Serializable
+data class LocationListRemoteEntity(
+    @SerialName("listLocations") val locations: List<LocationRemoteEntity>
+) {
     fun toDomainLocations() = locations.map { locationRemote ->
         locationRemote.toDomain()
     }

@@ -1,13 +1,15 @@
 package com.favoriteplaces.location.list.data.remote
 
 import com.favoriteplaces.location.list.data.Location
-import com.squareup.moshi.Json
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class LocationRemoteEntity(
-    @field:Json(name = "id") val id: Int,
-    @field:Json(name = "name") val name: String,
-    @field:Json(name = "review") val review: Double,
-    @field:Json(name = "type") val type: String
+    @SerialName("id") val id: Int,
+    @SerialName("name") val name: String,
+    @SerialName("review") val review: Double,
+    @SerialName("type") val type: String
 ) {
     fun toDomain() =
         Location(id, name, review, type)
