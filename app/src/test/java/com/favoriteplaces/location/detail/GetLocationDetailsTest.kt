@@ -4,6 +4,7 @@ import com.favoriteplaces.location.data.LocationRepository
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
+import com.favoriteplaces.location.detail.data.domain.Schedule
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -62,8 +63,6 @@ class GetLocationDetailsTest {
             "About",
             "123",
             "address",
-            Schedules(
-                listOf(DaySchedule(Day.MONDAY, "10h", "19h"))
-            )
+            Schedule(listOf(DaySchedule(Day.MONDAY, "10h", "11h")))
         )
 }

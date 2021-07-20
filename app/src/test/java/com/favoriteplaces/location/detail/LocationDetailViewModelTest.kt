@@ -6,14 +6,13 @@ import com.favoriteplaces.InstantTaskRule
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
+import com.favoriteplaces.location.detail.data.domain.Schedule
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.detail.ui.LocationDetailInstruction
 import com.favoriteplaces.location.detail.ui.LocationDetailViewModel
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
+import com.favoriteplaces.location.detail.ui.ScheduleFormatter
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -30,19 +29,27 @@ class LocationDetailViewModelTest {
 
     @MockK lateinit var getLocationDetails: GetLocationDetails
 
+    @MockK lateinit var scheduleFormatter: ScheduleFormatter
+
     private lateinit var viewModel: LocationDetailViewModel
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
 
-        viewModel = LocationDetailViewModel(LocationDetailInstruction(), getLocationDetails)
+        viewModel = LocationDetailViewModel(
+            LocationDetailInstruction(),
+            getLocationDetails,
+            scheduleFormatter
+        )
     }
 
     @Test
     fun `emits location detail when fetch detail is successfully done`() = runBlocking {
         val observer = mockk<(LocationDetailUIModel) -> Unit>(relaxed = true)
         val locationDetail = getLocationDetail()
+
+        every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
         coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
 
         viewModel.locationDetail.observeForever(observer)
@@ -82,6 +89,6 @@ class LocationDetailViewModelTest {
             "something about",
             "314142",
             "some address",
-            Schedules(listOf(DaySchedule(Day.MONDAY, "10h", "11h")))
+            Schedule(listOf(DaySchedule(Day.MONDAY, "10h", "11h")))
         )
 }
