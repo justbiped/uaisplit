@@ -3,8 +3,7 @@ package com.favoriteplaces.location.injection
 import com.favoriteplaces.BuildConfig
 import com.favoriteplaces.core.http.HttpManager
 import com.favoriteplaces.core.injection.FeatureScope
-import com.favoriteplaces.location.LocationHttpClient
-import com.favoriteplaces.location.LocationRepository
+import com.favoriteplaces.location.data.LocationHttpClient
 import dagger.Module
 import dagger.Provides
 

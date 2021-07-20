@@ -83,7 +83,7 @@ class LocationListSteps {
     }
 
     companion object {
-        private const val LAUNCH_TIMEOUT = 5000L
+        private const val LAUNCH_TIMEOUT = 3000L
         private const val PACKAGE = "com.favoriteplaces"
     }
 }

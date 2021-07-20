@@ -1,4 +1,4 @@
-package com.favoriteplaces.location
+package com.favoriteplaces.location.data
 
 import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import okhttp3.ResponseBody

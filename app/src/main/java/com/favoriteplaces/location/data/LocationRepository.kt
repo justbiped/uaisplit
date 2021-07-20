@@ -1,4 +1,4 @@
-package com.favoriteplaces.location
+package com.favoriteplaces.location.data
 
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.remote.LocationDetailRemoteEntity

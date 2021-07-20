@@ -1,7 +1,5 @@
 package com.favoriteplaces.location.data
 
-import com.favoriteplaces.location.LocationHttpClient
-import com.favoriteplaces.location.LocationRepository
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity

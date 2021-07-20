@@ -6,12 +6,11 @@ import com.favoriteplaces.location.detail.data.domain.ScheduleGroup
 
 class ScheduleFormatter(private val context: Context) {
 
-
     fun format(scheduleGroup: ScheduleGroup): String {
-        val shortWeekDays = scheduleGroup.shortWeekDays()
+        val shortWeekDays = scheduleGroup.shortWeekDays
 
         fun isSingleDay() = shortWeekDays.size == 1
-        fun isDaysInSequence() = scheduleGroup.isInSequence() && shortWeekDays.size > 3
+        fun isDaysInSequence() = scheduleGroup.isInSequence && shortWeekDays.size > 3
 
         return when {
             isSingleDay() -> singleDayTemplate(
