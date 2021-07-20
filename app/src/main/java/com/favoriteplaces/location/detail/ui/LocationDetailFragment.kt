@@ -90,8 +90,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         biding.locationDetailRatingText.text = "${locationDetail.rating}"
         biding.locationDetailAboutText.text = locationDetail.about
 
-        biding.locationDetailSchedule.locationDetailScheduleText.text =
-            locationDetail.formattedSchedule(ScheduleFormatter(requireContext()))
+        biding.locationDetailSchedule.locationDetailScheduleText.text = locationDetail.schedule
 
         biding.locationDetailSchedule.locationDetailPhoneText.text = locationDetail.phone
         biding.locationDetailSchedule.locationDetailAddressText.text = locationDetail.address

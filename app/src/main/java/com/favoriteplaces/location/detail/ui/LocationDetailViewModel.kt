@@ -15,7 +15,8 @@ import javax.inject.Inject
 
 class LocationDetailViewModel @Inject constructor(
     private val instruction: LocationDetailInstruction,
-    private val getLocationDetails: GetLocationDetails
+    private val getLocationDetails: GetLocationDetails,
+    private val scheduleFormatter: ScheduleFormatter
 ) : ViewModel() {
 
     private val _viewInstruction = SingleLiveEvent<Instruction>()
@@ -34,6 +35,6 @@ class LocationDetailViewModel @Inject constructor(
     }
 
     private fun onLoadLocationDetailSuccess(location: LocationDetail) {
-        _locationDetail.postValue(LocationDetailUIModel.fromDomain(location))
+        _locationDetail.postValue(LocationDetailUIModel.fromDomain(location, scheduleFormatter))
     }
 }

@@ -22,14 +22,6 @@ android {
 
     buildTypes {
 
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-
         getByName("local") {
             applicationIdSuffix = ".local"
             buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:8080/\"")

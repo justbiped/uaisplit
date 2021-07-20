@@ -2,39 +2,52 @@ package com.favoriteplaces.location.detail.ui
 
 import android.content.Context
 import com.favoriteplaces.R
-import com.favoriteplaces.location.detail.data.domain.ScheduleGroup
+import com.favoriteplaces.location.detail.data.domain.Day
+import com.favoriteplaces.location.detail.data.domain.Schedule
+import java.text.DateFormatSymbols
+import java.util.*
+import javax.inject.Inject
 
-class ScheduleFormatter(private val context: Context) {
+class ScheduleFormatter @Inject constructor(private val context: Context) {
 
-    fun format(scheduleGroup: ScheduleGroup): String {
-        val shortWeekDays = scheduleGroup.shortWeekDays
+    fun format(schedule: Schedule): String {
+        val stringBuilder = StringBuilder()
 
-        fun isSingleDay() = shortWeekDays.size == 1
-        fun isDaysInSequence() = scheduleGroup.isInSequence && shortWeekDays.size > 3
+        schedule.workingHourGroups.forEach { stringBuilder.append("${formatGroup(it)}\n") }
+        return stringBuilder.toString()
+    }
+
+    private fun formatGroup(group: Schedule.Group): String {
+        fun isSingleDay() = group.days.size == 1
+        fun isDaysInSequence() = group.isInSequence && group.days.size > 3
 
         return when {
             isSingleDay() -> singleDayTemplate(
-                shortWeekDays.first(),
-                scheduleGroup.open,
-                scheduleGroup.close
+                formatDay(group.firstDay),
+                group.open,
+                group.close
             )
             isDaysInSequence() -> daysInSequenceTemplate(
-                shortWeekDays.first(),
-                shortWeekDays.last(),
-                scheduleGroup.open,
-                scheduleGroup.close
+                formatDay(group.firstDay),
+                formatDay(group.lastDay),
+                group.open,
+                group.close
             )
             else -> daysTemplate(
-                getDaysFormatted(shortWeekDays),
-                shortWeekDays.last(),
-                scheduleGroup.open,
-                scheduleGroup.close
+                getDaysFormatted(group),
+                formatDay(group.lastDay),
+                group.open,
+                group.close
             )
         }
     }
 
-    private fun getDaysFormatted(shortWeekDays: List<String>) =
-        shortWeekDays.joinToString().substringBeforeLast(", ")
+    private fun formatDay(day: Day): String {
+        return DateFormatSymbols(Locale.getDefault()).shortWeekdays[day.index]
+    }
+
+    private fun getDaysFormatted(group: Schedule.Group) =
+        group.days.joinToString { formatDay(it.day) }.substringBeforeLast(", ")
 
     private fun singleDayTemplate(vararg args: String) =
         context.getString(R.string.single_day_schedule_template).format(*args)

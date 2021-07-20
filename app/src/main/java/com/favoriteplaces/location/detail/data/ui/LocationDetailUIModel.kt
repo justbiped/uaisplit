@@ -1,8 +1,7 @@
 package com.favoriteplaces.location.detail.data.ui
 
-import com.favoriteplaces.location.detail.ui.ScheduleFormatter
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
-import com.favoriteplaces.location.detail.data.domain.ScheduleGroup
+import com.favoriteplaces.location.detail.ui.ScheduleFormatter
 
 class LocationDetailUIModel(
     val name: String,
@@ -12,11 +11,11 @@ class LocationDetailUIModel(
     val phone: String,
     val address: String,
     val locationReviews: List<LocationReviewUIModel>,
-    private val scheduleGroups: List<ScheduleGroup>
+    val schedule: String
 ) {
 
     companion object {
-        fun fromDomain(locationDetail: LocationDetail) =
+        fun fromDomain(locationDetail: LocationDetail, scheduleFormatter: ScheduleFormatter) =
             LocationDetailUIModel(
                 locationDetail.name,
                 locationDetail.review,
@@ -25,7 +24,7 @@ class LocationDetailUIModel(
                 locationDetail.phone,
                 locationDetail.address,
                 buildMockedReviews(),
-                locationDetail.schedules.groupByWorkingTime()
+                scheduleFormatter.format(locationDetail.schedule)
             )
 
         private fun buildMockedReviews(): List<LocationReviewUIModel> {
@@ -53,15 +52,6 @@ class LocationDetailUIModel(
                 )
             )
         }
-    }
-
-    fun formattedSchedule(scheduleFormatter: ScheduleFormatter): String {
-        val stringBuilder = StringBuilder()
-        scheduleGroups.forEach {
-            stringBuilder.append("${scheduleFormatter.format(it)}\n")
-        }
-
-        return stringBuilder.toString()
     }
 }
 

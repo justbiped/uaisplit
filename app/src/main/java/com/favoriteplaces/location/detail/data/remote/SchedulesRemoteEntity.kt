@@ -2,7 +2,7 @@ package com.favoriteplaces.location.detail.data.remote
 
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
-import com.favoriteplaces.location.detail.data.domain.Schedules
+import com.favoriteplaces.location.detail.data.domain.Schedule
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +16,7 @@ data class SchedulesRemoteEntity(
     @SerialName("saturday") val saturday: ScheduleRemoteEntity? = null,
     @SerialName("sunday") val sunday: ScheduleRemoteEntity? = null
 ) {
-    fun toDomain(): Schedules {
+    fun toDomain(): Schedule {
         val schedules = mutableListOf<DaySchedule>()
 
         monday?.also { schedules.add(DaySchedule(Day.MONDAY, it.open, it.close)) }
@@ -27,6 +27,7 @@ data class SchedulesRemoteEntity(
         saturday?.also { schedules.add(DaySchedule(Day.SATURDAY, it.open, it.close)) }
         sunday?.also { schedules.add(DaySchedule(Day.SUNDAY, it.open, it.close)) }
 
-        return Schedules(schedules)
+        return Schedule(schedules)
     }
 }
+

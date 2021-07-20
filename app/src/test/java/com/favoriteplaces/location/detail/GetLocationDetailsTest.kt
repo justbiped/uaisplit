@@ -4,7 +4,6 @@ import com.favoriteplaces.location.data.LocationRepository
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
-import com.favoriteplaces.location.detail.data.domain.Schedules
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK

@@ -6,7 +6,6 @@ import com.favoriteplaces.InstantTaskRule
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
-import com.favoriteplaces.location.detail.data.domain.Schedules
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.detail.ui.LocationDetailInstruction
 import com.favoriteplaces.location.detail.ui.LocationDetailViewModel

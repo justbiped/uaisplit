@@ -8,5 +8,5 @@ data class LocationDetail(
     val about: String,
     val phone: String,
     val address: String,
-    val schedules: Schedules
+    val schedule: Schedule
 )
