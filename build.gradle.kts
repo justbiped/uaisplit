@@ -1,10 +1,4 @@
-import Build_gradle.*
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
-typealias App = com.android.build.gradle.AppPlugin
-typealias Library = com.android.build.gradle.LibraryPlugin
-typealias AndroidExtension = com.android.build.gradle.TestedExtension
+apply<ConfigPlugin>()
 
 buildscript {
     repositories {
@@ -21,117 +15,9 @@ buildscript {
 }
 
 allprojects {
-    apply<com.github.benmanes.gradle.versions.VersionsPlugin>()
-
-    tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
-        checkForGradleUpdate = true
-        outputFormatter = "html"
-        outputDir = "report/dependencies"
-        reportfileName = "available-versions"
-
-
-        rejectVersionIf {
-            candidate.version.contains("alpha") ||
-                    candidate.version.contains("beta") ||
-                    candidate.version.contains("SNAPSHOT")
-        }
-    }
-
     repositories {
         google()
         mavenCentral()
-    }
-}
-
-subprojects {
-    plugins.whenPluginAdded {
-        if (this is App || this is Library) {
-            extensions.findByType<AndroidExtension>()?.applyCommonConfigs()
-        }
-    }
-
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
-        kotlinOptions.freeCompilerArgs += "-Xallow-result-return-type"
-        kotlinOptions.jvmTarget = "1.8"
-    }
-}
-
-fun AndroidExtension.applyCommonConfigs() {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
-
-    defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(30)
-
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.com.hotmart.test.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures.apply {
-        viewBinding = true
-    }
-
-    compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    buildTypes {
-        create("local") {
-            initWith(getByName("debug"))
-            isTestCoverageEnabled = true
-        }
-        
-        create("production") {
-            isMinifyEnabled = true
-            initWith(getByName("release"))
-        }
-
-        create("internal") {
-            initWith(getByName("production"))
-            isDebuggable = true
-            isMinifyEnabled = false
-        }
-    }
-
-    sourceSets {
-        val sharedTest = "src/sharedTest"
-
-        getByName("test") {
-            java.srcDir("$sharedTest/java")
-            resources.srcDirs("$sharedTest/resources")
-        }
-        getByName("androidTest") {
-            java.srcDir("$sharedTest/java")
-        }
-    }
-
-    testOptions {
-        unitTests.all {
-            it.testLogging {
-                events = setOf(
-                    TestLogEvent.FAILED,
-                    TestLogEvent.PASSED,
-                    TestLogEvent.SKIPPED,
-                    TestLogEvent.STANDARD_OUT,
-                    TestLogEvent.STANDARD_ERROR
-                )
-            }
-        }
-        unitTests.isIncludeAndroidResources = true
-        unitTests.isReturnDefaultValues = true
-        animationsDisabled = true
-        testBuildType = "local"
-    }
-
-
-    variantFilter {
-        if (buildType.name.contains("release") || buildType.name.contains("debug")) {
-            ignore = true
-        }
     }
 }
 
