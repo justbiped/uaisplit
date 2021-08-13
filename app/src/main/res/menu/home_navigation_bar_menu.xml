@@ -9,6 +9,7 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/homeFragmentDestination"
         android:icon="@drawable/bottom_navigation_map_icon_selector"
         android:title="@string/map"
         app:showAsAction="always" />

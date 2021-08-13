@@ -9,4 +9,8 @@
         tools:layout = "@layout/location_host_fragment"
         android:name="com.favoriteplaces.location.LocationHostFragment"
         android:label="LocationHostFragment" />
+    <fragment
+        android:id="@+id/homeFragmentDestination"
+        android:name="com.favoriteplaces.home.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>
