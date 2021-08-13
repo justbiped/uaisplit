@@ -13,10 +13,10 @@ android {
 
     signingConfigs {
         create("production") {
-            storeFile = File("${rootProject.rootDir}/location_key")
-            storePassword = "mmXdww)}M&}*0n2Hw"
-            keyAlias = "locations_production"
-            keyPassword = "mmXdww)}M&}*0n2Hw"
+            storeFile = File("${rootProject.rootDir}/location_key_prod")
+            storePassword = "1a]IKErY0g]!\\K)(v"
+            keyAlias = "locaitons"
+            keyPassword = "1a]IKErY0g]!\\K)(v"
         }
     }
 
