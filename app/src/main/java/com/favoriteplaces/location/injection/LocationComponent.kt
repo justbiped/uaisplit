@@ -1,9 +1,9 @@
 package com.favoriteplaces.location.injection
 
-import com.favoriteplaces.core.injection.CoreComponent
-import com.favoriteplaces.core.injection.FeatureScope
 import com.favoriteplaces.location.detail.ui.LocationDetailFragment
 import com.favoriteplaces.location.list.ui.LocationListFragment
+import com.hotmart.locations.core.injection.CoreComponent
+import com.hotmart.locations.core.injection.FeatureScope
 import dagger.Component
 
 @FeatureScope

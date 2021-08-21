@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.tools
+package com.hotmart.locations.core.tools
 
 import androidx.annotation.VisibleForTesting
 import kotlinx.coroutines.CoroutineDispatcher

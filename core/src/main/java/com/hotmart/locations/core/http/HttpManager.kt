@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.http
+package com.hotmart.locations.core.http
 
 import okhttp3.OkHttpClient
 import retrofit2.Converter

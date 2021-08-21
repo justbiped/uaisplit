@@ -44,6 +44,5 @@ dependencies {
     localImplementation(Dependencies.Test.espressoContrib)
     localImplementation(Dependencies.Test.runner)
     localImplementation(Dependencies.Test.uiAutomator)
-
     localImplementation("io.cucumber:cucumber-android:4.8.4")
 }

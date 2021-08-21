@@ -1,4 +1,4 @@
-package com.favoriteplaces.core
+package com.hotmart.locations.core
 
 interface HomeController{
     fun hideNavigationBar()

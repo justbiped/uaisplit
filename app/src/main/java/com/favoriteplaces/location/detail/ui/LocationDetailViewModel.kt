@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.downstairs.eatat.core.tools.Instruction
-import com.downstairs.eatat.core.tools.SingleLiveEvent
 import com.favoriteplaces.location.detail.GetLocationDetails
-import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
+import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
+import com.hotmart.locations.core.tools.Instruction
+import com.hotmart.locations.core.tools.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

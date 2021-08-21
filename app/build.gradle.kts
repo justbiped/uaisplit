@@ -74,10 +74,13 @@ dependencies {
     kapt(Dependencies.daggerCompiler)
     kapt(Dependencies.daggerProcessor)
 
+    implementation(project(":core"))
+
     localImplementation(Dependencies.Test.androidxCore)
     localImplementation(Dependencies.Test.fragment)
     localImplementation(Dependencies.Test.navigation)
     localImplementation(Dependencies.Test.mockServer)
+    localImplementation(project(":core-tests"))
 
     testImplementation(Dependencies.Test.mockk)
     testImplementation(Dependencies.Test.coroutines)

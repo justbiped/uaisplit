@@ -8,15 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.downstairs.eatat.core.tools.Instruction
-import com.downstairs.eatat.core.tools.Navigation
-import com.downstairs.eatat.core.tools.State
 import com.favoriteplaces.R
-import com.favoriteplaces.core.extensions.getCoreComponent
-import com.favoriteplaces.core.extensions.navigate
 import com.favoriteplaces.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
+import com.hotmart.locations.core.extensions.getCoreComponent
+import com.hotmart.locations.core.extensions.navigate
+import com.hotmart.locations.core.tools.Instruction
+import com.hotmart.locations.core.tools.Navigation
+import com.hotmart.locations.core.tools.State
 import javax.inject.Inject
 
 class LocationListFragment : Fragment(R.layout.location_list_fragment) {

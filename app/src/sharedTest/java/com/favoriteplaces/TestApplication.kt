@@ -1,9 +1,9 @@
 package com.favoriteplaces
 
 import android.app.Application
-import com.favoriteplaces.core.injection.CoreComponent
-import com.favoriteplaces.core.injection.CoreInjector
-import com.favoriteplaces.core.injection.DaggerCoreComponent
+import com.hotmart.locations.core.injection.CoreComponent
+import com.hotmart.locations.core.injection.CoreInjector
+import com.hotmart.locations.core.injection.DaggerCoreComponent
 
 class TestApplication : Application(), CoreInjector {
 

@@ -1,8 +1,5 @@
 package com.favoriteplaces.location.detail
 
-import com.downstairs.eatat.core.tools.Instruction
-import com.downstairs.eatat.core.tools.State
-import com.favoriteplaces.InstantTaskRule
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -11,6 +8,9 @@ import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.detail.ui.LocationDetailInstruction
 import com.favoriteplaces.location.detail.ui.LocationDetailViewModel
 import com.favoriteplaces.location.detail.ui.ScheduleFormatter
+import com.hotmart.coretests.InstantTaskRule
+import com.hotmart.locations.core.tools.Instruction
+import com.hotmart.locations.core.tools.State
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
@@ -24,11 +24,8 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LocationDetailViewModelTest {
 
-    @get:Rule
-    val instantTaskRule = InstantTaskRule()
-
+    @get:Rule val instantTaskRule = InstantTaskRule()
     @MockK lateinit var getLocationDetails: GetLocationDetails
-
     @MockK lateinit var scheduleFormatter: ScheduleFormatter
 
     private lateinit var viewModel: LocationDetailViewModel

@@ -6,8 +6,8 @@ import androidx.core.view.isGone
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.favoriteplaces.R
-import com.favoriteplaces.core.HomeController
 import com.favoriteplaces.databinding.ActivityMainBinding
+import com.hotmart.locations.core.HomeController
 
 class MainActivity : AppCompatActivity(), HomeController {
 

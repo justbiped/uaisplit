@@ -9,16 +9,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.downstairs.eatat.core.tools.Failure
-import com.downstairs.eatat.core.tools.Instruction
 import com.favoriteplaces.R
-import com.favoriteplaces.core.extensions.getComponent
-import com.favoriteplaces.core.extensions.hideHomeNavigationBar
-import com.favoriteplaces.core.extensions.onBackPressCallback
 import com.favoriteplaces.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.injection.LocationComponent
 import com.favoriteplaces.location.list.ui.LocationListViewInstruction.Companion.LOCATION_ID_KEY
+import com.hotmart.locations.core.extensions.getComponent
+import com.hotmart.locations.core.extensions.hideHomeNavigationBar
+import com.hotmart.locations.core.extensions.onBackPressCallback
+import com.hotmart.locations.core.tools.Failure
+import com.hotmart.locations.core.tools.Instruction
 import javax.inject.Inject
 
 class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {

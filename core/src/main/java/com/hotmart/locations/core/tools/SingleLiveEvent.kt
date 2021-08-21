@@ -1,10 +1,9 @@
-package com.downstairs.eatat.core.tools
+package com.hotmart.locations.core.tools
 
 import androidx.annotation.MainThread
 import androidx.collection.ArraySet
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
 open class SingleLiveEvent<T> : MediatorLiveData<T>() {

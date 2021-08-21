@@ -1,7 +1,7 @@
-package com.favoriteplaces.core.extensions
+package com.hotmart.locations.core.extensions
 
 import androidx.navigation.NavController
-import com.downstairs.eatat.core.tools.Navigation
+import com.hotmart.locations.core.tools.Navigation
 
 fun NavController.navigate(navigation: Navigation) {
     navigate(navigation.destination, navigation.bundledArgs)

@@ -1,12 +1,13 @@
-package com.favoriteplaces
+package com.hotmart.coretests
 
+import android.annotation.SuppressLint
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.favoriteplaces.core.tools.DispatcherProvider
+import com.hotmart.locations.core.tools.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.runner.Description
 
-
+@SuppressLint("RestrictedApi")
 class InstantTaskRule(
     private val testDispatcher: CoroutineDispatcher = TestCoroutineDispatcher()
 ) : InstantTaskExecutorRule() {

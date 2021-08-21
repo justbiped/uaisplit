@@ -1,6 +1,6 @@
-package com.favoriteplaces.core.http
+package com.hotmart.locations.core.http
 
-import com.favoriteplaces.BuildConfig
+import com.hotmart.locations.core.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Inject

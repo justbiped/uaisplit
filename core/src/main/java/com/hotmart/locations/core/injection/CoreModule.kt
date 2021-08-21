@@ -1,7 +1,7 @@
-package com.favoriteplaces.core.injection
+package com.hotmart.locations.core.injection
 
-import com.favoriteplaces.core.http.HttpClient
-import com.favoriteplaces.core.http.HttpManager
+import com.hotmart.locations.core.http.HttpClient
+import com.hotmart.locations.core.http.HttpManager
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides

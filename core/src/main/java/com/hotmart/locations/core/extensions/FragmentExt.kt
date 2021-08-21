@@ -1,9 +1,9 @@
-package com.favoriteplaces.core.extensions
+package com.hotmart.locations.core.extensions
 
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import com.favoriteplaces.core.HomeController
-import com.favoriteplaces.core.injection.FeatureInjector
+import com.hotmart.locations.core.HomeController
+import com.hotmart.locations.core.injection.FeatureInjector
 
 fun Fragment.hideHomeNavigationBar() {
     (requireActivity() as HomeController).hideNavigationBar()

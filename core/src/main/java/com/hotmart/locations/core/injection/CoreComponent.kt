@@ -1,8 +1,7 @@
-package com.favoriteplaces.core.injection
+package com.hotmart.locations.core.injection
 
 import android.content.Context
-import com.favoriteplaces.core.http.HttpClient
-import com.favoriteplaces.core.http.HttpManager
+import com.hotmart.locations.core.http.HttpManager
 import dagger.BindsInstance
 import dagger.Component
 import okhttp3.OkHttpClient
