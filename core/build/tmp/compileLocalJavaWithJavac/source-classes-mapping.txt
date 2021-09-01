@@ -1,0 +1,15 @@
+com/hotmart/locations/core/http/HttpClient_Factory.java
+ com.hotmart.locations.core.http.HttpClient_Factory
+ com.hotmart.locations.core.http.HttpClient_Factory$InstanceHolder
+com/hotmart/locations/core/injection/CoreModule_ProvidesHttpManager$core_localFactory.java
+ com.hotmart.locations.core.injection.CoreModule_ProvidesHttpManager$core_localFactory
+com/hotmart/locations/core/http/HttpManager_Factory.java
+ com.hotmart.locations.core.http.HttpManager_Factory
+com/hotmart/locations/core/injection/CoreModule_ProvidesHttpClient$core_localFactory.java
+ com.hotmart.locations.core.injection.CoreModule_ProvidesHttpClient$core_localFactory
+com/hotmart/locations/core/BuildConfig.java
+ com.hotmart.locations.core.BuildConfig
+com/hotmart/locations/core/injection/DaggerCoreComponent.java
+ com.hotmart.locations.core.injection.DaggerCoreComponent
+ com.hotmart.locations.core.injection.DaggerCoreComponent$1
+ com.hotmart.locations.core.injection.DaggerCoreComponent$Factory

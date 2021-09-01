@@ -1,0 +1,2 @@
+com/hotmart/coretests/BuildConfig.java
+ com.hotmart.coretests.BuildConfig

@@ -13,24 +13,37 @@ class HomeSessionView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr), LifecycleObserver {
 
-    private val binder: HomeSessionViewBinding =
-        HomeSessionViewBinding.bind(inflate(context, R.layout.home_session_view, this))
+    private val binding: HomeSessionViewBinding
+
 
     init {
+        inflate(context, R.layout.home_session_view, this)
+        binding = HomeSessionViewBinding.bind(rootView)
         setupSessionItemList()
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        setupListeners()
+    }
+
     private fun setupSessionItemList() {
-        binder.sessionItemList.adapter = SessionItemAdapter()
+        binding.sessionItemList.adapter = SessionItemAdapter()
+    }
+
+    private fun setupListeners() {
+        getSessionItemAdapter()?.onItemClick{
+
+        }
     }
 
     fun bind(session: Session) {
-        binder.titleText.text = session.title
+        binding.titleText.text = session.title
         getSessionItemAdapter()?.run { submitList(session.items) }
     }
 
     private fun getSessionItemAdapter(): SessionItemAdapter? {
-        return binder.sessionItemList.adapter as? SessionItemAdapter
+        return binding.sessionItemList.adapter as? SessionItemAdapter
     }
 }
 

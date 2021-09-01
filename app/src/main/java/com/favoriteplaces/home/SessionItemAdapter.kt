@@ -13,6 +13,8 @@ import com.favoriteplaces.databinding.HomeSessionListItemBinding
 class SessionItemAdapter :
     ListAdapter<SessionItem, SessionItemAdapter.SessionItemViewHolder>(diffTool) {
 
+    private var onClick: () -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionItemViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.home_session_list_item, parent, false)
@@ -24,6 +26,9 @@ class SessionItemAdapter :
         holder.bind(getItem(position))
     }
 
+    fun onItemClick(onClick: () -> Unit) {
+        this.onClick = onClick
+    }
 
     inner class SessionItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = HomeSessionListItemBinding.bind(itemView)
@@ -31,6 +36,7 @@ class SessionItemAdapter :
         fun bind(item: SessionItem) {
             binding.titleText.text = item.title
             binding.bannerImage.load(item.artWork)
+            itemView.setOnClickListener { onClick() }
         }
     }
 

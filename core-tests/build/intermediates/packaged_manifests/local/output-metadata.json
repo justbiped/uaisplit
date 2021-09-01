@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "PACKAGED_MANIFESTS",
+    "kind": "Directory"
+  },
+  "applicationId": "com.hotmart.coretests",
+  "variantName": "local",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "outputFile": "../../merged_manifest/local/AndroidManifest.xml"
+    }
+  ]
+}

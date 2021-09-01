@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "PACKAGED_MANIFESTS",
+    "kind": "Directory"
+  },
+  "applicationId": "com.hotmart.locations.core",
+  "variantName": "production",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "outputFile": "../../merged_manifest/production/AndroidManifest.xml"
+    }
+  ]
+}
