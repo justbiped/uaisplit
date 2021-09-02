@@ -1,7 +1,7 @@
 package com.favoriteplaces.location.list.ui
 
-import com.downstairs.eatat.core.tools.Navigation
-import com.downstairs.eatat.core.tools.ViewInstruction
+import com.favoriteplaces.core.tools.Navigation
+import com.favoriteplaces.core.tools.ViewInstruction
 import com.favoriteplaces.R
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import javax.inject.Inject

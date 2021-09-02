@@ -1,7 +1,7 @@
 package com.favoriteplaces.location.detail
 
-import com.downstairs.eatat.core.tools.Instruction
-import com.downstairs.eatat.core.tools.State
+import com.favoriteplaces.core.tools.Instruction
+import com.favoriteplaces.core.tools.State
 import com.favoriteplaces.InstantTaskRule
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule

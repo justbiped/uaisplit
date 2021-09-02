@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.downstairs.eatat.core.tools.Failure
-import com.downstairs.eatat.core.tools.Instruction
+import com.favoriteplaces.core.tools.Failure
+import com.favoriteplaces.core.tools.Instruction
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getComponent
 import com.favoriteplaces.core.extensions.hideHomeNavigationBar

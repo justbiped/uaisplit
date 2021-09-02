@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.downstairs.eatat.core.tools.Instruction
-import com.downstairs.eatat.core.tools.Navigation
-import com.downstairs.eatat.core.tools.State
+import com.favoriteplaces.core.tools.Instruction
+import com.favoriteplaces.core.tools.Navigation
+import com.favoriteplaces.core.tools.State
 import com.favoriteplaces.R
 import com.favoriteplaces.core.extensions.getCoreComponent
 import com.favoriteplaces.core.extensions.navigate
