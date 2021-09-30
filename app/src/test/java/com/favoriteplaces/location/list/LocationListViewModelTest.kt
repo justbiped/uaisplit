@@ -25,8 +25,7 @@ class LocationListViewModelTest {
     @get:Rule
     val instantTaskRule = InstantTaskRule()
 
-    @MockK(relaxed = true)
-    lateinit var loadLocations: LoadLocations
+    @MockK(relaxed = true) lateinit var loadLocations: LoadLocations
 
     private val instruction = spyk(LocationListViewInstruction())
 

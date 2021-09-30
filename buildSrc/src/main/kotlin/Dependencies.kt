@@ -1,7 +1,7 @@
 // @formatter:off
 
 object Versions {
-    const val kotlin = "1.5.0"
+    const val kotlin = "1.5.30"
     const val navigation = "2.3.5"
     const val lifecycle = "2.3.1"
     const val retrofit = "2.9.0"

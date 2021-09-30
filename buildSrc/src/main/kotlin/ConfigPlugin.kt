@@ -54,6 +54,10 @@ fun AndroidExtension.applyCommonConfigs() {
         testInstrumentationRunner = "androidx.com.hotmart.test.test.runner.AndroidJUnitRunner"
     }
 
+    packagingOptions{
+        resources.excludes.add("META-INF/*")
+    }
+
     buildFeatures.apply {
         viewBinding = true
     }
