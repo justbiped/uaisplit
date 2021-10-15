@@ -1,10 +1,10 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.findByType
-import org.gradle.api.JavaVersion
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.named
 
 
@@ -79,6 +79,10 @@ fun AndroidExtension.applyCommonConfigs() {
             isDebuggable = true
             isMinifyEnabled = false
         }
+    }
+
+    packagingOptions{
+        resources.excludes.add("META-INF/*")
     }
 
     sourceSets {
