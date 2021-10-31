@@ -14,9 +14,4 @@ dependencies {
     localImplementation(Dependencies.Test.runner)
     localImplementation(Dependencies.Test.espresso)
     kaptLocal(Dependencies.daggerCompiler)
-
-    localApi(Dependencies.Test.androidxCore)
-    localApi(Dependencies.Test.fragment)
-    localApi(Dependencies.Test.navigation)
-    localApi(Dependencies.Test.mockServer)
 }

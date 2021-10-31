@@ -131,6 +131,11 @@ fun Project.androidConfigs(block: AndroidExtension.() -> Unit) {
                 extensions.findByType<AndroidExtension>()?.block()
 
                 dependencies {
+                    localImplementation(Dependencies.Test.androidxCore)
+                    localImplementation(Dependencies.Test.fragment)
+                    localImplementation(Dependencies.Test.navigation)
+                    localImplementation(Dependencies.Test.mockServer)
+
                     testImplementation(Dependencies.Test.mockk)
                     testImplementation(Dependencies.Test.coroutines)
                     testImplementation(Dependencies.Test.androidxCore)
