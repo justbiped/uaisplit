@@ -94,7 +94,6 @@ object Dependencies {
 }
 
 object Plugins {
-
     const val dependenciesUpdate = "com.github.ben-manes.versions"
 
     object Kotlin {
@@ -108,6 +107,7 @@ object Plugins {
         const val application = "com.android.application"
         const val library = "com.android.library"
         const val hilt = "dagger.hilt.android.plugin"
+        const val safeArgs: String ="androidx.navigation.safeargs.kotlin"
     }
 }
 
@@ -118,4 +118,5 @@ object Path {
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
+    const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
 }

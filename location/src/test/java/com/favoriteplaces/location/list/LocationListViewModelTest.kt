@@ -3,7 +3,7 @@ package com.favoriteplaces.location.list
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationImageUIModel
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
-import com.favoriteplaces.location.list.ui.LocationListViewInstruction
+import com.favoriteplaces.location.list.ui.LocationListInstructions
 import com.favoriteplaces.location.list.ui.LocationListViewModel
 import com.hotmart.coretests.InstantTaskRule
 import com.hotmart.locations.core.tools.Instruction
@@ -28,7 +28,7 @@ class LocationListViewModelTest {
     @MockK(relaxed = true)
     lateinit var loadLocations: LoadLocations
 
-    private val instruction = spyk(LocationListViewInstruction())
+    private val instruction = spyk(LocationListInstructions())
 
     private lateinit var viewModel: LocationListViewModel
 
@@ -63,7 +63,7 @@ class LocationListViewModelTest {
         val observer = mockk<(Instruction) -> Unit>(relaxed = true)
         coEvery { loadLocations() } returns Result.success(emptyList())
 
-        viewModel.viewInstruction.observeForever(observer)
+        viewModel.instruction.observeForever(observer)
         viewModel.fetchLocations()
 
         verify {
@@ -78,7 +78,7 @@ class LocationListViewModelTest {
         val observer = mockk<(Instruction) -> Unit>(relaxed = true)
         coEvery { loadLocations() } returns Result.success(emptyList())
 
-        viewModel.viewInstruction.observeForever(observer)
+        viewModel.instruction.observeForever(observer)
         viewModel.fetchLocations()
 
         verify {
@@ -93,7 +93,7 @@ class LocationListViewModelTest {
         val observer = mockk<(Instruction) -> Unit>(relaxed = true)
         coEvery { loadLocations() } returns Result.failure(Exception(""))
 
-        viewModel.viewInstruction.observeForever(observer)
+        viewModel.instruction.observeForever(observer)
         viewModel.fetchLocations()
 
         verify {
@@ -109,7 +109,7 @@ class LocationListViewModelTest {
             val observer = mockk<(Instruction) -> Unit>(relaxed = true)
             val locationUIModel = getLocationUIModel()
 
-            viewModel.viewInstruction.observeForever(observer)
+            viewModel.instruction.observeForever(observer)
             viewModel.onLocationSelected(locationUIModel)
 
             verify { instruction.navigateToLocationDetails(locationUIModel) }

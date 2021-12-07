@@ -7,14 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import com.hotmart.locations.core.tools.Instruction
 import com.hotmart.locations.core.tools.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LocationDetailViewModel @Inject constructor(
-    private val instruction: LocationDetailInstruction,
+internal class LocationDetailViewModel @Inject constructor(
+    private val detailsInstructions: LocationDetailInstructions,
     private val getLocationDetails: GetLocationDetails,
     private val scheduleFormatter: ScheduleFormatter
 ) : ViewModel() {
@@ -30,7 +29,7 @@ class LocationDetailViewModel @Inject constructor(
             val result = getLocationDetails(locationId)
 
             result.onSuccess { onLoadLocationDetailSuccess(it) }
-            result.onFailure { _viewInstruction.postValue(instruction.failure()) }
+            result.onFailure { _viewInstruction.postValue(detailsInstructions.failure()) }
         }
     }
 

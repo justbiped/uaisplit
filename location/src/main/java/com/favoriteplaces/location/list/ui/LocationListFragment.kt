@@ -3,6 +3,7 @@ package com.favoriteplaces.location.list.ui
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,10 +14,6 @@ import com.favoriteplaces.location.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.injection.DaggerLocationComponent
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import com.hotmart.locations.core.extensions.getCoreComponent
-import com.hotmart.locations.core.extensions.navigate
-import com.hotmart.locations.core.tools.Instruction
-import com.hotmart.locations.core.tools.Navigation
-import com.hotmart.locations.core.tools.State
 import javax.inject.Inject
 
 class LocationListFragment : Fragment(R.layout.location_list_fragment) {
@@ -51,7 +48,7 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     }
 
     private fun setupObservers() {
-        viewModel.viewInstruction.observe(viewLifecycleOwner, Observer { onInstructionChange(it) })
+        viewModel.instruction.observe(viewLifecycleOwner, Observer { onInstructionChange(it) })
         viewModel.locationList.observe(viewLifecycleOwner, Observer { onLocationListResult(it) })
     }
 
@@ -63,11 +60,15 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
-            is State.Success -> toDefaultState()
-            is State.Loading -> toLoadingState()
-            is State.Failed -> toDefaultState()
-            is Navigation -> findNavController().navigate(instruction)
+            is Instruction.Success -> toDefaultState()
+            is Instruction.Loading -> toLoadingState()
+            is Instruction.Failure -> showErrorMessage()
+            is Instruction.Navigation -> findNavController().navigate(instruction.destination)
         }
+    }
+
+    private fun showErrorMessage() {
+        Toast.makeText(requireContext(), "Error on load location list", Toast.LENGTH_LONG).show()
     }
 
     private fun onLocationListResult(locationList: List<LocationUIModel>) {

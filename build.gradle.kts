@@ -11,6 +11,7 @@ buildscript {
         classpath(Path.kotlinGradle)
         classpath(Path.serialization)
         classpath(Path.dependenciesUpdate)
+        classpath(Path.safeArgs)
     }
 }
 

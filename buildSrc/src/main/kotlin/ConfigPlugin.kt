@@ -128,6 +128,10 @@ fun Project.androidConfigs(block: AndroidExtension.() -> Unit) {
     subprojects {
         plugins.whenPluginAdded {
             if (this is App || this is Library) {
+
+                plugins.apply(Plugins.Kotlin.android)
+                plugins.apply(Plugins.Android.safeArgs)
+
                 extensions.findByType<AndroidExtension>()?.block()
 
                 dependencies {

@@ -7,30 +7,28 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.injection.LocationComponent
-import com.favoriteplaces.location.list.ui.LocationListViewInstruction.Companion.LOCATION_ID_KEY
 import com.hotmart.locations.core.extensions.getComponent
 import com.hotmart.locations.core.extensions.hideHomeNavigationBar
 import com.hotmart.locations.core.extensions.onBackPressCallback
-import com.hotmart.locations.core.tools.Failure
-import com.hotmart.locations.core.tools.Instruction
 import javax.inject.Inject
 
 class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
+
     @Inject
-    lateinit var viewModel: LocationDetailViewModel
+    internal lateinit var viewModel: LocationDetailViewModel
 
     private lateinit var biding: LocationDetailFragmentBinding
+    private val arguments by navArgs<LocationDetailFragmentArgs>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         hideHomeNavigationBar()
-
         getComponent<LocationComponent>().inject(this)
     }
 
@@ -50,8 +48,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
         setupReviewRecycler()
         setupObservers()
 
-        val locationId = arguments?.getInt(LOCATION_ID_KEY) ?: -1
-        viewModel.loadLocationDetails(locationId)
+        viewModel.loadLocationDetails(arguments.locationId)
     }
 
     private fun setupStatusBar() {
@@ -72,15 +69,15 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupObservers() {
-        viewModel.viewInstruction.observe(viewLifecycleOwner, Observer { onInstructionChange(it) })
-        viewModel.locationDetail.observe(viewLifecycleOwner, Observer { locationDetail ->
+        viewModel.viewInstruction.observe(viewLifecycleOwner, { onInstructionChange(it) })
+        viewModel.locationDetail.observe(viewLifecycleOwner, { locationDetail ->
             bindLocationDetail(locationDetail)
         })
     }
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
-            is Failure -> onDetailLoadFailure()
+            is Instruction.Failure -> onDetailLoadFailure()
         }
     }
 
