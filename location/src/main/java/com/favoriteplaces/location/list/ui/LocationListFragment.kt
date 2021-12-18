@@ -48,8 +48,8 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     }
 
     private fun setupObservers() {
-        viewModel.instruction.observe(viewLifecycleOwner, Observer { onInstructionChange(it) })
-        viewModel.locationList.observe(viewLifecycleOwner, Observer { onLocationListResult(it) })
+        viewModel.instruction.observe(viewLifecycleOwner) { onInstructionChange(it) }
+        viewModel.locationList.observe(viewLifecycleOwner){ onLocationListResult(it) }
     }
 
     private fun setupListeners() {
