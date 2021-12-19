@@ -1,7 +1,7 @@
 // @formatter:off
 
 object Versions {
-    const val kotlin = "1.5.0"
+    const val kotlin = "1.5.31"
     const val navigation = "2.3.5"
     const val lifecycle = "2.3.1"
     const val retrofit = "2.9.0"
@@ -112,7 +112,7 @@ object Plugins {
 }
 
 object Path {
-    const val androidGradle = "com.android.tools.build:gradle:4.2.1"
+    const val androidGradle = "com.android.tools.build:gradle:7.0.4"
     const val playServices = "com.google.gms:google-services:4.3.8"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"

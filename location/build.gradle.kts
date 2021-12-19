@@ -1,3 +1,6 @@
+import androidext.local
+import androidext.production
+
 plugins {
     id(Plugins.Android.library)
     id(Plugins.Kotlin.kapt)
@@ -11,16 +14,12 @@ android {
     }
 
     buildTypes {
-        getByName("local") {
+        local {
             buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:8080/\"")
         }
 
-        getByName("production") {
+        production {
             buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
-        }
-
-        getByName("internal") {
-            initWith(getByName("production"))
         }
     }
 
@@ -53,7 +52,7 @@ dependencies {
 
     implementation(project(":core"))
 
-    devImplementation(project(":core-tests"))
-    kaptDev(Dependencies.daggerCompiler)
+    testImplementation(project(":core-tests"))
+    kaptTest(Dependencies.daggerCompiler)
     kaptAndroidTest(Dependencies.daggerCompiler)
 }

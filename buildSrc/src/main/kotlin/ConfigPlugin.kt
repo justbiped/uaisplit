@@ -3,11 +3,8 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.Dependency
-import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.*
-
 
 typealias App = com.android.build.gradle.AppPlugin
 typealias Library = com.android.build.gradle.LibraryPlugin
@@ -44,11 +41,8 @@ private fun applyAndroidConfigs(project: Project) {
         buildToolsVersion("30.0.3")
 
         defaultConfig {
-            minSdkVersion(23)
-            targetSdkVersion(30)
-
-            versionCode = 1
-            versionName = "1.0"
+            minSdk = 23
+            targetSdk= 30
 
             testInstrumentationRunner = "com.hotmart.coretests.LocationTestRunner"
         }
@@ -58,8 +52,8 @@ private fun applyAndroidConfigs(project: Project) {
         }
 
         compileOptions {
-            targetCompatibility = JavaVersion.VERSION_1_8
-            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_11
         }
 
         buildTypes {
@@ -75,7 +69,6 @@ private fun applyAndroidConfigs(project: Project) {
 
             create("internal") {
                 initWith(getByName("production"))
-                isDebuggable = true
                 isMinifyEnabled = false
             }
         }

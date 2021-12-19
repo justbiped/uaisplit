@@ -5,10 +5,6 @@ plugins {
     id(Plugins.Kotlin.serialization)
 }
 
-android {
-
-}
-
 dependencies {
     implementation(Dependencies.Kotlin.coroutinesAndroid)
 

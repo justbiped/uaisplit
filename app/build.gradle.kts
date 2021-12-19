@@ -1,3 +1,6 @@
+import androidext.local
+import androidext.production
+
 plugins {
     id(Plugins.Android.application)
     id(Plugins.Kotlin.kapt)
@@ -5,8 +8,10 @@ plugins {
 }
 
 android {
-
     defaultConfig {
+        versionCode = 1
+        versionName = "1.0"
+
         testInstrumentationRunner = "com.favoriteplaces.LocationTestRunner"
     }
 
@@ -21,18 +26,12 @@ android {
 
     buildTypes {
 
-        getByName("local") {
+        local {
             applicationIdSuffix = ".local"
         }
 
-        getByName("internal") {
-            applicationIdSuffix = ".internal"
+        production {
             signingConfig = signingConfigs.getByName("production")
-        }
-
-        getByName("production") {
-            signingConfig = signingConfigs.getByName("production")
-
             buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }
@@ -73,7 +72,7 @@ dependencies {
     implementation(project(":location"))
     implementation(project(":core"))
 
-    devImplementation(project(":core-tests"))
+    testImplementation(project(":core-tests"))
     kaptTest(Dependencies.daggerCompiler)
     kaptAndroidTest(Dependencies.daggerCompiler)
 }
