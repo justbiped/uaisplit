@@ -53,7 +53,7 @@ dependencies {
 
     implementation(project(":core"))
 
-    localImplementation(project(":core-tests"))
-    kaptTest(Dependencies.daggerCompiler)
+    devImplementation(project(":core-tests"))
+    kaptDev(Dependencies.daggerCompiler)
     kaptAndroidTest(Dependencies.daggerCompiler)
 }

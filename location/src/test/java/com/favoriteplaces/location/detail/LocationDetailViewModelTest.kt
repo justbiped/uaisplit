@@ -5,12 +5,11 @@ import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.Schedule
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
+import com.favoriteplaces.location.detail.ui.Instruction
 import com.favoriteplaces.location.detail.ui.LocationDetailInstructions
 import com.favoriteplaces.location.detail.ui.LocationDetailViewModel
 import com.favoriteplaces.location.detail.ui.ScheduleFormatter
 import com.hotmart.coretests.InstantTaskRule
-import com.hotmart.locations.core.tools.Instruction
-import com.hotmart.locations.core.tools.State
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
@@ -71,7 +70,7 @@ class LocationDetailViewModelTest {
 
         verify {
             observer.invoke(withArg { instruction ->
-                assertThat(instruction).isInstanceOf(State.Failed::class.java)
+                assertThat(instruction).isInstanceOf(Instruction.Failure::class.java)
             })
         }
     }

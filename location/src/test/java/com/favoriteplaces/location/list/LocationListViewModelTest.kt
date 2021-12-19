@@ -3,12 +3,10 @@ package com.favoriteplaces.location.list
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationImageUIModel
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
+import com.favoriteplaces.location.list.ui.Instruction
 import com.favoriteplaces.location.list.ui.LocationListInstructions
 import com.favoriteplaces.location.list.ui.LocationListViewModel
 import com.hotmart.coretests.InstantTaskRule
-import com.hotmart.locations.core.tools.Instruction
-import com.hotmart.locations.core.tools.Navigation
-import com.hotmart.locations.core.tools.State
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
@@ -68,7 +66,7 @@ class LocationListViewModelTest {
 
         verify {
             observer.invoke(withArg { instruction ->
-                assertThat(instruction).isInstanceOf(State.Loading::class.java)
+                assertThat(instruction).isInstanceOf(Instruction.Loading::class.java)
             })
         }
     }
@@ -83,7 +81,7 @@ class LocationListViewModelTest {
 
         verify {
             observer.invoke(withArg { instruction ->
-                assertThat(instruction).isInstanceOf(State.Success::class.java)
+                assertThat(instruction).isInstanceOf(Instruction.Success::class.java)
             })
         }
     }
@@ -98,7 +96,7 @@ class LocationListViewModelTest {
 
         verify {
             observer.invoke(withArg { instruction ->
-                assertThat(instruction).isInstanceOf(State.Failed::class.java)
+                assertThat(instruction).isInstanceOf(Instruction.Failure::class.java)
             })
         }
     }
@@ -115,7 +113,7 @@ class LocationListViewModelTest {
             verify { instruction.navigateToLocationDetails(locationUIModel) }
             verify {
                 observer.invoke(withArg { instruction ->
-                    assertThat(instruction).isInstanceOf(Navigation::class.java)
+                    assertThat(instruction).isInstanceOf(Instruction.Navigation::class.java)
                 })
             }
         }

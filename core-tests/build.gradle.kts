@@ -5,13 +5,13 @@ plugins {
 }
 
 dependencies {
-    localImplementation(Dependencies.Test.coroutines)
-    localImplementation(Dependencies.Test.archCore)
-    localImplementation(project(":core"))
+    devImplementation(Dependencies.Test.coroutines)
+    devImplementation(Dependencies.Test.archCore)
+    devImplementation(project(":core"))
 
-    localImplementation(Dependencies.okHttp)
+    devImplementation(Dependencies.okHttp)
 
-    localImplementation(Dependencies.Test.runner)
-    localImplementation(Dependencies.Test.espresso)
+    devImplementation(Dependencies.Test.runner)
+    devImplementation(Dependencies.Test.espresso)
     kaptLocal(Dependencies.daggerCompiler)
 }
