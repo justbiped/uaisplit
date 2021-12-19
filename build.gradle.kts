@@ -12,7 +12,6 @@ buildscript {
         classpath(Path.serialization)
         classpath(Path.dependenciesUpdate)
         classpath(Path.safeArgs)
-
     }
 }
 

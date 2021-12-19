@@ -5,6 +5,7 @@ plugins {
     id(Plugins.Android.application)
     id(Plugins.Kotlin.kapt)
     id(Plugins.Kotlin.serialization)
+    id("com.apollographql.apollo")
 }
 
 android {
@@ -72,7 +73,7 @@ dependencies {
     implementation(project(":location"))
     implementation(project(":core"))
 
-    testImplementation(project(":core-tests"))
-    kaptTest(Dependencies.daggerCompiler)
+    devImplementation(project(":core-tests"))
+    kaptDev(Dependencies.daggerCompiler)
     kaptAndroidTest(Dependencies.daggerCompiler)
 }
