@@ -5,7 +5,6 @@ plugins {
     id(Plugins.Android.application)
     id(Plugins.Kotlin.kapt)
     id(Plugins.Kotlin.serialization)
-    id("com.apollographql.apollo")
 }
 
 android {
