@@ -8,11 +8,6 @@ plugins {
 }
 
 android {
-
-    defaultConfig {
-        testInstrumentationRunner = "com.hotmart.coretests.LocationTestRunner"
-    }
-
     buildTypes {
         local {
             buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:8080/\"")

@@ -42,7 +42,7 @@ private fun applyAndroidConfigs(project: Project) {
 
         defaultConfig {
             minSdk = 23
-            targetSdk= 30
+            targetSdk = 30
 
             testInstrumentationRunner = "com.hotmart.coretests.LocationTestRunner"
         }
@@ -74,8 +74,8 @@ private fun applyAndroidConfigs(project: Project) {
         }
 
         packagingOptions {
-            resources.excludes.add("META-INF/**")
-            pickFirst("**/attach_hotspot_windows.dll")
+            excludes.add("META-INF/**")
+            pickFirsts.add("**/attach_hotspot_windows.dll")
         }
 
         sourceSets {
@@ -128,10 +128,10 @@ fun Project.androidConfigs(block: AndroidExtension.() -> Unit) {
                 extensions.findByType<AndroidExtension>()?.block()
 
                 dependencies {
-                    devImplementation(Dependencies.Test.androidxCore)
-                    devImplementation(Dependencies.Test.fragment)
-                    devImplementation(Dependencies.Test.navigation)
-                    devImplementation(Dependencies.Test.mockServer)
+                    localImplementation(Dependencies.Test.androidxCore)
+                    localImplementation(Dependencies.Test.fragment)
+                    localImplementation(Dependencies.Test.navigation)
+                    localImplementation(Dependencies.Test.mockServer)
 
                     testImplementation(Dependencies.Test.mockk)
                     testImplementation(Dependencies.Test.coroutines)
