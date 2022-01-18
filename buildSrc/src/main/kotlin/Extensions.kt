@@ -45,8 +45,3 @@ fun DependencyHandler.testImplementation(dependencyNotation: Any) =
  **/
 fun DependencyHandler.androidTestImplementation(dependencyNotation: Any) =
     add("androidTestImplementation", dependencyNotation)
-
-fun DependencyHandler.kaptDev(dependencyNotation: Any): Dependency? {
-    add("kaptInternal", dependencyNotation)
-    return add("kaptLocal", dependencyNotation)
-}
