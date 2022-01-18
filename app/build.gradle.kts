@@ -70,7 +70,6 @@ dependencies {
     implementation(project(":location"))
     implementation(project(":core"))
 
-    devImplementation(project(":core-tests"))
-    kaptDev(Dependencies.daggerCompiler)
-    kaptAndroidTest(Dependencies.daggerCompiler)
+    localImplementation(project(":core-tests"))
+    kaptLocal(Dependencies.daggerCompiler)
 }
