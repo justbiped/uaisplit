@@ -1,8 +1,8 @@
 package com.favoriteplaces.location
 
 import androidx.fragment.app.Fragment
-import com.favoriteplaces.location.injection.DaggerLocationComponent
-import com.favoriteplaces.location.injection.LocationComponent
+import com.favoriteplaces.location.di.DaggerLocationComponent
+import com.favoriteplaces.location.di.LocationComponent
 import com.hotmart.locations.core.extensions.getCoreComponent
 import com.hotmart.locations.core.injection.FeatureInjector
 

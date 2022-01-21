@@ -1,4 +1,4 @@
-package com.favoriteplaces.location.injection
+package com.favoriteplaces.location.di
 
 import com.favoriteplaces.location.BuildConfig
 import com.favoriteplaces.location.data.LocationHttpClient

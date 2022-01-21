@@ -17,5 +17,5 @@ fun Fragment.onBackPressCallback(callback: () -> Unit) {
 inline fun <reified T> Fragment.getComponent(): T {
     val injector = parentFragment?.parentFragment as? FeatureInjector<T>
     return injector?.component
-        ?: throw Throwable("Cant fint ${T::class.simpleName} for the actual graph")
+        ?: throw Throwable("Cant find ${T::class.simpleName} for the actual graph")
 }
