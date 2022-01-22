@@ -5,7 +5,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class HttpManager @Inject constructor(
+class HttpManager constructor(
     private val httpClient: OkHttpClient,
     private val converterFactory: Converter.Factory
 ) {

@@ -8,7 +8,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.favoriteplaces.R
 import com.favoriteplaces.databinding.ActivityMainBinding
 import com.hotmart.locations.core.HomeController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), HomeController {
 
     private lateinit var binding: ActivityMainBinding

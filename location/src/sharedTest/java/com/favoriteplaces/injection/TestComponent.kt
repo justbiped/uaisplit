@@ -1,7 +1,6 @@
 package com.favoriteplaces.injection
 
 import com.favoriteplaces.location.list.LocationListFragmentTest
-import com.hotmart.locations.core.injection.CoreComponent
 import dagger.Component
 
 @TestScope

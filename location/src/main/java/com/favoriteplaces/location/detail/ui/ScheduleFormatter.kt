@@ -4,11 +4,12 @@ import android.content.Context
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.Schedule
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.text.DateFormatSymbols
 import java.util.*
 import javax.inject.Inject
 
-class ScheduleFormatter @Inject constructor(private val context: Context) {
+class ScheduleFormatter @Inject constructor(@ApplicationContext private val context: Context) {
 
     fun format(schedule: Schedule): String {
         val stringBuilder = StringBuilder()

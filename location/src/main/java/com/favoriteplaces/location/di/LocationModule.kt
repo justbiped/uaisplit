@@ -3,15 +3,18 @@ package com.favoriteplaces.location.di
 import com.favoriteplaces.location.BuildConfig
 import com.favoriteplaces.location.data.LocationHttpClient
 import com.hotmart.locations.core.http.HttpManager
-import com.hotmart.locations.core.injection.FeatureScope
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.android.scopes.FragmentScoped
 
 @Module
+@InstallIn(FragmentComponent::class)
 class LocationModule {
 
     @Provides
-    @FeatureScope
+    @FragmentScoped
     fun providesLocationService(httpManager: HttpManager) =
         httpManager.instantiate(LocationHttpClient::class.java, BuildConfig.BASE_URL)
 }

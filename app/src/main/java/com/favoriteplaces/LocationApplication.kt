@@ -1,13 +1,11 @@
 package com.favoriteplaces
 
 import android.app.Application
-import com.hotmart.locations.core.injection.CoreComponent
-import com.hotmart.locations.core.injection.CoreInjector
-import com.hotmart.locations.core.injection.DaggerCoreComponent
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.components.SingletonComponent
 
-class LocationApplication : Application(), CoreInjector {
-
-    override val coreComponent: CoreComponent by lazy {
-        DaggerCoreComponent.factory().create(applicationContext)
-    }
-}
+@HiltAndroidApp
+class LocationApplication : Application()

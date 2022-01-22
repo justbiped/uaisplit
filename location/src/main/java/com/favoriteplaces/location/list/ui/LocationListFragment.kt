@@ -1,6 +1,5 @@
 package com.favoriteplaces.location.list.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,26 +9,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationListFragmentBinding
-import com.favoriteplaces.location.di.LocationComponent
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
-import com.hotmart.locations.core.extensions.getComponent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class LocationListFragment : Fragment(R.layout.location_list_fragment) {
 
     @Inject
     lateinit var viewModel: LocationListViewModel
 
     private lateinit var binding: LocationListFragmentBinding
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        getComponent<LocationComponent>()
-            .listComponent()
-            .create()
-            .inject(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,12 +12,12 @@ import androidx.navigation.fragment.navArgs
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import com.favoriteplaces.location.di.LocationComponent
-import com.hotmart.locations.core.extensions.getComponent
 import com.hotmart.locations.core.extensions.hideHomeNavigationBar
 import com.hotmart.locations.core.extensions.onBackPressCallback
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
 
     @Inject
@@ -29,10 +29,6 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         hideHomeNavigationBar()
-        getComponent<LocationComponent>()
-            .detailComponent()
-            .create()
-            .inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

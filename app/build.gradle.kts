@@ -3,8 +3,9 @@ import androidext.production
 
 plugins {
     id(Plugins.Android.application)
-    id(Plugins.Kotlin.kapt)
+    id(Plugins.Android.hilt)
     id(Plugins.Kotlin.serialization)
+    id(Plugins.Kotlin.kapt)
 }
 
 android {
@@ -38,20 +39,20 @@ android {
 dependencies {
     implementation(Dependencies.Kotlin.coroutinesAndroid)
 
-    implementation(Dependencies.Androidx.core)
-    implementation(Dependencies.Androidx.appCompat)
-    implementation(Dependencies.Androidx.materialDesign)
+    implementation(Dependencies.Android.core)
+    implementation(Dependencies.Android.appCompat)
+    implementation(Dependencies.Android.materialDesign)
 
-    implementation(Dependencies.Androidx.constraintLayout)
+    implementation(Dependencies.Android.constraintLayout)
 
-    implementation(Dependencies.Androidx.activity)
-    implementation(Dependencies.Androidx.fragment)
+    implementation(Dependencies.Android.activity)
+    implementation(Dependencies.Android.fragment)
 
-    implementation(Dependencies.Androidx.navigationFragment)
-    implementation(Dependencies.Androidx.navigationUI)
+    implementation(Dependencies.Android.navigationFragment)
+    implementation(Dependencies.Android.navigationUI)
 
-    implementation(Dependencies.Androidx.lifecycleLiveData)
-    implementation(Dependencies.Androidx.lifecycleViewModel)
+    implementation(Dependencies.Android.lifecycleLiveData)
+    implementation(Dependencies.Android.lifecycleViewModel)
 
     implementation(Dependencies.coil)
 
@@ -61,15 +62,12 @@ dependencies {
     implementation(Dependencies.okHttp)
     implementation(Dependencies.serialization)
 
-    implementation(Dependencies.dagger)
-    implementation(Dependencies.daggerAndroid)
-    implementation(Dependencies.daggerSupport)
-    kapt(Dependencies.daggerCompiler)
-    kapt(Dependencies.daggerProcessor)
+    implementation(Dependencies.Android.hilt)
+    kapt(Dependencies.Android.hiltCompiler)
 
     implementation(project(":location"))
     implementation(project(":core"))
 
     localImplementation(project(":core-tests"))
-    kaptLocal(Dependencies.daggerCompiler)
+    kaptLocal(Dependencies.Android.hiltCompiler)
 }

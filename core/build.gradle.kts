@@ -1,5 +1,6 @@
 plugins {
     id(Plugins.Android.library)
+    id(Plugins.Android.hilt)
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.kapt)
     id(Plugins.Kotlin.serialization)
@@ -8,11 +9,11 @@ plugins {
 dependencies {
     implementation(Dependencies.Kotlin.coroutinesAndroid)
 
-    implementation(Dependencies.Androidx.core)
-    implementation(Dependencies.Androidx.appCompat)
-    implementation(Dependencies.Androidx.materialDesign)
-    implementation(Dependencies.Androidx.fragment)
-    implementation(Dependencies.Androidx.navigationUI)
+    implementation(Dependencies.Android.core)
+    implementation(Dependencies.Android.appCompat)
+    implementation(Dependencies.Android.materialDesign)
+    implementation(Dependencies.Android.fragment)
+    implementation(Dependencies.Android.navigationUI)
 
     implementation(Dependencies.retrofit)
     implementation(Dependencies.serializationConverter)
@@ -20,8 +21,6 @@ dependencies {
     implementation(Dependencies.okHttp)
     implementation(Dependencies.serialization)
 
-    implementation(Dependencies.dagger)
-    implementation(Dependencies.daggerAndroid)
-    kapt(Dependencies.daggerCompiler)
-    kapt(Dependencies.daggerProcessor)
+    implementation(Dependencies.Android.hilt)
+    kapt(Dependencies.Android.hiltCompiler)
 }

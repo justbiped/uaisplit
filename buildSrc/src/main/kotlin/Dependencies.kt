@@ -5,33 +5,21 @@ object Versions {
     const val navigation = "2.3.5"
     const val lifecycle = "2.3.1"
     const val retrofit = "2.9.0"
-    const val hilt = "2.35.1"
+    const val hilt = "2.38.1"
     const val room = "2.3.0"
-    const val dagger = "2.37"
     const val okHttp = "4.9.1"
 }
 
 object Dependencies {
-    const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
-    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
-
     const val serialization ="org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val serializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
-    const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
     const val httpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
-    
-    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
-    const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
-    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-    const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
-
     const val coil = "io.coil-kt:coil:1.3.0"
 
-    object Androidx {
+    object Android {
         const val core = "androidx.core:core-ktx:1.6.0"
         const val appCompat = "androidx.appcompat:appcompat:1.3.0"
         const val materialDesign = "com.google.android.material:material:1.4.0"
@@ -49,6 +37,9 @@ object Dependencies {
         const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
         const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+
+        const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
+        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
     }
 
     object Kotlin {
