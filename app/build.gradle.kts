@@ -1,6 +1,3 @@
-import androidext.local
-import androidext.production
-
 plugins {
     id(Plugins.Android.application)
     id(Plugins.Android.hilt)

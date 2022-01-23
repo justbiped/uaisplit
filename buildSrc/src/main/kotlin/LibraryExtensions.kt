@@ -1,5 +1,3 @@
-package androidext
-
 import com.android.build.api.dsl.LibraryBuildType
 import org.gradle.api.NamedDomainObjectContainer
 
