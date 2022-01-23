@@ -44,7 +44,7 @@ private fun applyAndroidConfigs(project: Project) {
             minSdk = 23
             targetSdk = 30
 
-            testInstrumentationRunner = "com.hotmart.coretests.LocationTestRunner"
+            testInstrumentationRunner = "com.hotmart.coretests.instrumentation.LocationTestRunner"
         }
 
         buildFeatures.apply {
@@ -70,6 +70,12 @@ private fun applyAndroidConfigs(project: Project) {
             create("internal") {
                 initWith(getByName("production"))
                 isMinifyEnabled = false
+            }
+        }
+
+        variantFilter {
+            if (buildType.name.contains("release") || buildType.name.contains("debug")) {
+                ignore = true
             }
         }
 
@@ -107,13 +113,6 @@ private fun applyAndroidConfigs(project: Project) {
             animationsDisabled = true
             testBuildType = "local"
         }
-
-
-        variantFilter {
-            if (buildType.name.contains("release") || buildType.name.contains("debug")) {
-                ignore = true
-            }
-        }
     }
 }
 
@@ -139,6 +138,7 @@ fun Project.androidConfigs(block: AndroidExtension.() -> Unit) {
                     testImplementation(Dependencies.Test.androidxJunit)
                     testImplementation(Dependencies.Test.archCore)
                     testImplementation(Dependencies.Test.navigation)
+                    testImplementation(Dependencies.Test.hilt)
                     testImplementation(Dependencies.Test.runner)
                     testImplementation(Dependencies.Test.espresso)
                     testImplementation(Dependencies.Test.espressoContrib)
@@ -148,6 +148,7 @@ fun Project.androidConfigs(block: AndroidExtension.() -> Unit) {
                     androidTestImplementation(Dependencies.Test.mockkAndroid)
                     androidTestImplementation(Dependencies.Test.androidxJunit)
                     androidTestImplementation(Dependencies.Test.navigation)
+                    androidTestImplementation(Dependencies.Test.hilt)
                     androidTestImplementation(Dependencies.Test.runner)
                     androidTestImplementation(Dependencies.Test.espresso)
                     androidTestImplementation(Dependencies.Test.espressoContrib)

@@ -1,8 +1,5 @@
 package com.favoriteplaces.location.list
 
-import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.fragment.app.testing.withFragment
 import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
@@ -17,31 +14,34 @@ import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
 import com.favoriteplaces.location.list.ui.LocationAdapter
 import com.favoriteplaces.location.list.ui.LocationListFragment
+import com.hotmart.coretests.instrumentation.FragmentScenario
+import com.hotmart.coretests.instrumentation.fragmentScenario
 import com.hotmart.coretests.tools.HttpResources
 import com.hotmart.coretests.tools.findView
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-
 import okhttp3.mockwebserver.MockResponse
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.hamcrest.CoreMatchers.not
-import org.junit.AfterClass
-import org.junit.Before
-import org.junit.BeforeClass
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
 
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class LocationListFragmentTest {
+
+    @get:Rule var hiltRule = HiltAndroidRule(this)
 
     private lateinit var scenario: FragmentScenario<LocationListFragment>
     private val navHost = TestNavHostController(ApplicationProvider.getApplicationContext())
 
     @Before
     fun setUp() {
-        scenario = launchFragmentInContainer(themeResId = R.style.AppTheme)
+        scenario = fragmentScenario()
         setScenarioNavGraph()
     }
 
@@ -63,6 +63,8 @@ class LocationListFragmentTest {
     fun show_loaded_locations_hiding_progress_bar() {
         externalResources.mockHttpResponse(MockResponse().setResponseCode(200).setBody(toJson()))
 
+        scenario.recreate()
+
         findView(withText("Lugarzinho")).check(matches(isDisplayed()))
         onView(withId(R.id.locationListProgressBar)).check(matches(not(isDisplayed())))
     }
@@ -77,7 +79,7 @@ class LocationListFragmentTest {
         onView(withId(R.id.locationRecyclerView))
             .perform(actionOnItemAtPosition<LocationAdapter.LocationViewHolder>(0, click()))
 
-        assertThat(navHost.currentDestination?.label).isEqualTo("LocationDetailsFragment")
+        Assertions.assertThat(navHost.currentDestination?.label).isEqualTo("LocationDetailsFragment")
     }
 
     private fun setScenarioNavGraph() {
