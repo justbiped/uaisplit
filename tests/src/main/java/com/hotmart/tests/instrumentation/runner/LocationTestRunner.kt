@@ -1,4 +1,4 @@
-package com.hotmart.coretests.instrumentation
+package com.hotmart.tests.instrumentation.runner
 
 import android.app.Application
 import android.content.Context

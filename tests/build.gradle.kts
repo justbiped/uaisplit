@@ -1,48 +1,37 @@
 plugins {
-    id("com.android.test")
+    id(Plugins.Android.library)
+    id(Plugins.Android.hilt)
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.kapt)
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
-
     defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(30)
-
         testApplicationId = "com.hotmart.test"
-        testInstrumentationRunner = "com.hotmart.test.CucumberRunner"
-    }
-
-    buildTypes {
-        create("local") {
-            initWith(getByName("debug"))
-        }
-
-        targetProjectPath(":app")
-    }
-
-    variantFilter {
-        if (buildType.name.contains("release") || buildType.name.contains("debug")) {
-            ignore = true
-        }
+        testInstrumentationRunner = "com.hotmart.tests.instrumentation.runner.CucumberRunner"
     }
 }
 
 dependencies {
-    localImplementation(Dependencies.Test.assertJ)
-    localImplementation(Dependencies.Test.mockkAndroid)
-    localImplementation(Dependencies.Test.mockServer)
-    localImplementation(Dependencies.Test.robolectricAnnotations)
-    localImplementation(Dependencies.Test.androidxCore)
-    localImplementation(Dependencies.Test.androidxJunit)
-    localImplementation(Dependencies.Test.fragment)
-    localImplementation(Dependencies.Test.navigation)
-    localImplementation(Dependencies.Test.espresso)
-    localImplementation(Dependencies.Test.espressoContrib)
-    localImplementation(Dependencies.Test.runner)
-    localImplementation(Dependencies.Test.uiAutomator)
-    localImplementation("io.cucumber:cucumber-android:4.8.4")
+    implementation(Dependencies.Android.core)
+    implementation(Dependencies.Android.appCompat)
+    implementation(Dependencies.Android.fragment)
+
+    implementation(project(":core"))
+    implementation(Dependencies.okHttp)
+    implementation(Dependencies.Test.mockServer)
+
+    implementation(Dependencies.Test.coroutines)
+    implementation(Dependencies.Test.archCore)
+    implementation(Dependencies.Test.fragment)
+    implementation(Dependencies.Test.hilt)
+    implementation(Dependencies.Test.runner)
+    implementation(Dependencies.Test.espresso)
+
+    implementation(Dependencies.Android.hilt)
+    kapt(Dependencies.Android.hiltCompiler)
+
+    implementation(Dependencies.Test.uiAutomator)
+    implementation("io.cucumber:cucumber-android:4.9.0")
+    implementation("io.cucumber:cucumber-picocontainer:4.8.1")
 }

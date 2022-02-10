@@ -1,4 +1,4 @@
-package com.hotmart.coretests.tools
+package com.hotmart.tests.tools
 
 import androidx.test.espresso.IdlingRegistry
 import okhttp3.OkHttpClient

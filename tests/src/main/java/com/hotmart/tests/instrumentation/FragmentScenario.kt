@@ -1,19 +1,16 @@
-package com.hotmart.coretests.instrumentation
+package com.hotmart.tests.instrumentation
 
 import android.content.ComponentName
-import android.content.Intent
 import android.content.Intent.makeMainActivity
 import android.os.Bundle
-import androidx.annotation.MainThread
 import androidx.annotation.StyleRes
-import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement
-import com.hotmart.coretests.R
+import com.hotmart.tests.R
 import dagger.hilt.android.testing.HiltTestApplication
 
 const val THEME_EXTRAS_BUNDLE_KEY = "androidx.fragment.app.testing.FragmentScenario.EmptyFragmentActivity.THEME_EXTRAS_BUNDLE_KEY"

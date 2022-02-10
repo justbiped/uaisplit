@@ -1,4 +1,4 @@
-package com.hotmart.coretests.tools
+package com.hotmart.tests.tools
 
 import android.view.View
 import androidx.test.espresso.*

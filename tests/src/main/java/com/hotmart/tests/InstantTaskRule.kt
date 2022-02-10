@@ -1,4 +1,4 @@
-package com.hotmart.coretests
+package com.hotmart.tests
 
 import android.annotation.SuppressLint
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule

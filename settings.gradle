@@ -1,5 +1,4 @@
 include ':app'
-include ':tests'
 include ':core'
-include ':core-tests'
+include ':tests'
 include ':location'

@@ -7,22 +7,15 @@ import android.view.ViewGroup
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.*
-import com.favoriteplaces.home.MainActivity
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
 
 class LocationListSteps {
 
     private val device = UiDevice.getInstance(getInstrumentation())
     private val context = getApplicationContext<Context>()
-
-    @Before
-    fun startMainActivityFromHomeScreen() {
-        device.pressHome()
-    }
 
     @Given("that i have the Location app")
     fun isLocationAppInstalled() {
@@ -35,7 +28,7 @@ class LocationListSteps {
         val intent: Intent? = context.packageManager.getLaunchIntentForPackage(PACKAGE)
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
-        device.wait(Until.hasObject(By.clazz(MainActivity::class.java)), LAUNCH_TIMEOUT)
+        device.wait(Until.hasObject(By.res(PACKAGE, "mainFragmentContainer")), LAUNCH_TIMEOUT)
     }
 
     @Then("i see the list of location at home screen")

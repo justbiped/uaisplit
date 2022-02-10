@@ -9,7 +9,7 @@ import com.favoriteplaces.location.detail.ui.Instruction
 import com.favoriteplaces.location.detail.ui.LocationDetailInstructions
 import com.favoriteplaces.location.detail.ui.LocationDetailViewModel
 import com.favoriteplaces.location.detail.ui.ScheduleFormatter
-import com.hotmart.coretests.InstantTaskRule
+import com.hotmart.tests.InstantTaskRule
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
