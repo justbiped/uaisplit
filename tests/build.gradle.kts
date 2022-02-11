@@ -28,10 +28,10 @@ dependencies {
     implementation(Dependencies.Test.runner)
     implementation(Dependencies.Test.espresso)
 
+    implementation(Dependencies.Test.uiAutomator)
+    implementation(Dependencies.Test.cucumber)
+    implementation(Dependencies.Test.picontainer)
+
     implementation(Dependencies.Android.hilt)
     kapt(Dependencies.Android.hiltCompiler)
-
-    implementation(Dependencies.Test.uiAutomator)
-    implementation("io.cucumber:cucumber-android:4.9.0")
-    implementation("io.cucumber:cucumber-picocontainer:4.8.1")
 }
