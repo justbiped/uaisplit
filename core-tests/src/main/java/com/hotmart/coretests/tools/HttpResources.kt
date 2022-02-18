@@ -2,10 +2,8 @@ package com.hotmart.coretests.tools
 
 import androidx.test.espresso.IdlingRegistry
 import okhttp3.OkHttpClient
-import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import okhttp3.mockwebserver.RecordedRequest
 import org.junit.rules.ExternalResource
 
 class HttpResources : ExternalResource() {
@@ -33,12 +31,8 @@ class HttpResources : ExternalResource() {
         after()
     }
 
-    fun mockHttpResponse(response: MockResponse) {
-        mockWebServer.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
-                return response
-            }
-        }
+    fun enqueue(vararg response: MockResponse) {
+        response.forEach { mockWebServer.enqueue(it) }
     }
 
     fun registerIdling(client: OkHttpClient) {

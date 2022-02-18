@@ -6,7 +6,7 @@ import com.hotmart.locations.core.HomeController
 import com.hotmart.locations.core.injection.FeatureInjector
 
 fun Fragment.hideHomeNavigationBar() {
-    (requireActivity() as HomeController).hideNavigationBar()
+  //  (requireActivity() as HomeController).hideNavigationBar()
 }
 
 fun Fragment.onBackPressCallback(callback: () -> Unit) {

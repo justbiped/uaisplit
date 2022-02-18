@@ -47,7 +47,7 @@ class LocationListFragmentTest {
 
     @Test
     fun show_progress_bar_on_load_locations() {
-        externalResources.mockHttpResponse(
+        externalResources.enqueue(
             MockResponse()
                 .setResponseCode(200)
                 .setBody(toJson())
@@ -61,7 +61,7 @@ class LocationListFragmentTest {
 
     @Test
     fun show_loaded_locations_hiding_progress_bar() {
-        externalResources.mockHttpResponse(MockResponse().setResponseCode(200).setBody(toJson()))
+        externalResources.enqueue(MockResponse().setResponseCode(200).setBody(toJson()))
 
         findView(withText("Lugarzinho")).check(matches(isDisplayed()))
         onView(withId(R.id.locationListProgressBar)).check(matches(not(isDisplayed())))
@@ -69,7 +69,7 @@ class LocationListFragmentTest {
 
     @Test
     fun navigate_to_details_on_tap_on_a_location() {
-        externalResources.mockHttpResponse(MockResponse().setResponseCode(200).setBody(toJson()))
+        externalResources.enqueue(MockResponse().setResponseCode(200).setBody(toJson()))
 
         scenario.recreate()
         setScenarioNavGraph()

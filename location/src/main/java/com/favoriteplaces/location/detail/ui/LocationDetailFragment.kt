@@ -12,8 +12,8 @@ import androidx.navigation.fragment.navArgs
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import com.favoriteplaces.location.injection.LocationComponent
-import com.hotmart.locations.core.extensions.getComponent
+import com.favoriteplaces.location.injection.DaggerLocationComponent
+import com.hotmart.locations.core.extensions.getCoreComponent
 import com.hotmart.locations.core.extensions.hideHomeNavigationBar
 import com.hotmart.locations.core.extensions.onBackPressCallback
 import javax.inject.Inject
@@ -29,7 +29,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         hideHomeNavigationBar()
-        getComponent<LocationComponent>().inject(this)
+        DaggerLocationComponent.factory().create(context.getCoreComponent()).inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,9 +70,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
 
     private fun setupObservers() {
         viewModel.viewInstruction.observe(viewLifecycleOwner, { onInstructionChange(it) })
-        viewModel.locationDetail.observe(viewLifecycleOwner, { locationDetail ->
-            bindLocationDetail(locationDetail)
-        })
+        viewModel.locationDetail.observe(viewLifecycleOwner, { locationDetail -> bindLocationDetail(locationDetail) })
     }
 
     private fun onInstructionChange(instruction: Instruction) {
