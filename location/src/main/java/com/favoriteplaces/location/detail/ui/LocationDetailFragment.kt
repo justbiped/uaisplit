@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import com.hotmart.locations.core.extensions.hideHomeNavigationBar
 import com.hotmart.locations.core.extensions.onBackPressCallback
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
