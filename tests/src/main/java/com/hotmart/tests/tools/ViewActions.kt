@@ -3,6 +3,8 @@ package com.hotmart.tests.tools
 import android.view.View
 import androidx.test.espresso.*
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.util.HumanReadables
 import androidx.test.espresso.util.TreeIterables
@@ -45,6 +47,10 @@ fun wait(viewMatcher: Matcher<View>, timeout: Long): ViewAction {
 /**
  * @param timeout is in Milliseconds
  */
-fun findView(viewMatcher: Matcher<View>, timeout: Long = 2000): ViewInteraction {
+fun waitView(viewMatcher: Matcher<View>, timeout: Long = 2000): ViewInteraction {
     return onView(isRoot()).perform(wait(viewMatcher, timeout))
+}
+
+fun isVisible(): ViewAssertion {
+    return ViewAssertions.matches(ViewMatchers.isDisplayed())
 }

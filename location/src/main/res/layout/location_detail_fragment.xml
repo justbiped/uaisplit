@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:theme="@style/AppTheme.Overlay.LightText"
-    tools:context=".location.detail.ui.LocationDetailFragment">
+    tools:context="com.favoriteplaces.location.detail.ui.LocationDetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"

@@ -19,13 +19,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
+class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
 
     @Inject
     internal lateinit var viewModel: LocationDetailViewModel
 
     private lateinit var biding: LocationDetailFragmentBinding
-    private val arguments by navArgs<LocationDetailFragmentArgs>()
+    private val arguments by navArgs<LocationDetailsFragmentArgs>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
