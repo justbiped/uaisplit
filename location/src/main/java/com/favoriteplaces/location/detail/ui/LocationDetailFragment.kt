@@ -68,10 +68,8 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupObservers() {
-        viewModel.viewInstruction.observe(viewLifecycleOwner, { onInstructionChange(it) })
-        viewModel.locationDetail.observe(viewLifecycleOwner, { locationDetail ->
-            bindLocationDetail(locationDetail)
-        })
+        viewModel.viewInstruction.observe(viewLifecycleOwner) { onInstructionChange(it) }
+        viewModel.locationDetail.observe(viewLifecycleOwner) { bindLocationDetail(it) }
     }
 
     private fun onInstructionChange(instruction: Instruction) {
