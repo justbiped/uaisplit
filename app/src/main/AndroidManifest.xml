@@ -15,11 +15,21 @@
         android:theme="@style/AppTheme"
         tools:replace="android:name">
 
-        <activity android:name=".home.MainActivity">
+        <activity
+            android:name=".home.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.hotmart.lcoations.HOME_ACTION" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 

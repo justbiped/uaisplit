@@ -94,6 +94,7 @@ object Plugins {
         const val serialization = "kotlinx-serialization"
         const val android = "kotlin-android"
         const val kapt: String = "kotlin-kapt"
+        const val parcelize = "kotlin-parcelize"
     }
 
     object Android {

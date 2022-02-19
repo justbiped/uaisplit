@@ -4,6 +4,7 @@ plugins {
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.kapt)
     id(Plugins.Kotlin.serialization)
+    id(Plugins.Kotlin.parcelize)
 }
 
 dependencies {

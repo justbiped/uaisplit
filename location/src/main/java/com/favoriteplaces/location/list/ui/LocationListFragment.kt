@@ -1,5 +1,6 @@
 package com.favoriteplaces.location.list.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
+import com.hotmart.locations.core.control.HomeAction
+import com.hotmart.locations.core.control.setHomeAction
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,6 +28,11 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
         super.onCreate(savedInstanceState)
 
         viewModel.fetchLocations()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        requireContext().setHomeAction(HomeAction(isNavBarVisible = true))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

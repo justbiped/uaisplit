@@ -12,6 +12,8 @@ import androidx.navigation.fragment.navArgs
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
+import com.hotmart.locations.core.control.HomeAction
+import com.hotmart.locations.core.control.setHomeAction
 import com.hotmart.locations.core.extensions.onBackPressCallback
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,6 +29,7 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        context.setHomeAction(HomeAction(isNavBarVisible = false))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
