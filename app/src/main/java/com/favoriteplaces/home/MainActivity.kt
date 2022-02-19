@@ -13,17 +13,19 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val navController by lazy { findNavController(R.id.mainFragmentContainer) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupNavigationBar()
+
+
     }
 
     private fun setupNavigationBar() {
-        binding.homeBottomNavigationView.setupWithNavController(getNavController())
+        binding.homeBottomNavigationView.setupWithNavController(navController)
     }
-
-    private fun getNavController() = findNavController(R.id.mainFragmentContainer)
 }
