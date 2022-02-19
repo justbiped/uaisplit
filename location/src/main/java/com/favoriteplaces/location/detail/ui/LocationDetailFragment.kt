@@ -28,7 +28,6 @@ class LocationDetailFragment : Fragment(R.layout.location_detail_fragment) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        hideHomeNavigationBar()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
