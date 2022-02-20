@@ -16,7 +16,7 @@ object TimeoutViewInteraction {
     /**
      * @param timeout is in Milliseconds
      */
-    fun wait(viewMatcher: Matcher<View>, timeout: Long): ViewAction {
+    private fun wait(viewMatcher: Matcher<View>, timeout: Long): ViewAction {
         return object : ViewAction {
             override fun getConstraints(): Matcher<View> {
                 return isRoot()
