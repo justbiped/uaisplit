@@ -42,28 +42,25 @@ class LocationListFragmentTest {
     @Before
     fun setUp() {
         scenario = fragmentScenario()
+        httpResources.clear()
         setScenarioNavGraph()
     }
 
     @Test
     fun show_progress_bar_on_load_locations() {
-        externalResources.enqueue(
+        httpResources.enqueue(
             MockResponse()
                 .setResponseCode(200)
                 .setBody(toJson())
                 .setBodyDelay(1, TimeUnit.SECONDS)
         )
 
-        scenario.recreate()
-
         onView(withId(R.id.locationListProgressBar)).check(matches(isDisplayed()))
     }
 
     @Test
     fun show_loaded_locations_hiding_progress_bar() {
-        externalResources.enqueue(MockResponse().setResponseCode(200).setBody(toJson()))
-
-        scenario.recreate()
+        httpResources.enqueue(MockResponse().setResponseCode(200).setBody(toJson()))
 
         waitView(withText("Lugarzinho")).check(matches(isDisplayed()))
         onView(withId(R.id.locationListProgressBar)).check(matches(not(isDisplayed())))
@@ -71,9 +68,8 @@ class LocationListFragmentTest {
 
     @Test
     fun navigate_to_details_on_tap_on_a_location() {
-        externalResources.enqueue(MockResponse().setResponseCode(200).setBody(toJson()))
+        httpResources.enqueue(MockResponse().setResponseCode(200).setBody(toJson()))
 
-        scenario.recreate()
         setScenarioNavGraph()
 
         onView(withId(R.id.locationRecyclerView))
@@ -98,18 +94,18 @@ class LocationListFragmentTest {
     }
 
     companion object {
-        private val externalResources = HttpResources()
+        private val httpResources = HttpResources()
 
         @BeforeClass
         @JvmStatic
         fun beforeAll() {
-            externalResources.init()
+            httpResources.init()
         }
 
         @AfterClass
         @JvmStatic
         fun afterAll() {
-            externalResources.release()
+            httpResources.release()
         }
     }
 }

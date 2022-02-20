@@ -7,7 +7,7 @@ object Versions {
     const val retrofit = "2.9.0"
     const val hilt = "2.38.1"
     const val room = "2.3.0"
-    const val okHttp = "4.9.1"
+    const val okHttp = "4.9.3"
 }
 
 object Dependencies {
