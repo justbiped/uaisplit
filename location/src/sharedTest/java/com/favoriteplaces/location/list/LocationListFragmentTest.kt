@@ -16,8 +16,7 @@ import com.favoriteplaces.location.list.ui.LocationAdapter
 import com.favoriteplaces.location.list.ui.LocationListFragment
 import com.hotmart.tests.instrumentation.FragmentScenario
 import com.hotmart.tests.instrumentation.fragmentScenario
-import com.hotmart.tests.tools.HttpResources
-import com.hotmart.tests.tools.waitView
+import com.hotmart.tests.instrumentation.rule.HttpResources
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.serialization.encodeToString

@@ -1,7 +1,5 @@
-package com.hotmart.tests.tools
+package com.hotmart.tests.instrumentation.rule
 
-import androidx.test.espresso.IdlingRegistry
-import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.QueueDispatcher
@@ -9,8 +7,6 @@ import org.junit.rules.ExternalResource
 
 class HttpResources : ExternalResource() {
     private val mockWebServer = MockWebServer()
-
-    private var httpIdlingResource: OkHttpIdlingResource? = null
 
     override fun before() {
         mockWebServer.dispatcher = ClearQueueDispatcher()
@@ -39,16 +35,6 @@ class HttpResources : ExternalResource() {
 
     fun clear() {
         (mockWebServer.dispatcher as ClearQueueDispatcher).clear()
-    }
-
-    fun registerIdling(client: OkHttpClient) {
-        httpIdlingResource = OkHttpIdlingResource(client)
-        IdlingRegistry.getInstance().register(httpIdlingResource!!)
-    }
-
-    fun unregisterIdling() {
-        IdlingRegistry.getInstance().unregister(httpIdlingResource!!)
-        httpIdlingResource = null
     }
 }
 
