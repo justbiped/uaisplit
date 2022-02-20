@@ -172,6 +172,7 @@
                 tools:listitem="@layout/location_detail_review_list_item" />
 
             <TextView
+                android:id="@+id/seeMoreCommentsText"
                 style="?textViewBody2Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

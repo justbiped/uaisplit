@@ -62,7 +62,7 @@ class LocationListFragmentTest {
     fun show_loaded_locations_hiding_progress_bar() {
         httpResources.enqueue(MockResponse().setResponseCode(200).setBody(toJson()))
 
-        waitView(withText("Lugarzinho")).check(matches(isDisplayed()))
+        onView(withText("Lugarzinho")).check(matches(isDisplayed()))
         onView(withId(R.id.locationListProgressBar)).check(matches(not(isDisplayed())))
     }
 

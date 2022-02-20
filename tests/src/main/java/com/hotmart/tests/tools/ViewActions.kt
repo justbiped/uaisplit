@@ -3,7 +3,7 @@ package com.hotmart.tests.tools
 import android.view.View
 import androidx.test.espresso.*
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.util.HumanReadables
@@ -52,5 +52,9 @@ fun waitView(viewMatcher: Matcher<View>, timeout: Long = 2000): ViewInteraction 
 }
 
 fun isVisible(): ViewAssertion {
-    return ViewAssertions.matches(ViewMatchers.isDisplayed())
+    return matches(ViewMatchers.isDisplayed())
+}
+
+fun hasText(text: String): ViewAssertion {
+    return matches(ViewMatchers.withText(text))
 }

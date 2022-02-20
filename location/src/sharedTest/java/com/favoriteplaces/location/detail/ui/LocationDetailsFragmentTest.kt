@@ -1,13 +1,17 @@
 package com.favoriteplaces.location.detail.ui
 
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.favoriteplaces.location.R
+import com.favoriteplaces.location.detail.data.remote.LocationDetailRemoteEntity
 import com.favoriteplaces.location.locationDetailsApiFixture
 import com.hotmart.tests.instrumentation.FragmentScenario
 import com.hotmart.tests.instrumentation.fragmentScenario
 import com.hotmart.tests.tools.HttpResources
+import com.hotmart.tests.tools.NestedScrollToAction.Companion.nestedScrollTo
+import com.hotmart.tests.tools.hasText
 import com.hotmart.tests.tools.isVisible
-import com.hotmart.tests.tools.waitView
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.serialization.encodeToString
@@ -31,13 +35,21 @@ class LocationDetailsFragmentTest {
 
     @Test
     fun show_location_details_on_success_details_fetch() {
-        httpResources.enqueue(createSuccessLocationDetailsResponse())
+        val fixture = locationDetailsApiFixture()
+        httpResources.enqueue(createSuccessLocationResponse(fixture))
 
-        waitView(withText("Café da Japa")).check(isVisible())
+        onView(withId(R.id.locationDetailNameText)).check(hasText(fixture.name))
+        onView(withId(R.id.locationDetailsRatingBar)).check(isVisible())
+        onView(withId(R.id.locationDetailRatingText)).check(hasText("${fixture.review}"))
+        onView(withId(R.id.locationDetailAboutText)).check(hasText(fixture.about))
+        onView(withId(R.id.locationDetailSchedule)).check(isVisible())
+        onView(withId(R.id.locationDetailPhoneText)).check(hasText(fixture.phone))
+        onView(withId(R.id.locationDetailAddressText)).check(hasText(fixture.address))
+        onView(withId(R.id.seeMoreCommentsText)).perform(nestedScrollTo()).check(isVisible())
     }
 
-    private fun createSuccessLocationDetailsResponse(): MockResponse {
-        val body = Json.encodeToString(locationDetailsApiFixture())
+    private fun createSuccessLocationResponse(locationDetails: LocationDetailRemoteEntity): MockResponse {
+        val body = Json.encodeToString(locationDetails)
 
         return MockResponse()
             .setResponseCode(200)
