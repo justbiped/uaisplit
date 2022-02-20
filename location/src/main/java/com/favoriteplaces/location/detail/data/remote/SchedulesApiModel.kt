@@ -7,7 +7,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SchedulesRemoteEntity(
+data class SchedulesApiModel(
     @SerialName("monday") val monday: ScheduleRemoteEntity? = null,
     @SerialName("tuesday") val tuesday: ScheduleRemoteEntity? = null,
     @SerialName("wednesday") val wednesday: ScheduleRemoteEntity? = null,

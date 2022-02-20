@@ -1,7 +1,7 @@
 package com.favoriteplaces.location.data
 
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
-import com.favoriteplaces.location.detail.data.remote.LocationDetailRemoteEntity
+import com.favoriteplaces.location.detail.data.remote.LocationDetailApiModel
 import com.favoriteplaces.location.list.data.Location
 import okhttp3.ResponseBody
 import javax.inject.Inject
@@ -20,6 +20,6 @@ class LocationRepository @Inject constructor(private val locationHttpClient: Loc
     }
 
     private fun parseLocationDetailResponse(responseBody: ResponseBody): LocationDetail {
-        return LocationDetailRemoteEntity.fromResponseBody(responseBody).toDomain()
+        return LocationDetailApiModel.fromResponseBody(responseBody).toDomain()
     }
 }

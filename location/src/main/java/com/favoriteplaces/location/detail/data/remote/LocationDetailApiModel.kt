@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.ResponseBody
 
 @Serializable
-data class LocationDetailRemoteEntity(
+data class LocationDetailApiModel(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("review") val review: Double,
@@ -16,11 +16,11 @@ data class LocationDetailRemoteEntity(
     @SerialName("about") val about: String,
     @SerialName("phone") val phone: String,
     @SerialName("adress") val address: String,
-    @SerialName("schedule") val schedule: SchedulesRemoteEntity
+    @SerialName("schedule") val schedule: SchedulesApiModel
 ) {
 
     companion object {
-        fun fromResponseBody(responseBody: ResponseBody): LocationDetailRemoteEntity {
+        fun fromResponseBody(responseBody: ResponseBody): LocationDetailApiModel {
             val fixedPayload = responseBody.string().replace("[", "").replace("]", "")
             return Json.decodeFromString(fixedPayload)
         }

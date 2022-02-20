@@ -4,7 +4,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.favoriteplaces.location.R
-import com.favoriteplaces.location.detail.data.remote.LocationDetailRemoteEntity
+import com.favoriteplaces.location.detail.data.remote.LocationDetailApiModel
 import com.favoriteplaces.location.locationDetailsApiFixture
 import com.hotmart.tests.instrumentation.FragmentScenario
 import com.hotmart.tests.instrumentation.fragmentScenario
@@ -36,7 +36,7 @@ class LocationDetailsFragmentTest {
     @Test
     fun show_location_details_on_success_details_fetch() {
         val fixture = locationDetailsApiFixture()
-        httpResources.enqueue(createSuccessLocationResponse(fixture))
+        httpResources.enqueue(successLocationResponse(fixture))
 
         onView(withId(R.id.locationDetailNameText)).check(hasText(fixture.name))
         onView(withId(R.id.locationDetailsRatingBar)).check(isVisible())
@@ -48,9 +48,8 @@ class LocationDetailsFragmentTest {
         onView(withId(R.id.seeMoreCommentsText)).perform(nestedScrollTo()).check(isVisible())
     }
 
-    private fun createSuccessLocationResponse(locationDetails: LocationDetailRemoteEntity): MockResponse {
+    private fun successLocationResponse(locationDetails: LocationDetailApiModel): MockResponse {
         val body = Json.encodeToString(locationDetails)
-
         return MockResponse()
             .setResponseCode(200)
             .setBody(body)
