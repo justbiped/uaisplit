@@ -7,11 +7,11 @@ import com.favoriteplaces.location.R
 import com.favoriteplaces.location.detail.data.remote.LocationDetailApiModel
 import com.favoriteplaces.location.locationDetailsApiFixture
 import com.hotmart.tests.instrumentation.FragmentScenario
-import com.hotmart.tests.instrumentation.fragmentScenario
-import com.hotmart.tests.instrumentation.rule.HttpResources
 import com.hotmart.tests.instrumentation.action.NestedScrollToAction.Companion.nestedScrollTo
 import com.hotmart.tests.instrumentation.action.hasText
 import com.hotmart.tests.instrumentation.action.isVisible
+import com.hotmart.tests.instrumentation.fragmentScenario
+import com.hotmart.tests.instrumentation.rule.HttpResources
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.serialization.encodeToString
@@ -42,9 +42,9 @@ class LocationDetailsFragmentTest {
         onView(withId(R.id.locationDetailsRatingBar)).check(isVisible())
         onView(withId(R.id.locationDetailRatingText)).check(hasText("${fixture.review}"))
         onView(withId(R.id.locationDetailAboutText)).check(hasText(fixture.about))
-        onView(withId(R.id.locationDetailSchedule)).check(isVisible())
-        onView(withId(R.id.locationDetailPhoneText)).check(hasText(fixture.phone))
-        onView(withId(R.id.locationDetailAddressText)).check(hasText(fixture.address))
+        onView(withId(R.id.locationDetailSchedule)).perform(nestedScrollTo()).check(isVisible())
+        onView(withId(R.id.locationDetailPhoneText)).perform(nestedScrollTo()).check(hasText(fixture.phone))
+        onView(withId(R.id.locationDetailAddressText)).perform(nestedScrollTo()).check(hasText(fixture.address))
         onView(withId(R.id.locationReviewList)).perform(nestedScrollTo()).check(isVisible())
         onView(withId(R.id.seeMoreCommentsText)).perform(nestedScrollTo()).check(isVisible())
     }

@@ -103,7 +103,6 @@ private fun applyAndroidConfigs(project: Project) {
                         TestLogEvent.FAILED,
                         TestLogEvent.PASSED,
                         TestLogEvent.SKIPPED,
-                        TestLogEvent.STANDARD_OUT,
                         TestLogEvent.STANDARD_ERROR
                     )
                 }
