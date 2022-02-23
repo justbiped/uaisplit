@@ -15,6 +15,7 @@ import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
 import com.favoriteplaces.location.list.ui.LocationAdapter
 import com.favoriteplaces.location.list.ui.LocationListFragment
 import com.hotmart.tests.instrumentation.FragmentScenario
+import com.hotmart.tests.instrumentation.action.TimeoutViewInteraction.waitView
 import com.hotmart.tests.instrumentation.fragmentScenario
 import com.hotmart.tests.instrumentation.rule.HttpResources
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -26,9 +27,11 @@ import org.assertj.core.api.Assertions
 import org.hamcrest.CoreMatchers.not
 import org.junit.*
 import org.junit.runner.RunWith
+import org.junit.runners.MethodSorters
 import java.util.concurrent.TimeUnit
 
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class LocationListFragmentTest {
@@ -61,7 +64,7 @@ class LocationListFragmentTest {
     fun show_loaded_locations_hiding_progress_bar() {
         httpResources.enqueue(MockResponse().setResponseCode(200).setBody(toJson()))
 
-        onView(withText("Lugarzinho")).check(matches(isDisplayed()))
+        waitView(withText("Lugarzinho")).check(matches(isDisplayed()))
         onView(withId(R.id.locationListProgressBar)).check(matches(not(isDisplayed())))
     }
 
