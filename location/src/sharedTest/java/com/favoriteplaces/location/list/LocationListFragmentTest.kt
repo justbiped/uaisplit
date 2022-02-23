@@ -27,11 +27,8 @@ import org.assertj.core.api.Assertions
 import org.hamcrest.CoreMatchers.not
 import org.junit.*
 import org.junit.runner.RunWith
-import org.junit.runners.MethodSorters
 import java.util.concurrent.TimeUnit
 
-
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class LocationListFragmentTest {
