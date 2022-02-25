@@ -1,6 +1,5 @@
 package com.favoriteplaces.location.detail.ui
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
@@ -27,17 +26,17 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
     private lateinit var biding: LocationDetailFragmentBinding
     private val arguments by navArgs<LocationDetailsFragmentArgs>()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        context.setHomeAction(HomeAction(isNavBarVisible = false))
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         onBackPressCallback {
             findNavController().navigateUp()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        requireContext().setHomeAction(HomeAction(isNavBarVisible = false))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

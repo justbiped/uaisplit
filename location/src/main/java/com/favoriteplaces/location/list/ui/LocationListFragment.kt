@@ -1,6 +1,5 @@
 package com.favoriteplaces.location.list.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -26,7 +25,6 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel.fetchLocations()
     }
 

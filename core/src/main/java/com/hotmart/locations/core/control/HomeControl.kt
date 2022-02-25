@@ -3,6 +3,7 @@ package com.hotmart.locations.core.control
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.hotmart.locations.core.BuildConfig
 import kotlinx.parcelize.Parcelize
 
@@ -14,7 +15,7 @@ fun Context.setHomeAction(action: HomeAction) {
 
     val intent = Intent(HOME_ACTION_INTENT)
     intent.putExtra(HOME_ACTION, action)
-    startActivity(intent)
+    LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
 }
 
 const val HOME_ACTION_INTENT = "com.hotmart.lcoations.HOME_ACTION"
