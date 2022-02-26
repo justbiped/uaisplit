@@ -27,7 +27,7 @@ fun DependencyHandler.prodImplementation(dependencyNotation: Any) =
  * import dependencies for shared(Runs on JVM and ART) tests on android.
  * The tests under project/sharedTest will use this shared imports
  **/
-fun DependencyHandler.localImplementation(dependencyNotation: Any) =
+fun DependencyHandler.`localImplementation`(dependencyNotation: Any) =
     add("localImplementation", dependencyNotation)
 
 /**
