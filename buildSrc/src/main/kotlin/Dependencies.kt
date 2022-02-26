@@ -82,8 +82,6 @@ object Dependencies {
         const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
         const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.4.0"
         const val uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
-        const val cucumber = "io.cucumber:cucumber-android:4.9.0"
-        const val picontainer = "io.cucumber:cucumber-picocontainer:4.8.1"
     }
 }
 

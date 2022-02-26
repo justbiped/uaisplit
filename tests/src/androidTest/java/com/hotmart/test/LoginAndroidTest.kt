@@ -3,65 +3,42 @@ package com.hotmart.test
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.view.ViewGroup
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.*
-import io.cucumber.java.en.Given
-import io.cucumber.java.en.Then
-import io.cucumber.java.en.When
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.FixMethodOrder
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.MethodSorters
 
-class LocationListSteps {
+@Suppress("ClassName", "TestFunctionName")
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(AndroidJUnit4::class)
+class See_list_of_locations_when_launch_application {
 
     private val device = UiDevice.getInstance(getInstrumentation())
     private val context = getApplicationContext<Context>()
 
-    @Given("that i have the Location app")
-    fun isLocationAppInstalled() {
+    @Test
+    fun _0__Given_i_have_the_sparkle_installed() {
         val launcherPackage: String = getLauncherPackageName()
         device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), LAUNCH_TIMEOUT)
     }
 
-    @When("i open it")
-    fun launchLocationApp() {
+    @Test
+    fun _1__When_i_launch_it() {
         val intent: Intent? = context.packageManager.getLaunchIntentForPackage(PACKAGE)
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
         device.wait(Until.hasObject(By.res(PACKAGE, "mainFragmentContainer")), LAUNCH_TIMEOUT)
     }
 
-    @Then("i see the list of location at home screen")
-    fun checkLocationListIsDisplayed() {
+    @Test
+    fun _2__Then_i_see_the_home_screen_with_loaded_locations() {
         val locationListView = UiScrollable(UiSelector().scrollable(true))
         assertThat(locationListView.childCount).isGreaterThan(0)
-    }
-
-    private fun seeThreeComments() {
-        val reviewList = UiScrollable(
-            UiSelector().resourceId("com.favoriteplaces:id/locationReviewList")
-        )
-        assertThat(reviewList.childCount).isEqualTo(3)
-
-        val reviewTitle =
-            reviewList.getChild(UiSelector().index(1).className(ViewGroup::class.java))
-                .getChild(UiSelector().resourceId("com.favoriteplaces:id/locationReviewTitleText"))
-        assertThat(reviewTitle.text).isEqualTo("Café da manhã delicioso")
-    }
-
-    private fun scrollToTheCommendSession() {
-        UiScrollable(UiSelector().scrollable(true)).flingToEnd(2)
-    }
-
-    private fun seePadariaPalermoDetails() {
-        val title = device.findObject(By.res(PACKAGE, "locationDetailNameText"))
-        assertThat(title.text).isEqualTo("Padaria Pelicano")
-    }
-
-    private fun selectPadariaPelicano() {
-        UiScrollable(UiSelector().scrollable(true))
-            .getChildByText(UiSelector().text("Padaria Pelicano"), "Padaria Pelicano", true)
-            .click()
     }
 
     private fun getLauncherPackageName(): String {

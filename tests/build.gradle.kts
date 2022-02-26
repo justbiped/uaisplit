@@ -8,7 +8,6 @@ plugins {
 android {
     defaultConfig {
         testApplicationId = "com.hotmart.test"
-        testInstrumentationRunner = "com.hotmart.tests.instrumentation.runner.CucumberRunner"
     }
 }
 
@@ -29,8 +28,6 @@ dependencies {
     implementation(Dependencies.Test.espresso)
 
     implementation(Dependencies.Test.uiAutomator)
-    implementation(Dependencies.Test.cucumber)
-    implementation(Dependencies.Test.picontainer)
 
     implementation(Dependencies.Android.hilt)
     kapt(Dependencies.Android.hiltCompiler)
