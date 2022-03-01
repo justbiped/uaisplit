@@ -43,6 +43,7 @@ object Dependencies {
     }
 
     object Kotlin {
+        const val reflection = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     }
