@@ -1,4 +1,4 @@
-package com.hotmart.test
+package com.hotmart.tests
 
 import org.junit.rules.TestRule
 import org.junit.runner.Description

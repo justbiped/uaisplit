@@ -1,4 +1,4 @@
-package com.hotmart.test
+package com.hotmart.tests
 
 import com.hotmart.tests.instrumentation.runner.AutomatorRunner
 import com.hotmart.tests.instrumentation.runner.Step

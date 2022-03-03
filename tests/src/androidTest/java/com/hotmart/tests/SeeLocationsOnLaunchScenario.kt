@@ -1,4 +1,4 @@
-package com.hotmart.test
+package com.hotmart.tests
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,6 @@ import androidx.test.uiautomator.*
 import com.hotmart.tests.instrumentation.runner.AutomatorRunner
 import com.hotmart.tests.instrumentation.runner.Step
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.ClassRule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -55,7 +54,7 @@ class SeeLocationsOnLaunchScenario {
     }
 
     companion object {
-        @get:ClassRule @JvmStatic val loginRule = LoginTestRule
+     //   @get:ClassRule @JvmStatic val loginRule = LoginTestRule
 
         private const val LAUNCH_TIMEOUT = 3000L
         private const val PACKAGE = "com.favoriteplaces"
