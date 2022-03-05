@@ -7,7 +7,7 @@ plugins {
 
 android {
     defaultConfig {
-        testApplicationId = "com.hotmart.test"
+        testApplicationId = "com.hotmart.tests"
     }
 }
 
