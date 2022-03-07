@@ -8,6 +8,7 @@ plugins {
 android {
     defaultConfig {
         testApplicationId = "com.hotmart.tests"
+        testInstrumentationRunnerArguments["class"] = "com.hotmart.tests.InstrumentationTestSuit"
     }
 }
 
