@@ -60,18 +60,18 @@ private fun applyAndroidConfigs(project: Project) {
         }
 
         buildTypes {
-            create("local") {
+            create(local) {
                 initWith(getByName("debug"))
                 isTestCoverageEnabled = true
             }
 
-            create("production") {
+            create(production) {
                 isMinifyEnabled = true
                 initWith(getByName("release"))
             }
 
-            create("internal") {
-                initWith(getByName("production"))
+            create(internal) {
+                initWith(getByName(production))
                 isMinifyEnabled = false
             }
         }
@@ -110,6 +110,7 @@ private fun applyAndroidConfigs(project: Project) {
                     )
                 }
             }
+
             unitTests.isIncludeAndroidResources = true
             unitTests.isReturnDefaultValues = true
             animationsDisabled = true

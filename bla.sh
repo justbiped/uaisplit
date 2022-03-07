@@ -1,4 +1,14 @@
-curl -u "roubertedgar_qTdHJK:ujsLgUC4qQfwPoPC3jBi" \
--X POST "https://api-cloud.browserstack.com/app-automate/espresso/v2/build" \
--d '{"app": "bs://87547a4a008f4403316c7bc4a315dbb384811597", "testSuite": "bs://fd60d643f9aa4a601c7f9093427035a3777b9c7c", "devices": ["Samsung Galaxy S9 Plus-9.0"]}' \
--H "Content-Type: application/json"
+#!/bin/bash
+#curl -u "roubertedgar_qTdHJK:ujsLgUC4qQfwPoPC3jBi" \
+#-X POST "https://api-cloud.browserstack.com/app-automate/espresso/v2/build" \
+#-d '{"app": "bs://b45976588c08d55964ec28f8ea303d356e5b03e8", "testSuite": "bs://277be667d78042cf6ac76522c17b9fae73472f3c", "devices": ["Samsung Galaxy S9 Plus-9.0"]}' \
+#-H "Content-Type: application/json"
+#
+
+gcloud firebase test android run \
+    --type instrumentation \
+    --app app-internal.apk \
+    --test tests-local-androidTest.apk \
+    --test-targets="class com.hotmart.tests.InstrumentationTestSuit" \
+    --device model=Pixel2,version=28,locale=en,orientation=portrait \
+    --timeout 300s

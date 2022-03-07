@@ -97,9 +97,10 @@ object Plugins {
     }
 
     object Android {
-        const val googleServices = "com.google.gms.google-services"
         const val application = "com.android.application"
         const val library = "com.android.library"
+        const val test: String = "com.android.test"
+        const val googleServices = "com.google.gms.google-services"
         const val hilt = "dagger.hilt.android.plugin"
         const val safeArgs: String ="androidx.navigation.safeargs.kotlin"
     }
