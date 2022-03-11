@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import com.hotmart.locations.core.tools.SingleLiveEvent
+import com.favoriteplaces.core.tools.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

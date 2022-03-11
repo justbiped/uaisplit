@@ -11,9 +11,9 @@ import androidx.navigation.fragment.navArgs
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import com.hotmart.locations.core.control.HomeAction
-import com.hotmart.locations.core.control.setHomeAction
-import com.hotmart.locations.core.extensions.onBackPressCallback
+import com.favoriteplaces.core.control.HomeAction
+import com.favoriteplaces.core.control.setHomeAction
+import com.favoriteplaces.core.extensions.onBackPressCallback
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

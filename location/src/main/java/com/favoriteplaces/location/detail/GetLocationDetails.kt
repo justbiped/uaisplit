@@ -4,7 +4,7 @@ import com.favoriteplaces.location.data.LocationRepository
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import javax.inject.Inject
 
-class GetLocationDetails @Inject constructor(private val locationRepository: LocationRepository) {
+internal class GetLocationDetails @Inject constructor(private val locationRepository: LocationRepository) {
 
     suspend operator fun invoke(locationId: Int): Result<LocationDetail> {
         return try {

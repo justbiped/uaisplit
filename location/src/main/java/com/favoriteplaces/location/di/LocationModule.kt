@@ -2,7 +2,7 @@ package com.favoriteplaces.location.di
 
 import com.favoriteplaces.location.BuildConfig
 import com.favoriteplaces.location.data.LocationHttpClient
-import com.hotmart.locations.core.http.HttpManager
+import com.favoriteplaces.core.http.HttpManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,7 @@ import dagger.hilt.android.scopes.FragmentScoped
 
 @Module
 @InstallIn(FragmentComponent::class)
-class LocationModule {
+internal class LocationModule {
 
     @Provides
     @FragmentScoped

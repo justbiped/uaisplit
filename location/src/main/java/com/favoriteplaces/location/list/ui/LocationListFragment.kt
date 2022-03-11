@@ -7,11 +7,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.favoriteplaces.core.control.HomeAction
+import com.favoriteplaces.core.control.setHomeAction
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
-import com.hotmart.locations.core.control.HomeAction
-import com.hotmart.locations.core.control.setHomeAction
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class LocationListFragment : Fragment(R.layout.location_list_fragment) {
 
     @Inject
-    lateinit var viewModel: LocationListViewModel
+    internal lateinit var viewModel: LocationListViewModel
 
     private lateinit var binding: LocationListFragmentBinding
 

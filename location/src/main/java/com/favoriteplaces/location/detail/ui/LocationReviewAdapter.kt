@@ -19,7 +19,7 @@ import com.favoriteplaces.location.detail.data.ui.LocationReviewUIModel
 import kotlin.random.Random
 
 
-class LocationReviewAdapter :
+internal class LocationReviewAdapter :
     ListAdapter<LocationReviewUIModel, LocationReviewAdapter.LocationReviewViewHolder>(diffTool) {
 
     private lateinit var binding: LocationDetailReviewListItemBinding

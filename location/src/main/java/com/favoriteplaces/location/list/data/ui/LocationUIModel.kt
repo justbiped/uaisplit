@@ -4,7 +4,7 @@ import com.favoriteplaces.location.R
 import com.favoriteplaces.location.list.data.Location
 import kotlin.random.Random
 
-data class LocationUIModel(
+internal data class LocationUIModel(
     val id: Int,
     val name: String,
     val review: Double,

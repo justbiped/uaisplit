@@ -8,9 +8,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.favoriteplaces.R
 import com.favoriteplaces.databinding.ActivityMainBinding
-import com.hotmart.locations.core.control.HOME_ACTION_INTENT
-import com.hotmart.locations.core.control.HomeAction
-import com.hotmart.locations.core.extensions.changeVisibility
+import com.favoriteplaces.core.control.HOME_ACTION_INTENT
+import com.favoriteplaces.core.control.HomeAction
+import com.favoriteplaces.core.extensions.changeVisibility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

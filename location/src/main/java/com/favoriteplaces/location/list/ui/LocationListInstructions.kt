@@ -11,7 +11,7 @@ sealed interface Instruction {
     data class Navigation(val destination: NavDirections) : Instruction
 }
 
-class LocationListInstructions @Inject constructor(){
+internal class LocationListInstructions @Inject constructor(){
     fun success() = Instruction.Success
     fun failure() = Instruction.Failure
     fun loading() = Instruction.Loading

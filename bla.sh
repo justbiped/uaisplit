@@ -7,8 +7,7 @@
 
 gcloud firebase test android run \
     --type instrumentation \
-    --app app-internal.apk \
-    --test tests-local-androidTest.apk \
-    --test-targets="class com.hotmart.tests.InstrumentationTestSuit" \
+    --app app-local.apk \
+    --test app-local-androidTest.apk \
     --device model=Pixel2,version=28,locale=en,orientation=portrait \
     --timeout 300s

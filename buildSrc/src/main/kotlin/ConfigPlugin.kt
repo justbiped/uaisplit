@@ -46,8 +46,7 @@ private fun Project.applyAndroidConfigs() {
                 minSdk = 23
                 targetSdk = 30
 
-                testInstrumentationRunner =
-                    "com.hotmart.tests.instrumentation.runner.LocationTestRunner"
+                testInstrumentationRunner = "com.favoriteplaces.tests.instrumentation.runner.LocationTestRunner"
             }
 
             buildFeatures.apply {

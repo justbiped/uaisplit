@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.detail.data.domain
 
-class Schedule(private val schedules: List<DaySchedule>) {
+internal class Schedule(private val schedules: List<DaySchedule>) {
 
     val workingHourGroups = groupByWorkingTime()
 

@@ -5,7 +5,7 @@ import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface LocationHttpClient {
+internal interface LocationHttpClient {
 
     @GET("/locations")
     suspend fun fetchLocations(): LocationListRemoteEntity

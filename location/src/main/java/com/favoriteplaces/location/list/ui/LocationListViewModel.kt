@@ -7,12 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.favoriteplaces.location.list.LoadLocations
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
-import com.hotmart.locations.core.tools.DispatcherProvider
-import com.hotmart.locations.core.tools.SingleLiveEvent
+import com.favoriteplaces.core.tools.DispatcherProvider
+import com.favoriteplaces.core.tools.SingleLiveEvent
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LocationListViewModel
+internal class LocationListViewModel
 @Inject constructor(
     private val locationListInstructions: LocationListInstructions,
     private val loadLocations: LoadLocations

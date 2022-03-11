@@ -9,7 +9,7 @@ import java.text.DateFormatSymbols
 import java.util.*
 import javax.inject.Inject
 
-class ScheduleFormatter @Inject constructor(@ApplicationContext private val context: Context) {
+internal class ScheduleFormatter @Inject constructor(@ApplicationContext private val context: Context) {
 
     fun format(schedule: Schedule): String {
         val stringBuilder = StringBuilder()

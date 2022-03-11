@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.ResponseBody
 
 @Serializable
-data class LocationDetailApiModel(
+internal data class LocationDetailApiModel(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("review") val review: Double,

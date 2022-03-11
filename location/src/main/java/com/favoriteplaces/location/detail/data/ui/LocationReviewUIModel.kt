@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.detail.data.ui
 
-data class LocationReviewUIModel(
+internal data class LocationReviewUIModel(
     val picture: String,
     val title: String,
     val comment: String,

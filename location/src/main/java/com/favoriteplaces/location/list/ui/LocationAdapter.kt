@@ -10,7 +10,7 @@ import coil.load
 import com.favoriteplaces.location.databinding.LocationListItemBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 
-class LocationAdapter :
+internal class LocationAdapter :
     ListAdapter<LocationUIModel, LocationAdapter.LocationViewHolder>(diffTool) {
 
     private lateinit var binding: LocationListItemBinding

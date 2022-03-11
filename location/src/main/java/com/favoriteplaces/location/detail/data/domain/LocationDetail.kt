@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.detail.data.domain
 
-data class LocationDetail(
+internal data class LocationDetail(
     val id: Int,
     val name: String,
     val review: Double,

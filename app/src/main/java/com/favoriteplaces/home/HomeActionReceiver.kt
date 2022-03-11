@@ -3,9 +3,9 @@ package com.favoriteplaces.home
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.hotmart.locations.core.control.HOME_ACTION
-import com.hotmart.locations.core.control.HOME_ACTION_INTENT
-import com.hotmart.locations.core.control.HomeAction
+import com.favoriteplaces.core.control.HOME_ACTION
+import com.favoriteplaces.core.control.HOME_ACTION_INTENT
+import com.favoriteplaces.core.control.HomeAction
 
 class HomeActionReceiver : BroadcastReceiver() {
     private var onActionReceived: (HomeAction) -> Unit = {}

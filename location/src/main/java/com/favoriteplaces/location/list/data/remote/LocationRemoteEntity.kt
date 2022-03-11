@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LocationRemoteEntity(
+internal data class LocationRemoteEntity(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("review") val review: Double,

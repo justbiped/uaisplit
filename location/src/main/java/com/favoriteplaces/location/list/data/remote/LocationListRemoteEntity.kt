@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LocationListRemoteEntity(
+internal data class LocationListRemoteEntity(
     @SerialName("listLocations") val locations: List<LocationRemoteEntity>
 ) {
     fun toDomainLocations() = locations.map { locationRemote ->

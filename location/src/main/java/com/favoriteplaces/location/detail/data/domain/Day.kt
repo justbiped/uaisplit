@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.detail.data.domain
 
-enum class Day(val index: Int) {
+internal enum class Day(val index: Int) {
     MONDAY(2),
     TUESDAY(3),
     WEDNESDAY(4),
