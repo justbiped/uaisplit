@@ -112,6 +112,6 @@ object Path {
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
-    const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
+    const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
     const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
 }

@@ -1,5 +1,3 @@
-import com.github.benmanes.gradle.versions.VersionsPlugin
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -14,25 +12,7 @@ typealias AndroidExtension = com.android.build.gradle.TestedExtension
 class ConfigPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
-        project.configureDependencyUpdates()
         project.applyAndroidConfigs()
-    }
-}
-
-private fun Project.configureDependencyUpdates() {
-    plugins.apply(VersionsPlugin::class)
-    tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
-        checkForGradleUpdate = true
-        outputFormatter = "html"
-        outputDir = "report/dependencies"
-        reportfileName = "available-versions"
-
-
-        rejectVersionIf {
-            candidate.version.contains("alpha") ||
-                    candidate.version.contains("beta") ||
-                    candidate.version.contains("SNAPSHOT")
-        }
     }
 }
 
