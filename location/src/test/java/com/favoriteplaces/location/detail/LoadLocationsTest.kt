@@ -18,8 +18,7 @@ class LoadLocationsTest {
 
     private lateinit var loadLocations: LoadLocations
 
-    @MockK
-    lateinit var repository: LocationRepository
+    @MockK internal lateinit var repository: LocationRepository
 
     @Before
     fun setUp() {

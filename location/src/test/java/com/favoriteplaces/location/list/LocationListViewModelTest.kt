@@ -6,7 +6,7 @@ import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import com.favoriteplaces.location.list.ui.Instruction
 import com.favoriteplaces.location.list.ui.LocationListInstructions
 import com.favoriteplaces.location.list.ui.LocationListViewModel
-import com.favoriteplaces.tests.InstantTaskRule
+import com.favoriteplaces.core.test.InstantTaskRule
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class LocationListViewModelTest {
+internal class LocationListViewModelTest {
 
     @get:Rule
     val instantTaskRule = InstantTaskRule()

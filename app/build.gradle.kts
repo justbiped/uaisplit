@@ -64,7 +64,8 @@ dependencies {
 
     implementation(project(":location"))
     implementation(project(":core"))
-    localImplementation(project(":tests"))
+    localImplementation(project(":core:test"))
 
-    kaptLocal(Dependencies.Android.hiltCompiler)
+    kaptTest(Dependencies.Android.hiltCompiler)
+    kaptAndroidTest(Dependencies.Android.hiltCompiler)
 }

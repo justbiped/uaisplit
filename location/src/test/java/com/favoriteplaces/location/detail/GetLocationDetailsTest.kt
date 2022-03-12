@@ -14,7 +14,7 @@ import org.junit.Before
 import org.junit.Test
 
 
-class GetLocationDetailsTest {
+internal class GetLocationDetailsTest {
 
     private lateinit var getLocationDetails: GetLocationDetails
 

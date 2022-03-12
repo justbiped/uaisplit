@@ -107,7 +107,7 @@ object Plugins {
 }
 
 object Path {
-    const val androidGradle = "com.android.tools.build:gradle:7.1.2"
+    const val androidGradle = "com.android.tools.build:gradle:7.2.0-beta03"
     const val playServices = "com.google.gms:google-services:4.3.8"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"

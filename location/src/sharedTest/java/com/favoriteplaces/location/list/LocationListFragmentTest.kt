@@ -14,10 +14,10 @@ import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
 import com.favoriteplaces.location.list.ui.LocationAdapter
 import com.favoriteplaces.location.list.ui.LocationListFragment
-import com.favoriteplaces.tests.instrumentation.FragmentScenario
-import com.favoriteplaces.tests.instrumentation.action.TimeoutViewInteraction.waitView
-import com.favoriteplaces.tests.instrumentation.fragmentScenario
-import com.favoriteplaces.tests.instrumentation.rule.HttpResources
+import com.favoriteplaces.core.test.instrumentation.FragmentScenario
+import com.favoriteplaces.core.test.instrumentation.action.TimeoutViewInteraction.waitView
+import com.favoriteplaces.core.test.instrumentation.fragmentScenario
+import com.favoriteplaces.core.test.instrumentation.rule.HttpResources
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.serialization.encodeToString

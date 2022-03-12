@@ -1,5 +1,6 @@
 package com.favoriteplaces.location.detail
 
+import com.favoriteplaces.core.test.InstantTaskRule
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -9,7 +10,6 @@ import com.favoriteplaces.location.detail.ui.Instruction
 import com.favoriteplaces.location.detail.ui.LocationDetailInstructions
 import com.favoriteplaces.location.detail.ui.LocationDetailViewModel
 import com.favoriteplaces.location.detail.ui.ScheduleFormatter
-import com.favoriteplaces.tests.InstantTaskRule
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
@@ -24,8 +24,8 @@ import org.mockito.junit.MockitoJUnitRunner
 class LocationDetailViewModelTest {
 
     @get:Rule val instantTaskRule = InstantTaskRule()
-    @MockK lateinit var getLocationDetails: GetLocationDetails
-    @MockK lateinit var scheduleFormatter: ScheduleFormatter
+    @MockK internal lateinit var getLocationDetails: GetLocationDetails
+    @MockK internal lateinit var scheduleFormatter: ScheduleFormatter
 
     private lateinit var viewModel: LocationDetailViewModel
 

@@ -15,7 +15,6 @@ android {
             buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }
-
 }
 
 dependencies {
@@ -41,8 +40,5 @@ dependencies {
     kapt(Dependencies.Android.hiltCompiler)
 
     implementation(project(":core"))
-    localImplementation(project(":tests"))
-
-    kaptTest(Dependencies.Android.hiltCompiler)
-    kaptAndroidTest(Dependencies.Android.hiltCompiler)
+    localImplementation(project(":core:test"))
 }

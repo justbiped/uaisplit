@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LocationRepositoryTest {
 
-    @MockK lateinit var locationHttpClient: LocationHttpClient
+    @MockK internal lateinit var locationHttpClient: LocationHttpClient
 
     private lateinit var locationRepository: LocationRepository
 
