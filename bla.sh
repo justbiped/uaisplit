@@ -16,6 +16,6 @@ modules=("app" "location")
 
 for i in "${modules[@]}"
 do
-    ./gradlew $i:pixel2LocalAndroidTest -Pandroid.sdk.channel=3
+    ./gradlew $i:pixel2LocalAndroidTest
     sleep 5
 done

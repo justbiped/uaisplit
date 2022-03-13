@@ -99,7 +99,7 @@ private fun AndroidExtension.testSetup() {
     testOptions {
 
         devices {
-            if (findByName("pixel2") == null) createPixel2() else setupPixel2()
+            createPixel2()
         }
 
         unitTests.all {
@@ -117,21 +117,21 @@ private fun AndroidExtension.testSetup() {
         unitTests.isIncludeAndroidResources = true
         unitTests.isReturnDefaultValues = true
         animationsDisabled = true
-        testBuildType = "local"
+        testBuildType = local
     }
 }
 
 private fun NamedDomainObjectContainerScope<Device>.createPixel2() {
-    create<ManagedVirtualDevice>("pixel2") {
-        device = "Pixel 2"
-        apiLevel = 29
-        systemImageSource = "aosp"
-        abi = "x86"
+    if (findByName("pixel2") == null) {
+        create<ManagedVirtualDevice>("pixel2") {
+            device = "Pixel 2"
+            apiLevel = 29
+            systemImageSource = "aosp"
+            abi = "x86"
+        }
+    } else {
+        getByName<ManagedVirtualDevice>("pixel2")
     }
-}
-
-private fun NamedDomainObjectContainerScope<Device>.setupPixel2() {
-    getByName<ManagedVirtualDevice>("pixel2") {}
 }
 
 fun Project.androidConfigs(block: AndroidExtension.() -> Unit) {
