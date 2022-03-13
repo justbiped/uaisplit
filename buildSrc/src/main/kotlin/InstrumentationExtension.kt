@@ -15,10 +15,11 @@ fun Project.instrumentation(setup: Instrumentation.() -> Unit) {
     extra.set(INSTRUMENTATION_SETUP_KEY, instrumentation)
 }
 
-fun Project.getInstrumentation(): Instrumentation {
-    return if (extra.has(INSTRUMENTATION_SETUP_KEY)) {
-        extra.get(INSTRUMENTATION_SETUP_KEY) as Instrumentation
-    } else {
-        Instrumentation()
+val Project.instrumentation: Instrumentation
+    get() {
+        return if (extra.has(INSTRUMENTATION_SETUP_KEY)) {
+            extra.get(INSTRUMENTATION_SETUP_KEY) as Instrumentation
+        } else {
+            Instrumentation()
+        }
     }
-}
