@@ -34,7 +34,7 @@ object TimeoutViewInteraction {
                     TreeIterables.breadthFirstViewTraversal(view).forEach { child ->
                         if (viewMatcher.matches(child)) return
                     }
-                    uiController.loopMainThreadForAtLeast(50)
+                    uiController.loopMainThreadForAtLeast(100)
                 } while (System.currentTimeMillis() < endTime)
 
                 throw PerformException.Builder()

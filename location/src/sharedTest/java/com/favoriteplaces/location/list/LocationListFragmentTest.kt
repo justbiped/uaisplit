@@ -22,6 +22,7 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import okhttp3.internal.wait
 import okhttp3.mockwebserver.MockResponse
 import org.assertj.core.api.Assertions
 import org.hamcrest.CoreMatchers.not
@@ -71,8 +72,7 @@ class LocationListFragmentTest {
 
         setScenarioNavGraph()
 
-        onView(withId(R.id.locationRecyclerView))
-            .perform(actionOnItemAtPosition<LocationAdapter.LocationViewHolder>(0, click()))
+        onView(withId(R.id.locationRecyclerView)).perform(actionOnItemAtPosition<LocationAdapter.LocationViewHolder>(0, click()))
 
         Assertions.assertThat(navHost.currentDestination?.label).isEqualTo("LocationDetailsFragment")
     }

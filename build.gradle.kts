@@ -1,5 +1,6 @@
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.codehaus.groovy.tools.groovydoc.Main.execute
 
 apply<VersionsPlugin>()
 apply<ConfigPlugin>()
@@ -43,4 +44,22 @@ tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
 
 tasks.create<Delete>("clean") {
     delete(rootProject.buildDir)
+}
+
+tasks.create("androidTest") {
+    val androidTestTask = this
+    var previousTask: Task? = null
+
+    subprojects {
+        tasks.whenTaskAdded {
+            if (name == "pixel2LocalAndroidTest") {
+                if (previousTask == null) {
+                    androidTestTask.dependsOn(this)
+                } else {
+                    previousTask?.shouldRunAfter(this)
+                }
+                previousTask = this
+            }
+        }
+    }
 }

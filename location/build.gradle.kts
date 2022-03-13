@@ -15,6 +15,10 @@ android {
             buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }
+
+    instrumentation {
+        hasManagedDevice = true
+    }
 }
 
 dependencies {
