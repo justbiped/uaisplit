@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Device
+import com.android.build.api.dsl.ManagedVirtualDevice
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -19,14 +21,15 @@ class ConfigPlugin : Plugin<Project> {
 private fun Project.applyAndroidConfigs() {
     subprojects {
         androidConfigs {
-            compileSdkVersion(30)
+            compileSdkVersion(31)
             buildToolsVersion("30.0.3")
 
             defaultConfig {
                 minSdk = 23
                 targetSdk = 30
 
-                testInstrumentationRunner = "com.favoriteplaces.core.test.instrumentation.runner.LocationTestRunner"
+                testInstrumentationRunner =
+                    "com.favoriteplaces.core.test.instrumentation.runner.LocationTestRunner"
             }
 
             buildFeatures.apply {
@@ -75,8 +78,8 @@ private fun AndroidExtension.buildVariant() {
 
 private fun AndroidExtension.packingOptions() {
     packagingOptions {
-        excludes.add("META-INF/**")
-        pickFirsts.add("**/attach_hotspot_windows.dll")
+        resources.excludes.add("META-INF/**")
+        resources.pickFirsts.add("**/attach_hotspot_windows.dll")
     }
 }
 
@@ -94,6 +97,11 @@ private fun AndroidExtension.testSetup() {
     }
 
     testOptions {
+
+        devices {
+            if (findByName("pixel2") == null) createPixel2() else setupPixel2()
+        }
+
         unitTests.all {
             it.testLogging {
                 events = setOf(
@@ -111,6 +119,19 @@ private fun AndroidExtension.testSetup() {
         animationsDisabled = true
         testBuildType = "local"
     }
+}
+
+private fun NamedDomainObjectContainerScope<Device>.createPixel2() {
+    create<ManagedVirtualDevice>("pixel2") {
+        device = "Pixel 2"
+        apiLevel = 29
+        systemImageSource = "aosp"
+        abi = "x86"
+    }
+}
+
+private fun NamedDomainObjectContainerScope<Device>.setupPixel2() {
+    getByName<ManagedVirtualDevice>("pixel2") {}
 }
 
 fun Project.androidConfigs(block: AndroidExtension.() -> Unit) {

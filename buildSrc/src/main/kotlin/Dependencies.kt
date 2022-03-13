@@ -1,17 +1,17 @@
 // @formatter:off
 
 object Versions {
-    const val kotlin = "1.5.31"
-    const val navigation = "2.3.5"
-    const val lifecycle = "2.3.1"
+    const val kotlin = "1.6.10"
+    const val navigation = "2.4.1"
+    const val lifecycle = "2.4.1"
     const val retrofit = "2.9.0"
-    const val hilt = "2.38.1"
+    const val hilt = "2.41"
     const val room = "2.3.0"
     const val okHttp = "4.9.3"
 }
 
 object Dependencies {
-    const val serialization ="org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
+    const val serialization ="org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val serializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
@@ -20,11 +20,11 @@ object Dependencies {
     const val coil = "io.coil-kt:coil:1.3.0"
 
     object Android {
-        const val core = "androidx.core:core-ktx:1.6.0"
+        const val core = "androidx.core:core-ktx:1.7.0"
         const val appCompat = "androidx.appcompat:appcompat:1.3.0"
         const val materialDesign = "com.google.android.material:material:1.4.0"
-        const val activity = "androidx.activity:activity-ktx:1.2.3"
-        const val fragment = "androidx.fragment:fragment-ktx:1.3.5"
+        const val activity = "androidx.activity:activity-ktx:1.4.0"
+        const val fragment = "androidx.fragment:fragment-ktx:1.4.1"
 
         const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
@@ -44,7 +44,7 @@ object Dependencies {
 
     object Kotlin {
         const val reflection = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
-        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
+        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     }
 
@@ -58,7 +58,7 @@ object Dependencies {
 
     object Test {
 
-        private const val robolectricVersion = "4.5.1"
+        private const val robolectricVersion = "4.7.3"
         private const val mockkVersion = "1.12.0"
 
         const val jUnit = "junit:junit:4.13"
@@ -107,11 +107,11 @@ object Plugins {
 }
 
 object Path {
-    const val androidGradle = "com.android.tools.build:gradle:7.2.0-beta03"
+    const val androidGradle = "com.android.tools.build:gradle:7.2.0-beta04"
     const val playServices = "com.google.gms:google-services:4.3.8"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
-    const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
+    const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
 }
