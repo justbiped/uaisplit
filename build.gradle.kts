@@ -1,5 +1,8 @@
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import java.nio.file.Paths
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
 apply<VersionsPlugin>()
 apply<ConfigPlugin>()
@@ -45,20 +48,15 @@ tasks.create<Delete>("clean") {
     delete(rootProject.buildDir)
 }
 
-
-tasks.create("androidTest") {
-    val commands = StringBuilder("#!/bin/bash\n")
-    val file = File("${rootProject.rootDir}/android-test.sh")
-    file.createNewFile()
-
-    subprojects {
-        val projectName = name
-        tasks.whenTaskAdded {
-            if (name == "pixel2LocalAndroidTest" && instrumentation.hasManagedDevice) {
-                commands.append("./gradlew $projectName:$name\n")
-            }
-        }
+tasks.register("prepareAndroidTest") {
+    val file = File("${rootProject.rootDir}/android-test.sh").apply {
+        delete()
+        createNewFile()
     }
 
-    doLast { file.writeText(commands.toString()) }
+    val commandBuilder = StringBuilder("#!/bin/bash").apply {
+        androidTestTasks.forEach { append("\n./gradlew $it") }
+    }
+
+    file.writeText(commandBuilder.toString())
 }
