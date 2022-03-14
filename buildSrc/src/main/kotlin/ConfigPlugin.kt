@@ -48,16 +48,6 @@ private fun Project.applyAndroidConfigs() {
             buildVariant()
             packingOptions()
             testSetup()
-
-            prepareAndroidTests()
-        }
-    }
-}
-
-private fun Project.prepareAndroidTests() {
-    afterEvaluate {
-        if (instrumentation.hasManagedDevice) {
-            androidTestTasks.add("$name:pixel2LocalAndroidTest")
         }
     }
 }

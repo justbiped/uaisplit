@@ -30,6 +30,14 @@ allprojects {
     }
 }
 
+subprojects {
+    afterEvaluate {
+        if (instrumentation.hasManagedDevice) {
+            androidTestTasks.add("$name:pixel2LocalAndroidTest")
+        }
+    }
+}
+
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
     checkForGradleUpdate = true
     outputFormatter = "html"
