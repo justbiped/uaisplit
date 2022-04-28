@@ -9,20 +9,19 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.favoriteplaces.core.test.instrumentation.FragmentScenario
+import com.favoriteplaces.core.test.instrumentation.action.TimeoutViewInteraction.waitView
+import com.favoriteplaces.core.test.instrumentation.fragmentScenario
+import com.favoriteplaces.core.test.instrumentation.rule.HttpResources
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
 import com.favoriteplaces.location.list.ui.LocationAdapter
 import com.favoriteplaces.location.list.ui.LocationListFragment
-import com.favoriteplaces.core.test.instrumentation.FragmentScenario
-import com.favoriteplaces.core.test.instrumentation.action.TimeoutViewInteraction.waitView
-import com.favoriteplaces.core.test.instrumentation.fragmentScenario
-import com.favoriteplaces.core.test.instrumentation.rule.HttpResources
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import okhttp3.internal.wait
 import okhttp3.mockwebserver.MockResponse
 import org.assertj.core.api.Assertions
 import org.hamcrest.CoreMatchers.not
@@ -72,9 +71,15 @@ class LocationListFragmentTest {
 
         setScenarioNavGraph()
 
-        onView(withId(R.id.locationRecyclerView)).perform(actionOnItemAtPosition<LocationAdapter.LocationViewHolder>(0, click()))
+        onView(withId(R.id.locationRecyclerView)).perform(
+            actionOnItemAtPosition<LocationAdapter.LocationViewHolder>(
+                0,
+                click()
+            )
+        )
 
-        Assertions.assertThat(navHost.currentDestination?.label).isEqualTo("LocationDetailsFragment")
+        Assertions.assertThat(navHost.currentDestination?.label)
+            .isEqualTo("LocationDetailsFragment")
     }
 
     private fun setScenarioNavGraph() {
