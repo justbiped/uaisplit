@@ -20,8 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 internal class LocationListViewModelTest {
 
-    @get:Rule
-    val instantTaskRule = InstantTaskRule()
+    @get:Rule val instantTaskRule = InstantTaskRule()
 
     @MockK(relaxed = true)
     lateinit var loadLocations: LoadLocations
