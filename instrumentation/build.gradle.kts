@@ -11,7 +11,6 @@ android {
 
         testApplicationId = "com.favoriteplaces.instrumentation"
         testInstrumentationRunner = "com.favoriteplaces.core.test.instrumentation.runner.LocationTestRunner"
-        testInstrumentationRunnerArguments["class"] = "com.favoriteplaces.instrumentation.InstrumentationTestSuit"
     }
 
     buildTypes {
