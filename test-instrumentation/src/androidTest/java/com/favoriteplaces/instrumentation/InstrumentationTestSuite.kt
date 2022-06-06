@@ -5,4 +5,4 @@ import org.junit.runners.Suite
 
 @RunWith(Suite::class)
 @Suite.SuiteClasses(LocationListScenario::class, LocationDetailsScenario::class)
-class InstrumentationTestSuit
+class InstrumentationTestSuite

@@ -6,13 +6,13 @@ plugins {
 android {
     defaultConfig {
         testApplicationId = "com.favoriteplaces.instrumentation"
+
         testInstrumentationRunnerArguments["class"] =
-            "com.favoriteplaces.instrumentation.InstrumentationTestSuit"
+            "com.favoriteplaces.instrumentation.InstrumentationTestSuite"
     }
 }
 
 dependencies {
-    localImplementation(project(":core:test"))
-
-    implementation(Dependencies.Test.uiAutomator)
+    androidTestImplementation(project(":core:test"))
+    androidTestImplementation(Dependencies.Test.uiAutomator)
 }
