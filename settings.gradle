@@ -1,5 +1,5 @@
 include ':app'
 include ':core'
-include ':instrumentation'
+include ':test-instrumentation'
 include ':location'
 include ':core:test'

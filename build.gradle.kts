@@ -1,8 +1,5 @@
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import java.nio.file.Paths
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
 
 apply<VersionsPlugin>()
 apply<ConfigPlugin>()
