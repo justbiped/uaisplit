@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.setupWithNavController
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
@@ -34,12 +35,10 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         biding = LocationDetailFragmentBinding.bind(view)
 
-        onBackPressCallback {
-            findNavController().navigateUp()
-        }
+        onBackPressCallback { findNavController().navigateUp() }
+        biding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
         setupStatusBar()
-        setupToolBar()
         setupReviewRecycler()
         setupObservers()
 
@@ -47,15 +46,7 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupStatusBar() {
-        requireActivity().window.apply {
-            statusBarColor = Color.TRANSPARENT
-        }
-    }
-
-    private fun setupToolBar() {
-        biding.locationDetailToolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
+        requireActivity().window.apply { statusBarColor = Color.TRANSPARENT }
     }
 
     private fun setupReviewRecycler() {
@@ -76,8 +67,8 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
 
     private fun bindLocationDetail(locationDetail: LocationDetailUIModel) {
         biding.collapseBar.title = locationDetail.name
-        biding.locationDetailsRatingBar.rating = locationDetail.rating.toFloat()
-        biding.locationDetailRatingText.text = "${locationDetail.rating}"
+        biding.locationRatingBar.rating = locationDetail.rating.toFloat()
+        biding.locationRatingText.text = "${locationDetail.rating}"
         biding.locationDetailAboutText.text = locationDetail.about
 
         biding.locationDetailSchedule.locationDetailScheduleText.text = locationDetail.schedule

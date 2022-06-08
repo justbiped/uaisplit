@@ -29,6 +29,7 @@
 
         <item name="ratingBarStyle">@style/Widget.RatingBar</item>
         <item name="ratingBarStyleSmall">@style/Widget.RatingBar.Small</item>
+        <item name="toolbarStyle">@style/AppToolbar.Theme</item>
     </style>
 
     <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">

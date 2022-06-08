@@ -44,6 +44,11 @@
         <item name="itemIconTint">@color/bottom_menu_home_item_color_selector</item>
     </style>
 
+    <style name="AppToolbar.Theme" parent="Widget.MaterialComponents.Toolbar">
+        <item name="navigationIcon">@drawable/ic_arrow_back</item>
+        <item name="navigationIconTint">?colorOnPrimary</item>
+    </style>
+
     <!--Collapse Toolbar-->
     <style name="CollapseToolbarTheme" parent="ThemeOverlay.AppCompat.DayNight.ActionBar">
         <item name="expandedTitleTextAppearance">@style/CollapseToolbarTheme.Text.Expanded</item>
