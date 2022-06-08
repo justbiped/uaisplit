@@ -25,7 +25,8 @@ import org.junit.runner.RunWith
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class LocationDetailsFragmentTest {
-    @get:Rule var hiltRule = HiltAndroidRule(this)
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
 
     private lateinit var scenario: FragmentScenario<LocationDetailsFragment>
 
@@ -44,8 +45,10 @@ class LocationDetailsFragmentTest {
         onView(withId(R.id.locationDetailRatingText)).check(hasText("${fixture.review}"))
         onView(withId(R.id.locationDetailAboutText)).check(hasText(fixture.about))
         onView(withId(R.id.locationDetailSchedule)).perform(nestedScrollTo()).check(isVisible())
-        onView(withId(R.id.locationDetailPhoneText)).perform(nestedScrollTo()).check(hasText(fixture.phone))
-        onView(withId(R.id.locationDetailAddressText)).perform(nestedScrollTo()).check(hasText(fixture.address))
+        onView(withId(R.id.locationDetailPhoneText)).perform(nestedScrollTo())
+            .check(hasText(fixture.phone))
+        onView(withId(R.id.locationDetailAddressText)).perform(nestedScrollTo())
+            .check(hasText(fixture.address))
         onView(withId(R.id.locationReviewList)).perform(nestedScrollTo()).check(isVisible())
         onView(withId(R.id.seeMoreCommentsText)).perform(nestedScrollTo()).check(isVisible())
     }

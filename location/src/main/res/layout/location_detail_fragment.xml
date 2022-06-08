@@ -11,23 +11,24 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="300dp"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapseBar"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll">
+            android:theme="@style/CollapseToolbarTheme"
+            app:collapsedTitleGravity="center_horizontal"
+            app:expandedTitleMarginBottom="50dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
-                android:id="@+id/locationDetailsImageView"
+                android:id="@+id/articlePicture"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
+                android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
                 tools:src="@tools:sample/avatars" />
@@ -35,58 +36,47 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/locationDetailToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:menu="@menu/location_detail_toolbar_menu"
-                app:navigationIcon="@drawable/ic_arrow_back" />
+                android:layout_height="?actionBarSize"
+                android:contentInsetStart="0dp"
+                android:navigationIcon="@drawable/ic_arrow_back"
+                app:layout_collapseMode="pin"
+                app:menu="@menu/location_detail_toolbar_menu" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:layout_collapseMode="parallax">
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/locationDetailsRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:rating="3" />
+
+                <TextView
+                    android:id="@+id/locationDetailRatingText"
+                    style="?textViewBody2Style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="?colorOnPrimary"
+                    app:layout_constraintBottom_toBottomOf="@+id/locationDetailsRatingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/locationDetailsRatingBar"
+                    app:layout_constraintTop_toTopOf="@+id/locationDetailsRatingBar"
+                    tools:text="4.1" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/locationDetailNameText"
-                style="?textViewH5Style"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Some Place" />
-
-            <androidx.appcompat.widget.AppCompatRatingBar
-                android:id="@+id/locationDetailsRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:isIndicator="true"
-                android:numStars="5"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/locationDetailNameText"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/locationDetailNameText"
-                app:layout_constraintTop_toBottomOf="@+id/locationDetailNameText"
-                tools:rating="3" />
-
-            <TextView
-                android:id="@+id/locationDetailRatingText"
-                style="?textViewBody2Style"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textColor="?colorOnPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/locationDetailsRatingBar"
-                app:layout_constraintEnd_toEndOf="@+id/locationDetailNameText"
-                app:layout_constraintStart_toEndOf="@+id/locationDetailsRatingBar"
-                app:layout_constraintTop_toTopOf="@+id/locationDetailsRatingBar"
-                tools:text="4.1" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -180,11 +170,11 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="28dp"
                 android:layout_marginBottom="30dp"
-                android:drawableEnd="@drawable/ic_next_arrows"
                 android:drawablePadding="8dp"
                 android:gravity="end"
+                android:text="@string/more_reviews_click_msg"
                 android:textColor="?colorPrimary"
-                android:text="@string/more_reviews_click_msg" />
+                app:drawableEndCompat="@drawable/ic_next_arrows" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

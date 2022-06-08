@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 class HomeAction(val isNavBarVisible: Boolean = true) : Parcelable
 
-fun Context.setHomeAction(action: HomeAction) {
+fun Context.sendHomeAction(action: HomeAction) {
     if (BuildConfig.BUILD_TYPE == "local") return
 
     val intent = Intent(HOME_ACTION_INTENT)

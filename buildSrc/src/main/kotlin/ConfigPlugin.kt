@@ -1,12 +1,12 @@
 import com.android.build.api.dsl.Device
 import com.android.build.api.dsl.ManagedVirtualDevice
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 
 typealias App = com.android.build.gradle.AppPlugin
 typealias Library = com.android.build.gradle.LibraryPlugin
@@ -117,17 +117,6 @@ private fun Project.applyAndroidConfigs() {
 }
 
 private fun AndroidExtension.setupTests() {
-    sourceSets {
-        val sharedTest = "src/sharedTest"
-
-        getByName("test") {
-            java.srcDir("$sharedTest/java")
-            resources.srcDirs("$sharedTest/resources")
-        }
-        getByName("androidTest") {
-            java.srcDir("$sharedTest/java")
-        }
-    }
 
     testOptions {
 

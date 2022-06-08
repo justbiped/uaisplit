@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.favoriteplaces.core.control.HomeAction
-import com.favoriteplaces.core.control.setHomeAction
+import com.favoriteplaces.core.control.sendHomeAction
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
@@ -30,7 +30,7 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
 
     override fun onStart() {
         super.onStart()
-        requireContext().setHomeAction(HomeAction(isNavBarVisible = true))
+        requireContext().sendHomeAction(HomeAction(isNavBarVisible = true))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

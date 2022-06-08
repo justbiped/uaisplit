@@ -12,7 +12,7 @@ import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.core.control.HomeAction
-import com.favoriteplaces.core.control.setHomeAction
+import com.favoriteplaces.core.control.sendHomeAction
 import com.favoriteplaces.core.extensions.onBackPressCallback
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,21 +26,17 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
     private lateinit var biding: LocationDetailFragmentBinding
     private val arguments by navArgs<LocationDetailsFragmentArgs>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        onBackPressCallback {
-            findNavController().navigateUp()
-        }
-    }
-
     override fun onStart() {
         super.onStart()
-        requireContext().setHomeAction(HomeAction(isNavBarVisible = false))
+        requireContext().sendHomeAction(HomeAction(isNavBarVisible = false))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         biding = LocationDetailFragmentBinding.bind(view)
+
+        onBackPressCallback {
+            findNavController().navigateUp()
+        }
 
         setupStatusBar()
         setupToolBar()
@@ -79,7 +75,7 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun bindLocationDetail(locationDetail: LocationDetailUIModel) {
-        biding.locationDetailNameText.text = locationDetail.name
+        biding.collapseBar.title = locationDetail.name
         biding.locationDetailsRatingBar.rating = locationDetail.rating.toFloat()
         biding.locationDetailRatingText.text = "${locationDetail.rating}"
         biding.locationDetailAboutText.text = locationDetail.about

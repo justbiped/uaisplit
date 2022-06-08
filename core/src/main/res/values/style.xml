@@ -43,4 +43,21 @@
     <style name="Widget.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@color/bottom_menu_home_item_color_selector</item>
     </style>
+
+    <!--Collapse Toolbar-->
+    <style name="CollapseToolbarTheme" parent="ThemeOverlay.AppCompat.DayNight.ActionBar">
+        <item name="expandedTitleTextAppearance">@style/CollapseToolbarTheme.Text.Expanded</item>
+        <item name="collapsedTitleTextAppearance">@style/CollapseToolbarTheme.Text.Collapsed</item>
+        <item name="contentScrim">?colorPrimary</item>
+        <item name="statusBarScrim">?colorPrimary</item>
+    </style>
+
+    <style name="CollapseToolbarTheme.Text.Expanded" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
+    <style name="CollapseToolbarTheme.Text.Collapsed" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">?colorOnPrimary</item>
+
+    </style>
 </resources>

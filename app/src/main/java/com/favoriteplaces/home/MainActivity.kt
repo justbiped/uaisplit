@@ -3,14 +3,15 @@ package com.favoriteplaces.home
 import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.favoriteplaces.R
-import com.favoriteplaces.databinding.ActivityMainBinding
 import com.favoriteplaces.core.control.HOME_ACTION_INTENT
 import com.favoriteplaces.core.control.HomeAction
 import com.favoriteplaces.core.extensions.changeVisibility
+import com.favoriteplaces.core.extensions.registerLocalBroadcast
+import com.favoriteplaces.core.extensions.unregisterLocalBroadcast
+import com.favoriteplaces.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,14 +27,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        registerReceiver()
+        registerLocalBroadcast(homeActionReceiver, IntentFilter(HOME_ACTION_INTENT))
         setupListeners()
         setupNavigationBar()
-    }
-
-    private fun registerReceiver() {
-        LocalBroadcastManager.getInstance(baseContext)
-            .registerReceiver(homeActionReceiver, IntentFilter(HOME_ACTION_INTENT))
     }
 
     private fun setupListeners() {
@@ -46,5 +42,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigationBar() {
         binding.homeBottomNavigationView.setupWithNavController(navController)
+    }
+
+    override fun onDestroy() {
+        unregisterLocalBroadcast(homeActionReceiver)
+        super.onDestroy()
     }
 }
