@@ -8,13 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.setupWithNavController
-import com.favoriteplaces.location.R
-import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
-import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.core.control.HomeAction
 import com.favoriteplaces.core.control.sendHomeAction
 import com.favoriteplaces.core.extensions.onBackPressCallback
+import com.favoriteplaces.location.R
+import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
+import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
