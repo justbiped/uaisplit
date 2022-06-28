@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.favoriteplaces.core.binding.BindingFragment
 import com.favoriteplaces.core.control.HomeAction
 import com.favoriteplaces.core.control.sendHomeAction
 import com.favoriteplaces.location.R
@@ -16,12 +16,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LocationListFragment : Fragment(R.layout.location_list_fragment) {
+class LocationListFragment :
+    BindingFragment<LocationListFragmentBinding>(R.layout.location_list_fragment) {
 
     @Inject
     internal lateinit var viewModel: LocationListViewModel
-
-    private lateinit var binding: LocationListFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +33,8 @@ class LocationListFragment : Fragment(R.layout.location_list_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding = LocationListFragmentBinding.bind(view)
+        setViewBinding(LocationListFragmentBinding.bind(view))
+
         setupLocationsRecycler()
         setupObservers()
         setupListeners()
