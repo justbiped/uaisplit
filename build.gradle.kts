@@ -17,7 +17,6 @@ buildscript {
         classpath(Path.dependenciesUpdate)
         classpath(Path.safeArgs)
         classpath(Path.hilt)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
     }
 }
 

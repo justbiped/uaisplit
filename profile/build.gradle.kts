@@ -18,12 +18,19 @@ dependencies {
 
     implementation(Dependencies.Android.navigationUI)
     implementation(Dependencies.Android.navigationFragment)
+
+
+    implementation(Dependencies.Android.Compose.ui)
+    implementation(Dependencies.Android.Compose.material)
+    implementation(Dependencies.Android.Compose.icons)
+    implementation(Dependencies.Android.Compose.iconsExtended)
+    implementation(Dependencies.Android.Compose.animation)
+
+    implementation(Dependencies.Android.Compose.foundation)
+    implementation(Dependencies.Android.Compose.runtime)
+
     implementation(Dependencies.Android.Compose.toolingPreview)
     devImplementation(Dependencies.Android.Compose.tooling)
 
-    implementation(Dependencies.Android.Compose.ui)
-    implementation(Dependencies.Android.Compose.tooling)
-    implementation(Dependencies.Android.Compose.foundation)
-    implementation(Dependencies.Android.Compose.icons)
-    implementation(Dependencies.Android.Compose.iconsExtended)
+    implementation(project(":core"))
 }

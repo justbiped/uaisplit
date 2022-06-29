@@ -11,13 +11,13 @@ object Versions {
 }
 
 object Dependencies {
-    const val serialization ="org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
+    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val serializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     const val httpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
-    const val coil = "io.coil-kt:coil:1.3.0"
+    const val coil = "io.coil-kt:coil:2.0.0"
 
     object Android {
         const val core = "androidx.core:core-ktx:1.7.0"
@@ -41,24 +41,22 @@ object Dependencies {
         const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
 
-        object Compose{
+        object Compose {
             private const val version = "1.2.0-rc02"
             const val ui = "androidx.compose.ui:ui:$version"
+            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
             const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
-            // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val material = "androidx.compose.material:material:$version"
-            // Material design icons
             const val icons = "androidx.compose.material:material-icons-core:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
-            // Integration with ViewModels
+            const val layout = "androidx.compose.foundation:foundation-layout:$version"
+            const val animation = "androidx.compose.animation:animation:$version"
             const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
-            // Integration with observables
-            //implementation 'androidx.compose.runtime:runtime-livedata:1.1.1'
 
-            // UI Tests
-            const val test  = "androidx.compose.ui:ui-test-junit4:1.1.1"
+            const val testManifest = "androidx.compose.ui:ui-test-manifest:$version"
+            const val test = "androidx.compose.ui:ui-test-junit4:$version"
         }
     }
 
@@ -122,7 +120,7 @@ object Plugins {
         const val test: String = "com.android.test"
         const val googleServices = "com.google.gms.google-services"
         const val hilt = "dagger.hilt.android.plugin"
-        const val safeArgs: String ="androidx.navigation.safeargs.kotlin"
+        const val safeArgs: String = "androidx.navigation.safeargs.kotlin"
     }
 }
 

@@ -9,4 +9,8 @@
         tools:layout = "@layout/location_host_fragment"
         android:name="com.favoriteplaces.location.LocationHostFragment"
         android:label="LocationHostFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.biped.locations.profile.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>
