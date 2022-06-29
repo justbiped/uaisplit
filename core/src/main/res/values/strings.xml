@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Locations</string>
 
-    <string name="home" translatable="false">Home</string>
+    <string name="home">Home</string>
     <string name="map">Map</string>
+    <string name="profile">Profile</string>
     <string name="share">Share</string>
 
     <string name="pictures">Pictures</string>

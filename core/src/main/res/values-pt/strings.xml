@@ -2,8 +2,11 @@
 <resources>
     <string name="app_name">Lugares</string>
 
+    <string name="home">Início</string>
     <string name="map">Mapa</string>
+    <string name="profile">Perfil</string>
     <string name="share">Compartilhar</string>
+
 
     <string name="pictures">Fotos</string>
     <string name="about">Sobre</string>

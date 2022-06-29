@@ -67,6 +67,7 @@ dependencies {
     kapt(Dependencies.Android.hiltCompiler)
 
     implementation(project(":location"))
+    implementation(project(":profile"))
     implementation(project(":core"))
     localImplementation(project(":core:test"))
 

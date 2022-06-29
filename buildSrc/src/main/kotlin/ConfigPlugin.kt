@@ -26,11 +26,11 @@ private fun Project.applyAndroidConfigs() {
             plugins.apply(Plugins.Android.safeArgs)
 
             android {
-                compileSdkVersion(31)
-                buildToolsVersion("30.0.3")
+                compileSdkVersion(32)
+                buildToolsVersion("33.0.0")
 
                 defaultConfig {
-                    minSdk = 23
+                    minSdk = 24
                     targetSdk = 30
 
                     testInstrumentationRunner =

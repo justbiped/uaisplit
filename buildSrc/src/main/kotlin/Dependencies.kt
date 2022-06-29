@@ -1,17 +1,17 @@
 // @formatter:off
 
 object Versions {
-    const val kotlin = "1.6.10"
+    const val kotlin = "1.6.21"
     const val navigation = "2.4.1"
     const val lifecycle = "2.4.1"
     const val retrofit = "2.9.0"
-    const val hilt = "2.41"
+    const val hilt = "2.42"
     const val room = "2.3.0"
-    const val okHttp = "4.9.3"
+    const val okHttp = "4.10.0"
 }
 
 object Dependencies {
-    const val serialization ="org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+    const val serialization ="org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val serializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
@@ -21,15 +21,15 @@ object Dependencies {
 
     object Android {
         const val core = "androidx.core:core-ktx:1.7.0"
-        const val appCompat = "androidx.appcompat:appcompat:1.3.0"
-        const val materialDesign = "com.google.android.material:material:1.4.0"
+        const val appCompat = "androidx.appcompat:appcompat:1.4.2"
+        const val materialDesign = "com.google.android.material:material:1.6.1"
         const val activity = "androidx.activity:activity-ktx:1.4.0"
         const val fragment = "androidx.fragment:fragment-ktx:1.4.1"
 
         const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
@@ -40,6 +40,26 @@ object Dependencies {
 
         const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+
+        object Compose{
+            private const val version = "1.2.0-rc02"
+            const val ui = "androidx.compose.ui:ui:$version"
+            const val tooling = "androidx.compose.ui:ui-tooling:$version"
+            const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
+            // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+            const val foundation = "androidx.compose.foundation:foundation:$version"
+            const val material = "androidx.compose.material:material:$version"
+            // Material design icons
+            const val icons = "androidx.compose.material:material-icons-core:$version"
+            const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
+            // Integration with ViewModels
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
+            // Integration with observables
+            //implementation 'androidx.compose.runtime:runtime-livedata:1.1.1'
+
+            // UI Tests
+            const val test  = "androidx.compose.ui:ui-test-junit4:1.1.1"
+        }
     }
 
     object Kotlin {
@@ -59,7 +79,7 @@ object Dependencies {
     object Test {
 
         private const val robolectricVersion = "4.7.3"
-        private const val mockkVersion = "1.12.0"
+        private const val mockkVersion = "1.12.4"
 
         const val jUnit = "junit:junit:4.13"
         const val assertJ = "org.assertj:assertj-core:3.20.2"
@@ -74,7 +94,7 @@ object Dependencies {
         const val fragment = "androidx.fragment:fragment-testing:1.3.5"
         const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
 
-        const val androidxCore = "androidx.test:core-ktx:1.4.0"
+        const val androidxCore = "androidx.test:core-ktx:1.8.0"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
         const val androidxJunit = "androidx.test.ext:junit-ktx:1.1.3"
         const val hilt = "com.google.dagger:hilt-android-testing:${Versions.hilt}"

@@ -15,6 +15,6 @@
 
     <item
         android:icon="@drawable/bottom_navigation_profile_icon_selector"
-        android:title="@string/map"
+        android:title="@string/profile"
         app:showAsAction="always" />
 </menu>
