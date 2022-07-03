@@ -42,7 +42,7 @@ object Dependencies {
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
 
         object Compose {
-            private const val version = "1.2.0-rc02"
+            private const val version = "1.1.1"
             const val ui = "androidx.compose.ui:ui:$version"
             const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"

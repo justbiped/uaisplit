@@ -32,5 +32,7 @@ dependencies {
     implementation(Dependencies.Android.Compose.toolingPreview)
     devImplementation(Dependencies.Android.Compose.tooling)
 
+    implementation("io.coil-kt:coil-compose:2.1.0")
+
     implementation(project(":core"))
 }
