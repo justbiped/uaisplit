@@ -22,7 +22,9 @@ import com.biped.locations.profile.ui.theme.panel
 @Composable
 fun ProfileView(@PreviewParameter(UserPreview::class) user: UserUiModel) {
     Column(
-        modifier = Modifier.panel()
+        modifier = Modifier
+            .panel()
+            .padding(top = Dimens.normal)
     ) {
         Column(
             modifier = Modifier
@@ -69,5 +71,5 @@ fun ProfileHeader(user: UserUiModel) {
 }
 
 class UserPreview : PreviewParameterProvider<UserUiModel> {
-    override val values = sequenceOf(UserUiModel("Edgar"))
+    override val values = sequenceOf(UserUiModel("Roubert Edgar"))
 }
