@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.biped.locations.profile.ui.theme.LocationsandroidTheme
+import com.biped.locations.profile.ui.theme.LocationsTheme
 
 class ProfileFragment : Fragment() {
 
@@ -17,7 +17,7 @@ class ProfileFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                LocationsandroidTheme {
+                LocationsTheme {
                     ProfileView(
                         UserUiModel(
                             "Edgar",
