@@ -44,6 +44,7 @@ dependencies {
     kapt(Dependencies.Android.hiltCompiler)
 
     implementation(project(":core"))
+    implementation(project(":core:theme"))
     localImplementation(project(":core:test"))
 
     kaptTest(Dependencies.Android.hiltCompiler)

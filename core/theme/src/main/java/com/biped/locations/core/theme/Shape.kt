@@ -1,4 +1,4 @@
-package com.biped.locations.profile.ui.theme
+package com.biped.locations.core.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

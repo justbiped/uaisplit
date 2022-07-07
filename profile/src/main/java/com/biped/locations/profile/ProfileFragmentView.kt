@@ -14,9 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import coil.compose.rememberAsyncImagePainter
-import com.biped.locations.profile.ui.theme.Dimens
-import com.biped.locations.profile.ui.theme.SmallSpacer
-import com.biped.locations.profile.ui.theme.panel
+import com.biped.locations.core.theme.Dimens
+import com.biped.locations.core.theme.SmallSpacer
+import com.biped.locations.core.theme.panel
 
 @Preview(showSystemUi = true)
 @Composable
