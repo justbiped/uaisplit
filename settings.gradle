@@ -5,3 +5,7 @@ include ':location'
 include ':core:test'
 include ':profile'
 include ':core:theme'
+
+
+project(":location").projectDir = new File(rootDir, "features/location")
+project(":profile").projectDir = new File(rootDir, "features/profile")
