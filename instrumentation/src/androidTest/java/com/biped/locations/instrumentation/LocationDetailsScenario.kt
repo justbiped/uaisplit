@@ -8,7 +8,7 @@ import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import com.favoriteplaces.core.test.instrumentation.runner.AutomatorRunner
 import com.favoriteplaces.core.test.instrumentation.runner.Step
-import com.biped.locations.instrumentation.LocationListScenario.Companion.LAUNCH_TIMEOUT
+import com.biped.locations.instrumentation.ApplicationStartScenario.Companion.LAUNCH_TIMEOUT
 import org.junit.Test
 import org.junit.runner.RunWith
 

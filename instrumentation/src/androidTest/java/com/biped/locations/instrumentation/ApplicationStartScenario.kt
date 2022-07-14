@@ -2,20 +2,20 @@ package com.biped.locations.instrumentation
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
-import androidx.test.uiautomator.*
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.Until
 import com.favoriteplaces.core.test.instrumentation.runner.AutomatorRunner
 import com.favoriteplaces.core.test.instrumentation.runner.Step
-import io.mockk.InternalPlatformDsl.toStr
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
 
 @RunWith(AutomatorRunner::class)
-class LocationListScenario {
+class ApplicationStartScenario {
 
     private val device = UiDevice.getInstance(getInstrumentation())
     private val context = getApplicationContext<Context>()
@@ -27,10 +27,9 @@ class LocationListScenario {
         assertThat(launcherPackage).isNotNull()
         device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), LAUNCH_TIMEOUT)
 
+        val packageInfo = context.packageManager.getPackageInfo(PACKAGE, 0)
 
-        val packageInfo =
-            context.packageManager.getPackageInfo(PACKAGE, PackageManager.GET_META_DATA)
-        assertThat(packageInfo.toStr()).isNotNull()
+        assertThat(packageInfo).isNotNull()
     }
 
     @Test
@@ -43,15 +42,17 @@ class LocationListScenario {
     }
 
     @Test
-    @Step("Then i see the home screen with loaded locations", order = 2)
+    @Step("Then i see the home screen", order = 2)
     fun then_i_see_the_home_screen_with_loaded_locations() {
-        val locationListView = UiScrollable(UiSelector().scrollable(true))
-        assertThat(locationListView.childCount).isGreaterThan(0)
+        val isHomeVisible = device.wait(
+            Until.hasObject(By.scrollable(true)),
+            LAUNCH_TIMEOUT
+        )
+
+        assert(isHomeVisible)
     }
 
     companion object {
-        //   @get:ClassRule @JvmStatic val loginRule = LoginTestRule
-
         const val LAUNCH_TIMEOUT = 3000L
         private const val PACKAGE = "com.biped.locations"
     }
