@@ -27,7 +27,6 @@ class LocationDetailsScenario {
     @Step("When i scroll to screen bottom", 1)
     fun when_i_scroll_to_screen_bottom() {
         UiScrollable(UiSelector().scrollable(true)).scrollToEnd(2)
-        UiScrollable(UiSelector().scrollable(true)).scrollToEnd(2)
     }
 
     @Test
