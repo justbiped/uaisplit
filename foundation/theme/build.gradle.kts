@@ -1,5 +1,6 @@
 plugins {
     id(Plugins.Android.library)
+    id(Plugins.Kotlin.android)
 }
 
 android {
@@ -13,12 +14,7 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.Android.core)
-    implementation(Dependencies.Android.appCompat)
-
-    implementation(Dependencies.Android.navigationUI)
-    implementation(Dependencies.Android.navigationFragment)
-
+    implementation(Dependencies.Android.materialDesign)
 
     implementation(Dependencies.Android.Compose.ui)
     implementation(Dependencies.Android.Compose.material)
@@ -33,7 +29,4 @@ dependencies {
     devImplementation(Dependencies.Android.Compose.tooling)
 
     implementation("io.coil-kt:coil-compose:2.1.0")
-
-    implementation(project(":core"))
-    implementation(project(":theme"))
 }

@@ -1,11 +1,15 @@
 include ':app'
 include ':core'
-include ':test-instrumentation'
+include ':instrumentation'
 include ':location'
-include ':core:test'
+include ':core-test'
 include ':profile'
-include ':core:theme'
+include ':theme'
 
 
 project(":location").projectDir = new File(rootDir, "features/location")
 project(":profile").projectDir = new File(rootDir, "features/profile")
+
+project(":core").projectDir = new File(rootDir, "foundation/core")
+project(":core-test").projectDir = new File(rootDir, "foundation/core-test")
+project(":theme").projectDir = new File(rootDir, "foundation/theme")

@@ -92,7 +92,7 @@ object Dependencies {
         const val fragment = "androidx.fragment:fragment-testing:1.3.5"
         const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
 
-        const val androidxCore = "androidx.test:core-ktx:1.8.0"
+        const val androidxCore = "androidx.test:core-ktx:1.4.0"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
         const val androidxJunit = "androidx.test.ext:junit-ktx:1.1.3"
         const val hilt = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
