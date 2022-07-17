@@ -54,6 +54,6 @@ class ApplicationStartScenario {
 
     companion object {
         const val LAUNCH_TIMEOUT = 3000L
-        private const val PACKAGE = "com.biped.locations"
+        const val PACKAGE = "com.biped.locations"
     }
 }
