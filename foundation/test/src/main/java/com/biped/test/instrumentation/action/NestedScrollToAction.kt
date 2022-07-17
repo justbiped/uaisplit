@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test.instrumentation.action
+package com.biped.test.instrumentation.action
 
 import android.graphics.Rect
 import android.util.Log

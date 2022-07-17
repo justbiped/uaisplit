@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test
+package com.biped.test
 
 import android.annotation.SuppressLint
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule

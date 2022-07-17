@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test.instrumentation.action
+package com.biped.test.instrumentation.action
 
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.assertion.ViewAssertions

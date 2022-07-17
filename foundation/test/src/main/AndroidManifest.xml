@@ -9,7 +9,7 @@
         android:name="dagger.hilt.android.testing.HiltTestApplication"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.favoriteplaces.core.test.instrumentation.HiltTestActivity"
+            android:name="com.favoriteplaces.core.test.com.biped.test.instrumentation.HiltTestActivity"
             android:exported="false" />
     </application>
 </manifest>

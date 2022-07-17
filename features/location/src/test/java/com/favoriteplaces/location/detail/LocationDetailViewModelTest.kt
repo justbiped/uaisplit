@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.detail
 
-import com.favoriteplaces.core.test.InstantTaskRule
+import com.biped.test.InstantTaskRule
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail

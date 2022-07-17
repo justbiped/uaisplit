@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test.instrumentation
+package com.biped.test.instrumentation
 
 import android.content.ComponentName
 import android.content.Intent.makeMainActivity

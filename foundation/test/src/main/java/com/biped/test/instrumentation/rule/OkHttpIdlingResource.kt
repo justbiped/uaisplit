@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test.instrumentation.rule
+package com.biped.test.instrumentation.rule
 
 import androidx.test.espresso.IdlingResource
 import okhttp3.OkHttpClient

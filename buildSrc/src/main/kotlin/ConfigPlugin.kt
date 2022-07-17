@@ -34,7 +34,7 @@ private fun Project.applyAndroidConfigs() {
                     targetSdk = 30
 
                     testInstrumentationRunner =
-                        "com.favoriteplaces.core.test.instrumentation.runner.LocationTestRunner"
+                        "com.biped.test.instrumentation.runner.LocationTestRunner"
                 }
 
                 buildFeatures.apply {

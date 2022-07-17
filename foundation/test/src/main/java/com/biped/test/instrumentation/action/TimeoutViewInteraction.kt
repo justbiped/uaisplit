@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test.instrumentation.action
+package com.biped.test.instrumentation.action
 
 import android.view.View
 import androidx.test.espresso.Espresso.onView

@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test.instrumentation.rule
+package com.biped.test.instrumentation.rule
 
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

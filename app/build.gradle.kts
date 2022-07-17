@@ -70,7 +70,7 @@ dependencies {
     implementation(project(":profile"))
     implementation(project(":core"))
     implementation(project(":theme"))
-    localImplementation(project(":core-test"))
+    "localImplementation"(project(":test"))
 
     kaptTest(Dependencies.Android.hiltCompiler)
     kaptAndroidTest(Dependencies.Android.hiltCompiler)

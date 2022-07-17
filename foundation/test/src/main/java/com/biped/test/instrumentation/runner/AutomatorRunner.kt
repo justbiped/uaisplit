@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test.instrumentation.runner
+package com.biped.test.instrumentation.runner
 
 import org.junit.Test
 import org.junit.runner.Description

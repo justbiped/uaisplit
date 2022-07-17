@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.test.instrumentation.runner
+package com.biped.test.instrumentation.runner
 
 import android.app.Application
 import android.content.Context

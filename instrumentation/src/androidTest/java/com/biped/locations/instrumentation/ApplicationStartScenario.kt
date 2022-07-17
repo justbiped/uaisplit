@@ -7,8 +7,8 @@ import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
-import com.favoriteplaces.core.test.instrumentation.runner.AutomatorRunner
-import com.favoriteplaces.core.test.instrumentation.runner.Step
+import com.biped.test.instrumentation.runner.AutomatorRunner
+import com.biped.test.instrumentation.runner.Step
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

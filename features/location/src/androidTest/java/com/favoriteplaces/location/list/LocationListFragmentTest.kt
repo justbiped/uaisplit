@@ -9,10 +9,10 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.favoriteplaces.core.test.instrumentation.FragmentScenario
-import com.favoriteplaces.core.test.instrumentation.action.TimeoutViewInteraction.waitView
-import com.favoriteplaces.core.test.instrumentation.fragmentScenario
-import com.favoriteplaces.core.test.instrumentation.rule.HttpResources
+import com.biped.test.instrumentation.FragmentScenario
+import com.biped.test.instrumentation.action.TimeoutViewInteraction.waitView
+import com.biped.test.instrumentation.fragmentScenario
+import com.biped.test.instrumentation.rule.HttpResources
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
