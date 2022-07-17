@@ -45,8 +45,7 @@ class ApplicationStartScenario {
     @Step("Then i see the home screen", order = 2)
     fun then_i_see_the_home_screen_with_loaded_locations() {
         val isHomeVisible = device.wait(
-            Until.hasObject(By.scrollable(true)),
-            LAUNCH_TIMEOUT
+            Until.hasObject(By.res(PACKAGE, "homeBottomNavigationView")), LAUNCH_TIMEOUT
         )
 
         assert(isHomeVisible)

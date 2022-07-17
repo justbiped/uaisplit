@@ -1,13 +1,12 @@
 package com.biped.locations.instrumentation
 
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.Until
+import androidx.test.uiautomator.*
 import com.biped.locations.instrumentation.ApplicationStartScenario.Companion.LAUNCH_TIMEOUT
 import com.biped.locations.instrumentation.ApplicationStartScenario.Companion.PACKAGE
 import com.biped.test.instrumentation.runner.AutomatorRunner
 import com.biped.test.instrumentation.runner.Step
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -30,5 +29,13 @@ class LocationListScenario {
             device.wait(Until.gone(By.res(PACKAGE, "locationListProgressBar")), LAUNCH_TIMEOUT)
 
         assert(isNotLoadingLocations)
+    }
+
+    @Test
+    @Step(order = 2, displayName = "Then I see the list of locations")
+    fun then_i_see_the_list_of_locations() {
+        val locationList = UiScrollable(UiSelector().scrollable(true))
+
+        assertThat(locationList.childCount).isGreaterThan(0)
     }
 }
