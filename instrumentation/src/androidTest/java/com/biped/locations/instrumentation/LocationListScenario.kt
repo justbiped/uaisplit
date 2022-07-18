@@ -2,7 +2,6 @@ package com.biped.locations.instrumentation
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.*
-import com.biped.locations.instrumentation.ApplicationStartScenario.Companion.LAUNCH_TIMEOUT
 import com.biped.locations.instrumentation.ApplicationStartScenario.Companion.PACKAGE
 import com.biped.test.instrumentation.runner.AutomatorRunner
 import com.biped.test.instrumentation.runner.Step
@@ -17,7 +16,7 @@ class LocationListScenario {
     @Test
     @Step(order = 0, displayName = "Given that I am in the home screen")
     fun given_that_i_am_in_the_home_screen() {
-        val homeMenu = device.wait(Until.findObject(By.text("Home")), LAUNCH_TIMEOUT)
+        val homeMenu = device.wait(Until.findObject(By.text("Home")), TIMEOUT)
 
         assert(homeMenu.isSelected)
     }
@@ -26,7 +25,7 @@ class LocationListScenario {
     @Step(order = 1, displayName = "When the location is loaded")
     fun when_the_locations_is_loaded() {
         val isNotLoadingLocations =
-            device.wait(Until.gone(By.res(PACKAGE, "locationListProgressBar")), LAUNCH_TIMEOUT)
+            device.wait(Until.gone(By.res(PACKAGE, "locationListProgressBar")), TRASH_TIMEOUT)
 
         assert(isNotLoadingLocations)
     }

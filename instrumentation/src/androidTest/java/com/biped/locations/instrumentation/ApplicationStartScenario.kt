@@ -25,7 +25,7 @@ class ApplicationStartScenario {
     fun given_i_have_the_sparkle_installed() {
         val launcherPackage = device.launcherPackageName
         assertThat(launcherPackage).isNotNull()
-        device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), LAUNCH_TIMEOUT)
+        device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), TIMEOUT)
 
         val packageInfo = context.packageManager.getPackageInfo(PACKAGE, 0)
 
@@ -38,21 +38,20 @@ class ApplicationStartScenario {
         val intent: Intent? = context.packageManager.getLaunchIntentForPackage(PACKAGE)
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
-        device.wait(Until.hasObject(By.res(PACKAGE, "mainFragmentContainer")), LAUNCH_TIMEOUT)
+        device.wait(Until.hasObject(By.res(PACKAGE, "mainFragmentContainer")), TIMEOUT)
     }
 
     @Test
     @Step("Then i see the home screen", order = 2)
     fun then_i_see_the_home_screen_with_loaded_locations() {
         val isHomeVisible = device.wait(
-            Until.hasObject(By.res(PACKAGE, "homeBottomNavigationView")), LAUNCH_TIMEOUT
+            Until.hasObject(By.res(PACKAGE, "homeBottomNavigationView")), TIMEOUT
         )
 
         assert(isHomeVisible)
     }
 
     companion object {
-        const val LAUNCH_TIMEOUT = 3000L
         const val PACKAGE = "com.biped.locations"
     }
 }

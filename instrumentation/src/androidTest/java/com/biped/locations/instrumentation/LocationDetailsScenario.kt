@@ -8,7 +8,6 @@ import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import com.biped.test.instrumentation.runner.AutomatorRunner
 import com.biped.test.instrumentation.runner.Step
-import com.biped.locations.instrumentation.ApplicationStartScenario.Companion.LAUNCH_TIMEOUT
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -33,7 +32,7 @@ class LocationDetailsScenario {
     @Step("Then i see the click to see more comments button", 2)
     fun then_i_see_the_click_to_see_more_comments_button() {
         val isClickToSeeCommentsVisible =
-            device.wait(Until.hasObject(text("Click here to see all reviews")), LAUNCH_TIMEOUT)
+            device.wait(Until.hasObject(text("Click here to see all reviews")), TIMEOUT)
 
         assert(isClickToSeeCommentsVisible)
     }
