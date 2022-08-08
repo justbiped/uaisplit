@@ -9,17 +9,17 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 fun TinySpacer() {
-    Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.tiny)))
+    Spacer(modifier = Modifier.size(Dimens.tiny))
 }
 
 @Composable
 fun SmallSpacer() {
-    Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.small)))
+    Spacer(modifier = Modifier.size(Dimens.small))
 }
 
 @Composable
 fun NormalSpacer() {
-    Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.normal)))
+    Spacer(modifier = Modifier.size(Dimens.normal))
 }
 
 object Dimens {
