@@ -14,6 +14,8 @@ android {
 }
 
 dependencies {
+    implementation(Dependencies.Lifecycle.runtime)
+
     implementation(Dependencies.Android.materialDesign)
 
     implementation(Dependencies.Compose.ui)
@@ -23,7 +25,6 @@ dependencies {
     implementation(Dependencies.Compose.animation)
 
     implementation(Dependencies.Compose.foundation)
-    implementation(Dependencies.Compose.runtime)
 
     implementation(Dependencies.Compose.toolingPreview)
     devImplementation(Dependencies.Compose.tooling)

@@ -32,8 +32,8 @@ dependencies {
     implementation(Dependencies.Fragment.core)
     implementation(Dependencies.Navigator.fragment)
     implementation(Dependencies.Navigator.ui)
-    implementation(Dependencies.Android.lifecycleLiveData)
-    implementation(Dependencies.Android.lifecycleViewModel)
+    implementation(Dependencies.Lifecycle.liveData)
+    implementation(Dependencies.Lifecycle.viewModel)
 
     implementation(Dependencies.coil)
 

@@ -60,7 +60,6 @@ dependencies {
     implementation(Dependencies.Compose.pager)
 
     implementation(Dependencies.Compose.foundation)
-    implementation(Dependencies.Compose.runtime)
 
     implementation(Dependencies.Compose.toolingPreview)
     devImplementation(Dependencies.Compose.tooling)
@@ -73,8 +72,9 @@ dependencies {
     implementation(Dependencies.Navigator.fragment)
     implementation(Dependencies.Navigator.ui)
 
-    implementation(Dependencies.Android.lifecycleLiveData)
-    implementation(Dependencies.Android.lifecycleViewModel)
+    implementation(Dependencies.Lifecycle.liveData)
+    implementation(Dependencies.Lifecycle.viewModel)
+    implementation(Dependencies.Lifecycle.runtime)
 
     implementation(Dependencies.coil)
 

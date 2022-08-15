@@ -1,7 +1,6 @@
 // @formatter:off
 
 object Versions {
-    const val lifecycle = "2.4.1"
     const val retrofit = "2.9.0"
     const val room = "2.3.0"
     const val okHttp = "4.10.0"
@@ -21,12 +20,6 @@ object Dependencies {
         const val materialDesign = "com.google.android.material:material:1.6.1"
         const val activity = "androidx.activity:activity-ktx:1.5.1"
 
-
-        const val lifecycleLiveData =
-            "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-        const val lifecycleViewModel =
-            "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
-
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 
         const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
@@ -35,6 +28,7 @@ object Dependencies {
     }
 
     private const val KotlinVersion = "1.7.0"
+
     object Kotlin {
 
         const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$KotlinVersion"
@@ -49,7 +43,8 @@ object Dependencies {
 
     object Serialization {
         const val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
-        const val converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+        const val converter =
+            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
         const val plugin = "kotlinx-serialization"
         const val classPath = "org.jetbrains.kotlin:kotlin-serialization:$KotlinVersion"
     }
@@ -109,7 +104,6 @@ object Dependencies {
     object Compose {
         private const val version = "1.2.0"
         const val ui = "androidx.compose.ui:ui:$version"
-        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
         const val tooling = "androidx.compose.ui:ui-tooling:$version"
         const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
         const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -118,12 +112,19 @@ object Dependencies {
         const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val animation = "androidx.compose.animation:animation:$version"
-        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
 
         const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
 
         const val testManifest = "androidx.compose.ui:ui-test-manifest:$version"
         const val test = "androidx.compose.ui:ui-test-junit4:$version"
+    }
+
+    object Lifecycle {
+        private const val version = "2.5.1"
+        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
+        const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+        const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$version"
     }
 
     object Navigator {

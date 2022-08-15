@@ -16,6 +16,8 @@ dependencies {
     implementation(Dependencies.Android.core)
     implementation(Dependencies.Android.appCompat)
 
+    implementation(Dependencies.Lifecycle.runtime)
+
     implementation(Dependencies.Navigator.ui)
     implementation(Dependencies.Navigator.fragment)
 
@@ -25,9 +27,7 @@ dependencies {
     implementation(Dependencies.Compose.iconsExtended)
     implementation(Dependencies.Compose.animation)
     implementation(Dependencies.Compose.pager)
-
     implementation(Dependencies.Compose.foundation)
-    implementation(Dependencies.Compose.runtime)
 
     implementation(Dependencies.Compose.toolingPreview)
     devImplementation(Dependencies.Compose.tooling)
