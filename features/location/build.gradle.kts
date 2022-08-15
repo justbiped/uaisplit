@@ -1,6 +1,6 @@
 plugins {
     id(Plugins.Android.library)
-    id(Plugins.Android.hilt)
+    id(Dependencies.Hilt.plugin)
     id(Plugins.Kotlin.kapt)
     id(Plugins.Kotlin.serialization)
 }
@@ -40,13 +40,13 @@ dependencies {
     implementation(Dependencies.retrofit)
     implementation(Dependencies.serialization)
 
-    implementation(Dependencies.Android.hilt)
-    kapt(Dependencies.Android.hiltCompiler)
+    implementation(Dependencies.Hilt.core)
+    kapt(Dependencies.Hilt.compiler)
 
     implementation(project(":core"))
     implementation(project(":theme"))
     "localImplementation"(project(":test"))
 
-    kaptTest(Dependencies.Android.hiltCompiler)
-    kaptAndroidTest(Dependencies.Android.hiltCompiler)
+    kaptTest(Dependencies.Hilt.compiler)
+    kaptAndroidTest(Dependencies.Hilt.compiler)
 }

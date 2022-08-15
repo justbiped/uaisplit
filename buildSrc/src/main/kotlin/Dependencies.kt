@@ -4,7 +4,6 @@ object Versions {
     const val kotlin = "1.7.0"
     const val lifecycle = "2.4.1"
     const val retrofit = "2.9.0"
-    const val hilt = "2.42"
     const val room = "2.3.0"
     const val okHttp = "4.10.0"
 }
@@ -42,9 +41,6 @@ object Dependencies {
         const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
         const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
-
-        const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
-        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
     }
 
     object Kotlin {
@@ -78,12 +74,20 @@ object Dependencies {
         const val androidxCore = "androidx.test:core-ktx:1.4.0"
         const val archCore = "androidx.arch.core:core-testing:2.1.0"
         const val androidxJunit = "androidx.test.ext:junit-ktx:1.1.3"
-        const val hilt = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
         const val rules = "androidx.test:rules:1.4.0"
         const val runner = "androidx.test:runner:1.4.0"
         const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
         const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.4.0"
         const val uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
+    }
+
+    object Hilt {
+        private const val version = "2.42"
+        const val core = "com.google.dagger:hilt-android:$version"
+        const val compiler = "com.google.dagger:hilt-android-compiler:$version"
+        const val testing = "com.google.dagger:hilt-android-testing:$version"
+        const val plugin = "dagger.hilt.android.plugin"
+        const val classPath = "com.google.dagger:hilt-android-gradle-plugin:$version"
     }
 
     object Compose {
@@ -131,14 +135,12 @@ object Plugins {
         const val library = "com.android.library"
         const val test: String = "com.android.test"
         const val googleServices = "com.google.gms.google-services"
-        const val hilt = "dagger.hilt.android.plugin"
     }
 }
 
 object Path {
     const val androidGradle = "com.android.tools.build:gradle:7.2.1"
     const val playServices = "com.google.gms:google-services:4.3.8"
-    const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.42.0"

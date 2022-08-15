@@ -16,7 +16,7 @@ buildscript {
         classpath(Path.serialization)
         classpath(Path.dependenciesUpdate)
         classpath(Dependencies.Navigator.classPath)
-        classpath(Path.hilt)
+        classpath(Dependencies.Hilt.classPath)
     }
 }
 

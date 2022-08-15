@@ -1,6 +1,6 @@
 plugins {
     id(Plugins.Android.application)
-    id(Plugins.Android.hilt)
+    id(Dependencies.Hilt.plugin)
     id(Plugins.Kotlin.serialization)
     id(Plugins.Kotlin.kapt)
 }
@@ -84,8 +84,8 @@ dependencies {
     implementation(Dependencies.okHttp)
     implementation(Dependencies.serialization)
 
-    implementation(Dependencies.Android.hilt)
-    kapt(Dependencies.Android.hiltCompiler)
+    implementation(Dependencies.Hilt.core)
+    kapt(Dependencies.Hilt.compiler)
 
     implementation(project(":location"))
     implementation(project(":profile"))
@@ -93,6 +93,6 @@ dependencies {
     implementation(project(":theme"))
     localImplementation(project(":test"))
 
-    kaptTest(Dependencies.Android.hiltCompiler)
-    kaptAndroidTest(Dependencies.Android.hiltCompiler)
+    kaptTest(Dependencies.Hilt.compiler)
+    kaptAndroidTest(Dependencies.Hilt.compiler)
 }

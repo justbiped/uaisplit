@@ -1,6 +1,6 @@
 plugins {
     id(Plugins.Android.library)
-    id(Plugins.Android.hilt)
+    id(Dependencies.Hilt.plugin)
     id(Plugins.Kotlin.android)
     id(Plugins.Kotlin.kapt)
     id(Plugins.Kotlin.serialization)
@@ -22,6 +22,6 @@ dependencies {
     implementation(Dependencies.okHttp)
     implementation(Dependencies.serialization)
 
-    implementation(Dependencies.Android.hilt)
-    kapt(Dependencies.Android.hiltCompiler)
+    implementation(Dependencies.Hilt.core)
+    kapt(Dependencies.Hilt.compiler)
 }
