@@ -19,12 +19,6 @@ object Dependencies {
     const val coil = "io.coil-kt:coil:2.1.0"
 
     object Android {
-        object Fragment {
-            private const val version = "1.5.1"
-            const val fragment = "androidx.fragment:fragment-ktx:$version"
-            const val test = "androidx.fragment:fragment-testing:$version"
-        }
-
         const val core = "androidx.core:core-ktx:1.8.0"
         const val appCompat = "androidx.appcompat:appcompat:1.5.0"
         const val materialDesign = "com.google.android.material:material:1.6.1"
@@ -79,6 +73,12 @@ object Dependencies {
         const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
         const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.4.0"
         const val uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
+    }
+
+    object Fragment {
+        private const val version = "1.5.1"
+        const val core = "androidx.fragment:fragment-ktx:$version"
+        const val testing = "androidx.fragment:fragment-testing:$version"
     }
 
     object Hilt {

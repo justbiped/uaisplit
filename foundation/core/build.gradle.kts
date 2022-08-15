@@ -13,7 +13,7 @@ dependencies {
     implementation(Dependencies.Android.core)
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.materialDesign)
-    implementation(Dependencies.Android.Fragment.fragment)
+    implementation(Dependencies.Fragment.core)
     implementation(Dependencies.Navigator.ui)
 
     implementation(Dependencies.retrofit)

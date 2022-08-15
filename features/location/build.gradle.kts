@@ -29,7 +29,7 @@ dependencies {
     implementation(Dependencies.Android.materialDesign)
     implementation(Dependencies.Android.constraintLayout)
     implementation(Dependencies.Android.activity)
-    implementation(Dependencies.Android.Fragment.fragment)
+    implementation(Dependencies.Fragment.core)
     implementation(Dependencies.Navigator.fragment)
     implementation(Dependencies.Navigator.ui)
     implementation(Dependencies.Android.lifecycleLiveData)

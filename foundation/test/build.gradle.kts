@@ -8,7 +8,7 @@ plugins {
 dependencies {
     implementation(Dependencies.Android.core)
     implementation(Dependencies.Android.appCompat)
-    implementation(Dependencies.Android.Fragment.fragment)
+    implementation(Dependencies.Fragment.core)
 
     implementation(project(":core"))
     implementation(project(":theme"))
@@ -17,7 +17,7 @@ dependencies {
 
     implementation(Dependencies.Test.coroutines)
     implementation(Dependencies.Test.archCore)
-    implementation(Dependencies.Android.Fragment.test)
+    implementation(Dependencies.Fragment.testing)
     implementation(Dependencies.Hilt.testing)
     implementation(Dependencies.Test.runner)
     implementation(Dependencies.Test.espresso)

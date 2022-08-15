@@ -84,7 +84,7 @@ private fun Project.applyAndroidConfigs() {
 
             dependencies {
                 localImplementation(Dependencies.Test.androidxCore)
-                localImplementation(Dependencies.Android.Fragment.test)
+                localImplementation(Dependencies.Fragment.testing)
                 localImplementation(Dependencies.Navigator.testing)
                 localImplementation(Dependencies.Test.mockServer)
 
