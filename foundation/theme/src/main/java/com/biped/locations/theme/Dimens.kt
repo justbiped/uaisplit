@@ -23,6 +23,7 @@ fun NormalSpacer() {
 }
 
 object Dimens {
+    val micro: Dp @Composable get() = dimensionResource(id = R.dimen.micro)
     val tiny: Dp @Composable get() = dimensionResource(id = R.dimen.tiny)
     val small: Dp @Composable get() = dimensionResource(id = R.dimen.small)
     val normal: Dp @Composable get() = dimensionResource(id = R.dimen.normal)

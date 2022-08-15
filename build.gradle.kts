@@ -15,7 +15,7 @@ buildscript {
         classpath(Path.kotlinGradle)
         classpath(Path.serialization)
         classpath(Path.dependenciesUpdate)
-        classpath(Path.safeArgs)
+        classpath(Dependencies.Navigator.classPath)
         classpath(Path.hilt)
     }
 }

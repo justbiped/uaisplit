@@ -23,7 +23,7 @@ private fun Project.applyAndroidConfigs() {
     subprojects {
         onAndroidSetup {
             plugins.apply(Plugins.Kotlin.android)
-            plugins.apply(Plugins.Android.safeArgs)
+            plugins.apply(Dependencies.Navigator.plugin)
 
             android {
                 compileSdkVersion(33)
@@ -84,8 +84,8 @@ private fun Project.applyAndroidConfigs() {
 
             dependencies {
                 localImplementation(Dependencies.Test.androidxCore)
-                localImplementation(Dependencies.Test.fragment)
-                localImplementation(Dependencies.Test.navigation)
+                localImplementation(Dependencies.Android.Fragment.test)
+                localImplementation(Dependencies.Navigator.testing)
                 localImplementation(Dependencies.Test.mockServer)
 
                 testImplementation(Dependencies.Test.mockk)
@@ -93,7 +93,7 @@ private fun Project.applyAndroidConfigs() {
                 testImplementation(Dependencies.Test.androidxCore)
                 testImplementation(Dependencies.Test.androidxJunit)
                 testImplementation(Dependencies.Test.archCore)
-                testImplementation(Dependencies.Test.navigation)
+                testImplementation(Dependencies.Navigator.testing)
                 testImplementation(Dependencies.Test.hilt)
                 testImplementation(Dependencies.Test.runner)
                 testImplementation(Dependencies.Test.espresso)
@@ -103,7 +103,7 @@ private fun Project.applyAndroidConfigs() {
 
                 androidTestImplementation(Dependencies.Test.mockkAndroid)
                 androidTestImplementation(Dependencies.Test.androidxJunit)
-                androidTestImplementation(Dependencies.Test.navigation)
+                androidTestImplementation(Dependencies.Navigator.testing)
                 androidTestImplementation(Dependencies.Test.hilt)
                 androidTestImplementation(Dependencies.Test.runner)
                 androidTestImplementation(Dependencies.Test.espresso)

@@ -29,9 +29,9 @@ dependencies {
     implementation(Dependencies.Android.materialDesign)
     implementation(Dependencies.Android.constraintLayout)
     implementation(Dependencies.Android.activity)
-    implementation(Dependencies.Android.fragment)
-    implementation(Dependencies.Android.navigationFragment)
-    implementation(Dependencies.Android.navigationUI)
+    implementation(Dependencies.Android.Fragment.fragment)
+    implementation(Dependencies.Navigator.fragment)
+    implementation(Dependencies.Navigator.ui)
     implementation(Dependencies.Android.lifecycleLiveData)
     implementation(Dependencies.Android.lifecycleViewModel)
 

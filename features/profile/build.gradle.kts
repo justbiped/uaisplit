@@ -8,7 +8,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-rc02"
+        kotlinCompilerExtensionVersion = "1.2.0"
     }
 }
 
@@ -16,21 +16,21 @@ dependencies {
     implementation(Dependencies.Android.core)
     implementation(Dependencies.Android.appCompat)
 
-    implementation(Dependencies.Android.navigationUI)
-    implementation(Dependencies.Android.navigationFragment)
+    implementation(Dependencies.Navigator.ui)
+    implementation(Dependencies.Navigator.fragment)
 
+    implementation(Dependencies.Compose.ui)
+    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.icons)
+    implementation(Dependencies.Compose.iconsExtended)
+    implementation(Dependencies.Compose.animation)
+    implementation(Dependencies.Compose.pager)
 
-    implementation(Dependencies.Android.Compose.ui)
-    implementation(Dependencies.Android.Compose.material)
-    implementation(Dependencies.Android.Compose.icons)
-    implementation(Dependencies.Android.Compose.iconsExtended)
-    implementation(Dependencies.Android.Compose.animation)
+    implementation(Dependencies.Compose.foundation)
+    implementation(Dependencies.Compose.runtime)
 
-    implementation(Dependencies.Android.Compose.foundation)
-    implementation(Dependencies.Android.Compose.runtime)
-
-    implementation(Dependencies.Android.Compose.toolingPreview)
-    devImplementation(Dependencies.Android.Compose.tooling)
+    implementation(Dependencies.Compose.toolingPreview)
+    devImplementation(Dependencies.Compose.tooling)
 
     implementation("io.coil-kt:coil-compose:2.1.0")
 

@@ -13,8 +13,8 @@ dependencies {
     implementation(Dependencies.Android.core)
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.materialDesign)
-    implementation(Dependencies.Android.fragment)
-    implementation(Dependencies.Android.navigationUI)
+    implementation(Dependencies.Android.Fragment.fragment)
+    implementation(Dependencies.Navigator.ui)
 
     implementation(Dependencies.retrofit)
     implementation(Dependencies.serializationConverter)

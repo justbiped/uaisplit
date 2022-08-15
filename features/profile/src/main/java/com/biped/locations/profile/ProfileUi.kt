@@ -20,7 +20,7 @@ import com.biped.locations.theme.panel
 
 @Preview(showSystemUi = true)
 @Composable
-fun ProfileView(@PreviewParameter(UserPreview::class) user: UserUiModel) {
+fun ProfileUi(@PreviewParameter(UserPreview::class) user: UserUiModel) {
     Column(
         modifier = Modifier
             .panel()

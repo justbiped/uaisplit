@@ -20,6 +20,14 @@ android {
         }
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0"
+    }
+
     buildTypes {
 
         local {
@@ -44,13 +52,26 @@ dependencies {
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.materialDesign)
 
+    implementation(Dependencies.Compose.ui)
+    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.icons)
+    implementation(Dependencies.Compose.iconsExtended)
+    implementation(Dependencies.Compose.animation)
+    implementation(Dependencies.Compose.pager)
+
+    implementation(Dependencies.Compose.foundation)
+    implementation(Dependencies.Compose.runtime)
+
+    implementation(Dependencies.Compose.toolingPreview)
+    devImplementation(Dependencies.Compose.tooling)
+
     implementation(Dependencies.Android.constraintLayout)
 
     implementation(Dependencies.Android.activity)
-    implementation(Dependencies.Android.fragment)
+    implementation(Dependencies.Android.Fragment.fragment)
 
-    implementation(Dependencies.Android.navigationFragment)
-    implementation(Dependencies.Android.navigationUI)
+    implementation(Dependencies.Navigator.fragment)
+    implementation(Dependencies.Navigator.ui)
 
     implementation(Dependencies.Android.lifecycleLiveData)
     implementation(Dependencies.Android.lifecycleViewModel)
