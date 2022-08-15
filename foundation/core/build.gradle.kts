@@ -1,14 +1,14 @@
 plugins {
     id(Plugins.Android.library)
     id(Dependencies.Hilt.plugin)
-    id(Plugins.Kotlin.android)
-    id(Plugins.Kotlin.kapt)
-    id(Plugins.Kotlin.serialization)
-    id(Plugins.Kotlin.parcelize)
+    id(Dependencies.Kotlin.android)
+    id(Dependencies.Kotlin.kapt)
+    id(Dependencies.Kotlin.parcelize)
+    id(Dependencies.Serialization.plugin)
 }
 
 dependencies {
-    implementation(Dependencies.Kotlin.coroutinesAndroid)
+    implementation(Dependencies.Coroutines.android)
 
     implementation(Dependencies.Android.core)
     implementation(Dependencies.Android.appCompat)
@@ -17,10 +17,10 @@ dependencies {
     implementation(Dependencies.Navigator.ui)
 
     implementation(Dependencies.retrofit)
-    implementation(Dependencies.serializationConverter)
+    implementation(Dependencies.Serialization.converter)
     implementation(Dependencies.httpLogging)
     implementation(Dependencies.okHttp)
-    implementation(Dependencies.serialization)
+    implementation(Dependencies.Serialization.core)
 
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)

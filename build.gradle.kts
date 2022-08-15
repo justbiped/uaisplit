@@ -12,8 +12,8 @@ buildscript {
     }
     dependencies {
         classpath(Path.androidGradle)
-        classpath(Path.kotlinGradle)
-        classpath(Path.serialization)
+        classpath(Dependencies.Kotlin.classPath)
+        classpath(Dependencies.Serialization.classPath)
         classpath(Path.dependenciesUpdate)
         classpath(Dependencies.Navigator.classPath)
         classpath(Dependencies.Hilt.classPath)

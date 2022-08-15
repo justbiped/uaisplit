@@ -22,7 +22,7 @@ class ConfigPlugin : Plugin<Project> {
 private fun Project.applyAndroidConfigs() {
     subprojects {
         onAndroidSetup {
-            plugins.apply(Plugins.Kotlin.android)
+            plugins.apply(Dependencies.Kotlin.android)
             plugins.apply(Dependencies.Navigator.plugin)
 
             android {
@@ -89,7 +89,7 @@ private fun Project.applyAndroidConfigs() {
                 localImplementation(Dependencies.Test.mockServer)
 
                 testImplementation(Dependencies.Test.mockk)
-                testImplementation(Dependencies.Test.coroutines)
+                testImplementation(Dependencies.Coroutines.test)
                 testImplementation(Dependencies.Test.androidxCore)
                 testImplementation(Dependencies.Test.androidxJunit)
                 testImplementation(Dependencies.Test.archCore)

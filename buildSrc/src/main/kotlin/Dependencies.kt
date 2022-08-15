@@ -1,7 +1,6 @@
 // @formatter:off
 
 object Versions {
-    const val kotlin = "1.7.0"
     const val lifecycle = "2.4.1"
     const val retrofit = "2.9.0"
     const val room = "2.3.0"
@@ -9,11 +8,9 @@ object Versions {
 }
 
 object Dependencies {
-    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
+
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    const val serializationConverter =
-        "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     const val httpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val coil = "io.coil-kt:coil:2.1.0"
@@ -37,10 +34,30 @@ object Dependencies {
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
     }
 
+    private const val KotlinVersion = "1.7.0"
     object Kotlin {
-        const val reflection = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
+
+        const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$KotlinVersion"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KotlinVersion"
+
+        const val kapt: String = "kotlin-kapt"
+        const val android = "kotlin-android"
+        const val parcelize = "kotlin-parcelize"
+
+        const val classPath = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KotlinVersion"
+    }
+
+    object Serialization {
+        const val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
+        const val converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+        const val plugin = "kotlinx-serialization"
+        const val classPath = "org.jetbrains.kotlin:kotlin-serialization:$KotlinVersion"
+    }
+
+    object Coroutines {
+        private const val version = "1.6.4"
+        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
 
     object Firebase {
@@ -59,7 +76,6 @@ object Dependencies {
         const val assertJ = "org.assertj:assertj-core:3.20.2"
         const val mockk = "io.mockk:mockk:$mockkVersion"
         const val mockkAndroid = "io.mockk:mockk-android:$mockkVersion"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
         const val mockServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
 
         const val robolectric = "org.robolectric:robolectric:${robolectricVersion}"
@@ -123,13 +139,6 @@ object Dependencies {
 object Plugins {
     const val dependenciesUpdate = "com.github.ben-manes.versions"
 
-    object Kotlin {
-        const val serialization = "kotlinx-serialization"
-        const val android = "kotlin-android"
-        const val kapt: String = "kotlin-kapt"
-        const val parcelize = "kotlin-parcelize"
-    }
-
     object Android {
         const val application = "com.android.application"
         const val library = "com.android.library"
@@ -141,7 +150,5 @@ object Plugins {
 object Path {
     const val androidGradle = "com.android.tools.build:gradle:7.2.1"
     const val playServices = "com.google.gms:google-services:4.3.8"
-    const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
 }

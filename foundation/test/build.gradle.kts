@@ -1,8 +1,8 @@
 plugins {
     id(Plugins.Android.library)
     id(Dependencies.Hilt.plugin)
-    id(Plugins.Kotlin.android)
-    id(Plugins.Kotlin.kapt)
+    id(Dependencies.Kotlin.android)
+    id(Dependencies.Kotlin.kapt)
 }
 
 dependencies {
@@ -15,7 +15,7 @@ dependencies {
     implementation(Dependencies.okHttp)
     implementation(Dependencies.Test.mockServer)
 
-    implementation(Dependencies.Test.coroutines)
+    implementation(Dependencies.Coroutines.test)
     implementation(Dependencies.Test.archCore)
     implementation(Dependencies.Fragment.testing)
     implementation(Dependencies.Hilt.testing)
