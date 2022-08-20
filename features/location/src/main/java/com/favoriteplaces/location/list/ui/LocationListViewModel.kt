@@ -1,14 +1,14 @@
 package com.favoriteplaces.location.list.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.favoriteplaces.core.flow.Instruction
+import com.favoriteplaces.core.flow.MutableInstructionFlow
+import com.favoriteplaces.core.tools.DispatcherProvider
 import com.favoriteplaces.location.list.LoadLocations
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
-import com.favoriteplaces.core.tools.DispatcherProvider
-import com.favoriteplaces.core.tools.SingleLiveEvent
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,36 +18,34 @@ internal class LocationListViewModel
     private val loadLocations: LoadLocations
 ) : ViewModel() {
 
-    private val _instruction = SingleLiveEvent<Instruction>()
-    val instruction: LiveData<Instruction> = _instruction
-
-    private val _locationList = MutableLiveData<List<LocationUIModel>>()
-    val locationList: LiveData<List<LocationUIModel>> = _locationList
+    private val _instruction = MutableInstructionFlow<Instruction>()
+    val instruction = _instruction.toInstructionFlow()
 
     fun fetchLocations() {
-        _instruction.postValue(locationListInstructions.loading())
 
         viewModelScope.launch(DispatcherProvider.IO) {
-            val locationResult = loadLocations()
+            _instruction.emit(locationListInstructions.loading())
 
+            val locationResult = loadLocations()
             locationResult.onSuccess { locations ->
                 onLocationLoadSuccess(locations)
             }
 
             locationResult.onFailure {
-                _instruction.postValue(locationListInstructions.failure())
+                _instruction.emit(locationListInstructions.failure())
             }
         }
     }
 
-    private fun onLocationLoadSuccess(locations: List<Location>) {
+    private suspend fun onLocationLoadSuccess(locations: List<Location>) {
         val locationsUI = locations.map { LocationUIModel.fromDomain(it) }
 
-        _locationList.postValue(locationsUI)
-        _instruction.postValue(locationListInstructions.success())
+        _instruction.emit(locationListInstructions.success(locationsUI))
     }
 
     fun onLocationSelected(locationUIModel: LocationUIModel) {
-        _instruction.postValue(locationListInstructions.navigateToLocationDetails(locationUIModel))
+        viewModelScope.launch {
+            _instruction.emit(locationListInstructions.navigateToLocationDetails(locationUIModel))
+        }
     }
 }

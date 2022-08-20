@@ -1,20 +1,16 @@
 package com.favoriteplaces.location.list.ui
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.favoriteplaces.core.binding.BindingFragment
 import com.favoriteplaces.core.control.HomeAction
 import com.favoriteplaces.core.control.sendHomeAction
+import com.favoriteplaces.core.flow.Instruction
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
@@ -52,8 +48,9 @@ class LocationListFragment :
     }
 
     private fun setupObservers() {
-        viewModel.instruction.observe(viewLifecycleOwner) { onInstructionChange(it) }
-        viewModel.locationList.observe(viewLifecycleOwner) { onLocationListResult(it) }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.instruction.collect { onInstructionChange(it) }
+        }
     }
 
     private fun setupListeners() {
@@ -64,10 +61,10 @@ class LocationListFragment :
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
-            is Instruction.Success -> toDefaultState()
-            is Instruction.Loading -> toLoadingState()
-            is Instruction.Failure -> showErrorMessage()
-            is Instruction.Navigation -> findNavController().navigate(instruction.destination)
+            is Success -> onLocationListResult(instruction.locations)
+            is Loading -> toLoadingState()
+            is Failure -> showErrorMessage()
+            is Navigation -> findNavController().navigate(instruction.destination)
         }
     }
 
@@ -76,6 +73,7 @@ class LocationListFragment :
     }
 
     private fun onLocationListResult(locationList: List<LocationUIModel>) {
+        toDefaultState()
         getLocationAdapter()?.also {
             it.submitList(locationList)
         }

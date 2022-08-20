@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import com.biped.locations.core.theme.LocationsTheme
 import com.biped.locations.theme.Dimens
+import com.google.accompanist.pager.HorizontalPager
 
 class ProfileFragment : Fragment() {
 
@@ -37,9 +38,12 @@ class ProfileFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 LocationsTheme {
-                    UserUiModel(
-                        "Edgar",
-                        "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg"
+                    ProfileUi(
+                        user =
+                        UserUiModel(
+                            "Edgar",
+                            "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg"
+                        )
                     )
                 }
             }
