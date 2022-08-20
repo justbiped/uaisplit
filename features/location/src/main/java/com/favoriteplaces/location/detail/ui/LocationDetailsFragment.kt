@@ -6,11 +6,13 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.favoriteplaces.core.control.HomeAction
 import com.favoriteplaces.core.control.sendHomeAction
 import com.favoriteplaces.core.extensions.onBackPressCallback
+import com.favoriteplaces.core.flow.Instruction
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
@@ -54,13 +56,15 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
     }
 
     private fun setupObservers() {
-        viewModel.viewInstruction.observe(viewLifecycleOwner) { onInstructionChange(it) }
-        viewModel.locationDetail.observe(viewLifecycleOwner) { bindLocationDetail(it) }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.viewInstruction.collect { onInstructionChange(it) }
+        }
     }
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
-            is Instruction.Failure -> onDetailLoadFailure()
+            is Success -> bindLocationDetail(instruction.locationDetailUiModel)
+            is Failure -> onDetailLoadFailure()
         }
     }
 
