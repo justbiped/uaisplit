@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.merge
 
-class MutableInstructionFlow<T : Instruction?> : Flow<T> {
+class MutableInstructionFlow<T : Instruction> : Flow<T> {
     private val hotFlow = MutableSharedFlow<T>(replay = 1)
     private val coldFlow = MutableSharedFlow<T>(replay = 0)
 
@@ -27,7 +27,7 @@ class MutableInstructionFlow<T : Instruction?> : Flow<T> {
 
 }
 
-class InstructionFlow<T : Instruction?> internal constructor(
+class InstructionFlow<T : Instruction> internal constructor(
     private val mutableInstructionFlow: MutableInstructionFlow<T>
 ) : Flow<T> {
     override suspend fun collect(collector: FlowCollector<T>) {

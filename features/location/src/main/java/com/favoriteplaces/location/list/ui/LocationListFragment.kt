@@ -61,10 +61,10 @@ class LocationListFragment :
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
-            is Success -> onLocationListResult(instruction.locations)
-            is Loading -> toLoadingState()
-            is Failure -> showErrorMessage()
-            is Navigation -> findNavController().navigate(instruction.destination)
+            is LocationListInstruction.Success -> onLocationListResult(instruction.locations)
+            is LocationListInstruction.Loading -> toLoadingState()
+            is LocationListInstruction.Failure -> showErrorMessage()
+            is LocationListInstruction.Navigation -> findNavController().navigate(instruction.destination)
         }
     }
 
