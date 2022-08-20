@@ -2,7 +2,6 @@ package com.favoriteplaces.location.detail.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.favoriteplaces.core.flow.Instruction
 import com.favoriteplaces.core.flow.MutableInstructionFlow
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -31,6 +30,6 @@ internal class LocationDetailViewModel @Inject constructor(
 
     private suspend fun onLoadLocationDetailSuccess(location: LocationDetail) {
         val locationDetailUiModel = LocationDetailUIModel.fromDomain(location, scheduleFormatter)
-        _viewInstruction.emit(Success(locationDetailUiModel))
+        _viewInstruction.emit(Instruction.Success(locationDetailUiModel))
     }
 }

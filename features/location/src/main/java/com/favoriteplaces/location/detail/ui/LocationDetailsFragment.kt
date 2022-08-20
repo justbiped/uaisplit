@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import com.favoriteplaces.core.control.HomeAction
 import com.favoriteplaces.core.control.sendHomeAction
 import com.favoriteplaces.core.extensions.onBackPressCallback
-import com.favoriteplaces.core.flow.Instruction
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
@@ -63,8 +62,8 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
-            is Success -> bindLocationDetail(instruction.locationDetailUiModel)
-            is Failure -> onDetailLoadFailure()
+            is Instruction.Success -> bindLocationDetail(instruction.locationDetailUiModel)
+            is Instruction.Failure -> onDetailLoadFailure()
         }
     }
 

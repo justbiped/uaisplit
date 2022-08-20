@@ -2,7 +2,6 @@ package com.favoriteplaces.location.list.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.favoriteplaces.core.flow.Instruction
 import com.favoriteplaces.core.flow.MutableInstructionFlow
 import com.favoriteplaces.core.tools.DispatcherProvider
 import com.favoriteplaces.location.list.LoadLocations
@@ -23,7 +22,7 @@ internal class LocationListViewModel
     fun fetchLocations() {
 
         viewModelScope.launch(DispatcherProvider.IO) {
-            _instruction.emit(locationListInstructions.loading())
+            _instruction.post(locationListInstructions.loading())
 
             val locationResult = loadLocations()
             locationResult.onSuccess { locations ->
@@ -39,7 +38,7 @@ internal class LocationListViewModel
     private suspend fun onLocationLoadSuccess(locations: List<Location>) {
         val locationsUI = locations.map { LocationUIModel.fromDomain(it) }
 
-        _instruction.emit(locationListInstructions.success(locationsUI))
+        _instruction.post(locationListInstructions.success(locationsUI))
     }
 
     fun onLocationSelected(locationUIModel: LocationUIModel) {

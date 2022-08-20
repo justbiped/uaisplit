@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.favoriteplaces.core.binding.BindingFragment
 import com.favoriteplaces.core.control.HomeAction
 import com.favoriteplaces.core.control.sendHomeAction
-import com.favoriteplaces.core.flow.Instruction
 import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
@@ -61,10 +60,10 @@ class LocationListFragment :
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
-            is LocationListInstruction.Success -> onLocationListResult(instruction.locations)
-            is LocationListInstruction.Loading -> toLoadingState()
-            is LocationListInstruction.Failure -> showErrorMessage()
-            is LocationListInstruction.Navigation -> findNavController().navigate(instruction.destination)
+            is Instruction.Success -> onLocationListResult(instruction.locations)
+            is Instruction.Loading -> toLoadingState()
+            is Instruction.Failure -> showErrorMessage()
+            is Instruction.Navigation -> findNavController().navigate(instruction.destination)
         }
     }
 
