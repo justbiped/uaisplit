@@ -1,15 +1,13 @@
 package com.favoriteplaces.location.list.data.ui
 
-import com.favoriteplaces.location.R
 import com.favoriteplaces.location.list.data.Location
-import kotlin.random.Random
 
 internal data class LocationUIModel(
     val id: Int,
     val name: String,
     val review: Double,
     val type: String,
-    val image: LocationImageUIModel
+    val image: String
 ) {
 
     companion object {
@@ -19,17 +17,8 @@ internal data class LocationUIModel(
                 location.name,
                 location.review,
                 location.type,
-                LocationImageUIModel(
-                    getPlaceHolderColor(),
-                    ""
-                )
+                ""
             )
-
-        private fun getPlaceHolderColor() = when (Random.nextInt(0, 4)) {
-            0 -> R.color.turquoise_100
-            1 -> R.color.red_100
-            else -> R.color.yellow_200
-        }
     }
 }
 

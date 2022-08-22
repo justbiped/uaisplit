@@ -45,7 +45,7 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":theme"))
-    "localImplementation"(project(":test"))
+    testImplementation(project(":test"))
 
     kaptTest(Dependencies.Hilt.compiler)
     kaptAndroidTest(Dependencies.Hilt.compiler)

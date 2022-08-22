@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationListItemBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
+import kotlin.random.Random
 
 internal class LocationAdapter :
     ListAdapter<LocationUIModel, LocationAdapter.LocationViewHolder>(diffTool) {
@@ -44,9 +46,9 @@ internal class LocationAdapter :
             binding.locationRatingText.text = "${location.review}"
             binding.ratingBar.rating = location.review.toFloat()
 
-            binding.locationImageView.load(location.image.url) {
-                placeholder(location.image.placeHolderResource)
-                error(location.image.placeHolderResource)
+            binding.locationImageView.load(location.image) {
+                placeholder(getPlaceHolderColor())
+                error(getPlaceHolderColor())
             }
         }
     }
@@ -60,4 +62,12 @@ internal class LocationAdapter :
                 oldItem.id == newItem.id
         }
     }
+}
+
+private fun getPlaceHolderColor() = when (Random.nextInt(0, 4)) {
+    0 -> R.color.turquoise_100
+    1 -> R.color.turquoise_600
+    2 -> R.color.red_100
+    3 -> R.color.yellow_200
+    else -> R.color.yellow_200
 }

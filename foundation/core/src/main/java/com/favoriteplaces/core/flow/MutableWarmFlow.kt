@@ -1,11 +1,8 @@
 package com.favoriteplaces.core.flow
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.*
 
-open class InstructionFlow<T> : Flow<T> {
+open class WarmFlow<T> : Flow<T> {
     private val hotFlow = MutableSharedFlow<T>(replay = 1)
     private val coldFlow = MutableSharedFlow<T>(replay = 0)
 
@@ -24,7 +21,7 @@ open class InstructionFlow<T> : Flow<T> {
     }
 }
 
-class MutableInstructionFlow<T> : InstructionFlow<T>() {
+class MutableWarmFlow<T> : WarmFlow<T>() {
     public override val value: T? get() = super.value
 
     public override suspend fun emit(value: T) {
@@ -35,5 +32,5 @@ class MutableInstructionFlow<T> : InstructionFlow<T>() {
         super.post(value)
     }
 
-    fun toInstructionFlow(): InstructionFlow<T> = this
+    fun toWarmFlow(): WarmFlow<T> = this
 }

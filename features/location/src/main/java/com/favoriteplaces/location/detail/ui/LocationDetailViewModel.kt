@@ -2,7 +2,7 @@ package com.favoriteplaces.location.detail.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.favoriteplaces.core.flow.MutableInstructionFlow
+import com.favoriteplaces.core.flow.MutableWarmFlow
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
@@ -16,8 +16,8 @@ internal class LocationDetailViewModel @Inject constructor(
     private val scheduleFormatter: ScheduleFormatter
 ) : ViewModel() {
 
-    private val _viewInstruction = MutableInstructionFlow<Instruction>()
-    val viewInstruction = _viewInstruction.toInstructionFlow()
+    private val _viewInstruction = MutableWarmFlow<Instruction>()
+    val viewInstruction = _viewInstruction.toWarmFlow()
 
     fun loadLocationDetails(locationId: Int) {
         viewModelScope.launch(Dispatchers.IO) {

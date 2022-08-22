@@ -2,7 +2,7 @@ package com.favoriteplaces.location.list.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.favoriteplaces.core.flow.MutableInstructionFlow
+import com.favoriteplaces.core.flow.MutableWarmFlow
 import com.favoriteplaces.core.tools.DispatcherProvider
 import com.favoriteplaces.location.list.LoadLocations
 import com.favoriteplaces.location.list.data.Location
@@ -16,8 +16,8 @@ internal class LocationListViewModel
     private val loadLocations: LoadLocations
 ) : ViewModel() {
 
-    private val _instruction = MutableInstructionFlow<Instruction>()
-    val instruction = _instruction.toInstructionFlow()
+    private val _instruction = MutableWarmFlow<Instruction>()
+    val instruction = _instruction.toWarmFlow()
 
     fun fetchLocations() {
 
@@ -42,7 +42,7 @@ internal class LocationListViewModel
     }
 
     fun onLocationSelected(locationUIModel: LocationUIModel) {
-        viewModelScope.launch {
+        viewModelScope.launch(DispatcherProvider.Default) {
             _instruction.emit(locationListInstructions.navigateToLocationDetails(locationUIModel))
         }
     }

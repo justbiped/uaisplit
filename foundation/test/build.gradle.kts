@@ -10,6 +10,8 @@ dependencies {
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Fragment.core)
 
+    implementation(Dependencies.Test.mockk)
+
     implementation(project(":core"))
     implementation(project(":theme"))
     implementation(Dependencies.okHttp)

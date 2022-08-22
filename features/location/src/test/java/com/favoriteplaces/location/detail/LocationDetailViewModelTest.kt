@@ -48,7 +48,7 @@ class LocationDetailViewModelTest {
         every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
         coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
 
-        viewModel.locationDetail.observeForever(observer)
+      //  viewModel.locationDetail.observeForever(observer)
         viewModel.loadLocationDetails(0)
 
         verify {
@@ -65,7 +65,7 @@ class LocationDetailViewModelTest {
         val observer = mockk<(Instruction) -> Unit>(relaxed = true)
         coEvery { getLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
 
-        viewModel.viewInstruction.observeForever(observer)
+      //  viewModel.viewInstruction.observeForever(observer)
         viewModel.loadLocationDetails(0)
 
         verify {
