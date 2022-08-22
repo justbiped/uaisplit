@@ -1,4 +1,4 @@
-package com.biped.test
+package com.biped.test.unit
 
 import android.annotation.SuppressLint
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule

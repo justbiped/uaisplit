@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.list
 
-import com.biped.test.InstantTaskRule
+import com.biped.test.unit.InstantTaskRule
 import com.biped.test.unit.flowTest
 import com.biped.test.unit.mock
 import com.favoriteplaces.location.list.ui.Instruction
