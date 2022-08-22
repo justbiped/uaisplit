@@ -6,28 +6,28 @@ import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
 
 
-public fun CoroutineScope.launchDefault(
+fun CoroutineScope.launchDefault(
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
 ) {
     launch(DispatcherProvider.Default, start, block)
 }
 
-public fun CoroutineScope.launchMain(
+fun CoroutineScope.launchMain(
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
 ) {
     launch(DispatcherProvider.Main, start, block)
 }
 
-public fun CoroutineScope.launchIO(
+fun CoroutineScope.launchIO(
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
 ) {
     launch(DispatcherProvider.IO, start, block)
 }
 
-public fun CoroutineScope.launchUnconfined(
+fun CoroutineScope.launchUnconfined(
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
 ) {
