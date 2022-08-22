@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.flow
+package com.favoriteplaces.core.coroutines
 
 import kotlinx.coroutines.flow.*
 

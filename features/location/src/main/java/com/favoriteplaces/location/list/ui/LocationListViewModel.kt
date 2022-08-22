@@ -2,12 +2,12 @@ package com.favoriteplaces.location.list.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.favoriteplaces.core.flow.MutableWarmFlow
-import com.favoriteplaces.core.tools.DispatcherProvider
+import com.favoriteplaces.core.coroutines.MutableWarmFlow
+import com.favoriteplaces.core.coroutines.launchDefault
+import com.favoriteplaces.core.coroutines.launchIO
 import com.favoriteplaces.location.list.LoadLocations
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class LocationListViewModel
@@ -21,7 +21,7 @@ internal class LocationListViewModel
 
     fun fetchLocations() {
 
-        viewModelScope.launch(DispatcherProvider.IO) {
+        viewModelScope.launchIO {
             _instruction.post(locationListInstructions.loading())
 
             val locationResult = loadLocations()
@@ -42,7 +42,7 @@ internal class LocationListViewModel
     }
 
     fun onLocationSelected(locationUIModel: LocationUIModel) {
-        viewModelScope.launch(DispatcherProvider.Default) {
+        viewModelScope.launchDefault {
             _instruction.emit(locationListInstructions.navigateToLocationDetails(locationUIModel))
         }
     }

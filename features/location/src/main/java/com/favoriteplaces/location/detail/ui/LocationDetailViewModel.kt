@@ -2,7 +2,7 @@ package com.favoriteplaces.location.detail.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.favoriteplaces.core.flow.MutableWarmFlow
+import com.favoriteplaces.core.coroutines.MutableWarmFlow
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
