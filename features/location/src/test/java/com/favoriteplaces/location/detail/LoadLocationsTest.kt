@@ -1,7 +1,7 @@
 package com.favoriteplaces.location.detail
 
 import com.favoriteplaces.location.data.LocationRepository
-import com.favoriteplaces.location.list.LoadLocations
+import com.favoriteplaces.location.list.LoadLocationsUseCase
 import com.favoriteplaces.location.list.data.Location
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -16,7 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LoadLocationsTest {
 
-    private lateinit var loadLocations: LoadLocations
+    private lateinit var loadLocations: LoadLocationsUseCase
 
     @MockK internal lateinit var repository: LocationRepository
 
@@ -24,7 +24,7 @@ class LoadLocationsTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        loadLocations = LoadLocations(repository)
+        loadLocations = LoadLocationsUseCase(repository)
     }
 
     @Test

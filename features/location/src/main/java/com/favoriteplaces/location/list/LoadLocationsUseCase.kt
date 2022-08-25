@@ -4,7 +4,7 @@ import com.favoriteplaces.location.data.LocationRepository
 import com.favoriteplaces.location.list.data.Location
 import javax.inject.Inject
 
-internal class LoadLocations @Inject constructor(private val locationRepository: LocationRepository) {
+internal class LoadLocationsUseCase @Inject constructor(private val locationRepository: LocationRepository) {
 
     suspend operator fun invoke(): Result<List<Location>> {
         return try {
