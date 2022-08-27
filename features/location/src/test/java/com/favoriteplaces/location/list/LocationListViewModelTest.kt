@@ -11,6 +11,7 @@ import com.favoriteplaces.location.locationUiFixture
 import io.mockk.coEvery
 import io.mockk.spyk
 import io.mockk.verify
+import io.mockk.verifySequence
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import org.assertj.core.api.Assertions.assertThat
@@ -33,6 +34,18 @@ internal class LocationListViewModelTest {
     @Before
     fun setUp() {
         viewModel = LocationListViewModel(instruction, loadLocations)
+    }
+
+    @Test
+    fun `post default state on init`() = flowTest {
+        val instructionEvents = mock<MutableList<Instruction>>()
+        val collectJob = launch { viewModel.instruction.toList(instructionEvents) }
+
+        verify {
+            instructionEvents.add(withArg { assert(it is Instruction.Default) })
+        }
+
+        collectJob
     }
 
     @Test
@@ -84,9 +97,25 @@ internal class LocationListViewModelTest {
         collectJob
     }
 
+    @Test
+    fun `post default, loading and success sequence on a successful locations load`() = flowTest {
+        val instructionEvents = mock<MutableList<Instruction>>()
+        val collectJob = launch { viewModel.instruction.toList(instructionEvents) }
+        coEvery { loadLocations() } returns Result.success(listOf(locationFixture()))
+
+        viewModel.fetchLocations()
+
+        verifySequence {
+            instructionEvents.add(withArg { assert(it is Instruction.Default) })
+            instructionEvents.add(withArg { assert(it is Instruction.Loading) })
+            instructionEvents.add(withArg { assert(it is Instruction.Success) })
+        }
+
+        collectJob
+    }
 
     @Test
-    fun `emits failed state when locations loading was failure`() = flowTest {
+    fun `emit failed state when locations loading was failure`() = flowTest {
         val instructionEvents = mock<MutableList<Instruction>>()
         val collectJob = launch { viewModel.instruction.toList(instructionEvents) }
         coEvery { loadLocations() } returns Result.failure(Exception(""))

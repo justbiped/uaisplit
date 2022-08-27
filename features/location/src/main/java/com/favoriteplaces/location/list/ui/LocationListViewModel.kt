@@ -16,28 +16,26 @@ internal class LocationListViewModel
     private val loadLocations: LoadLocationsUseCase
 ) : ViewModel() {
 
-    private val _instruction = MutableWarmFlow<Instruction>()
+    private val _instruction = MutableWarmFlow(locationListInstructions.default())
     val instruction = _instruction.toWarmFlow()
 
     fun fetchLocations() {
         viewModelScope.launchIO {
             _instruction.post(locationListInstructions.loading())
 
-            val locationResult = loadLocations()
-            locationResult.onSuccess { locations ->
-                onLocationLoadSuccess(locations)
-            }
-
-            locationResult.onFailure {
-                _instruction.post(locationListInstructions.success(emptyList()))
-                _instruction.emit(locationListInstructions.failure())
-            }
+            loadLocations()
+                .onSuccess {
+                    onLocationLoadSuccess(it)
+                }
+                .onFailure {
+                    _instruction.repost()
+                    _instruction.emit(locationListInstructions.failure())
+                }
         }
     }
 
     private suspend fun onLocationLoadSuccess(locations: List<Location>) {
         val locationsUI = locations.map { LocationUIModel.fromDomain(it) }
-
         _instruction.post(locationListInstructions.success(locationsUI))
     }
 

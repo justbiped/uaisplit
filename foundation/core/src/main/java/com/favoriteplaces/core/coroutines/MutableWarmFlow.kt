@@ -1,12 +1,17 @@
 package com.favoriteplaces.core.coroutines
 
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.runBlocking
 
-open class WarmFlow<T> : Flow<T> {
+open class WarmFlow<T>(initialValue: T) : Flow<T> {
     private val hotFlow = MutableSharedFlow<T>(replay = 1)
     private val coldFlow = MutableSharedFlow<T>(replay = 0)
 
-    internal open val value: T? = hotFlow.replayCache.firstOrNull()
+    internal open val value: T get() = hotFlow.replayCache.first()
+
+    init {
+        runBlocking { hotFlow.emit(initialValue) }
+    }
 
     override suspend fun collect(collector: FlowCollector<T>) {
         merge(hotFlow, coldFlow).collect(collector)
@@ -19,10 +24,14 @@ open class WarmFlow<T> : Flow<T> {
     internal open suspend fun post(value: T) {
         hotFlow.emit(value)
     }
+
+    internal open suspend fun repost() {
+        hotFlow.emit(value)
+    }
 }
 
-class MutableWarmFlow<T> : WarmFlow<T>() {
-    public override val value: T? get() = super.value
+class MutableWarmFlow<T>(value: T) : WarmFlow<T>(value) {
+    public override val value: T get() = super.value
 
     public override suspend fun emit(value: T) {
         super.emit(value)
@@ -30,6 +39,10 @@ class MutableWarmFlow<T> : WarmFlow<T>() {
 
     public override suspend fun post(value: T) {
         super.post(value)
+    }
+
+    public override suspend fun repost() {
+        super.repost()
     }
 
     fun toWarmFlow(): WarmFlow<T> = this

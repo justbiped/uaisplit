@@ -62,6 +62,7 @@ class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
+            is Instruction.Default -> print("default")//freeViews
             is Instruction.Success -> bindLocationDetail(instruction.locationDetailUiModel)
             is Instruction.Failure -> onDetailLoadFailure()
         }

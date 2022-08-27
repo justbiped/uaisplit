@@ -3,11 +3,10 @@ package com.favoriteplaces.location.detail.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
+import com.favoriteplaces.core.coroutines.launchIO
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class LocationDetailViewModel @Inject constructor(
@@ -16,11 +15,11 @@ internal class LocationDetailViewModel @Inject constructor(
     private val scheduleFormatter: ScheduleFormatter
 ) : ViewModel() {
 
-    private val _viewInstruction = MutableWarmFlow<Instruction>()
+    private val _viewInstruction = MutableWarmFlow(detailsInstructions.default())
     val viewInstruction = _viewInstruction.toWarmFlow()
 
     fun loadLocationDetails(locationId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launchIO {
             val result = getLocationDetails(locationId)
 
             result.onSuccess { onLoadLocationDetailSuccess(it) }

@@ -15,12 +15,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.theme.SmallSpacer
 
-@Preview()
+@Preview
 @Composable
 fun ProfileUi(@PreviewParameter(UserPreview::class) user: UserUiModel) {
     Column {

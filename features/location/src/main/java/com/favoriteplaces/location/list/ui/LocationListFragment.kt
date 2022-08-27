@@ -60,6 +60,7 @@ class LocationListFragment :
 
     private fun onInstructionChange(instruction: Instruction) {
         when (instruction) {
+            is Instruction.Default -> toDefaultState()
             is Instruction.Success -> onLocationListResult(instruction.locations)
             is Instruction.Loading -> toLoadingState()
             is Instruction.Failure -> showErrorMessage()
