@@ -28,8 +28,8 @@ internal class LocationListViewModel
                     onLocationLoadSuccess(it)
                 }
                 .onFailure {
-                    _instruction.repost()
                     _instruction.emit(locationListInstructions.failure())
+                    _instruction.reset()
                 }
         }
     }

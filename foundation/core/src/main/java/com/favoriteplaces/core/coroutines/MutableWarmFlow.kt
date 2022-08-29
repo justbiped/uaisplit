@@ -3,7 +3,7 @@ package com.favoriteplaces.core.coroutines
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 
-open class WarmFlow<T>(initialValue: T) : Flow<T> {
+open class WarmFlow<T>(private val initialValue: T) : Flow<T> {
     private val hotFlow = MutableSharedFlow<T>(replay = 1)
     private val coldFlow = MutableSharedFlow<T>(replay = 0)
 
@@ -28,6 +28,10 @@ open class WarmFlow<T>(initialValue: T) : Flow<T> {
     internal open suspend fun repost() {
         hotFlow.emit(value)
     }
+
+    internal open suspend fun reset() {
+        hotFlow.emit(initialValue)
+    }
 }
 
 class MutableWarmFlow<T>(value: T) : WarmFlow<T>(value) {
@@ -43,6 +47,10 @@ class MutableWarmFlow<T>(value: T) : WarmFlow<T>(value) {
 
     public override suspend fun repost() {
         super.repost()
+    }
+
+    public override suspend fun reset() {
+        super.reset()
     }
 
     fun toWarmFlow(): WarmFlow<T> = this
