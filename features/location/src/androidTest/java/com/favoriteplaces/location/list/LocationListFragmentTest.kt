@@ -98,18 +98,6 @@ class LocationListFragmentTest {
     }
 
     companion object {
-        private val httpResources = HttpResources()
-
-        @BeforeClass
-        @JvmStatic
-        fun beforeAll() {
-            httpResources.init()
-        }
-
-        @AfterClass
-        @JvmStatic
-        fun afterAll() {
-            httpResources.release()
-        }
+        @ClassRule @JvmField val httpResources = HttpResources()
     }
 }

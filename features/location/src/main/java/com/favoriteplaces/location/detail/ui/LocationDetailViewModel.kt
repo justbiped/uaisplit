@@ -23,7 +23,10 @@ internal class LocationDetailViewModel @Inject constructor(
             val result = getLocationDetails(locationId)
 
             result.onSuccess { onLoadLocationDetailSuccess(it) }
-            result.onFailure { _viewInstruction.emit(detailsInstructions.failure()) }
+            result.onFailure {
+                _viewInstruction.repost()
+                _viewInstruction.emit(detailsInstructions.failure())
+            }
         }
     }
 

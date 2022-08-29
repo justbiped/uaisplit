@@ -1,13 +1,12 @@
 package com.favoriteplaces.location.detail
 
+import com.biped.test.unit.mock
 import com.favoriteplaces.location.data.LocationRepository
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.Schedule
-import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.Before
@@ -18,13 +17,10 @@ internal class GetLocationDetailsTest {
 
     private lateinit var getLocationDetails: GetLocationDetails
 
-    @MockK
-    lateinit var repository: LocationRepository
+    private val repository = mock<LocationRepository>()
 
     @Before
     fun setUp() {
-        MockKAnnotations.init(this)
-
         getLocationDetails = GetLocationDetails(repository)
     }
 

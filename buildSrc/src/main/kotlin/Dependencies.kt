@@ -65,10 +65,10 @@ object Dependencies {
 
     object Test {
         private const val robolectricVersion = "4.8.1"
-        private const val mockkVersion = "1.12.4"
+        private const val mockkVersion = "1.12.7"
 
         const val jUnit = "junit:junit:4.13"
-        const val assertJ = "org.assertj:assertj-core:3.20.2"
+        const val assertJ = "org.assertj:assertj-core:3.23.1"
         const val mockk = "io.mockk:mockk:$mockkVersion"
         const val mockkAndroid = "io.mockk:mockk-android:$mockkVersion"
         const val mockServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"

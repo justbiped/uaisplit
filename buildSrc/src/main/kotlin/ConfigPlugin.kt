@@ -101,7 +101,6 @@ private fun Project.applyAndroidConfigs() {
                 testImplementation(Dependencies.Test.robolectric)
                 testImplementation(Dependencies.Test.assertJ)
 
-                androidTestImplementation(Dependencies.Test.mockkAndroid)
                 androidTestImplementation(Dependencies.Test.androidxJunit)
                 androidTestImplementation(Dependencies.Navigator.testing)
                 androidTestImplementation(Dependencies.Hilt.testing)
@@ -119,7 +118,6 @@ private fun Project.applyAndroidConfigs() {
 private fun AndroidExtension.setupTests() {
 
     testOptions {
-
         devices {
             createPixel2()
         }

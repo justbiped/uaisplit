@@ -10,8 +10,8 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement
-import com.favoriteplaces.core.test.R
 import dagger.hilt.android.testing.HiltTestApplication
+import com.biped.locations.theme.R
 
 const val THEME_EXTRAS_BUNDLE_KEY = "androidx.fragment.app.testing.FragmentScenario.EmptyFragmentActivity.THEME_EXTRAS_BUNDLE_KEY"
 const val FRAGMENT_TAG = "FRAGMENT_UNDER_TEST_TAG"

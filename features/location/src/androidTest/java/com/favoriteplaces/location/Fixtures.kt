@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 
 internal fun locationDetailsApiFixture(
     id: Int = 0,
-    name: String = "Café da Japa",
+    name: String = "My Coffee",
     review: Double = 5.0,
     type: String = "Café",
     about: String = "O café mais chavoso que existe",
