@@ -1,67 +1,60 @@
 package com.biped.locations.profile
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import coil.compose.rememberAsyncImagePainter
-import com.biped.locations.theme.NormalSpacer
-import com.biped.locations.theme.SmallSpacer
+import com.biped.locations.theme.*
+import com.biped.locations.theme.components.MediumBody
+import com.biped.locations.theme.components.MediumHeadline
+import com.biped.locations.theme.components.MediumTitle
 
-@Preview
 @Composable
-fun ProfileUi(@PreviewParameter(UserPreview::class) user: UserUiModel) {
-    Column {
-        NormalSpacer()
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .weight(1f)
-        ) {
-            ProfileHeader(user)
-        }
-        NormalSpacer()
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .weight(3f)
-                .background(Color.Cyan)
-        ) {
-            Row(
+fun ProfileUI(uiModel: UserUiModel) {
+    ProfileUiStateless(user = uiModel)
+}
+
+@Composable
+fun ProfileUiStateless(user: UserUiModel) {
+    Surface {
+        Column {
+            BigSpacer()
+            Column(
                 modifier = Modifier
-                    .background(Color.White)
+                    .fillMaxSize()
+                    .weight(0.25f)
             ) {
-                Box(
-                    modifier = Modifier
-                        .background(color = Color.Red)
-                        .fillMaxSize()
-                        .weight(1f)
-                )
-                SmallSpacer()
-                Box(
-                    modifier = Modifier
-                        .background(color = Color.Yellow)
-                        .fillMaxSize()
-                        .weight(1f)
-                )
-                SmallSpacer()
-                Box(
-                    modifier = Modifier
-                        .background(color = Color.Blue)
-                        .fillMaxSize()
-                        .weight(1f)
-                )
+                ProfileHeader(user)
+            }
+            NormalSpacer()
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = Dimens.small)
+                    .weight(0.75f)
+            ) {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.padding(Dimens.normal)) {
+                        MediumTitle(text = user.name)
+                        SmallSpacer()
+                        MediumBody(text = user.imageUrl)
+                    }
+                }
+            }
+            FloatingActionButton(onClick = { print("click") }) {
             }
         }
     }
@@ -89,7 +82,23 @@ fun ProfileHeader(user: UserUiModel) {
             contentDescription = ""
         )
         SmallSpacer()
-        Text(text = user.name)
+        MediumHeadline(text = user.name)
+    }
+}
+
+@Preview(name = "Dark preview", showBackground = true)
+@Composable
+fun ProfileUiLightPreview(@PreviewParameter(UserPreview::class) uiModel: UserUiModel) {
+    AppTheme {
+        ProfileUiStateless(user = uiModel)
+    }
+}
+
+@Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun ProfileUiDarkPreview(@PreviewParameter(UserPreview::class) uiModel: UserUiModel) {
+    AppTheme {
+        ProfileUiStateless(user = uiModel)
     }
 }
 
