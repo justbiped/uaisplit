@@ -20,7 +20,7 @@ class ProfileFragment : Fragment() {
                 AppTheme {
                     ProfileUI(
                         uiModel = UserUiModel(
-                            "Edgar",
+                            "R.Edgar",
                             "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg"
                         )
                     )

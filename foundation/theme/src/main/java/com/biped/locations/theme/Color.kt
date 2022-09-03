@@ -2,27 +2,55 @@ package com.biped.locations.theme
 
 import androidx.compose.ui.graphics.Color
 
-val light_primary = Color(0xFF556500)
-val light_onPrimary = Color(0xFFFFFFFF)
-val light_primaryContainer = Color(0xFFD8ED7C)
-val light_onPrimaryContainer = Color(0xFF181E00)
-val light_secondary = Color(0xFF5C6145)
-val light_onSecondary = Color(0xFFFFFFFF)
-val light_secondaryContainer = Color(0xFFE1E6C3)
-val light_onSecondaryContainer = Color(0xFF191D08)
+val green_50 = Color(0xFFDEE5D9)
+val green_100 = Color(0xFFaFBFA1)
+val green_200 = Color(0xFF7B9665)
+val green_300 = Color(0xFF4B722C)
+val green_400 = Color(0xFF295B00)
+val green_500 = Color(0xFF064300)
+val green_600 = Color(0xFF063A00)
+val green_700 = Color(0xFF092D00)
+val green_800 = Color(0xFF002000)
+val green_900 = Color(0xFF001000)
+
+val cream_50 = Color(0xFFf9FBE8)
+val cream_100 = Color(0xFFf9FBE8)
+val cream_200 = Color(0xFFECEEDB)
+val cream_300 = Color(0xFFDDDFCD)
+val cream_400 = Color(0xFFBABCAA)
+val cream_500 = Color(0xFF9B9D8B)
+val cream_600 = Color(0xFF727463)
+val cream_700 = Color(0xFF5E6050)
+val cream_800 = Color(0xFF3F4132)
+val cream_900 = Color(0xFF1E2012)
+
+
+//============Light===================
+val light_primary = green_200
+val light_onPrimary = green_50
+val light_primaryContainer = green_200
+val light_onPrimaryContainer = green_800
+
+val light_secondary = cream_800
+val light_onSecondary = green_50
+val light_secondaryContainer = cream_400
+val light_onSecondaryContainer = green_800
+
 val light_tertiary = Color(0xFF3A665C)
 val light_onTertiary = Color(0xFFFFFFFF)
 val light_tertiaryContainer = Color(0xFFBDECDF)
 val light_onTertiaryContainer = Color(0xFF00201B)
+
 val light_error = Color(0xFFBA1A1A)
 val light_errorContainer = Color(0xFFFFDAD6)
 val light_onError = Color(0xFFFFFFFF)
 val light_onErrorContainer = Color(0xFF410002)
-val light_background = Color(0xFFFFFCF4)
-val light_onBackground = Color(0xFF1B1C17)
-val light_surface = Color(0xFFFFFCF4)
-val light_onSurface = Color(0xFF1B1C17)
-val light_surfaceVariant = Color(0xFFE3E3D3)
+
+val light_background = green_50
+val light_onBackground = green_900
+val light_surface = green_50
+val light_onSurface = green_900
+val light_surfaceVariant = green_100
 val light_onSurfaceVariant = Color(0xFF46483C)
 val light_outline = Color(0xFF77786A)
 val light_inverseOnSurface = Color(0xFFF3F1E8)
@@ -30,27 +58,33 @@ val light_inverseSurface = Color(0xFF30312B)
 val light_inversePrimary = Color(0xFFBCD063)
 val light_shadow = Color(0xFF000000)
 val light_surfaceTint = Color(0xFF556500)
+//============Light===================
 
-val dark_primary = Color(0xFFBCD063)
-val dark_onPrimary = Color(0xFF2B3400)
-val dark_primaryContainer = Color(0xFF404C00)
-val dark_onPrimaryContainer = Color(0xFFD8ED7C)
-val dark_secondary = Color(0xFFC5C9A8)
-val dark_onSecondary = Color(0xFF2E331B)
-val dark_secondaryContainer = Color(0xFF45492F)
-val dark_onSecondaryContainer = Color(0xFFE1E6C3)
+//============Dark====================
+val dark_primary = cream_400
+val dark_onPrimary = green_800
+val dark_primaryContainer = cream_600
+val dark_onPrimaryContainer = cream_100
+
+val dark_secondary = cream_200
+val dark_onSecondary = cream_800
+val dark_secondaryContainer = cream_800
+val dark_onSecondaryContainer = cream_200
+
 val dark_tertiary = Color(0xFFA1D0C4)
 val dark_onTertiary = Color(0xFF04372F)
 val dark_tertiaryContainer = Color(0xFF214E45)
 val dark_onTertiaryContainer = Color(0xFFBDECDF)
+
 val dark_error = Color(0xFFFFB4AB)
 val dark_errorContainer = Color(0xFF93000A)
 val dark_onError = Color(0xFF690005)
 val dark_onErrorContainer = Color(0xFFFFDAD6)
-val dark_background = Color(0xFF1B1C17)
-val dark_onBackground = Color(0xFFE5E2DA)
-val dark_surface = Color(0xFF1B1C17)
-val dark_onSurface = Color(0xFFE5E2DA)
+
+val dark_background = green_900
+val dark_onBackground = green_100
+val dark_surface = green_900
+val dark_onSurface = green_100
 val dark_surfaceVariant = Color(0xFF46483C)
 val dark_onSurfaceVariant = Color(0xFFC7C8B7)
 val dark_outline = Color(0xFF919283)
