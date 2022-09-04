@@ -1,36 +1,62 @@
 package com.biped.locations.theme
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
 
 @Composable
-fun TinySpacer() {
-    Spacer(modifier = Modifier.size(Dimens.tiny))
+fun RowScope.TinySpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.tiny))
 }
 
 @Composable
-fun SmallSpacer() {
-    Spacer(modifier = Modifier.size(Dimens.small))
+fun RowScope.SmallSpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.small))
 }
 
 @Composable
-fun NormalSpacer() {
-    Spacer(modifier = Modifier.size(Dimens.normal))
+fun RowScope.NormalSpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.normal))
 }
 
 @Composable
-fun BigSpacer() {
-    Spacer(modifier = Modifier.size(Dimens.big))
+fun RowScope.BigSpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.big))
 }
 
 @Composable
-fun HugeSpacer() {
-    Spacer(modifier = Modifier.size(Dimens.huge))
+fun RowScope.HugeSpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.huge))
 }
+
+
+@Composable
+fun ColumnScope.TinySpacer() {
+    Spacer(modifier = Modifier.padding(top = Dimens.tiny))
+}
+
+@Composable
+fun ColumnScope.SmallSpacer() {
+    Spacer(modifier = Modifier.padding(top = Dimens.small))
+}
+
+@Composable
+fun ColumnScope.NormalSpacer() {
+    Spacer(modifier = Modifier.padding(top = Dimens.normal))
+}
+
+@Composable
+fun ColumnScope.BigSpacer() {
+    Spacer(modifier = Modifier.padding(top = Dimens.big))
+}
+
+@Composable
+fun ColumnScope.HugeSpacer() {
+    Spacer(modifier = Modifier.padding(top = Dimens.huge))
+}
+
 
 object Dimens {
     val micro: Dp @Composable get() = dimensionResource(id = R.dimen.micro)
