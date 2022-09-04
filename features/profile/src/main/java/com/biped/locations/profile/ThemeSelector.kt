@@ -3,6 +3,8 @@ package com.biped.locations.profile
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.*
@@ -11,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.ColorScheme
+import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.TinySpacer
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.theme.components.MediumTitle
@@ -41,6 +44,7 @@ fun ThemeSettingsUi(
                 onCheckedChange = { useDynamicColor = it }
             )
         }
+        SmallSpacer()
         ColorSchemeSelector(
             colorScheme = uiModel.colorScheme,
             onSchemeSelected = onColorScheme
@@ -87,7 +91,7 @@ private fun RowScope.weightModifier(isSelected: Boolean): Modifier {
     val weight = if (isSelected) 1.1f else 1f
     return Modifier
         .weight(weight)
-        .animateContentSize()
+        .animateContentSize(animationSpec = spring(stiffness = Spring.StiffnessHigh))
 }
 
 @Preview(name = "Light preview", showBackground = true)

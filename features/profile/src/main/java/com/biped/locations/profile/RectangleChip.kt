@@ -1,6 +1,5 @@
 package com.biped.locations.profile
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.height
@@ -24,8 +23,8 @@ fun RectangleChip(
     selected: Boolean
 ) {
     val backgroundColor = if (selected) colorScheme().primary else Color.Transparent
-    val textColor = if (selected) colorScheme().onPrimary else colorScheme().onBackground
-    val border = BorderStroke(width = 0.8.dp, color = colorScheme().surfaceTint)
+    val textColor = if (selected) colorScheme().onPrimary else colorScheme().onSurfaceVariant
+    val border = BorderStroke(width = 1.dp, color = colorScheme().outline)
     OutlinedButton(
         modifier = modifier
             .background(backgroundColor)
