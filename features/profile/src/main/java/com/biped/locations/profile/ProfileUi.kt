@@ -68,9 +68,7 @@ fun ProfileHeader(user: UserUiModel) {
         placeholder = painterResource(id = R.drawable.ic_profile_on)
     )
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Dimens.normal),
+        modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(

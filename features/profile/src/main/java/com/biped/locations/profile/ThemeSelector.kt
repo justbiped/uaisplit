@@ -31,8 +31,6 @@ fun ThemeSettingsUi(
 ) {
     var useDynamicColor by remember { mutableStateOf(uiModel.useDynamicColors) }
     Column {
-        LargeLabel(text = "Theme setup")
-        TinySpacer()
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
