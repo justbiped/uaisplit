@@ -34,21 +34,18 @@ fun ProfileUI(uiModel: UserUiModel) {
 @Composable
 fun ProfileUiStateless(user: UserUiModel) {
     Surface {
-        Column {
+        Column(
+            modifier = Modifier.padding(horizontal = Dimens.small)
+        ) {
             BigSpacer()
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(0.10f)
+                modifier = Modifier.weight(0.10f)
             ) {
                 ProfileHeader(user)
             }
             BigSpacer()
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = Dimens.small)
-                    .weight(0.90f)
+                modifier = Modifier.weight(0.90f)
             ) {
                 ThemeSettingsUi(user.themeSetting)
                 BigSpacer()
