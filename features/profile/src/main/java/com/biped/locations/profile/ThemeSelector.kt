@@ -14,8 +14,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.ColorScheme
 import com.biped.locations.theme.SmallSpacer
-import com.biped.locations.theme.TinySpacer
-import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.theme.components.MediumTitle
 
 data class ThemeSettingsUiModel(

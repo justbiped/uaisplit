@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.theme.*
+import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.theme.components.MediumBody
 import com.biped.locations.theme.components.MediumHeadline
 import com.biped.locations.theme.components.MediumTitle
@@ -47,6 +48,8 @@ fun ProfileUiStateless(user: UserUiModel) {
             Column(
                 modifier = Modifier.weight(0.90f)
             ) {
+                LargeLabel(text = "Theme setup")
+                SmallSpacer()
                 ThemeSettingsUi(user.themeSetting)
                 BigSpacer()
                 Card(modifier = Modifier.fillMaxWidth()) {
