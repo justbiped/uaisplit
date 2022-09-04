@@ -1,11 +1,10 @@
 package com.biped.locations.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.*
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 
 private val LightColors = lightColorScheme(
     primary = light_primary,
@@ -68,12 +67,33 @@ private val DarkColors = darkColorScheme(
     surfaceTint = dark_surfaceTint,
 )
 
+enum class ColorScheme {
+    SYSTEM,
+    LIGHT,
+    DARK
+}
+
 @Composable
 fun colorScheme(): ColorScheme {
-    return if (isSystemInDarkTheme()) {
-        DarkColors
+    val isDarkMode = isSystemInDarkTheme()
+    val isDynamicColor = false
+    return if (isDynamicColor) {
+        getDynamicColorScheme(isDarkMode)
     } else {
-        LightColors
+        getAppColorScheme(isDarkMode)
+    }
+}
+
+fun getAppColorScheme(isDarkMode: Boolean): ColorScheme {
+    return if (isDarkMode) DarkColors else LightColors
+}
+
+@Composable
+private fun getDynamicColorScheme(isDarkMode: Boolean): ColorScheme {
+    return if (isDarkMode) {
+        dynamicDarkColorScheme(LocalContext.current)
+    } else {
+        dynamicLightColorScheme(LocalContext.current)
     }
 }
 

@@ -4,21 +4,25 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextOverflow
+import com.biped.locations.theme.colorScheme
 
 @Composable
 fun LargeDisplayText(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.displayLarge,
         overflow = overflow,
         softWrap = softWrap,
@@ -29,16 +33,18 @@ fun LargeDisplayText(
 
 @Composable
 fun MediumDisplayText(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.displayMedium,
         overflow = overflow,
         softWrap = softWrap,
@@ -49,16 +55,18 @@ fun MediumDisplayText(
 
 @Composable
 fun SmallDisplayText(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.displaySmall,
         overflow = overflow,
         softWrap = softWrap,
@@ -69,16 +77,18 @@ fun SmallDisplayText(
 
 @Composable
 fun LargeHeadline(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.headlineLarge,
         overflow = overflow,
         softWrap = softWrap,
@@ -89,16 +99,18 @@ fun LargeHeadline(
 
 @Composable
 fun MediumHeadline(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.headlineMedium,
         overflow = overflow,
         softWrap = softWrap,
@@ -109,16 +121,18 @@ fun MediumHeadline(
 
 @Composable
 fun SmallHeadline(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.headlineSmall,
         overflow = overflow,
         softWrap = softWrap,
@@ -129,16 +143,18 @@ fun SmallHeadline(
 
 @Composable
 fun LargeTitle(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.titleLarge,
         overflow = overflow,
         softWrap = softWrap,
@@ -149,16 +165,18 @@ fun LargeTitle(
 
 @Composable
 fun MediumTitle(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.titleMedium,
         overflow = overflow,
         softWrap = softWrap,
@@ -169,16 +187,18 @@ fun MediumTitle(
 
 @Composable
 fun SmallTitle(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.titleSmall,
         overflow = overflow,
         softWrap = softWrap,
@@ -189,16 +209,18 @@ fun SmallTitle(
 
 @Composable
 fun LargeBody(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.bodyLarge,
         overflow = overflow,
         softWrap = softWrap,
@@ -209,16 +231,18 @@ fun LargeBody(
 
 @Composable
 fun MediumBody(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.bodyMedium,
         overflow = overflow,
         softWrap = softWrap,
@@ -229,16 +253,18 @@ fun MediumBody(
 
 @Composable
 fun SmallBody(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.bodySmall,
         overflow = overflow,
         softWrap = softWrap,
@@ -249,16 +275,18 @@ fun SmallBody(
 
 @Composable
 fun LargeLabel(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.labelLarge,
         overflow = overflow,
         softWrap = softWrap,
@@ -269,16 +297,18 @@ fun LargeLabel(
 
 @Composable
 fun MediumLabel(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.labelMedium,
         overflow = overflow,
         softWrap = softWrap,
@@ -289,16 +319,18 @@ fun MediumLabel(
 
 @Composable
 fun SmallLabel(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    color: Color = Color.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-){
+) {
     Text(
-        text = text,
         modifier = modifier,
+        text = text,
+        color = color,
         style = MaterialTheme.typography.labelSmall,
         overflow = overflow,
         softWrap = softWrap,

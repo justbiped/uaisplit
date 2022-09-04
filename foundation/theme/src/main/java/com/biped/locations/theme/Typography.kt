@@ -101,7 +101,7 @@ val AppTypography = Typography(
 
     labelLarge = TextStyle(
         fontFamily = AppFontFamily,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 14.sp
     ),
 

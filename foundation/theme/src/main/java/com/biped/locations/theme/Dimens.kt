@@ -27,6 +27,11 @@ fun BigSpacer() {
     Spacer(modifier = Modifier.size(Dimens.big))
 }
 
+@Composable
+fun HugeSpacer() {
+    Spacer(modifier = Modifier.size(Dimens.huge))
+}
+
 object Dimens {
     val micro: Dp @Composable get() = dimensionResource(id = R.dimen.micro)
     val tiny: Dp @Composable get() = dimensionResource(id = R.dimen.tiny)
