@@ -11,6 +11,6 @@
         android:label="LocationHostFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.biped.locations.profile.ProfileFragment"
+        android:name="com.biped.locations.profile.ui.ProfileFragment"
         android:label="ProfileFragment" />
 </navigation>

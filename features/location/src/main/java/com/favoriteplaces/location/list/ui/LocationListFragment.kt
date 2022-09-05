@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -20,8 +21,8 @@ import javax.inject.Inject
 class LocationListFragment :
     BindingFragment<LocationListFragmentBinding>(R.layout.location_list_fragment) {
 
-    @Inject
-    internal lateinit var viewModel: LocationListViewModel
+
+    private val viewModel: LocationListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

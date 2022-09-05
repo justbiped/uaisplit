@@ -6,6 +6,7 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,13 +17,11 @@ import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationDetailFragmentBinding
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LocationDetailsFragment : Fragment(R.layout.location_detail_fragment) {
 
-    @Inject
-    internal lateinit var viewModel: LocationDetailViewModel
+    private val viewModel: LocationDetailViewModel by viewModels()
 
     private lateinit var biding: LocationDetailFragmentBinding
     private val arguments by navArgs<LocationDetailsFragmentArgs>()

@@ -1,4 +1,4 @@
-package com.biped.locations.profile
+package com.biped.locations.profile.ui
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.biped.locations.profile.RectangleChip
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.ColorScheme
 import com.biped.locations.theme.SmallSpacer

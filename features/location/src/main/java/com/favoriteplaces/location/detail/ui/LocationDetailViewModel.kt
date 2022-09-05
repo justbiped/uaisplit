@@ -7,8 +7,10 @@ import com.favoriteplaces.core.coroutines.launchIO
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 internal class LocationDetailViewModel @Inject constructor(
     private val detailsInstructions: LocationDetailInstructions,
     private val getLocationDetails: GetLocationDetails,

@@ -1,5 +1,6 @@
 plugins {
     id(Plugins.Android.library)
+    id(Dependencies.Kotlin.kapt)
 }
 
 android {
@@ -29,6 +30,9 @@ dependencies {
     implementation(Dependencies.Compose.foundation)
     implementation("androidx.compose.material3:material3:1.0.0-beta01")
     implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta01")
+
+    implementation(Dependencies.Hilt.core)
+    kapt(Dependencies.Hilt.compiler)
 
     implementation(Dependencies.Compose.toolingPreview)
     devImplementation(Dependencies.Compose.tooling)

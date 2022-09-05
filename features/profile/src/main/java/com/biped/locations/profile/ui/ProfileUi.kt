@@ -1,12 +1,12 @@
-package com.biped.locations.profile
+package com.biped.locations.profile.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,25 +15,48 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
-import com.biped.locations.theme.*
+import com.biped.locations.profile.R
+import com.biped.locations.profile.data.ProfileUiModel
+import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.BigSpacer
+import com.biped.locations.theme.Dimens
+import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.LargeLabel
-import com.biped.locations.theme.components.MediumBody
 import com.biped.locations.theme.components.MediumHeadline
-import com.biped.locations.theme.components.MediumTitle
 
-data class UserUiModel(
-    val name: String = "",
-    val imageUrl: String = "",
-    val themeSetting: ThemeSettingsUiModel = ThemeSettingsUiModel(),
+private data class ProfileComposeState(
+    var isLoading: Boolean = false,
+    var uiModel: ProfileUiModel = ProfileUiModel()
 )
 
 @Composable
-fun ProfileUI(uiModel: UserUiModel) {
-    ProfileUiStateless(user = uiModel)
+fun ProfileUI(viewModel: ProfileViewModel) {
+    val instruction = viewModel.instruction.collectAsState(ProfileViewInstruction.Default).value
+    val state by remember { mutableStateOf(ProfileComposeState()) }
+
+    when (instruction) {
+        is ProfileViewInstruction.Success -> state.apply {
+            uiModel = instruction.uiModel
+            isLoading = false
+        }
+        is ProfileViewInstruction.Default -> state.apply {
+            isLoading = false
+        }
+    }
+
+    BoxSurface(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        ProfileUiStateless(state)
+        if (state.isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        }
+    }
+
 }
 
 @Composable
-fun ProfileUiStateless(user: UserUiModel) {
+private fun ProfileUiStateless(user: ProfileComposeState) {
     Surface {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.small)
@@ -42,7 +65,7 @@ fun ProfileUiStateless(user: UserUiModel) {
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(user)
+                ProfileHeader(user.uiModel)
             }
             BigSpacer()
             Column(
@@ -50,24 +73,16 @@ fun ProfileUiStateless(user: UserUiModel) {
             ) {
                 LargeLabel(text = "Theme setup")
                 SmallSpacer()
-                ThemeSettingsUi(user.themeSetting)
-                BigSpacer()
-                Card(modifier = Modifier.fillMaxWidth()) {
-                    Column(modifier = Modifier.padding(Dimens.normal)) {
-                        MediumTitle(text = user.name)
-                        TinySpacer()
-                        MediumBody(text = user.imageUrl)
-                    }
-                }
+                ThemeSettingsUi(user.uiModel.theme)
             }
         }
     }
 }
 
 @Composable
-fun ProfileHeader(user: UserUiModel) {
+fun ProfileHeader(user: ProfileUiModel) {
     val profileImagePainter = rememberAsyncImagePainter(
-        model = user.imageUrl,
+        model = user.profileUrl,
         placeholder = painterResource(id = R.drawable.ic_profile_on)
     )
     Row(
@@ -90,13 +105,26 @@ fun ProfileHeader(user: UserUiModel) {
 @Preview(name = "Dark preview", showBackground = true)
 @Composable
 fun ProfileUiLightPreview() {
-    AppTheme { ProfileUiStateless(user = userUiModel) }
+    AppTheme { ProfileUiStateless(user = composeState) }
 }
 
 @Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun ProfileUiDarkPreview() {
-    AppTheme { ProfileUiStateless(user = userUiModel) }
+    AppTheme { ProfileUiStateless(user = composeState) }
 }
 
-val userUiModel = UserUiModel("Roubert Edgar")
+private val composeState = ProfileComposeState(uiModel = ProfileUiModel("Roubert Edgar"))
+
+
+@Composable
+fun BoxSurface(
+    modifier: Modifier,
+    content: @Composable BoxScope.() -> Unit
+) {
+    Box(modifier = modifier.fillMaxSize()) {
+        Surface {
+            content()
+        }
+    }
+}

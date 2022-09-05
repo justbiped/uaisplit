@@ -8,8 +8,10 @@ import com.favoriteplaces.core.coroutines.launchIO
 import com.favoriteplaces.location.list.LoadLocationsUseCase
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 internal class LocationListViewModel
 @Inject constructor(
     private val locationListInstructions: LocationListInstructions,

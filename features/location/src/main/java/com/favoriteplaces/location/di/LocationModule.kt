@@ -7,14 +7,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.FragmentScoped
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(ViewModelComponent::class)
 internal class LocationModule {
 
     @Provides
-    @FragmentScoped
-    fun providesLocationService(httpManager: HttpManager) =
+    @ViewModelScoped
+    fun providesLocationService(httpManager: HttpManager): LocationHttpClient =
         httpManager.instantiate(LocationHttpClient::class.java, BuildConfig.BASE_URL)
 }

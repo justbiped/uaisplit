@@ -65,13 +65,13 @@ val AppTypography = Typography(
 
     titleLarge = TextStyle(
         fontFamily = AppFontFamily,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
         fontSize = 22.sp
     ),
 
     titleMedium = TextStyle(
         fontFamily = AppFontFamily,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
         fontSize = 18.sp
     ),
 
