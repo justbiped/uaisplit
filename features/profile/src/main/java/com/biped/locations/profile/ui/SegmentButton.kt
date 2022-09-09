@@ -37,6 +37,7 @@ fun SegmentedButton(
     multiSegments: Boolean = false,
     colors: SegmentColors = segmentColors(),
     dimension: SegmentDimension = SegmentDimension(),
+    onSegmentSelected: (Map<String, Boolean>) -> Unit = {}
 ) {
     val selectedItems = remember { createSelectionMap(segments) }
     var lastSelectedKey = segments.first { it.isSelected }.key
@@ -56,6 +57,8 @@ fun SegmentedButton(
         } else {
             selectedItems[key] = selectedItems[key]!!.not()
         }
+
+        onSegmentSelected(selectedItems)
     }
 
     Surface(

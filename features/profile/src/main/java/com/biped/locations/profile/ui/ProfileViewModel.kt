@@ -3,6 +3,7 @@ package com.biped.locations.profile.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biped.locations.profile.data.ProfileUiModel
+import com.biped.locations.theme.ColorScheme
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.coroutineScope
@@ -12,8 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor() : ViewModel() {
-
-    private val _instruction = MutableWarmFlow<ProfileViewInstruction>(ProfileViewInstruction.Default)
+    private val _instruction =
+        MutableWarmFlow<ProfileViewInstruction>(ProfileViewInstruction.Default)
     val instruction = _instruction.toWarmFlow()
 
     fun loadProfile() {
@@ -26,7 +27,14 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
                     )
                 )
             )
-
         }
+    }
+
+    fun setUseDynamicColors(use: Boolean) {
+        print(use)
+    }
+
+    fun setColorScheme(scheme: ColorScheme) {
+        print(scheme)
     }
 }

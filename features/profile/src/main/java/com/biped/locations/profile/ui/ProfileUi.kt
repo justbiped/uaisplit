@@ -19,6 +19,7 @@ import com.biped.locations.profile.R
 import com.biped.locations.profile.data.ProfileUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
+import com.biped.locations.theme.ColorScheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.LargeLabel
@@ -40,23 +41,37 @@ fun ProfileUI(viewModel: ProfileViewModel) {
             isLoading = false
         }
         is ProfileViewInstruction.Default -> state.apply {
-            isLoading = false
+            isLoading = true
         }
     }
 
     BoxSurface(
         modifier = Modifier.fillMaxSize()
     ) {
-        ProfileUiStateless(state)
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
+        ProfileUiStateless(
+            state, object : ProfileEvents {
+                override fun useDynamicColors(use: Boolean) {
+                    viewModel.setUseDynamicColors(use)
+                }
+
+                override fun onColorScheme(scheme: ColorScheme) {
+                    viewModel.setColorScheme(scheme)
+                }
+            }
+        )
+
+        LoadingIndicator(isVisible = state.isLoading)
     }
 
 }
 
 @Composable
-private fun ProfileUiStateless(user: ProfileComposeState) {
+private fun BoxScope.LoadingIndicator(isVisible: Boolean) {
+    if (isVisible) CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+}
+
+@Composable
+private fun ProfileUiStateless(user: ProfileComposeState, profileEvents: ProfileEvents) {
     Surface {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.small)
@@ -72,8 +87,11 @@ private fun ProfileUiStateless(user: ProfileComposeState) {
                 modifier = Modifier.weight(0.90f)
             ) {
                 LargeLabel(text = "Theme setup")
-                SmallSpacer()
-                ThemeSettingsUi(user.uiModel.theme)
+                ThemeSettingsUi(
+                    uiModel = user.uiModel.theme,
+                    onUseDynamicScheme = { profileEvents.useDynamicColors(it) },
+                    onColorScheme = { profileEvents.onColorScheme(it) }
+                )
             }
         }
     }
@@ -102,29 +120,31 @@ fun ProfileHeader(user: ProfileUiModel) {
     }
 }
 
-@Preview(name = "Dark preview", showBackground = true)
-@Composable
-fun ProfileUiLightPreview() {
-    AppTheme { ProfileUiStateless(user = composeState) }
-}
-
-@Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun ProfileUiDarkPreview() {
-    AppTheme { ProfileUiStateless(user = composeState) }
-}
-
-private val composeState = ProfileComposeState(uiModel = ProfileUiModel("Roubert Edgar"))
-
-
 @Composable
 fun BoxSurface(
     modifier: Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {
     Box(modifier = modifier.fillMaxSize()) {
-        Surface {
-            content()
-        }
+        Surface { content() }
     }
+}
+
+@Preview(name = "Dark preview", showBackground = true)
+@Composable
+fun ProfileUiLightPreview() {
+    AppTheme { ProfileUiStateless(user = composeState, object : ProfileEvents {}) }
+}
+
+@Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun ProfileUiDarkPreview() {
+    AppTheme { ProfileUiStateless(user = composeState, object : ProfileEvents {}) }
+}
+
+private val composeState = ProfileComposeState(uiModel = ProfileUiModel("Roubert Edgar"))
+
+interface ProfileEvents {
+    fun useDynamicColors(use: Boolean) {}
+    fun onColorScheme(scheme: ColorScheme) {}
 }
