@@ -33,8 +33,8 @@ val light_onPrimaryContainer = green_800
 
 val light_secondary = cream_800
 val light_onSecondary = green_50
-val light_secondaryContainer = cream_400
-val light_onSecondaryContainer = green_800
+val light_secondaryContainer = green_100
+val light_onSecondaryContainer = green_700
 
 val light_tertiary = Color(0xFF3A665C)
 val light_onTertiary = Color(0xFFFFFFFF)

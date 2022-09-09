@@ -11,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.biped.locations.profile.RectangleChip
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.ColorScheme
 import com.biped.locations.theme.SmallSpacer
@@ -57,28 +56,12 @@ fun ColorSchemeSelector(
 ) {
     var theme by remember { mutableStateOf(colorScheme) }
 
-    Row(
-        Modifier.fillMaxWidth()
-    ) {
-        RectangleChip(
-            onClick = { theme = ColorScheme.DARK },
-            label = "Dark",
-            selected = theme == ColorScheme.DARK,
-            modifier = weightModifier(theme == ColorScheme.DARK)
-        )
-        RectangleChip(
-            onClick = { theme = ColorScheme.LIGHT },
-            label = "Light",
-            selected = theme == ColorScheme.LIGHT,
-            modifier = weightModifier(theme == ColorScheme.LIGHT)
-        )
-        RectangleChip(
-            onClick = { theme = ColorScheme.SYSTEM },
-            label = "System",
-            selected = theme == ColorScheme.SYSTEM,
-            modifier = weightModifier(theme == ColorScheme.SYSTEM)
-        )
-    }
+    val segments = listOf(
+        SegmentItem("Dark", isSelected = true),
+        SegmentItem("Light"),
+        SegmentItem("System"),
+    )
+    SegmentedButton(segments =segments)
 
     onSchemeSelected(theme)
 }
