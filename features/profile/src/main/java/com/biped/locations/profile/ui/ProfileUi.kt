@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.profile.R
-import com.biped.locations.profile.data.ProfileUiModel
+import com.biped.locations.profile.data.ui.ProfileUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.ColorScheme
@@ -41,7 +41,7 @@ fun ProfileUI(viewModel: ProfileViewModel) {
             isLoading = false
         }
         is ProfileViewInstruction.Default -> state.apply {
-            isLoading = true
+            isLoading = false
         }
     }
 
@@ -100,7 +100,7 @@ private fun ProfileUiStateless(user: ProfileComposeState, profileEvents: Profile
 @Composable
 fun ProfileHeader(user: ProfileUiModel) {
     val profileImagePainter = rememberAsyncImagePainter(
-        model = user.profileUrl,
+        model = user.picture,
         placeholder = painterResource(id = R.drawable.ic_profile_on)
     )
     Row(

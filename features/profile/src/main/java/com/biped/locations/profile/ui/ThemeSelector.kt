@@ -15,15 +15,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.biped.locations.profile.data.ui.ThemeSettingsUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.ColorScheme
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumTitle
-
-data class ThemeSettingsUiModel(
-    val colorScheme: ColorScheme = ColorScheme.SYSTEM,
-    val useDynamicColors: Boolean = false
-)
 
 @Composable
 fun ThemeSettingsUi(
@@ -64,7 +60,7 @@ fun ColorSchemeSelector(
         SegmentItem("Light", isSelected = theme == ColorScheme.LIGHT),
         SegmentItem("System", isSelected = theme == ColorScheme.SYSTEM),
     )
-    
+
     SegmentedButton(
         segments = segments,
         onSegmentSelected = { selections ->

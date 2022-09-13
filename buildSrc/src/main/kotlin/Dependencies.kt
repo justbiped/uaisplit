@@ -8,11 +8,10 @@ object Versions {
 
 object Dependencies {
 
-
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val httpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
-    const val coil = "io.coil-kt:coil:2.1.0"
+    const val coil = "io.coil-kt:coil-compose:2.2.0"
 
     object Android {
         const val core = "androidx.core:core-ktx:1.8.0"
@@ -87,18 +86,18 @@ object Dependencies {
     }
 
     object Fragment {
-        private const val version = "1.5.1"
+        private const val version = "1.5.2"
         const val core = "androidx.fragment:fragment-ktx:$version"
         const val testing = "androidx.fragment:fragment-testing:$version"
     }
 
     object Hilt {
-        private const val version = "2.42"
+        private const val version = "2.43.2"
         const val core = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
         const val testing = "com.google.dagger:hilt-android-testing:$version"
-        const val plugin = "dagger.hilt.android.plugin"
         const val classPath = "com.google.dagger:hilt-android-gradle-plugin:$version"
+        const val plugin = "dagger.hilt.android.plugin"
     }
 
     object Compose {
@@ -149,7 +148,7 @@ object Plugins {
 }
 
 object Path {
-    const val androidGradle = "com.android.tools.build:gradle:7.2.1"
+    const val androidGradle = "com.android.tools.build:gradle:7.2.2"
     const val playServices = "com.google.gms:google-services:4.3.8"
     const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
 }
