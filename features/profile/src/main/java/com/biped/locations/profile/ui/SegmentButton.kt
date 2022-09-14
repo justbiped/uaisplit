@@ -162,8 +162,8 @@ data class SegmentItem(
 )
 
 private fun colorAnimationSpec() = tween<Color>(
-    durationMillis = 450,
-    delayMillis = 50,
+    durationMillis = 200,
+    delayMillis = 0,
     easing = LinearOutSlowInEasing
 )
 

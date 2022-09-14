@@ -53,7 +53,6 @@ fun ColorSchemeSelector(
     colorScheme: ColorScheme,
     onSchemeSelected: (ColorScheme) -> Unit
 ) {
-
     val segments = remember(colorScheme) {
         mutableStateListOf(
             SegmentItem("Dark", isSelected = colorScheme == ColorScheme.DARK),
@@ -94,4 +93,4 @@ private fun ThemeDarkConfigPreview() {
     }
 }
 
-private val settingsUi = ThemeSettingsUiModel(ColorScheme.SYSTEM, false)
+private val settingsUi = ThemeSettingsUiModel(ColorScheme.DARK, false)

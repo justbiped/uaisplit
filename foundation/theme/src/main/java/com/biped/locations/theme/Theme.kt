@@ -36,7 +36,6 @@ private val LightColors = lightColorScheme(
     surfaceTint = light_surfaceTint,
 )
 
-
 private val DarkColors = darkColorScheme(
     primary = dark_primary,
     onPrimary = dark_onPrimary,
