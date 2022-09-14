@@ -9,9 +9,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,10 +26,8 @@ import com.biped.locations.theme.components.MediumTitle
 @Composable
 fun ThemeSettingsUi(
     uiModel: ThemeSettingsUiModel,
-    onColorScheme: (ColorScheme) -> Unit = {},
-    onUseDynamicScheme: (Boolean) -> Unit = {}
+    onSettingsChanged: (ThemeSettingsUiModel) -> Unit = {}
 ) {
-    var useDynamicColor by remember { mutableStateOf(uiModel.useDynamicColors) }
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -36,17 +36,16 @@ fun ThemeSettingsUi(
         ) {
             MediumTitle(text = "Use dynamic colors")
             Switch(
-                checked = useDynamicColor,
-                onCheckedChange = { useDynamicColor = it }
+                checked = uiModel.useDynamicColors,
+                onCheckedChange = { onSettingsChanged(uiModel.copy(useDynamicColors = it)) }
             )
         }
         SmallSpacer()
         ColorSchemeSelector(
             colorScheme = uiModel.colorScheme,
-            onSchemeSelected = onColorScheme
+            onSchemeSelected = { onSettingsChanged(uiModel.copy(colorScheme = it)) }
         )
     }
-    onUseDynamicScheme(useDynamicColor)
 }
 
 @Composable
@@ -54,12 +53,14 @@ fun ColorSchemeSelector(
     colorScheme: ColorScheme,
     onSchemeSelected: (ColorScheme) -> Unit
 ) {
-    val theme by remember { mutableStateOf(colorScheme) }
-    val segments = listOf(
-        SegmentItem("Dark", isSelected = theme == ColorScheme.DARK),
-        SegmentItem("Light", isSelected = theme == ColorScheme.LIGHT),
-        SegmentItem("System", isSelected = theme == ColorScheme.SYSTEM),
-    )
+
+    val segments = remember(colorScheme) {
+        mutableStateListOf(
+            SegmentItem("Dark", isSelected = colorScheme == ColorScheme.DARK),
+            SegmentItem("Light", isSelected = colorScheme == ColorScheme.LIGHT),
+            SegmentItem("System", isSelected = colorScheme == ColorScheme.SYSTEM),
+        )
+    }
 
     SegmentedButton(
         segments = segments,
@@ -78,7 +79,7 @@ fun ColorSchemeSelector(
 private fun ThemeLightConfigPreview() {
     AppTheme {
         Surface {
-            ThemeSettingsUi(ThemeSettingsUiModel())
+            ThemeSettingsUi(settingsUi)
         }
     }
 }
@@ -88,7 +89,9 @@ private fun ThemeLightConfigPreview() {
 private fun ThemeDarkConfigPreview() {
     AppTheme {
         Surface {
-            ThemeSettingsUi(ThemeSettingsUiModel())
+            ThemeSettingsUi(settingsUi)
         }
     }
 }
+
+private val settingsUi = ThemeSettingsUiModel(ColorScheme.SYSTEM, false)

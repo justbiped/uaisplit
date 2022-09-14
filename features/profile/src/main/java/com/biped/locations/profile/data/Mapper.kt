@@ -14,3 +14,14 @@ fun ThemeSettings.toUiModel() = ThemeSettingsUiModel(
     colorScheme = colorScheme,
     useDynamicColors = useDynamicColors
 )
+
+fun ProfileUiModel.toDomainModel() = Profile(
+    name = name,
+    picture = picture,
+    themeSettings = theme.toDomainModel()
+)
+
+fun ThemeSettingsUiModel.toDomainModel() = ThemeSettings(
+    colorScheme = colorScheme,
+    useDynamicColors = useDynamicColors
+)

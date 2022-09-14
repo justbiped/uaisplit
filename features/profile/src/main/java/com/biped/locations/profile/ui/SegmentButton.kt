@@ -20,20 +20,19 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.colorScheme
 import com.biped.locations.theme.components.LargeLabel
 
 @Composable
 fun SegmentedButton(
-    segments: List<SegmentItem>,
+    segments: SnapshotStateList<SegmentItem>,
     multiSegments: Boolean = false,
     colors: SegmentColors = segmentColors(),
     dimension: SegmentDimension = SegmentDimension(),
@@ -78,7 +77,7 @@ fun SegmentedButton(
                 Segment(
                     label = segment.label,
                     key = segment.key,
-                    isSelected = selectedItems[segment.key] ?: false,
+                    isSelected = segment.isSelected,
                     onClick = { key -> changeSegmentSelection(key) },
                     modifier = Modifier.weight(1f)
                 )
@@ -128,20 +127,6 @@ private fun Segment(
         horizontalArrangement = Arrangement.Center
     ) {
         LargeLabel(text = label, color = textColor)
-    }
-}
-
-@Composable
-@Preview(showBackground = true)
-private fun SegmentedButtonPreview() {
-    AppTheme {
-        SegmentedButton(
-            listOf(
-                SegmentItem("Light", isSelected = true),
-                SegmentItem("Dark"),
-                SegmentItem("System")
-            )
-        )
     }
 }
 

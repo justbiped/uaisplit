@@ -17,15 +17,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.profile.R
 import com.biped.locations.profile.data.ui.ProfileUiModel
+import com.biped.locations.profile.data.ui.ThemeSettingsUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
-import com.biped.locations.theme.ColorScheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.theme.components.MediumHeadline
 
-private data class ProfileComposeState(
+private data class ProfileState(
     var isLoading: Boolean = false,
     var uiModel: ProfileUiModel = ProfileUiModel()
 )
@@ -33,7 +33,7 @@ private data class ProfileComposeState(
 @Composable
 fun ProfileUI(viewModel: ProfileViewModel) {
     val instruction = viewModel.instruction.collectAsState(ProfileViewInstruction.Default).value
-    val state by remember { mutableStateOf(ProfileComposeState()) }
+    val state by remember { mutableStateOf(ProfileState()) }
 
     when (instruction) {
         is ProfileViewInstruction.Success -> state.apply {
@@ -50,29 +50,18 @@ fun ProfileUI(viewModel: ProfileViewModel) {
     ) {
         ProfileUiStateless(
             state, object : ProfileEvents {
-                override fun useDynamicColors(use: Boolean) {
-                    viewModel.setUseDynamicColors(use)
-                }
-
-                override fun onColorScheme(scheme: ColorScheme) {
-                    viewModel.setColorScheme(scheme)
+                override fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {
+                    viewModel.changeThemeSettings(state.uiModel.copy(theme = settings))
                 }
             }
         )
-
-        LoadingIndicator(isVisible = state.isLoading)
     }
 
 }
 
 @Composable
-private fun BoxScope.LoadingIndicator(isVisible: Boolean) {
-    if (isVisible) CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-}
-
-@Composable
-private fun ProfileUiStateless(user: ProfileComposeState, profileEvents: ProfileEvents) {
-    Surface {
+private fun ProfileUiStateless(state: ProfileState, profileEvents: ProfileEvents) {
+    BoxSurface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.small)
         ) {
@@ -80,7 +69,7 @@ private fun ProfileUiStateless(user: ProfileComposeState, profileEvents: Profile
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(user.uiModel)
+                ProfileHeader(state.uiModel)
             }
             BigSpacer()
             Column(
@@ -88,12 +77,13 @@ private fun ProfileUiStateless(user: ProfileComposeState, profileEvents: Profile
             ) {
                 LargeLabel(text = "Theme setup")
                 ThemeSettingsUi(
-                    uiModel = user.uiModel.theme,
-                    onUseDynamicScheme = { profileEvents.useDynamicColors(it) },
-                    onColorScheme = { profileEvents.onColorScheme(it) }
+                    uiModel = state.uiModel.theme,
+                    onSettingsChanged = { profileEvents.onThemeSettingsChanged(it) }
                 )
             }
         }
+
+        LoadingIndicator(isLoading = state.isLoading)
     }
 }
 
@@ -130,21 +120,25 @@ fun BoxSurface(
     }
 }
 
-@Preview(name = "Dark preview", showBackground = true)
+@Composable
+private fun BoxScope.LoadingIndicator(isLoading: Boolean) {
+    if (isLoading) CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+}
+
+@Preview(name = "Light preview", showBackground = true)
 @Composable
 fun ProfileUiLightPreview() {
-    AppTheme { ProfileUiStateless(user = composeState, object : ProfileEvents {}) }
+    AppTheme { ProfileUiStateless(state = composeState, object : ProfileEvents {}) }
 }
 
 @Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun ProfileUiDarkPreview() {
-    AppTheme { ProfileUiStateless(user = composeState, object : ProfileEvents {}) }
+    AppTheme { ProfileUiStateless(state = composeState, object : ProfileEvents {}) }
 }
 
-private val composeState = ProfileComposeState(uiModel = ProfileUiModel("Roubert Edgar"))
+private val composeState = ProfileState(uiModel = ProfileUiModel("R.Edgar"))
 
 interface ProfileEvents {
-    fun useDynamicColors(use: Boolean) {}
-    fun onColorScheme(scheme: ColorScheme) {}
+    fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {}
 }
