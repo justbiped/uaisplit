@@ -55,20 +55,28 @@ fun ColorSchemeSelector(
 ) {
     val segments = remember(colorScheme) {
         mutableStateListOf(
-            SegmentItem("Dark", isSelected = colorScheme == ColorScheme.DARK),
-            SegmentItem("Light", isSelected = colorScheme == ColorScheme.LIGHT),
-            SegmentItem("System", isSelected = colorScheme == ColorScheme.SYSTEM),
+            SegmentItem(
+                "Dark",
+                key = ColorScheme.DARK,
+                isSelected = colorScheme == ColorScheme.DARK
+            ),
+            SegmentItem(
+                "Light",
+                key = ColorScheme.LIGHT,
+                isSelected = colorScheme == ColorScheme.LIGHT
+            ),
+            SegmentItem(
+                "System",
+                key = ColorScheme.SYSTEM,
+                isSelected = colorScheme == ColorScheme.SYSTEM
+            ),
         )
     }
 
     SegmentedButton(
         segments = segments,
         onSegmentSelected = { selections ->
-            when {
-                selections.getOrDefault("Dark", false) -> onSchemeSelected(ColorScheme.DARK)
-                selections.getOrDefault("Light", false) -> onSchemeSelected(ColorScheme.LIGHT)
-                selections.getOrDefault("System", false) -> onSchemeSelected(ColorScheme.SYSTEM)
-            }
+            if (selections.isNotEmpty()) onSchemeSelected(selections.first() as ColorScheme)
         }
     )
 }

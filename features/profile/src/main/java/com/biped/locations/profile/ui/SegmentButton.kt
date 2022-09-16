@@ -1,8 +1,7 @@
 package com.biped.locations.profile.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,9 +18,10 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,31 +30,31 @@ import androidx.compose.ui.unit.dp
 import com.biped.locations.theme.colorScheme
 import com.biped.locations.theme.components.LargeLabel
 
+@SuppressLint("MutableCollectionMutableState")
 @Composable
 fun SegmentedButton(
     segments: SnapshotStateList<SegmentItem>,
-    multiSegments: Boolean = false,
+    multiSelection: Boolean = false,
     colors: SegmentColors = segmentColors(),
     dimension: SegmentDimension = SegmentDimension(),
-    onSegmentSelected: (Map<String, Boolean>) -> Unit = {}
+    onSegmentSelected: (HashSet<Any>) -> Unit = {}
 ) {
-    val selectedItems = remember { createSelectionMap(segments) }
-    var lastSelectedKey = segments.first { it.isSelected }.key
+    var selectedItems by remember(segments) { mutableStateOf(createSelectionMap(segments)) }
     val shape = CircleShape
 
-    fun changeSingleSelection(key: String) {
-        if (selectedItems[key] == false) selectedItems[key] = true
-        if (lastSelectedKey != key) {
-            selectedItems.replace(lastSelectedKey, false)
-            lastSelectedKey = key
-        }
+    fun changeSingleSelection(key: Any) {
+        selectedItems = hashSetOf(key)
     }
 
-    fun changeSegmentSelection(key: String) {
-        if (multiSegments.not()) {
+    fun changeSegmentSelection(key: Any) {
+        if (multiSelection.not()) {
             changeSingleSelection(key)
         } else {
-            selectedItems[key] = selectedItems[key]!!.not()
+            selectedItems = if (selectedItems.contains(key)) {
+                selectedItems.apply { remove(key) }
+            } else {
+                selectedItems.apply { add((key)) }
+            }
         }
 
         onSegmentSelected(selectedItems)
@@ -74,15 +74,15 @@ fun SegmentedButton(
                 .height(IntrinsicSize.Min),
         ) {
             segments.forEach { segment ->
-                Segment(
-                    label = segment.label,
-                    key = segment.key,
-                    isSelected = segment.isSelected,
+                SegmentBox(
+                    segment,
+                    isSelected = selectedItems.contains(segment.key),
                     onClick = { key -> changeSegmentSelection(key) },
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    segmentColors = colors
                 )
 
-                if (segments.size > 1) SegmentDivider()
+                if (segments.size > 1) SegmentDivider(colors = colors)
             }
         }
     }
@@ -102,17 +102,15 @@ private fun SegmentDivider(
 }
 
 @Composable
-private fun Segment(
-    label: String,
-    key: String,
-    onClick: (String) -> Unit,
+private fun SegmentBox(
+    segment: SegmentItem,
+    onClick: (key: Any) -> Unit,
     isSelected: Boolean,
     modifier: Modifier = Modifier,
     segmentColors: SegmentColors = segmentColors(),
 ) {
     val background by animateColorAsState(
-        targetValue = if (isSelected) segmentColors.backgroundSelected else segmentColors.background,
-        animationSpec = colorAnimationSpec()
+        targetValue = if (isSelected) segmentColors.backgroundSelected else segmentColors.background
     )
     val textColor by animateColorAsState(
         targetValue = if (isSelected) segmentColors.textColorSelected else segmentColors.textColor
@@ -122,11 +120,11 @@ private fun Segment(
         modifier = modifier
             .fillMaxSize()
             .background(background)
-            .clickable { onClick(key) },
+            .clickable { onClick(segment.key) },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        LargeLabel(text = label, color = textColor)
+        LargeLabel(text = segment.label, color = textColor)
     }
 }
 
@@ -156,19 +154,10 @@ data class SegmentDimension(
 
 data class SegmentItem(
     val label: String,
-    val key: String = label,
-    val isSelected: Boolean = false,
-    val textColor: Color = Color.Unspecified
+    val key: Any = label,
+    val isSelected: Boolean = false
 )
 
-private fun colorAnimationSpec() = tween<Color>(
-    durationMillis = 200,
-    delayMillis = 0,
-    easing = LinearOutSlowInEasing
-)
-
-private fun createSelectionMap(segments: List<SegmentItem>): SnapshotStateMap<String, Boolean> {
-    return SnapshotStateMap<String, Boolean>().apply {
-        segments.forEach { segment -> put(segment.key, segment.isSelected) }
-    }
+private fun createSelectionMap(segments: List<SegmentItem>): HashSet<Any> {
+    return segments.filter { it.isSelected }.map { it.key }.toHashSet()
 }
