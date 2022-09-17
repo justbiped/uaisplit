@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,30 +48,27 @@ fun ColorSchemeSelector(
     colorScheme: ColorScheme,
     onSchemeSelected: (ColorScheme) -> Unit
 ) {
-    val segments = remember(colorScheme) {
-        mutableStateListOf(
-            SegmentItem(
-                "Dark",
-                key = ColorScheme.DARK,
-                isSelected = colorScheme == ColorScheme.DARK
-            ),
-            SegmentItem(
-                "Light",
-                key = ColorScheme.LIGHT,
-                isSelected = colorScheme == ColorScheme.LIGHT
-            ),
-            SegmentItem(
-                "System",
-                key = ColorScheme.SYSTEM,
-                isSelected = colorScheme == ColorScheme.SYSTEM
-            ),
-        )
-    }
+    val segments = rememberSegmentState(
+        SegmentItem(
+            "Dark",
+            key = ColorScheme.DARK,
+            isSelected = colorScheme == ColorScheme.DARK
+        ),
+        SegmentItem(
+            "Light",
+            key = ColorScheme.LIGHT,
+            isSelected = colorScheme == ColorScheme.LIGHT
+        ),
+        SegmentItem(
+            "System",
+            key = ColorScheme.SYSTEM,
+            isSelected = colorScheme == ColorScheme.SYSTEM
+        ),
+    )
 
     SegmentButton(
         segments = segments,
-        onSegmentSelected = { selection -> onSchemeSelected(selection as ColorScheme)
-        }
+        onSegmentSelected = { selection -> onSchemeSelected(selection as ColorScheme) }
     )
 }
 

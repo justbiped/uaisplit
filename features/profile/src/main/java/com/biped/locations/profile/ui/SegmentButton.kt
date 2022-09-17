@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,7 +32,7 @@ import com.biped.locations.theme.components.LargeLabel
 
 @Composable
 fun SegmentButton(
-    segments: List<SegmentItem>,
+    segments: SnapshotStateList<SegmentItem>,
     colors: SegmentColors = segmentColors(),
     dimension: SegmentDimension = SegmentDimension(),
     shape: Shape = CircleShape,
@@ -147,3 +148,7 @@ data class SegmentItem(
 private fun getSelectedKey(segments: List<SegmentItem>): Any {
     return segments.firstOrNull { it.isSelected }?.key ?: Any()
 }
+
+@Composable
+fun rememberSegmentState(vararg segment: SegmentItem): SnapshotStateList<SegmentItem> =
+    remember(segment) { SnapshotStateList<SegmentItem>().also { it.addAll(segment) } }
