@@ -30,7 +30,7 @@ import com.biped.locations.theme.colorScheme
 import com.biped.locations.theme.components.LargeLabel
 
 @Composable
-fun SegmentedButton(
+fun SegmentButton(
     segments: List<SegmentItem>,
     colors: SegmentColors = segmentColors(),
     dimension: SegmentDimension = SegmentDimension(),
