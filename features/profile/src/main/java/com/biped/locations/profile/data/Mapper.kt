@@ -1,7 +1,7 @@
 package com.biped.locations.profile.data
 
 import com.biped.locations.profile.data.domain.Profile
-import com.biped.locations.profile.data.domain.ThemeSettings
+import com.biped.locations.profile.settings.ThemeSettings
 import com.biped.locations.profile.data.ui.ProfileUiModel
 import com.biped.locations.profile.data.ui.ThemeSettingsUiModel
 

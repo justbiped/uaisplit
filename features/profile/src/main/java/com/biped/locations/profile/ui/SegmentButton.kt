@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,7 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.biped.locations.theme.colorScheme
 import com.biped.locations.theme.components.LargeLabel
 
 @Composable
@@ -197,11 +197,11 @@ private fun SegmentBox(
 @Composable
 private fun segmentColors(): SegmentColors {
     return SegmentColors(
-        line = colorScheme().outline,
+        line = colorScheme.outline,
         background = Color.Transparent,
-        textColor = colorScheme().onSurface,
-        backgroundSelected = colorScheme().primary,
-        textColorSelected = colorScheme().onSecondaryContainer
+        textColor = colorScheme.onSurface,
+        backgroundSelected = colorScheme.primary,
+        textColorSelected = colorScheme.onSecondaryContainer
     )
 }
 

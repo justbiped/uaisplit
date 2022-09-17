@@ -1,9 +1,6 @@
 package com.biped.locations.profile.settings
 
-import com.biped.locations.profile.data.domain.ThemeSettings
-import com.biped.locations.theme.ColorScheme
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -25,11 +22,11 @@ class SettingsRepository @Inject constructor(
         }
     }
 
-    private fun toColorScheme(name: String): ColorScheme {
+    private fun toColorScheme(name: String): ColorSettings {
         return try {
-            ColorScheme.valueOf(name)
+            ColorSettings.valueOf(name)
         } catch (error: Throwable) {
-            ColorScheme.SYSTEM
+            ColorSettings.SYSTEM
         }
     }
 
