@@ -1,6 +1,5 @@
 package com.biped.locations.profile.ui
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -21,43 +20,30 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.biped.locations.theme.colorScheme
 import com.biped.locations.theme.components.LargeLabel
 
-@SuppressLint("MutableCollectionMutableState")
 @Composable
 fun SegmentedButton(
-    segments: SnapshotStateList<SegmentItem>,
-    multiSelection: Boolean = false,
+    segments: List<SegmentItem>,
     colors: SegmentColors = segmentColors(),
     dimension: SegmentDimension = SegmentDimension(),
-    onSegmentSelected: (HashSet<Any>) -> Unit = {}
+    shape: Shape = CircleShape,
+    onSegmentSelected: (Any) -> Unit = {}
 ) {
-    var selectedItems by remember(segments) { mutableStateOf(createSelectionMap(segments)) }
-    val shape = CircleShape
-
-    fun changeSingleSelection(key: Any) {
-        selectedItems = hashSetOf(key)
-    }
+    var selectedKey by remember(segments) { mutableStateOf(getSelectedKey(segments)) }
 
     fun changeSegmentSelection(key: Any) {
-        if (multiSelection.not()) {
-            changeSingleSelection(key)
-        } else {
-            selectedItems = if (selectedItems.contains(key)) {
-                selectedItems.apply { remove(key) }
-            } else {
-                selectedItems.apply { add((key)) }
-            }
+        if (key != selectedKey) {
+            selectedKey = key
+            onSegmentSelected(selectedKey)
         }
-
-        onSegmentSelected(selectedItems)
     }
 
     Surface(
@@ -76,7 +62,7 @@ fun SegmentedButton(
             segments.forEach { segment ->
                 SegmentBox(
                     segment,
-                    isSelected = selectedItems.contains(segment.key),
+                    isSelected = selectedKey == segment.key,
                     onClick = { key -> changeSegmentSelection(key) },
                     modifier = Modifier.weight(1f),
                     segmentColors = colors
@@ -158,6 +144,6 @@ data class SegmentItem(
     val isSelected: Boolean = false
 )
 
-private fun createSelectionMap(segments: List<SegmentItem>): HashSet<Any> {
-    return segments.filter { it.isSelected }.map { it.key }.toHashSet()
+private fun getSelectedKey(segments: List<SegmentItem>): Any {
+    return segments.firstOrNull { it.isSelected }?.key ?: Any()
 }

@@ -75,8 +75,7 @@ fun ColorSchemeSelector(
 
     SegmentedButton(
         segments = segments,
-        onSegmentSelected = { selections ->
-            if (selections.isNotEmpty()) onSchemeSelected(selections.first() as ColorScheme)
+        onSegmentSelected = { selection -> onSchemeSelected(selection as ColorScheme)
         }
     )
 }
