@@ -66,6 +66,32 @@ private val DarkColors = darkColorScheme(
     surfaceTint = dark_surfaceTint,
 )
 
+@Composable
+fun AppTheme(
+    colorTheme: ColorTheme = ColorTheme.SYSTEM,
+    useDynamicColors: Boolean = false,
+    content: @Composable () -> Unit
+) {
+    val isDarkMode = when (colorTheme) {
+        ColorTheme.SYSTEM -> isSystemInDarkTheme()
+        ColorTheme.DARK -> true
+        ColorTheme.LIGHT -> false
+    }
+
+    val colorScheme = if (useDynamicColors) {
+        getDynamicColorScheme(isDarkMode)
+    } else {
+        getAppColorScheme(isDarkMode)
+    }
+
+    MaterialTheme(
+        content = content,
+        colorScheme = colorScheme,
+        shapes = AppShapes,
+        typography = AppTypography
+    )
+}
+
 fun getAppColorScheme(isDarkMode: Boolean): ColorScheme {
     return if (isDarkMode) DarkColors else LightColors
 }
@@ -79,22 +105,8 @@ private fun getDynamicColorScheme(isDarkMode: Boolean): ColorScheme {
     }
 }
 
-@Composable
-fun AppTheme(
-    isDarkMode: Boolean = isSystemInDarkTheme(),
-    useDynamicColors: Boolean = false,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = if (useDynamicColors) {
-        getDynamicColorScheme(isDarkMode)
-    } else {
-        getAppColorScheme(isDarkMode)
-    }
-
-    MaterialTheme(
-        content = content,
-        colorScheme = colorScheme,
-        shapes = AppShapes,
-        typography = AppTypography
-    )
+enum class ColorTheme {
+    SYSTEM,
+    LIGHT,
+    DARK
 }

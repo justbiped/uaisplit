@@ -17,6 +17,7 @@ buildscript {
         classpath(Path.dependenciesUpdate)
         classpath(Dependencies.Navigator.classPath)
         classpath(Dependencies.Hilt.classPath)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
     }
 }
 

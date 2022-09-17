@@ -13,3 +13,5 @@ project(":profile").projectDir = new File(rootDir, "features/profile")
 project(":core").projectDir = new File(rootDir, "foundation/core")
 project(":test").projectDir = new File(rootDir, "foundation/test")
 project(":theme").projectDir = new File(rootDir, "foundation/theme")
+include ':settings'
+include ':settings'
