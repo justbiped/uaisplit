@@ -1,4 +1,4 @@
-package com.biped.locations.profile.ui
+package com.biped.locations.theme.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
@@ -29,7 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.biped.locations.theme.components.LargeLabel
 
 @Composable
 fun SegmentButton(

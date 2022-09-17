@@ -16,6 +16,9 @@ import com.biped.locations.profile.settings.ColorSettings
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumTitle
+import com.biped.locations.theme.components.SegmentButton
+import com.biped.locations.theme.components.SegmentItem
+import com.biped.locations.theme.components.rememberSegmentState
 
 @Composable
 fun ThemeSettingsUi(
