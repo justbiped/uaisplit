@@ -5,7 +5,6 @@ import com.biped.locations.settings.SettingsRepository
 import com.biped.locations.user.profile.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LoadUserSettingsUseCase @Inject constructor(

@@ -5,13 +5,13 @@ include ':location'
 include ':test'
 include ':profile'
 include ':theme'
+include ':settings'
 
 
 project(":location").projectDir = new File(rootDir, "features/location")
 project(":profile").projectDir = new File(rootDir, "features/profile")
+project(":settings").projectDir = new File(rootDir, "features/settings")
 
 project(":core").projectDir = new File(rootDir, "foundation/core")
 project(":test").projectDir = new File(rootDir, "foundation/test")
 project(":theme").projectDir = new File(rootDir, "foundation/theme")
-include ':settings'
-include ':settings'

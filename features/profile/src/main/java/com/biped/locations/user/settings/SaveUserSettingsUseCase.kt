@@ -1,7 +1,6 @@
 package com.biped.locations.user.settings
 
 import com.biped.locations.user.settings.data.UserSettings
-import com.biped.locations.settings.SettingsRepository
 import javax.inject.Inject
 
 class SaveUserSettingsUseCase @Inject constructor(

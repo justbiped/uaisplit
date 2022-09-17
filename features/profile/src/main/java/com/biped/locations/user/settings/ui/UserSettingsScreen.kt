@@ -17,8 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.profile.R
 import com.biped.locations.user.settings.data.UserSettingsUiModel
-import com.biped.locations.settings.ui.ThemeSettingsUi
-import com.biped.locations.settings.ui.ThemeSettingsUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
