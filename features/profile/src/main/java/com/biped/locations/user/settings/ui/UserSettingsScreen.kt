@@ -2,11 +2,22 @@ package com.biped.locations.user.settings.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -16,50 +27,49 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.profile.R
-import com.biped.locations.user.settings.data.UserSettingsUiModel
+import com.biped.locations.settings.ui.ThemeSettingsUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
+import com.biped.locations.theme.components.BoxSurface
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.theme.components.MediumHeadline
+import com.biped.locations.user.settings.data.UserSettingsUiModel
 
 private data class ProfileState(
-    var isLoading: Boolean = false,
-    var uiModel: UserSettingsUiModel = UserSettingsUiModel()
+    val isLoading: Boolean = false,
+    val uiModel: UserSettingsUiModel = UserSettingsUiModel()
 )
 
 @Composable
 fun UserSettingsScreen(viewModel: UserSettingsViewModel) {
-    val instruction = viewModel.instruction.collectAsState(UserSettingsViewInstruction.Default).value
-    val state by remember { mutableStateOf(ProfileState()) }
+    var state by rememberState(state = ProfileState())
 
-    when (instruction) {
-        is UserSettingsViewInstruction.Success -> state.apply {
-            uiModel = instruction.uiModel
-            isLoading = false
-        }
-        is UserSettingsViewInstruction.Default -> state.apply {
-            isLoading = false
-        }
-    }
-
-    BoxSurface(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        ProfileUiStateless(
-            state, object : ProfileEvents {
-                override fun onThemeSettingsChanged(settings: com.biped.locations.settings.ui.ThemeSettingsUiModel) {
-                    viewModel.changeThemeSettings(state.uiModel.copy(theme = settings))
-                }
-            }
+    state = when (val instruction = collectInstruction(viewModel)) {
+        is UserSettingsInstruction.Success -> state.copy(
+            uiModel = instruction.uiModel, isLoading = false
         )
+        is UserSettingsInstruction.Default -> state.copy(isLoading = false)
+        is UserSettingsInstruction.Loading -> state.copy(isLoading = true)
     }
 
+    UserSettingsUi(
+        state,
+        object : ProfileEvents {
+            override fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {
+                viewModel.changeThemeSettings(state.uiModel.copy(theme = settings))
+            }
+        }
+    )
 }
 
 @Composable
-private fun ProfileUiStateless(state: ProfileState, profileEvents: ProfileEvents) {
+private fun collectInstruction(viewModel: UserSettingsViewModel) =
+    viewModel.instruction.collectAsState(UserSettingsInstruction.Default).value
+
+@Composable
+private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
     BoxSurface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.small)
@@ -87,7 +97,7 @@ private fun ProfileUiStateless(state: ProfileState, profileEvents: ProfileEvents
 }
 
 @Composable
-fun ProfileHeader(user: UserSettingsUiModel) {
+private fun ProfileHeader(user: UserSettingsUiModel) {
     val profileImagePainter = rememberAsyncImagePainter(
         model = user.picture,
         placeholder = painterResource(id = R.drawable.ic_profile_on)
@@ -110,16 +120,6 @@ fun ProfileHeader(user: UserSettingsUiModel) {
 }
 
 @Composable
-fun BoxSurface(
-    modifier: Modifier,
-    content: @Composable BoxScope.() -> Unit
-) {
-    Box(modifier = modifier.fillMaxSize()) {
-        Surface { content() }
-    }
-}
-
-@Composable
 private fun BoxScope.LoadingIndicator(isLoading: Boolean) {
     if (isLoading) CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
 }
@@ -127,17 +127,22 @@ private fun BoxScope.LoadingIndicator(isLoading: Boolean) {
 @Preview(name = "Light preview", showBackground = true)
 @Composable
 fun ProfileUiLightPreview() {
-    AppTheme { ProfileUiStateless(state = composeState, object : ProfileEvents {}) }
+    AppTheme { UserSettingsUi(state = composeState, object : ProfileEvents {}) }
 }
 
 @Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun ProfileUiDarkPreview() {
-    AppTheme { ProfileUiStateless(state = composeState, object : ProfileEvents {}) }
+    AppTheme { UserSettingsUi(state = composeState, object : ProfileEvents {}) }
 }
 
 private val composeState = ProfileState(uiModel = UserSettingsUiModel("R.Edgar"))
 
 interface ProfileEvents {
     fun onThemeSettingsChanged(settings: com.biped.locations.settings.ui.ThemeSettingsUiModel) {}
+}
+
+@Composable
+fun <T> rememberState(state: T): MutableState<T> {
+    return remember { mutableStateOf(state) }
 }

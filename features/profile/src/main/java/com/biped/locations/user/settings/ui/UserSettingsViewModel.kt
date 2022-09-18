@@ -19,15 +19,16 @@ class UserSettingsViewModel @Inject constructor(
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
-    private val _instruction = MutableWarmFlow<UserSettingsViewInstruction>(
-        UserSettingsViewInstruction.Default
+    private val _instruction = MutableWarmFlow<UserSettingsInstruction>(
+        UserSettingsInstruction.Default
     )
     val instruction = _instruction.toWarmFlow()
 
     fun loadUserSettings() {
         viewModelScope.launch(DispatcherProvider.IO) {
+            _instruction.post(UserSettingsInstruction.Loading)
             loadUserSettingsUseCase().collect { userSettings ->
-                _instruction.post(UserSettingsViewInstruction.Success(userSettings.toUiModel()))
+                _instruction.post(UserSettingsInstruction.Success(userSettings.toUiModel()))
             }
         }
     }
