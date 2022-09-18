@@ -4,10 +4,14 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 
 open class WarmFlow<T>(private val initialValue: T) : Flow<T> {
-    private val hotFlow = MutableSharedFlow<T>(replay = 1)
+    private val hotFlow = MutableStateFlow(initialValue)
     private val coldFlow = MutableSharedFlow<T>(replay = 0)
 
-    internal open val value: T get() = hotFlow.replayCache.first()
+    internal open var value: T
+        get() = hotFlow.value
+        set(value) {
+            hotFlow.value = value
+        }
 
     init {
         runBlocking { hotFlow.emit(initialValue) }
@@ -21,35 +25,31 @@ open class WarmFlow<T>(private val initialValue: T) : Flow<T> {
         coldFlow.emit(value)
     }
 
-    internal open suspend fun post(value: T) {
-        hotFlow.emit(value)
+    internal open fun post(value: T) {
+        hotFlow.value = value
     }
 
-    internal open suspend fun repost() {
-        hotFlow.emit(value)
-    }
-
-    internal open suspend fun reset() {
-        hotFlow.emit(initialValue)
+    internal open fun reset() {
+        hotFlow.value = initialValue
     }
 }
 
 class MutableWarmFlow<T>(value: T) : WarmFlow<T>(value) {
-    public override val value: T get() = super.value
+    public override var value: T
+        get() = super.value
+        set(value) {
+            super.value = value
+        }
 
     public override suspend fun emit(value: T) {
         super.emit(value)
     }
 
-    public override suspend fun post(value: T) {
+    public override fun post(value: T) {
         super.post(value)
     }
 
-    public override suspend fun repost() {
-        super.repost()
-    }
-
-    public override suspend fun reset() {
+    public override fun reset() {
         super.reset()
     }
 

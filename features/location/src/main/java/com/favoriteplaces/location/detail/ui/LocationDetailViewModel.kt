@@ -26,7 +26,7 @@ internal class LocationDetailViewModel @Inject constructor(
 
             result.onSuccess { onLoadLocationDetailSuccess(it) }
             result.onFailure {
-                _viewInstruction.repost()
+                _viewInstruction.post(detailsInstructions.default())
                 _viewInstruction.emit(detailsInstructions.failure())
             }
         }

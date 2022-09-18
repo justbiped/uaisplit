@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biped.locations.user.settings.LoadUserSettingsUseCase
 import com.biped.locations.user.settings.SaveUserSettingsUseCase
+import com.biped.locations.user.settings.data.UserSettingsUiModel
 import com.biped.locations.user.settings.data.toDomainModel
 import com.biped.locations.user.settings.data.toUiModel
-import com.biped.locations.user.settings.data.UserSettingsUiModel
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
 import com.favoriteplaces.core.tools.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,10 +25,11 @@ class UserSettingsViewModel @Inject constructor(
     val instruction = _instruction.toWarmFlow()
 
     fun loadUserSettings() {
+        _instruction.value = UserSettingsInstruction.Loading
+
         viewModelScope.launch(DispatcherProvider.IO) {
-            _instruction.post(UserSettingsInstruction.Loading)
             loadUserSettingsUseCase().collect { userSettings ->
-                _instruction.post(UserSettingsInstruction.Success(userSettings.toUiModel()))
+                _instruction.value = UserSettingsInstruction.Success(userSettings.toUiModel())
             }
         }
     }
