@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SegmentButton(
-    segments: SnapshotStateList<SegmentItem>,
+    segmentState: SegmentButtonState,
     modifier: Modifier = Modifier,
     multiSelection: Boolean = false,
     colors: SegmentColors = segmentColors(),
@@ -42,7 +42,7 @@ fun SegmentButton(
 ) {
     if (multiSelection) {
         SegmentButtonMulti(
-            segments = segments,
+            segments = segmentState.state,
             modifier = modifier,
             colors = colors,
             dimension = dimension,
@@ -51,7 +51,7 @@ fun SegmentButton(
         )
     } else {
         SegmentButtonSingle(
-            segments = segments,
+            segments = segmentState.state,
             modifier = modifier,
             colors = colors,
             dimension = dimension,
@@ -234,5 +234,9 @@ private fun createSelectedMap(segment: List<SegmentItem>): SnapshotStateMap<Any,
 }
 
 @Composable
-fun rememberSegmentState(vararg segment: SegmentItem): SnapshotStateList<SegmentItem> =
-    remember(segment) { SnapshotStateList<SegmentItem>().also { it.addAll(segment) } }
+fun rememberSegmentState(vararg segment: SegmentItem): SegmentButtonState =
+    remember(segment) { SegmentButtonState(segment.toList()) }
+
+class SegmentButtonState internal constructor(private val segments: List<SegmentItem>) {
+    internal val state = SnapshotStateList<SegmentItem>().also { it.addAll(segments) }
+}

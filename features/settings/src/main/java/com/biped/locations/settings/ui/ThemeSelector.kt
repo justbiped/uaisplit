@@ -49,7 +49,7 @@ fun ColorSchemeSelector(
     colorScheme: ColorTheme,
     onSchemeSelected: (ColorTheme) -> Unit
 ) {
-    val segments = rememberSegmentState(
+    val segmentState = rememberSegmentState(
         SegmentItem(
             "Dark",
             key = ColorTheme.DARK,
@@ -69,7 +69,7 @@ fun ColorSchemeSelector(
 
     SegmentButton(
         modifier = Modifier.fillMaxWidth(),
-        segments = segments,
+        segmentState = segmentState,
         onSelectionChange = { selections ->
             if (selections.isNotEmpty()) onSchemeSelected(selections.first() as ColorTheme)
         }

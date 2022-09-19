@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.profile.R
+import com.biped.locations.settings.ui.ThemeSettingsUi
 import com.biped.locations.settings.ui.ThemeSettingsUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
@@ -85,7 +86,7 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
                 modifier = Modifier.weight(0.90f)
             ) {
                 LargeLabel(text = "Theme setup")
-                com.biped.locations.settings.ui.ThemeSettingsUi(
+                ThemeSettingsUi(
                     uiModel = state.uiModel.theme,
                     onSettingsChanged = { profileEvents.onThemeSettingsChanged(it) }
                 )
