@@ -10,6 +10,7 @@ dependencies {
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Fragment.core)
 
+    implementation(Dependencies.Test.assertJ)
     implementation(Dependencies.Test.mockk)
 
     implementation(project(":core"))

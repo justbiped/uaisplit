@@ -31,12 +31,12 @@ internal class LocationListViewModel
                 }
                 .onFailure {
                     _instruction.emit(locationListInstructions.failure())
-                    _instruction.reset()
+                    _instruction.post(locationListInstructions.default())
                 }
         }
     }
 
-    private suspend fun onLocationLoadSuccess(locations: List<Location>) {
+    private fun onLocationLoadSuccess(locations: List<Location>) {
         val locationsUI = locations.map { LocationUIModel.fromDomain(it) }
         _instruction.post(locationListInstructions.success(locationsUI))
     }

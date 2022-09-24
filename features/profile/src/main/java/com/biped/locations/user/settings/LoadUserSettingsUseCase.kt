@@ -13,7 +13,8 @@ class LoadUserSettingsUseCase @Inject constructor(
 ) {
     operator fun invoke(): Flow<UserSettings> {
         return combine(
-            userRepository.observeUser(), settingsRepository.observeThemeSettings()
+            userRepository.observeUser(),
+            settingsRepository.observeThemeSettings()
         ) { user, themeSettings ->
             UserSettings(
                 name = user.name,

@@ -1,20 +1,35 @@
 package com.favoriteplaces.core.coroutines
 
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.merge
 
-open class WarmFlow<T>(private val initialValue: T) : Flow<T> {
-    private val hotFlow = MutableStateFlow(initialValue)
-    private val coldFlow = MutableSharedFlow<T>(replay = 0)
+open class WarmFlow<T>(
+    initialValue: T,
+    conflate: Boolean
+) : Flow<T> {
+
+    private val hotFlow: MutableSharedFlow<T>
+    private val coldFlow: MutableSharedFlow<T>
 
     internal open var value: T
-        get() = hotFlow.value
+        get() = hotFlow.replayCache.first()
         set(value) {
-            hotFlow.value = value
+            hotFlow.tryEmit(value)
         }
 
     init {
-        runBlocking { hotFlow.emit(initialValue) }
+        val extraBufferCapacity = if (conflate.not()) 1 else 0
+        hotFlow = MutableSharedFlow(
+            replay = 1,
+            extraBufferCapacity = extraBufferCapacity,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+        coldFlow = MutableSharedFlow()
+
+        hotFlow.tryEmit(initialValue)
     }
 
     override suspend fun collect(collector: FlowCollector<T>) {
@@ -26,15 +41,15 @@ open class WarmFlow<T>(private val initialValue: T) : Flow<T> {
     }
 
     internal open fun post(value: T) {
-        hotFlow.value = value
+        hotFlow.tryEmit(value)
     }
 
-    internal open fun reset() {
-        hotFlow.value = initialValue
+    internal open fun update(action: (value: T) -> T) {
+        hotFlow.tryEmit(action(value))
     }
 }
 
-class MutableWarmFlow<T>(value: T) : WarmFlow<T>(value) {
+class MutableWarmFlow<T>(value: T, conflate: Boolean = false) : WarmFlow<T>(value, conflate) {
     public override var value: T
         get() = super.value
         set(value) {
@@ -49,8 +64,8 @@ class MutableWarmFlow<T>(value: T) : WarmFlow<T>(value) {
         super.post(value)
     }
 
-    public override fun reset() {
-        super.reset()
+    public override fun update(action: (value: T) -> T) {
+        super.update(action)
     }
 
     fun toWarmFlow(): WarmFlow<T> = this
