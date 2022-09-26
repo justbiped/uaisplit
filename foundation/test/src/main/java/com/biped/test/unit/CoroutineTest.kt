@@ -1,6 +1,7 @@
 package com.biped.test.unit
 
 import com.biped.test.unit.Assertions.assertThat
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,6 @@ import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.AbstractObjectAssert
 import org.assertj.core.api.ListAssert
 import org.assertj.core.api.ObjectAssert
-import kotlin.coroutines.CoroutineContext
 
 fun test(
     context: CoroutineContext = UnconfinedTestDispatcher(),

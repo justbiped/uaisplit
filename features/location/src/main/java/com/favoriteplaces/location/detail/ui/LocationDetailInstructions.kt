@@ -11,6 +11,7 @@ internal sealed interface Instruction {
 
 internal class LocationDetailInstructions @Inject constructor() {
     fun default(): Instruction = Instruction.Default
-    fun failure():Instruction = Instruction.Failure
-    fun success(locationDetailUiModel: LocationDetailUIModel) = Instruction.Success(locationDetailUiModel)
+    fun failure(): Instruction = Instruction.Failure
+    fun success(locationDetailUiModel: LocationDetailUIModel) =
+        Instruction.Success(locationDetailUiModel)
 }

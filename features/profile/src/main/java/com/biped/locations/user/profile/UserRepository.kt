@@ -1,7 +1,7 @@
 package com.biped.locations.user.profile
 
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
+import kotlinx.coroutines.flow.flowOf
 
 class UserRepository @Inject constructor() {
 

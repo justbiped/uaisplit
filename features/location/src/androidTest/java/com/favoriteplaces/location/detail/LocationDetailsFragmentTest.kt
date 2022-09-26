@@ -24,7 +24,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class LocationDetailsFragmentTest {
@@ -43,8 +42,10 @@ class LocationDetailsFragmentTest {
         onView(withText("${detail.review}")).check(isVisible())
         onView(withId(R.id.locationDetailAboutText)).check(hasText(detail.about))
         onView(withId(R.id.locationDetailSchedule)).perform(nestedScrollTo()).check(isVisible())
-        onView(withId(R.id.locationDetailPhoneText)).perform(nestedScrollTo()).check(hasText(detail.phone))
-        onView(withId(R.id.locationDetailAddressText)).perform(nestedScrollTo()).check(hasText(detail.address))
+        onView(withId(R.id.locationDetailPhoneText)).perform(nestedScrollTo())
+            .check(hasText(detail.phone))
+        onView(withId(R.id.locationDetailAddressText)).perform(nestedScrollTo())
+            .check(hasText(detail.address))
         onView(withId(R.id.locationReviewList)).perform(nestedScrollTo()).check(isVisible())
         onView(withId(R.id.seeMoreCommentsText)).perform(nestedScrollTo()).check(isVisible())
     }
@@ -56,7 +57,7 @@ class LocationDetailsFragmentTest {
             .setBody(body)
     }
 
-    companion object{
+    companion object {
         @ClassRule @JvmField var httpResources = HttpResources()
     }
 }

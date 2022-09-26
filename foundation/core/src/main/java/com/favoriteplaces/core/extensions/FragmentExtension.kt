@@ -7,6 +7,8 @@ fun Fragment.onBackPressCallback(callback: () -> Unit) {
     activity?.onBackPressedDispatcher?.addCallback(
         viewLifecycleOwner,
         object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() { callback() }
+            override fun handleOnBackPressed() {
+                callback()
+            }
         })
 }

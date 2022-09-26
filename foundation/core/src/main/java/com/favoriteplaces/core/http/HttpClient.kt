@@ -1,9 +1,9 @@
 package com.favoriteplaces.core.http
 
 import com.favoriteplaces.core.BuildConfig
+import javax.inject.Inject
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import javax.inject.Inject
 
 class HttpClient @Inject
 constructor() {

@@ -1,6 +1,9 @@
 package com.biped.locations.theme
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -31,7 +34,6 @@ fun RowScope.HugeSpacer() {
     Spacer(modifier = Modifier.padding(end = Dimens.huge))
 }
 
-
 @Composable
 fun ColumnScope.TinySpacer() {
     Spacer(modifier = Modifier.padding(top = Dimens.tiny))
@@ -56,7 +58,6 @@ fun ColumnScope.BigSpacer() {
 fun ColumnScope.HugeSpacer() {
     Spacer(modifier = Modifier.padding(top = Dimens.huge))
 }
-
 
 object Dimens {
     val micro: Dp @Composable get() = dimensionResource(id = R.dimen.micro)

@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.biped.locations.theme.ColorTheme
 import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.ColorTheme
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumTitle
 import com.biped.locations.theme.components.SegmentButton

@@ -9,8 +9,8 @@ import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.util.HumanReadables
 import androidx.test.espresso.util.TreeIterables
-import org.hamcrest.Matcher
 import java.util.concurrent.TimeoutException
+import org.hamcrest.Matcher
 
 object TimeoutViewInteraction {
     /**

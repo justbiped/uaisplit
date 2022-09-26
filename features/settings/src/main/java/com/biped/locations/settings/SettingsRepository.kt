@@ -1,10 +1,10 @@
 package com.biped.locations.settings
 
 import com.biped.locations.theme.ColorTheme
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 class SettingsRepository @Inject constructor(
     private val settingsDataStore: SettingsDataStore

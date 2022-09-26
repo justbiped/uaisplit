@@ -3,9 +3,9 @@ package com.biped.locations.user.settings
 import com.biped.locations.settings.SettingsRepository
 import com.biped.locations.user.profile.UserRepository
 import com.biped.locations.user.settings.data.UserSettings
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import javax.inject.Inject
 
 class LoadUserSettingsUseCase @Inject constructor(
     private val settingsRepository: SettingsRepository,

@@ -1,10 +1,10 @@
 package com.biped.test.instrumentation.runner
 
+import java.lang.reflect.Method
 import org.junit.Test
 import org.junit.runner.Description
 import org.junit.runners.BlockJUnit4ClassRunner
 import org.junit.runners.model.FrameworkMethod
-import java.lang.reflect.Method
 
 class AutomatorRunner(private val testClass: Class<*>) : BlockJUnit4ClassRunner(testClass) {
 

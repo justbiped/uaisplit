@@ -64,7 +64,6 @@ fun PermissionDialog(dialogData: DialogData, onAnswer: (DialogAnswerEvent) -> Un
     }
 }
 
-
 sealed interface DialogAnswerEvent {
     object Dismiss : DialogAnswerEvent
     object Positive : DialogAnswerEvent

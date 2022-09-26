@@ -15,12 +15,10 @@ import com.favoriteplaces.location.R
 import com.favoriteplaces.location.databinding.LocationListFragmentBinding
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LocationListFragment :
     BindingFragment<LocationListFragmentBinding>(R.layout.location_list_fragment) {
-
 
     private val viewModel: LocationListViewModel by viewModels()
 

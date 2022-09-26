@@ -9,9 +9,7 @@ import com.biped.locations.user.settings.data.toDomainModel
 import com.biped.locations.user.settings.data.toUiModel
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
 import com.favoriteplaces.core.coroutines.launchIO
-import com.favoriteplaces.core.tools.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

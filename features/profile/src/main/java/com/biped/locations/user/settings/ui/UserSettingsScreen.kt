@@ -48,7 +48,10 @@ fun UserSettingsScreen(viewModel: UserSettingsViewModel) {
     var state by rememberState(state = ProfileState())
 
     state = when (val instruction = collectInstruction(viewModel)) {
-        is UserSettingsInstruction.Success -> state.copy(uiModel = instruction.uiModel, isLoading = false)
+        is UserSettingsInstruction.Success -> state.copy(
+            uiModel = instruction.uiModel,
+            isLoading = false
+        )
         is UserSettingsInstruction.Default -> state.copy(isLoading = false)
         is UserSettingsInstruction.Loading -> state.copy(isLoading = true)
     }

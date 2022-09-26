@@ -4,7 +4,6 @@ import androidx.navigation.NavDirections
 import com.favoriteplaces.location.list.data.ui.LocationUIModel
 import javax.inject.Inject
 
-
 internal sealed interface Instruction {
     data class Success(val locations: List<LocationUIModel>) : Instruction
     object Failure : Instruction

@@ -10,8 +10,12 @@ import com.favoriteplaces.location.detail.ui.Instruction
 import com.favoriteplaces.location.detail.ui.LocationDetailInstructions
 import com.favoriteplaces.location.detail.ui.LocationDetailViewModel
 import com.favoriteplaces.location.detail.ui.ScheduleFormatter
-import io.mockk.*
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -48,7 +52,7 @@ class LocationDetailViewModelTest {
         every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
         coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
 
-      //  viewModel.locationDetail.observeForever(observer)
+        //  viewModel.locationDetail.observeForever(observer)
         viewModel.loadLocationDetails(0)
 
         verify {
@@ -59,13 +63,12 @@ class LocationDetailViewModelTest {
         }
     }
 
-
     @Test
     fun `emits error state when fetch details fail`() = runBlocking {
         val observer = mockk<(Instruction) -> Unit>(relaxed = true)
         coEvery { getLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
 
-      //  viewModel.viewInstruction.observeForever(observer)
+        //  viewModel.viewInstruction.observeForever(observer)
         viewModel.loadLocationDetails(0)
 
         verify {
@@ -74,7 +77,6 @@ class LocationDetailViewModelTest {
             })
         }
     }
-
 
     private fun getLocationDetail() =
         LocationDetail(

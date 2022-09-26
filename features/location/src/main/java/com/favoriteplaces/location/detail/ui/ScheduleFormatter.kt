@@ -6,7 +6,7 @@ import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.Schedule
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.text.DateFormatSymbols
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 internal class ScheduleFormatter @Inject constructor(@ApplicationContext private val context: Context) {

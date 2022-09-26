@@ -24,7 +24,6 @@ val cream_700 = Color(0xFF5E6050)
 val cream_800 = Color(0xFF3F4132)
 val cream_900 = Color(0xFF1E2012)
 
-
 //============Light===================
 val light_primary = green_200
 val light_onPrimary = green_50
@@ -93,6 +92,5 @@ val dark_inverseSurface = Color(0xFFE5E2DA)
 val dark_inversePrimary = Color(0xFF556500)
 val dark_shadow = Color(0xFF000000)
 val dark_surfaceTint = Color(0xFFBCD063)
-
 
 val seed = Color(0xFF5E6050)

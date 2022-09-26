@@ -17,7 +17,7 @@
         android:id="@+id/locationDetailsFragment"
         android:name="com.favoriteplaces.location.detail.ui.LocationDetailsFragment"
         android:label="LocationDetailsFragment"
-        tools:layout="@layout/location_detail_fragment" >
+        tools:layout="@layout/location_detail_fragment">
         <argument
             android:name="locationId"
             app:argType="integer"
