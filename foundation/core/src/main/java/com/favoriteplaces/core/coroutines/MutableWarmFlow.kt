@@ -4,39 +4,39 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.merge
-import kotlinx.coroutines.runBlocking
 
 open class WarmFlow<T>(
     initialValue: T,
     conflate: Boolean
 ) : Flow<T> {
-
     private val hotFlow: MutableSharedFlow<T>
     private val coldFlow: MutableSharedFlow<T>
+    private val mergedFlow: Flow<T>
 
     internal open val value: T
         get() = hotFlow.replayCache.first()
 
     init {
-        val onBufferOverflow =
-            if (conflate.not()) BufferOverflow.SUSPEND else BufferOverflow.DROP_OLDEST
-        hotFlow = MutableSharedFlow(
-            replay = 1,
-            onBufferOverflow = onBufferOverflow
-        )
+        val onBufferOverflow = if (conflate.not()) {
+            BufferOverflow.SUSPEND
+        } else {
+            BufferOverflow.DROP_OLDEST
+        }
+
         coldFlow = MutableSharedFlow()
+        hotFlow = MutableSharedFlow(replay = 1, onBufferOverflow = onBufferOverflow)
+        mergedFlow = merge(
+            hotFlow.distinctUntilChanged(),
+            coldFlow.distinctUntilChanged()
+        )
 
         hotFlow.tryEmit(initialValue)
     }
 
     override suspend fun collect(collector: FlowCollector<T>) {
-        merge(
-            hotFlow.distinctUntilChanged(),
-            coldFlow.distinctUntilChanged()
-        ).collect(collector)
+        mergedFlow.collect(collector)
     }
 
     internal open suspend fun emit(value: T) {
