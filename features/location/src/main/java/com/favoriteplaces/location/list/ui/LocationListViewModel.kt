@@ -36,7 +36,7 @@ internal class LocationListViewModel
         }
     }
 
-    private fun onLocationLoadSuccess(locations: List<Location>) {
+    private suspend fun onLocationLoadSuccess(locations: List<Location>) {
         val locationsUI = locations.map { LocationUIModel.fromDomain(it) }
         _instruction.post(locationListInstructions.success(locationsUI))
     }

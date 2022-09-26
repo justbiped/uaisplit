@@ -8,6 +8,7 @@ import com.biped.locations.user.settings.data.UserSettingsUiModel
 import com.biped.locations.user.settings.data.toDomainModel
 import com.biped.locations.user.settings.data.toUiModel
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
+import com.favoriteplaces.core.coroutines.launchIO
 import com.favoriteplaces.core.tools.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -25,17 +26,19 @@ class UserSettingsViewModel @Inject constructor(
     val instruction = _instruction.toWarmFlow()
 
     fun loadUserSettings() {
-        _instruction.value = UserSettingsInstruction.Loading
+        viewModelScope.launchIO {
+            _instruction.post(UserSettingsInstruction.Loading)
 
-        viewModelScope.launch(DispatcherProvider.IO) {
             loadUserSettingsUseCase().collect { userSettings ->
-                _instruction.value = UserSettingsInstruction.Success(userSettings.toUiModel())
+                _instruction.post(
+                    UserSettingsInstruction.Success(userSettings.toUiModel())
+                )
             }
         }
     }
 
     fun changeThemeSettings(settings: UserSettingsUiModel) {
-        viewModelScope.launch(DispatcherProvider.IO) {
+        viewModelScope.launchIO {
             _instruction
             saveUserSettingsUseCase(settings.toDomainModel())
         }

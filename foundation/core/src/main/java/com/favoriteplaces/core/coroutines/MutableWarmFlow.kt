@@ -4,7 +4,10 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.runBlocking
 
 open class WarmFlow<T>(
     initialValue: T,
@@ -14,18 +17,15 @@ open class WarmFlow<T>(
     private val hotFlow: MutableSharedFlow<T>
     private val coldFlow: MutableSharedFlow<T>
 
-    internal open var value: T
+    internal open val value: T
         get() = hotFlow.replayCache.first()
-        set(value) {
-            hotFlow.tryEmit(value)
-        }
 
     init {
-        val extraBufferCapacity = if (conflate.not()) 1 else 0
+        val onBufferOverflow =
+            if (conflate.not()) BufferOverflow.SUSPEND else BufferOverflow.DROP_OLDEST
         hotFlow = MutableSharedFlow(
             replay = 1,
-            extraBufferCapacity = extraBufferCapacity,
-            onBufferOverflow = BufferOverflow.DROP_OLDEST
+            onBufferOverflow = onBufferOverflow
         )
         coldFlow = MutableSharedFlow()
 
@@ -33,38 +33,37 @@ open class WarmFlow<T>(
     }
 
     override suspend fun collect(collector: FlowCollector<T>) {
-        merge(hotFlow, coldFlow).collect(collector)
+        merge(
+            hotFlow.distinctUntilChanged(),
+            coldFlow.distinctUntilChanged()
+        ).collect(collector)
     }
 
     internal open suspend fun emit(value: T) {
         coldFlow.emit(value)
     }
 
-    internal open fun post(value: T) {
-        hotFlow.tryEmit(value)
+    internal open suspend fun post(value: T) {
+        hotFlow.emit(value)
     }
 
-    internal open fun update(action: (value: T) -> T) {
-        hotFlow.tryEmit(action(value))
+    internal open suspend fun update(action: (value: T) -> T) {
+        hotFlow.emit(action(value))
     }
 }
 
 class MutableWarmFlow<T>(value: T, conflate: Boolean = false) : WarmFlow<T>(value, conflate) {
-    public override var value: T
-        get() = super.value
-        set(value) {
-            super.value = value
-        }
+    public override val value: T get() = super.value
 
     public override suspend fun emit(value: T) {
         super.emit(value)
     }
 
-    public override fun post(value: T) {
+    public override suspend fun post(value: T) {
         super.post(value)
     }
 
-    public override fun update(action: (value: T) -> T) {
+    public override suspend fun update(action: (value: T) -> T) {
         super.update(action)
     }
 

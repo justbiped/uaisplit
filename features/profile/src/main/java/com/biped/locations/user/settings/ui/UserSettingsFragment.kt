@@ -24,13 +24,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserSettingsFragment : ComposeFragment() {
 
     private val viewModel: UserSettingsViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.loadUserSettings()
     }
 
     @Composable
-    override fun Compose() {
+    override fun Compose(savedInstanceState: Bundle?) {
         UserSettingsScreen(viewModel = viewModel)
     }
 }
@@ -61,12 +62,12 @@ abstract class ComposeFragment : Fragment() {
                     colorTheme = colorTheme,
                     useDynamicColors = useDynamicColors
                 ) {
-                    Compose()
+                    Compose(savedInstanceState)
                 }
             }
         }
     }
 
     @Composable
-    abstract fun Compose()
+    abstract fun Compose(savedInstanceState: Bundle?)
 }

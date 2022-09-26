@@ -48,9 +48,7 @@ fun UserSettingsScreen(viewModel: UserSettingsViewModel) {
     var state by rememberState(state = ProfileState())
 
     state = when (val instruction = collectInstruction(viewModel)) {
-        is UserSettingsInstruction.Success -> state.copy(
-            uiModel = instruction.uiModel, isLoading = false
-        )
+        is UserSettingsInstruction.Success -> state.copy(uiModel = instruction.uiModel, isLoading = false)
         is UserSettingsInstruction.Default -> state.copy(isLoading = false)
         is UserSettingsInstruction.Loading -> state.copy(isLoading = true)
     }
@@ -64,10 +62,6 @@ fun UserSettingsScreen(viewModel: UserSettingsViewModel) {
         }
     )
 }
-
-@Composable
-private fun collectInstruction(viewModel: UserSettingsViewModel) =
-    viewModel.instruction.collectAsState(UserSettingsInstruction.Default).value
 
 @Composable
 private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
@@ -142,6 +136,10 @@ private val composeState = ProfileState(uiModel = UserSettingsUiModel("R.Edgar")
 interface ProfileEvents {
     fun onThemeSettingsChanged(settings: com.biped.locations.settings.ui.ThemeSettingsUiModel) {}
 }
+
+@Composable
+private fun collectInstruction(viewModel: UserSettingsViewModel) =
+    viewModel.instruction.collectAsState(UserSettingsInstruction.Default).value
 
 @Composable
 fun <T> rememberState(state: T): MutableState<T> {
