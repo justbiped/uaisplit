@@ -41,19 +41,20 @@ import com.biped.locations.user.settings.data.UserSettingsUiModel
 private data class ProfileState(
     val isLoading: Boolean = false,
     val uiModel: UserSettingsUiModel = UserSettingsUiModel()
-)
+) {
+    fun defaultState() = copy(isLoading = false)
+    fun loadingState() = copy(isLoading = true)
+    fun successState(uiModel: UserSettingsUiModel) = copy(uiModel = uiModel, isLoading = false)
+}
 
 @Composable
 fun UserSettingsScreen(viewModel: UserSettingsViewModel) {
     var state by rememberState(state = ProfileState())
 
     state = when (val instruction = collectInstruction(viewModel)) {
-        is UserSettingsInstruction.Success -> state.copy(
-            uiModel = instruction.uiModel,
-            isLoading = false
-        )
-        is UserSettingsInstruction.Default -> state.copy(isLoading = false)
-        is UserSettingsInstruction.Loading -> state.copy(isLoading = true)
+        is UserSettingsInstruction.Success -> state.successState(instruction.uiModel)
+        is UserSettingsInstruction.Default -> state.defaultState()
+        is UserSettingsInstruction.Loading -> state.loadingState()
     }
 
     UserSettingsUi(
@@ -137,7 +138,7 @@ fun ProfileUiDarkPreview() {
 private val composeState = ProfileState(uiModel = UserSettingsUiModel("R.Edgar"))
 
 interface ProfileEvents {
-    fun onThemeSettingsChanged(settings: com.biped.locations.settings.ui.ThemeSettingsUiModel) {}
+    fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {}
 }
 
 @Composable
