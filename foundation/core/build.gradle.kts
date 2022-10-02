@@ -1,10 +1,10 @@
 plugins {
-    id(Plugins.Android.library)
-    id(Dependencies.Hilt.plugin)
-    id(Dependencies.Kotlin.android)
-    id(Dependencies.Kotlin.kapt)
-    id(Dependencies.Kotlin.parcelize)
-    id(Dependencies.Serialization.plugin)
+    id(Plugins.Library)
+    id(Plugins.Hilt)
+    id(Plugins.Android)
+    id(Plugins.Kapt)
+    id(Plugins.Parcelize)
+    id(Plugins.Serialization)
 }
 
 dependencies {
@@ -16,10 +16,10 @@ dependencies {
     implementation(Dependencies.Fragment.core)
     implementation(Dependencies.Navigator.ui)
 
-    implementation(Dependencies.retrofit)
+    implementation(Dependencies.Square.retrofit)
     implementation(Dependencies.Serialization.converter)
-    implementation(Dependencies.httpLogging)
-    implementation(Dependencies.okHttp)
+    implementation(Dependencies.Square.httpLogging)
+    implementation(Dependencies.Square.okHttp)
     implementation(Dependencies.Serialization.core)
 
     implementation(Dependencies.Hilt.core)

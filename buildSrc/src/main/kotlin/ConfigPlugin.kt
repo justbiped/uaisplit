@@ -22,8 +22,8 @@ class ConfigPlugin : Plugin<Project> {
 private fun Project.applyAndroidConfigs() {
     subprojects {
         onAndroidSetup {
-            plugins.apply(Dependencies.Kotlin.android)
-            plugins.apply(Dependencies.Navigator.plugin)
+            plugins.apply(Plugins.Android)
+            plugins.apply(Plugins.Kotlin)
 
             android {
                 compileSdkVersion(33)
@@ -86,7 +86,7 @@ private fun Project.applyAndroidConfigs() {
                 localImplementation(Dependencies.Test.androidxCore)
                 localImplementation(Dependencies.Fragment.testing)
                 localImplementation(Dependencies.Navigator.testing)
-                localImplementation(Dependencies.Test.mockServer)
+                localImplementation(Dependencies.Square.mockServer)
 
                 testImplementation(Dependencies.Test.mockk)
                 testImplementation(Dependencies.Coroutines.test)
@@ -116,12 +116,7 @@ private fun Project.applyAndroidConfigs() {
 }
 
 private fun AndroidExtension.setupTests() {
-
     testOptions {
-        devices {
-            createPixel2()
-        }
-
         unitTests.all {
             it.testLogging {
                 events = setOf(
@@ -138,19 +133,6 @@ private fun AndroidExtension.setupTests() {
         unitTests.isReturnDefaultValues = true
         animationsDisabled = true
         testBuildType = local
-    }
-}
-
-private fun NamedDomainObjectContainerScope<Device>.createPixel2() {
-    if (findByName("pixel2") == null) {
-        create<ManagedVirtualDevice>("pixel2") {
-            device = "Pixel 2"
-            apiLevel = 29
-            systemImageSource = "aosp"
-            abi = "x86"
-        }
-    } else {
-        getByName<ManagedVirtualDevice>("pixel2")
     }
 }
 

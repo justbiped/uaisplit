@@ -1,17 +1,14 @@
 // @formatter:off
-
-object Versions {
-    const val retrofit = "2.9.0"
-    const val room = "2.3.0"
-    const val okHttp = "4.10.0"
-}
-
 object Dependencies {
 
-    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    const val httpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
-    const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
-    const val coil = "io.coil-kt:coil-compose:2.2.0"
+    object Square {
+        const val retrofitVersion = "2.9.0"
+        const val okHttpVersion = "4.10.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+        const val httpLogging = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+        const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+        const val mockServer = "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+    }
 
     object Android {
         const val core = "androidx.core:core-ktx:1.8.0"
@@ -23,31 +20,22 @@ object Dependencies {
 
         const val datastore = "androidx.datastore:datastore-preferences:1.0.0"
 
-        const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
-        const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
-        const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+        const val roomVersion = "2.3.0"
+        const val roomRuntime = "androidx.room:room-runtime:$roomVersion"
+        const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
+        const val roomKtx = "androidx.room:room-ktx:$roomVersion"
     }
 
-    private const val KotlinVersion = "1.7.0"
-
     object Kotlin {
-
-        const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$KotlinVersion"
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KotlinVersion"
-
-        const val kapt: String = "kotlin-kapt"
-        const val android = "kotlin-android"
-        const val parcelize = "kotlin-parcelize"
-
-        const val classPath = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KotlinVersion"
+        const val version = "1.7.0"
+        const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$version"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
     }
 
     object Serialization {
         const val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
         const val converter =
             "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
-        const val plugin = "kotlinx-serialization"
-        const val classPath = "org.jetbrains.kotlin:kotlin-serialization:$KotlinVersion"
     }
 
     object Coroutines {
@@ -72,7 +60,6 @@ object Dependencies {
         const val assertJ = "org.assertj:assertj-core:3.23.1"
         const val mockk = "io.mockk:mockk:$mockkVersion"
         const val mockkAndroid = "io.mockk:mockk-android:$mockkVersion"
-        const val mockServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
 
         const val robolectric = "org.robolectric:robolectric:${robolectricVersion}"
         const val robolectricAnnotations = "org.robolectric:annotations:${robolectricVersion}"
@@ -94,12 +81,10 @@ object Dependencies {
     }
 
     object Hilt {
-        private const val version = "2.43.2"
+        const val version = "2.43.2"
         const val core = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
         const val testing = "com.google.dagger:hilt-android-testing:$version"
-        const val classPath = "com.google.dagger:hilt-android-gradle-plugin:$version"
-        const val plugin = "dagger.hilt.android.plugin"
     }
 
     object Compose {
@@ -113,8 +98,9 @@ object Dependencies {
         const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val animation = "androidx.compose.animation:animation:$version"
-
         const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
+
+        const val coil = "io.coil-kt:coil-compose:2.2.0"
 
         const val testManifest = "androidx.compose.ui:ui-test-manifest:$version"
         const val test = "androidx.compose.ui:ui-test-junit4:$version"
@@ -129,28 +115,41 @@ object Dependencies {
     }
 
     object Navigator {
-        private const val version = "2.5.1"
+        const val version = "2.5.1"
         const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
         const val ui = "androidx.navigation:navigation-ui-ktx:$version"
         const val testing = "androidx.navigation:navigation-testing:$version"
-        const val classPath = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
-        const val plugin = "androidx.navigation.safeargs.kotlin"
     }
 }
 
 object Plugins {
-    const val dependenciesUpdate = "com.github.ben-manes.versions"
+    const val Application = "com.android.application"
+    const val Library = "com.android.library"
+    const val Kotlin = "org.jetbrains.kotlin.android"
+    const val Android = "kotlin-android"
+    const val Kapt: String = "kotlin-kapt"
+    const val Parcelize = "kotlin-parcelize"
 
-    object Android {
-        const val application = "com.android.application"
-        const val library = "com.android.library"
-        const val test: String = "com.android.test"
-        const val googleServices = "com.google.gms.google-services"
-    }
+    const val Serialization = "org.jetbrains.kotlin.plugin.serialization"
+    const val SerializationVersion = Dependencies.Kotlin.version
+
+    const val PlayServices = "com.google.gms.google-services"
+    const val PlayServicesVersion = "4.3.8"
+
+    const val SafeArgs = "androidx.navigation.safeargs.kotlin"
+    const val SafeArgsVersion = Dependencies.Navigator.version
+
+    const val Hilt = "com.google.dagger.hilt.android"
+    const val HiltVersion = Dependencies.Hilt.version
+
+    const val DependenciesUpdate = "com.github.ben-manes.versions"
+    const val DependenciesUpdateVersion = "0.42.0"
+
+    const val test = "com.android.test"
 }
 
 object Path {
-    const val androidGradle = "com.android.tools.build:gradle:7.2.2"
+    const val androidGradle = "com.android.tools.build:gradle:7.3.0"
     const val playServices = "com.google.gms:google-services:4.3.8"
     const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
 }

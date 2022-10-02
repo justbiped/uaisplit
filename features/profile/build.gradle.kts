@@ -1,7 +1,7 @@
 plugins {
-    id(Plugins.Android.library)
-    id(Dependencies.Hilt.plugin)
-    id(Dependencies.Kotlin.kapt)
+    id(Plugins.Library)
+    id(Plugins.Hilt)
+    id(Plugins.Kapt)
 }
 
 android {
@@ -36,7 +36,7 @@ dependencies {
     implementation(Dependencies.Compose.toolingPreview)
     devImplementation(Dependencies.Compose.tooling)
 
-    implementation(Dependencies.coil)
+    implementation(Dependencies.Compose.coil)
 
 
     implementation(Dependencies.Hilt.core)

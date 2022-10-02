@@ -57,14 +57,13 @@ fun UserSettingsScreen(viewModel: UserSettingsViewModel) {
         is UserSettingsInstruction.Loading -> state.loadingState()
     }
 
-    UserSettingsUi(
-        state,
-        object : ProfileEvents {
-            override fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {
-                viewModel.changeThemeSettings(state.uiModel.copy(theme = settings))
-            }
+    val listener = object : ProfileEvents {
+        override fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {
+            viewModel.changeThemeSettings(state.uiModel.copy(theme = settings))
         }
-    )
+    }
+
+    UserSettingsUi(state, listener)
 }
 
 @Composable

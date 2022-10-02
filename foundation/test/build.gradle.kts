@@ -1,8 +1,8 @@
 plugins {
-    id(Plugins.Android.library)
-    id(Dependencies.Hilt.plugin)
-    id(Dependencies.Kotlin.android)
-    id(Dependencies.Kotlin.kapt)
+    id(Plugins.Library)
+    id(Plugins.Hilt)
+    id(Plugins.Android)
+    id(Plugins.Kapt)
 }
 
 dependencies {
@@ -15,8 +15,8 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":theme"))
-    implementation(Dependencies.okHttp)
-    implementation(Dependencies.Test.mockServer)
+    implementation(Dependencies.Square.okHttp)
+    implementation(Dependencies.Square.mockServer)
 
     implementation(Dependencies.Coroutines.test)
     implementation(Dependencies.Test.archCore)

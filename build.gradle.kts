@@ -4,28 +4,15 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 apply<VersionsPlugin>()
 apply<ConfigPlugin>()
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath(Path.androidGradle)
-        classpath(Dependencies.Kotlin.classPath)
-        classpath(Dependencies.Serialization.classPath)
-        classpath(Path.dependenciesUpdate)
-        classpath(Dependencies.Navigator.classPath)
-        classpath(Dependencies.Hilt.classPath)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+plugins {
+    id(Plugins.Application).apply(false)
+    id(Plugins.Library).apply(false)
+    id(Plugins.PlayServices).version(Plugins.PlayServicesVersion).apply(false)
+    id(Plugins.Kotlin).apply(false)
+    id(Plugins.Serialization).version(Plugins.SerializationVersion).apply(false)
+    id(Plugins.SafeArgs).version(Plugins.SafeArgsVersion).apply(false)
+    id(Plugins.Hilt).version(Plugins.HiltVersion).apply(false)
+    id(Plugins.DependenciesUpdate).version(Plugins.DependenciesUpdateVersion).apply(false)
 }
 
 subprojects {

@@ -1,8 +1,9 @@
 plugins {
-    id(Plugins.Android.library)
-    id(Dependencies.Hilt.plugin)
-    id(Dependencies.Kotlin.kapt)
-    id(Dependencies.Serialization.plugin)
+    id(Plugins.Library)
+    id(Plugins.Hilt)
+    id(Plugins.Kapt)
+    id(Plugins.Serialization)
+    id(Plugins.SafeArgs)
 }
 
 android {
@@ -34,9 +35,9 @@ dependencies {
     implementation(Dependencies.Navigator.ui)
     implementation(Dependencies.Lifecycle.viewModel)
 
-    implementation(Dependencies.coil)
+    implementation(Dependencies.Compose.coil)
 
-    implementation(Dependencies.retrofit)
+    implementation(Dependencies.Square.retrofit)
     implementation(Dependencies.Serialization.core)
 
     implementation(Dependencies.Hilt.core)

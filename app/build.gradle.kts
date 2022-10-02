@@ -1,8 +1,8 @@
 plugins {
-    id(Plugins.Android.application)
-    id(Dependencies.Hilt.plugin)
-    id(Dependencies.Serialization.plugin)
-    id(Dependencies.Kotlin.kapt)
+    id(Plugins.Application)
+    id(Plugins.Hilt)
+    id(Plugins.Serialization)
+    id(Plugins.Kapt)
 }
 
 android {
@@ -76,12 +76,12 @@ dependencies {
     implementation(Dependencies.Lifecycle.viewModel)
     implementation(Dependencies.Lifecycle.runtime)
 
-    implementation(Dependencies.coil)
+    implementation(Dependencies.Compose.coil)
 
-    implementation(Dependencies.retrofit)
+    implementation(Dependencies.Square.retrofit)
+    implementation(Dependencies.Square.httpLogging)
+    implementation(Dependencies.Square.okHttp)
     implementation(Dependencies.Serialization.converter)
-    implementation(Dependencies.httpLogging)
-    implementation(Dependencies.okHttp)
     implementation(Dependencies.Serialization.core)
 
     implementation(Dependencies.Hilt.core)
