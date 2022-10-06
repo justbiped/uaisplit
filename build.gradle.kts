@@ -15,14 +15,6 @@ plugins {
     id(Plugins.DependenciesUpdate).version(Plugins.DependenciesUpdateVersion).apply(false)
 }
 
-subprojects {
-    afterEvaluate {
-        if (instrumentation.hasManagedDevice) {
-            androidTestTasks.add("$name:pixel2LocalAndroidTest")
-        }
-    }
-}
-
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
     checkForGradleUpdate = true
     outputFormatter = "html"

@@ -30,8 +30,8 @@ dependencies {
     implementation(Dependencies.Compose.animation)
     implementation(Dependencies.Compose.pager)
     implementation(Dependencies.Compose.foundation)
-    implementation("androidx.compose.material3:material3:1.0.0-beta02")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta02")
+    implementation("androidx.compose.material3:material3:1.0.0-beta03")
+    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta03")
 
     implementation(Dependencies.Compose.toolingPreview)
     devImplementation(Dependencies.Compose.tooling)
