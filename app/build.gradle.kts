@@ -52,14 +52,16 @@ dependencies {
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.materialDesign)
 
+    implementation(Dependencies.Compose.foundation)
     implementation(Dependencies.Compose.ui)
-    implementation(Dependencies.Compose.material)
+    implementation("androidx.compose.material3:material3:1.0.0-beta03")
+    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta03")
     implementation(Dependencies.Compose.icons)
     implementation(Dependencies.Compose.iconsExtended)
     implementation(Dependencies.Compose.animation)
-    implementation(Dependencies.Compose.pager)
-
-    implementation(Dependencies.Compose.foundation)
+    implementation(Dependencies.Compose.activity)
+    implementation("androidx.navigation:navigation-compose:2.5.2")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     implementation(Dependencies.Compose.toolingPreview)
     devImplementation(Dependencies.Compose.tooling)
@@ -89,6 +91,7 @@ dependencies {
 
     implementation(project(":location"))
     implementation(project(":profile"))
+    implementation(project(":settings"))
     implementation(project(":core"))
     implementation(project(":theme"))
     localImplementation(project(":test"))

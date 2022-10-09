@@ -34,8 +34,7 @@ object Dependencies {
 
     object Serialization {
         const val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
-        const val converter =
-            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+        const val converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     }
 
     object Coroutines {
@@ -81,7 +80,7 @@ object Dependencies {
     }
 
     object Hilt {
-        const val version = "2.43.2"
+        const val version = "2.44"
         const val core = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
         const val testing = "com.google.dagger:hilt-android-testing:$version"
@@ -89,6 +88,7 @@ object Dependencies {
 
     object Compose {
         private const val version = "1.2.0"
+        const val compiler = "1.2.0"
         const val ui = "androidx.compose.ui:ui:$version"
         const val tooling = "androidx.compose.ui:ui-tooling:$version"
         const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
@@ -98,6 +98,7 @@ object Dependencies {
         const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val animation = "androidx.compose.animation:animation:$version"
+        const val activity ="androidx.activity:activity-compose:1.6.0"
         const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
 
         const val coil = "io.coil-kt:coil-compose:2.2.0"

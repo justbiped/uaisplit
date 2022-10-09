@@ -9,7 +9,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
+        kotlinCompilerExtensionVersion = Dependencies.Compose.compiler
     }
 }
 
@@ -23,8 +23,8 @@ dependencies {
     implementation(Dependencies.Compose.icons)
     implementation(Dependencies.Compose.iconsExtended)
     implementation(Dependencies.Compose.animation)
-    implementation("androidx.compose.material3:material3:1.0.0-beta02")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta02")
+    implementation("androidx.compose.material3:material3:1.0.0-beta03")
+    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta03")
 
     implementation(Dependencies.Compose.foundation)
 

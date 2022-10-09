@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun BoxSurface(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {
     Box(modifier = modifier) {

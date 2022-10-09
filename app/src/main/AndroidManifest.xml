@@ -14,7 +14,7 @@
         tools:replace="android:name">
 
         <activity
-            android:name=".home.MainActivity"
+            android:name=".home.MainComposeActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>

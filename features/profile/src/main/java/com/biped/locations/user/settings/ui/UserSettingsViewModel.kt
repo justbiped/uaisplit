@@ -18,10 +18,13 @@ class UserSettingsViewModel @Inject constructor(
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
-    private val _instruction = MutableWarmFlow<UserSettingsInstruction>(
-        UserSettingsInstruction.Default
-    )
+    private val _instruction =
+        MutableWarmFlow<UserSettingsInstruction>(UserSettingsInstruction.Default)
     val instruction = _instruction.toWarmFlow()
+
+    init {
+        loadUserSettings()
+    }
 
     fun loadUserSettings() {
         viewModelScope.launchIO {
@@ -37,7 +40,6 @@ class UserSettingsViewModel @Inject constructor(
 
     fun changeThemeSettings(settings: UserSettingsUiModel) {
         viewModelScope.launchIO {
-            _instruction
             saveUserSettingsUseCase(settings.toDomainModel())
         }
     }
