@@ -41,28 +41,23 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
         is HomeInstruction.Default -> state.toDefault()
     }
 
-    HomeScreenStateless(state)
+    val (colorScheme, useDynamicColors) = state.themeSettings
+    AppTheme(colorScheme, useDynamicColors) {
+        HomeScreenStateless(state)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreenStateless(state: HomeComposeState) {
     val navController = rememberNavController()
-    AppTheme(state.themeSettings.colorScheme, state.themeSettings.useDynamicColors) {
-        Scaffold(
-            bottomBar = { BottomNavigation(navController) }
-        ) { paddingValues ->
-            Surface(modifier = Modifier.padding(paddingValues)) {
-                NavigationGraph(navController = navController)
-            }
+    Scaffold(
+        bottomBar = { BottomNavigation(navController) }
+    ) { paddingValues ->
+        Surface(modifier = Modifier.padding(paddingValues)) {
+            NavigationGraph(navController = navController)
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    HomeScreenStateless(HomeComposeState())
 }
 
 @Composable
@@ -110,3 +105,10 @@ val NavBackStackEntry.currentRoute: String get() = destination.route ?: ""
 private fun HomeViewModel.collectInstruction() =
     instruction.collectAsState(initial = HomeInstruction.Default).value
 
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    AppTheme {
+        HomeScreenStateless(HomeComposeState())
+    }
+}
