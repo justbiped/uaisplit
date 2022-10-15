@@ -22,8 +22,8 @@ sealed class HomeDestination(
     val selectedIcon: ImageVector
 ) {
     object LocationList : HomeDestination(
-        route = "home_route",
-        title = R.string.home_destination_label,
+        route = "location_list_route",
+        title = R.string.location_list_label,
         unselectedIcon = Icons.Outlined.ViewList,
         selectedIcon = Icons.Filled.ViewList
     )
@@ -40,7 +40,7 @@ sealed class HomeDestination(
 fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = HomeDestination.LocationList.route) {
         composable(HomeDestination.LocationList.route) {
-            LocationListScreen()
+          //  StatementScreen()
         }
         composable(HomeDestination.UserSettings.route) {
             UserSettingsScreen(viewModel = hiltViewModel())

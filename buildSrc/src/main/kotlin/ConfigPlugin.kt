@@ -1,11 +1,11 @@
-import com.android.build.api.dsl.Device
-import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.gradle.kotlin.dsl.*
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.findByType
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 typealias App = com.android.build.gradle.AppPlugin
@@ -13,7 +13,6 @@ typealias Library = com.android.build.gradle.LibraryPlugin
 typealias AndroidExtension = com.android.build.gradle.TestedExtension
 
 class ConfigPlugin : Plugin<Project> {
-
     override fun apply(project: Project) {
         project.applyAndroidConfigs()
     }
@@ -22,8 +21,8 @@ class ConfigPlugin : Plugin<Project> {
 private fun Project.applyAndroidConfigs() {
     subprojects {
         onAndroidSetup {
-            plugins.apply(Plugins.Android)
-            plugins.apply(Plugins.Kotlin)
+            plugins.apply(Plugins.kotlin)
+            plugins.apply(Plugins.kotlin_android)
 
             android {
                 compileSdkVersion(33)
@@ -142,10 +141,10 @@ private fun Project.onAndroidSetup(action: () -> Unit) {
     }
 }
 
-private fun Project.android(action: AndroidExtension.() -> Unit) {
+internal fun Project.android(action: AndroidExtension.() -> Unit) {
     extensions.findByType<AndroidExtension>()?.action()
 }
 
-private fun Project.androidComponents(action: ApplicationAndroidComponentsExtension.() -> Unit) {
+internal fun Project.androidComponents(action: ApplicationAndroidComponentsExtension.() -> Unit) {
     extensions.findByType<ApplicationAndroidComponentsExtension>()?.action()
 }

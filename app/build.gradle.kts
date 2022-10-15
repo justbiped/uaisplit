@@ -1,8 +1,9 @@
 plugins {
-    id(Plugins.Application)
-    id(Plugins.Hilt)
-    id(Plugins.Serialization)
-    id(Plugins.Kapt)
+    id(Plugins.application)
+    id(Plugins.hilt)
+    id(Plugins.serialization)
+    id(Plugins.kapt)
+    id(Plugins.compose)
 }
 
 android {
@@ -20,14 +21,6 @@ android {
         }
     }
 
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
-    }
-
     buildTypes {
 
         local {
@@ -39,10 +32,6 @@ android {
             buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }
-
-    instrumentation {
-        hasManagedDevice = true
-    }
 }
 
 dependencies {
@@ -51,17 +40,6 @@ dependencies {
     implementation(Dependencies.Android.core)
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.materialDesign)
-
-    implementation(Dependencies.Compose.foundation)
-    implementation(Dependencies.Compose.ui)
-    implementation("androidx.compose.material3:material3:1.0.0-beta03")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta03")
-    implementation(Dependencies.Compose.icons)
-    implementation(Dependencies.Compose.iconsExtended)
-    implementation(Dependencies.Compose.animation)
-    implementation(Dependencies.Compose.activity)
-    implementation("androidx.navigation:navigation-compose:2.5.2")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     implementation(Dependencies.Compose.toolingPreview)
     devImplementation(Dependencies.Compose.tooling)

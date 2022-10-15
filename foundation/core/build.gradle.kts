@@ -1,10 +1,10 @@
 plugins {
-    id(Plugins.Library)
-    id(Plugins.Hilt)
-    id(Plugins.Android)
-    id(Plugins.Kapt)
-    id(Plugins.Parcelize)
-    id(Plugins.Serialization)
+    id(Plugins.library)
+    id(Plugins.hilt)
+    id(Plugins.kotlin)
+    id(Plugins.kapt)
+    id(Plugins.parcelize)
+    id(Plugins.serialization)
 }
 
 dependencies {

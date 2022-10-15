@@ -1,8 +1,8 @@
 plugins {
-    id(Plugins.Library)
-    id(Plugins.Hilt)
-    id(Plugins.Android)
-    id(Plugins.Kapt)
+    id(Plugins.library)
+    id(Plugins.hilt)
+    id(Plugins.kotlin)
+    id(Plugins.kapt)
 }
 
 dependencies {

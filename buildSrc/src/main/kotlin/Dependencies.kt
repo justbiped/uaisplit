@@ -1,6 +1,5 @@
 // @formatter:off
 object Dependencies {
-
     object Square {
         const val retrofitVersion = "2.9.0"
         const val okHttpVersion = "4.10.0"
@@ -28,13 +27,15 @@ object Dependencies {
 
     object Kotlin {
         const val version = "1.7.0"
+        const val core = "androidx.core:core-ktx:$version"
         const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
     }
 
     object Serialization {
         const val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
-        const val converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+        const val converter =
+            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     }
 
     object Coroutines {
@@ -87,8 +88,9 @@ object Dependencies {
     }
 
     object Compose {
-        private const val version = "1.2.0"
-        const val compiler = "1.2.0"
+        private const val version = "1.2.1"
+        const val compiler_vesion = "1.2.0"
+
         const val ui = "androidx.compose.ui:ui:$version"
         const val tooling = "androidx.compose.ui:ui-tooling:$version"
         const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
@@ -98,8 +100,11 @@ object Dependencies {
         const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val animation = "androidx.compose.animation:animation:$version"
-        const val activity ="androidx.activity:activity-compose:1.6.0"
+        const val activity = "androidx.activity:activity-compose:1.6.0"
         const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
+
+        const val navigation = "androidx.navigation:navigation-compose:2.5.2"
+        const val hilt = "androidx.hilt:hilt-navigation-compose:1.0.0"
 
         const val coil = "io.coil-kt:coil-compose:2.2.0"
 
@@ -124,27 +129,30 @@ object Dependencies {
 }
 
 object Plugins {
-    const val Application = "com.android.application"
-    const val Library = "com.android.library"
-    const val Kotlin = "org.jetbrains.kotlin.android"
-    const val Android = "kotlin-android"
-    const val Kapt: String = "kotlin-kapt"
-    const val Parcelize = "kotlin-parcelize"
+    const val application = "com.android.application"
+    const val library = "com.android.library"
+    const val kotlin = "org.jetbrains.kotlin.android"
+    const val kotlin_android = "kotlin-android"
 
-    const val Serialization = "org.jetbrains.kotlin.plugin.serialization"
-    const val SerializationVersion = Dependencies.Kotlin.version
+    const val kapt: String = "kotlin-kapt"
+    const val parcelize = "kotlin-parcelize"
 
-    const val PlayServices = "com.google.gms.google-services"
-    const val PlayServicesVersion = "4.3.8"
+    const val serialization = "org.jetbrains.kotlin.plugin.serialization"
+    const val serialization_version = Dependencies.Kotlin.version
 
-    const val SafeArgs = "androidx.navigation.safeargs.kotlin"
-    const val SafeArgsVersion = Dependencies.Navigator.version
+    const val play_services = "com.google.gms.google-services"
+    const val play_services_version = "4.3.8"
 
-    const val Hilt = "com.google.dagger.hilt.android"
-    const val HiltVersion = Dependencies.Hilt.version
+    const val safe_args = "androidx.navigation.safeargs.kotlin"
+    const val safe_args_version = Dependencies.Navigator.version
 
-    const val DependenciesUpdate = "com.github.ben-manes.versions"
-    const val DependenciesUpdateVersion = "0.42.0"
+    const val hilt = "com.google.dagger.hilt.android"
+    const val hilt_version = Dependencies.Hilt.version
+
+    const val dependency_updates = "com.github.ben-manes.versions"
+    const val dependency_updates_version = "0.42.0"
+
+    const val compose = "biped.works.plugins.compose"
 
     const val test = "com.android.test"
 }

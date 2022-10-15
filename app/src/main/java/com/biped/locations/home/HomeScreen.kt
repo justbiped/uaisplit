@@ -1,6 +1,5 @@
 package com.biped.locations.home
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -90,13 +89,6 @@ fun BottomNavigation(navController: NavHostController) {
             )
         }
     }
-}
-
-@Composable
-fun LocationListScreen() {
-    Surface(
-        modifier = Modifier.fillMaxSize()
-    ) {}
 }
 
 val NavBackStackEntry.currentRoute: String get() = destination.route ?: ""

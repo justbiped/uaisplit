@@ -1,17 +1,8 @@
 plugins {
-    id(Plugins.Library)
-    id(Plugins.Hilt)
-    id(Plugins.Kapt)
-}
-
-android {
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
-    }
+    id(Plugins.library)
+    id(Plugins.hilt)
+    id(Plugins.kapt)
+    id(Plugins.compose)
 }
 
 dependencies {
@@ -23,21 +14,6 @@ dependencies {
 
     implementation(Dependencies.Navigator.ui)
     implementation(Dependencies.Navigator.fragment)
-
-    implementation(Dependencies.Compose.ui)
-    implementation(Dependencies.Compose.icons)
-    implementation(Dependencies.Compose.iconsExtended)
-    implementation(Dependencies.Compose.animation)
-    implementation(Dependencies.Compose.pager)
-    implementation(Dependencies.Compose.foundation)
-    implementation("androidx.compose.material3:material3:1.0.0-beta03")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta03")
-
-    implementation(Dependencies.Compose.toolingPreview)
-    devImplementation(Dependencies.Compose.tooling)
-
-    implementation(Dependencies.Compose.coil)
-
 
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)

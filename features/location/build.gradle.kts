@@ -1,9 +1,9 @@
 plugins {
-    id(Plugins.Library)
-    id(Plugins.Hilt)
-    id(Plugins.Kapt)
-    id(Plugins.Serialization)
-    id(Plugins.SafeArgs)
+    id(Plugins.library)
+    id(Plugins.hilt)
+    id(Plugins.kapt)
+    id(Plugins.serialization)
+    id(Plugins.safe_args)
 }
 
 android {

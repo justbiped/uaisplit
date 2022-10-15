@@ -1,3 +1,4 @@
+import biped.works.plugins.ComposePlugin
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
@@ -5,14 +6,14 @@ apply<VersionsPlugin>()
 apply<ConfigPlugin>()
 
 plugins {
-    id(Plugins.Application).apply(false)
-    id(Plugins.Library).apply(false)
-    id(Plugins.PlayServices).version(Plugins.PlayServicesVersion).apply(false)
-    id(Plugins.Kotlin).apply(false)
-    id(Plugins.Serialization).version(Plugins.SerializationVersion).apply(false)
-    id(Plugins.SafeArgs).version(Plugins.SafeArgsVersion).apply(false)
-    id(Plugins.Hilt).version(Plugins.HiltVersion).apply(false)
-    id(Plugins.DependenciesUpdate).version(Plugins.DependenciesUpdateVersion).apply(false)
+    id(Plugins.application).apply(false)
+    id(Plugins.library).apply(false)
+    id(Plugins.play_services).version(Plugins.play_services_version).apply(false)
+    id(Plugins.kotlin).apply(false)
+    id(Plugins.serialization).version(Plugins.serialization_version).apply(false)
+    id(Plugins.safe_args).version(Plugins.safe_args_version).apply(false)
+    id(Plugins.hilt).version(Plugins.hilt_version).apply(false)
+    id(Plugins.dependency_updates).version(Plugins.dependency_updates_version).apply(false)
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
@@ -20,7 +21,6 @@ tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
     outputFormatter = "html"
     outputDir = "report/dependencies"
     reportfileName = "available-versions"
-
 
     rejectVersionIf {
         candidate.version.contains("alpha") ||
@@ -31,17 +31,4 @@ tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
 
 tasks.create<Delete>("clean") {
     delete(rootProject.buildDir)
-}
-
-tasks.register("prepareAndroidTest") {
-    val file = File("${rootProject.rootDir}/android-test.sh").apply {
-        delete()
-        createNewFile()
-    }
-
-    val commandBuilder = StringBuilder("#!/bin/bash").apply {
-        androidTestTasks.forEach { append("\n./gradlew $it") }
-    }
-
-    file.writeText(commandBuilder.toString())
 }
