@@ -22,7 +22,6 @@ android {
     }
 
     buildTypes {
-
         local {
             applicationIdSuffix = ".local"
         }
