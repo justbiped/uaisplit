@@ -78,10 +78,9 @@ fun BottomNavigation(navController: NavHostController) {
 
     NavigationBar {
         homeDestinations.forEach { destination ->
-            val currentRoute = navBackStackEntry?.currentRoute
-            val isSelected = destination.route == currentRoute
+            val isSelected = destination.route == navBackStackEntry?.currentRoute
             val icon = if (isSelected) destination.selectedIcon else destination.unselectedIcon
-            print(currentRoute)
+
             NavigationBarItem(
                 selected = isSelected,
                 onClick = { navigate(destination.graph) },
