@@ -64,13 +64,13 @@ fun BottomNavigation(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     val homeDestinations = listOf(
-        HomeDestination.LocationList,
+        HomeDestination.StatementGraph,
         HomeDestination.UserSettings
     )
 
     fun navigate(route: String) {
         navController.navigate(route) {
-            popUpTo(HomeDestination.LocationList.route) { saveState = true }
+            popUpTo(HomeDestination.StatementGraph.route) { saveState = true }
             launchSingleTop = true
             restoreState = true
         }
@@ -78,12 +78,13 @@ fun BottomNavigation(navController: NavHostController) {
 
     NavigationBar {
         homeDestinations.forEach { destination ->
-            val isSelected = destination.route == navBackStackEntry?.currentRoute
+            val currentRoute = navBackStackEntry?.currentRoute
+            val isSelected = destination.route == currentRoute
             val icon = if (isSelected) destination.selectedIcon else destination.unselectedIcon
-
+            print(currentRoute)
             NavigationBarItem(
                 selected = isSelected,
-                onClick = { navigate(destination.route) },
+                onClick = { navigate(destination.graph) },
                 icon = { Icon(icon, contentDescription = "") },
                 label = { LargeLabel(text = stringResource(id = destination.title)) }
             )

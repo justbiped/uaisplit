@@ -7,6 +7,16 @@ plugins {
     id(Plugins.serialization)
 }
 
+android {
+    buildFeatures.apply {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Dependencies.Compose.compiler_vesion
+    }
+}
+
 dependencies {
     implementation(Dependencies.Coroutines.android)
 
@@ -21,6 +31,8 @@ dependencies {
     implementation(Dependencies.Square.httpLogging)
     implementation(Dependencies.Square.okHttp)
     implementation(Dependencies.Serialization.core)
+
+    implementation(Dependencies.Compose.navigation)
 
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)

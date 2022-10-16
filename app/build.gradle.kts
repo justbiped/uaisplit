@@ -68,6 +68,7 @@ dependencies {
 
     implementation(project(":location"))
     implementation(project(":profile"))
+    implementation(project(":statement"))
     implementation(project(":settings"))
     implementation(project(":core"))
     implementation(project(":theme"))
