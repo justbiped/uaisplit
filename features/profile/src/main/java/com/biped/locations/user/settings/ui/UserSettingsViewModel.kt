@@ -13,26 +13,26 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class UserSettingsViewModel @Inject constructor(
+internal class UserSettingsViewModel @Inject constructor(
     private val loadUserSettingsUseCase: LoadUserSettingsUseCase,
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
     private val _instruction =
-        MutableWarmFlow<UserSettingsInstruction>(UserSettingsInstruction.Default)
+        MutableWarmFlow<Instruction>(Instruction.Default)
     val instruction = _instruction.toWarmFlow()
 
     init {
         loadUserSettings()
     }
 
-    fun loadUserSettings() {
+    private fun loadUserSettings() {
         viewModelScope.launchIO {
-            _instruction.post(UserSettingsInstruction.Loading)
+            _instruction.post(Instruction.Loading)
 
             loadUserSettingsUseCase().collect { userSettings ->
                 _instruction.post(
-                    UserSettingsInstruction.Success(userSettings.toUiModel())
+                    Instruction.Success(userSettings.toUiModel())
                 )
             }
         }
@@ -41,6 +41,12 @@ class UserSettingsViewModel @Inject constructor(
     fun changeThemeSettings(settings: UserSettingsUiModel) {
         viewModelScope.launchIO {
             saveUserSettingsUseCase(settings.toDomainModel())
+        }
+    }
+
+    fun showUserProfile(userId: String) {
+        viewModelScope.launchIO {
+            _instruction.emit(Instruction.navigateToProfile(userId))
         }
     }
 }

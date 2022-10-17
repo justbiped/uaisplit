@@ -18,6 +18,9 @@ dependencies {
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)
 
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha02")
+
+
     implementation(project(":core"))
     implementation(project(":theme"))
     devImplementation(project(":test"))

@@ -4,7 +4,9 @@ import com.biped.locations.settings.toDomainModel
 import com.biped.locations.settings.toUiModel
 
 fun UserSettings.toUiModel() = UserSettingsUiModel(
-    name, picture,
+    "userId",
+    name,
+    picture,
     themeSettings.toUiModel()
 )
 

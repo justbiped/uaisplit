@@ -2,6 +2,7 @@ package com.biped.locations.user.settings.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,7 +14,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.profile.R
 import com.biped.locations.settings.ui.ThemeSettingsUi
@@ -37,6 +38,8 @@ import com.biped.locations.theme.components.BoxSurface
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.theme.components.MediumHeadline
 import com.biped.locations.user.settings.data.UserSettingsUiModel
+import com.favoriteplaces.core.compose.Launch
+import com.favoriteplaces.core.compose.navigate
 
 private data class ProfileState(
     val isLoading: Boolean = false,
@@ -48,16 +51,31 @@ private data class ProfileState(
 }
 
 @Composable
-fun UserSettingsScreen(viewModel: UserSettingsViewModel) {
+internal fun UserSettingsScreen(
+    viewModel: UserSettingsViewModel,
+    navController: NavHostController
+) {
     var state by rememberState(state = ProfileState())
 
-    state = when (val instruction = collectInstruction(viewModel)) {
-        is UserSettingsInstruction.Success -> state.successState(instruction.uiModel)
-        is UserSettingsInstruction.Default -> state.defaultState()
-        is UserSettingsInstruction.Loading -> state.loadingState()
+    Launch {
+        viewModel.instruction.collect { instruction ->
+            state = when (instruction) {
+                is Instruction.Success -> state.successState(instruction.uiModel)
+                is Instruction.Default -> state.defaultState()
+                is Instruction.Loading -> state.loadingState()
+                is Instruction.Navigate -> {
+                    navController.navigate(direction = instruction.direction)
+                    state.defaultState()
+                }
+            }
+        }
     }
 
     val listener = object : ProfileEvents {
+        override fun onProfileClicked(userId: String) {
+            viewModel.showUserProfile(userId)
+        }
+
         override fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {
             viewModel.changeThemeSettings(state.uiModel.copy(theme = settings))
         }
@@ -73,12 +91,17 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
             modifier = Modifier.padding(horizontal = Dimens.small)
         ) {
             BigSpacer()
+
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(state.uiModel)
+                ProfileHeader(
+                    user = state.uiModel,
+                    onClick = { profileEvents.onProfileClicked(it) })
             }
+
             BigSpacer()
+
             Column(
                 modifier = Modifier.weight(0.90f)
             ) {
@@ -95,13 +118,15 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
 }
 
 @Composable
-private fun ProfileHeader(user: UserSettingsUiModel) {
+private fun ProfileHeader(user: UserSettingsUiModel, onClick: (id: String) -> Unit) {
     val profileImagePainter = rememberAsyncImagePainter(
         model = user.picture,
         placeholder = painterResource(id = R.drawable.ic_profile_on)
     )
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick(user.id) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
@@ -137,12 +162,9 @@ fun ProfileUiDarkPreview() {
 private val composeState = ProfileState(uiModel = UserSettingsUiModel("R.Edgar"))
 
 interface ProfileEvents {
+    fun onProfileClicked(userId: String) {}
     fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {}
 }
-
-@Composable
-private fun collectInstruction(viewModel: UserSettingsViewModel) =
-    viewModel.instruction.collectAsState(UserSettingsInstruction.Default).value
 
 @Composable
 fun <T> rememberState(state: T): MutableState<T> {

@@ -3,16 +3,16 @@ package com.biped.locations.home
 import StatementDirections
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ListAlt
 import androidx.compose.material.icons.filled.People
-import androidx.compose.material.icons.filled.ViewList
+import androidx.compose.material.icons.outlined.ListAlt
 import androidx.compose.material.icons.outlined.People
-import androidx.compose.material.icons.outlined.ViewList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.biped.locations.R
-import com.biped.locations.user.ProfileDestinations
+import com.biped.locations.user.ProfileNavGraph
 import com.biped.locations.user.profileNavGraph
 import statementGraph
 
@@ -27,13 +27,13 @@ sealed class HomeDestination(
         graph = StatementDirections.Graph.route,
         route = StatementDirections.Statement.route,
         title = R.string.statement_list_label,
-        unselectedIcon = Icons.Outlined.ViewList,
-        selectedIcon = Icons.Filled.ViewList
+        unselectedIcon = Icons.Outlined.ListAlt,
+        selectedIcon = Icons.Filled.ListAlt
     )
 
     object UserSettings : HomeDestination(
-        graph = ProfileDestinations.Graph.route,
-        route = ProfileDestinations.Settings.route,
+        graph = ProfileNavGraph.route,
+        route = ProfileNavGraph.SettingsDirection.route,
         title = R.string.profile_destination_label,
         unselectedIcon = Icons.Outlined.People,
         selectedIcon = Icons.Filled.People
