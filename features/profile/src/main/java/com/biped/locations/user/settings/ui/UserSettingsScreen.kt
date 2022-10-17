@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,7 +54,7 @@ internal fun UserSettingsScreen(
     viewModel: UserSettingsViewModel,
     navController: NavHostController
 ) {
-    var state by rememberState(state = ProfileState())
+    var state by remember { mutableStateOf(ProfileState()) }
 
     Launch {
         viewModel.instruction.collect { instruction ->
@@ -164,9 +163,4 @@ private val composeState = ProfileState(uiModel = UserSettingsUiModel("R.Edgar")
 interface ProfileEvents {
     fun onProfileClicked(userId: String) {}
     fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {}
-}
-
-@Composable
-fun <T> rememberState(state: T): MutableState<T> {
-    return remember { mutableStateOf(state) }
 }
