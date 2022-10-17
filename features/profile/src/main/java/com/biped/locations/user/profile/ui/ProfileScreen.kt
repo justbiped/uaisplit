@@ -14,7 +14,7 @@ private data class ComposeState(val isLoading: Boolean = false) {
 }
 
 @Composable
-internal fun ProfileScreen(viewModel: ProfileViewModel = viewModel(), userId: String) {
+internal fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
     var state by remember { mutableStateOf(ComposeState()) }
 
     Launch {

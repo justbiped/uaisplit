@@ -18,15 +18,15 @@ sealed class ProfileNavGraph {
     object SettingsDirection : NavDestination(route = "user_settings_route")
 
     data class ProfileDirection(val userId: String) : Direction {
-        override val route: String = "$ROOT/$userId"
+        override val route: String = "$rootRoute/$userId"
         override val popUpRoute: String = SettingsDirection.route
 
         companion object {
-            const val USER_ID_ARG = "userID"
-            const val ROOT = "user_profile_route"
+            const val USER_ID_ARG = "userId"
 
+            const val rootRoute = "user_profile_route"
             val destination = NavDestination(
-                route = "$ROOT/{$USER_ID_ARG}",
+                route = "$rootRoute/{$USER_ID_ARG}",
                 arguments = listOf(navArgument(USER_ID_ARG) { type = NavType.StringType })
             )
         }
@@ -42,13 +42,8 @@ fun NavGraphBuilder.profileNavGraph(navController: NavHostController) {
             UserSettingsScreen(viewModel = hiltViewModel(), navController = navController)
         }
 
-        composable(ProfileNavGraph.ProfileDirection.destination) { backStackEntry ->
-            ProfileScreen(
-                viewModel = hiltViewModel(),
-                userId = backStackEntry.arguments
-                    ?.getString(ProfileNavGraph.ProfileDirection.USER_ID_ARG)
-                    .orEmpty()
-            )
+        composable(ProfileNavGraph.ProfileDirection.destination) {
+            ProfileScreen(viewModel = hiltViewModel())
         }
     }
 }
