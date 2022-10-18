@@ -9,14 +9,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class ProfileViewModel @Inject constructor(
-    private val stateHandle: SavedStateHandle
+    stateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _instruction = MutableWarmFlow<Instruction>(Instruction.Default)
     val instruction = _instruction.toWarmFlow()
 
     init {
-        val userId = stateHandle.get<String>(USER_ID_ARG)
-        print(userId)
+        val userId = stateHandle.get<String>(USER_ID_ARG).orEmpty()
+        loadUserProfile(userId)
+    }
+
+    private fun loadUserProfile(userId:String) {
     }
 }

@@ -10,6 +10,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,22 +25,21 @@ import androidx.navigation.compose.rememberNavController
 import com.biped.locations.settings.ui.ThemeSettingsUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.components.LargeLabel
-import com.biped.locations.user.settings.ui.rememberState
 
 private data class HomeComposeState(
     val themeSettings: ThemeSettingsUiModel = ThemeSettingsUiModel()
 ) {
     fun updateTheme(themeSettings: ThemeSettingsUiModel) = copy(themeSettings = themeSettings)
-    fun toDefault() = copy(themeSettings = ThemeSettingsUiModel())
+    fun default() = copy(themeSettings = ThemeSettingsUiModel())
 }
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
-    var state by rememberState(state = HomeComposeState())
+    var state by remember { (mutableStateOf(HomeComposeState())) }
 
     state = when (val instruction = viewModel.collectInstruction()) {
         is HomeInstruction.UpdateTheme -> state.updateTheme(instruction.themeSettings)
-        is HomeInstruction.Default -> state.toDefault()
+        is HomeInstruction.Default -> state.default()
     }
 
     val (colorScheme, useDynamicColors) = state.themeSettings
