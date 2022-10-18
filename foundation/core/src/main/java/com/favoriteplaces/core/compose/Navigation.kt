@@ -1,6 +1,8 @@
 package com.favoriteplaces.core.compose
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.produceState
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -38,6 +40,13 @@ fun NavController.navigate(
         popUpTo(direction.route, popUpToBuilder = popUpOptions)
     }
 }
+
+val NavController.currentRouteState: State<String>
+    @Composable get() = produceState("", this) {
+        currentBackStackEntryFlow.collect {
+            value = it.destination.route.orEmpty()
+        }
+    }
 
 interface Direction {
     val route: String
