@@ -44,8 +44,10 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
         }
     }
 
-    val (colorScheme, useDynamicColors) = state.themeSettings
-    AppTheme(colorScheme, useDynamicColors) {
+    AppTheme(
+        state.themeSettings.colorScheme,
+        state.themeSettings.useDynamicColors
+    ) {
         HomeScreenStateless(state)
     }
 }
