@@ -2,14 +2,18 @@ package com.biped.locations.user.profile.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.biped.locations.user.ProfileNavGraph.ProfileDirection.Companion.USER_ID_ARG
+import com.biped.locations.user.profile.LoadUserUseCase
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
+import com.favoriteplaces.core.coroutines.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 internal class ProfileViewModel @Inject constructor(
-    stateHandle: SavedStateHandle
+    stateHandle: SavedStateHandle,
+    private val loadUser: LoadUserUseCase
 ) : ViewModel() {
 
     private val _instruction = MutableWarmFlow<Instruction>(Instruction.Default)
@@ -20,6 +24,11 @@ internal class ProfileViewModel @Inject constructor(
         loadUserProfile(userId)
     }
 
-    private fun loadUserProfile(userId:String) {
+    private fun loadUserProfile(userId: String) {
+        viewModelScope.launchIO {
+            loadUser(userId).collect { user ->
+                _instruction.post(Instruction.UpdateUser(user))
+            }
+        }
     }
 }

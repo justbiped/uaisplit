@@ -1,0 +1,61 @@
+package com.biped.locations.user
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.rememberAsyncImagePainter
+import com.biped.locations.profile.R
+import com.biped.locations.theme.SmallSpacer
+import com.biped.locations.theme.components.MediumHeadline
+import com.biped.locations.user.profile.data.User
+
+@Composable
+fun ProfileHeader(
+    modifier: Modifier = Modifier,
+    user: User,
+    onClick: ((userId: String) -> Unit)? = null
+) {
+    val profileImagePainter = rememberAsyncImagePainter(
+        model = user.picture,
+        placeholder = painterResource(id = R.drawable.ic_profile_on)
+    )
+    Row(
+        modifier = modifier
+            .clickable(
+                enabled = onClick != null,
+                interactionSource = MutableInteractionSource(),
+                indication = null
+            ) {
+                onClick?.invoke(user.id)
+            },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = profileImagePainter,
+            modifier = Modifier
+                .aspectRatio(1f)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop,
+            contentDescription = ""
+        )
+        SmallSpacer()
+        MediumHeadline(text = user.name, overflow = TextOverflow.Ellipsis)
+    }
+}
+
+@Preview()
+@Composable
+fun ProfileHeader_Preview() {
+    ProfileHeader(user = User(name = "R. Edgar"))
+}
