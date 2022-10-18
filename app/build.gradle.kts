@@ -55,8 +55,6 @@ dependencies {
     implementation(Dependencies.Lifecycle.viewModel)
     implementation(Dependencies.Lifecycle.runtime)
 
-    implementation(Dependencies.Compose.coil)
-
     implementation(Dependencies.Square.retrofit)
     implementation(Dependencies.Square.httpLogging)
     implementation(Dependencies.Square.okHttp)

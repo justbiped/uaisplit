@@ -1,11 +1,14 @@
 package com.biped.locations.user
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.profile.R
+import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumHeadline
 import com.biped.locations.user.profile.data.User
@@ -54,8 +58,22 @@ fun ProfileHeader(
     }
 }
 
-@Preview()
 @Composable
+@Preview(heightDp = 60, widthDp = 360)
 fun ProfileHeader_Preview() {
-    ProfileHeader(user = User(name = "R. Edgar"))
+    AppTheme {
+        Surface(modifier = Modifier.fillMaxWidth()) {
+            ProfileHeader(user = User(name = "R. Edgar"))
+        }
+    }
+}
+
+@Composable
+@Preview(heightDp = 60, widthDp = 360, uiMode = Configuration.UI_MODE_NIGHT_YES)
+fun ProfileHeader_Preview_Dark() {
+    AppTheme {
+        Surface(modifier = Modifier.fillMaxWidth()) {
+            ProfileHeader(user = User(name = "R. Edgar"))
+        }
+    }
 }

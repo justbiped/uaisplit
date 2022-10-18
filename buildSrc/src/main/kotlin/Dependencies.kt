@@ -92,14 +92,16 @@ object Dependencies {
         const val compiler_vesion = "1.2.0"
 
         const val ui = "androidx.compose.ui:ui:$version"
-        const val tooling = "androidx.compose.ui:ui-tooling:$version"
-        const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
         const val foundation = "androidx.compose.foundation:foundation:$version"
         const val material = "androidx.compose.material:material:$version"
         const val icons = "androidx.compose.material:material-icons-core:$version"
         const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val animation = "androidx.compose.animation:animation:$version"
+
+        const val tooling = "androidx.compose.ui:ui-tooling:$version"
+        const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
+
         const val activity = "androidx.activity:activity-compose:1.6.0"
         const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
 

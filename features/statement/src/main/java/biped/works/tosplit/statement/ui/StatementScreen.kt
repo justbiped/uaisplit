@@ -3,7 +3,7 @@ package biped.works.tosplit.statement.ui
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import biped.works.tosplit.statement.data.Statement
 import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.components.LargeLabel
 
 private data class ComposeState(
     val data: List<Statement> = emptyList(),
@@ -27,10 +28,14 @@ private data class ComposeState(
 internal fun StatementScreen(viewModel: StatementViewModel = viewModel()) {
     var state by remember { mutableStateOf(ComposeState()) }
 
-    state = when (val instruction = viewModel.collectInstruction()) {
-        is Instruction.Default -> state.default()
-        is Instruction.Loading -> state.loading()
-        is Instruction.ShowStatement -> state.showStatement(instruction.statement)
+    LaunchedEffect(Unit) {
+        viewModel.instruction.collect { instruction ->
+            state = when (instruction) {
+                is Instruction.Default -> state.default()
+                is Instruction.Loading -> state.loading()
+                is Instruction.ShowStatement -> state.showStatement(instruction.statement)
+            }
+        }
     }
 
     StatementUi(state = state)
@@ -40,18 +45,16 @@ internal fun StatementScreen(viewModel: StatementViewModel = viewModel()) {
 private fun StatementUi(state: ComposeState) {
     Surface(modifier = Modifier.fillMaxSize()) {
         //todo: implement a lazy list
+        LargeLabel(text = "Suas continhas")
     }
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 private fun Statement_Preview() {
     AppTheme {
-        StatementUi(state = ComposeState())
+        Surface(modifier = Modifier.fillMaxSize()) {
+            StatementUi(state = ComposeState())
+        }
     }
-}
-
-@Composable
-private fun StatementViewModel.collectInstruction(): Instruction {
-    return instruction.collectAsState(initial = Instruction.Default).value
 }

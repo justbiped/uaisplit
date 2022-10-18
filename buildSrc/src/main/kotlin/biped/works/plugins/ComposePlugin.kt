@@ -3,6 +3,7 @@ package biped.works.plugins
 import AndroidExtension
 import Dependencies
 import android
+import devImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.DependencyHandlerScope
@@ -39,8 +40,11 @@ class ComposePlugin : Plugin<Project> {
                 implementation(Dependencies.Compose.activity)
                 implementation(Dependencies.Compose.navigation)
                 implementation(Dependencies.Compose.hilt)
-                implementation(Dependencies.Compose.toolingPreview)
                 implementation(Dependencies.Compose.coil)
+
+                //Preview
+                implementation(Dependencies.Compose.toolingPreview)
+                devImplementation(Dependencies.Compose.tooling)
             }
         }
     }

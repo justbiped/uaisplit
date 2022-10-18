@@ -25,10 +25,10 @@ include(":settings")
 include(":statement")
 
 project(":statement").projectDir = File(rootDir, "features/statement")
-project(":location").projectDir = File(rootDir, "features/location")
 project(":profile").projectDir = File(rootDir, "features/profile")
-
 project(":settings").projectDir = File(rootDir, "features/settings")
+project(":location").projectDir = File(rootDir, "features/location")
+
 project(":core").projectDir = File(rootDir, "foundation/core")
 project(":test").projectDir = File(rootDir, "foundation/test")
 project(":theme").projectDir = File(rootDir, "foundation/theme")
