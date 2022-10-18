@@ -1,5 +1,6 @@
-package com.biped.locations.user.profile
+package com.biped.locations.user.profile.data
 
+import com.biped.locations.user.profile.data.User
 import javax.inject.Inject
 import kotlinx.coroutines.flow.flowOf
 

@@ -22,15 +22,15 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.biped.locations.settings.ui.ThemeSettingsUiModel
+import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.components.LargeLabel
 
 private data class HomeComposeState(
-    val themeSettings: ThemeSettingsUiModel = ThemeSettingsUiModel()
+    val themeSettings: ThemeSettings = ThemeSettings()
 ) {
-    fun updateTheme(themeSettings: ThemeSettingsUiModel) = copy(themeSettings = themeSettings)
-    fun default() = copy(themeSettings = ThemeSettingsUiModel())
+    fun updateTheme(themeSettings: ThemeSettings) = copy(themeSettings = themeSettings)
+    fun default() = copy(themeSettings = ThemeSettings())
 }
 
 @Composable

@@ -27,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.profile.R
+import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.settings.ui.ThemeSettingsUi
-import com.biped.locations.settings.ui.ThemeSettingsUiModel
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
@@ -36,17 +36,18 @@ import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.BoxSurface
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.theme.components.MediumHeadline
-import com.biped.locations.user.settings.data.UserSettingsUiModel
+import com.biped.locations.user.profile.data.User
+import com.biped.locations.user.settings.data.UserSettings
 import com.favoriteplaces.core.compose.Launch
 import com.favoriteplaces.core.compose.navigate
 
 private data class ProfileState(
     val isLoading: Boolean = false,
-    val uiModel: UserSettingsUiModel = UserSettingsUiModel()
+    val settings: UserSettings = UserSettings()
 ) {
     fun defaultState() = copy(isLoading = false)
     fun loadingState() = copy(isLoading = true)
-    fun successState(uiModel: UserSettingsUiModel) = copy(uiModel = uiModel, isLoading = false)
+    fun successState(settings: UserSettings) = copy(settings = settings, isLoading = false)
 }
 
 @Composable
@@ -59,7 +60,7 @@ internal fun UserSettingsScreen(
     Launch {
         viewModel.instruction.collect { instruction ->
             state = when (instruction) {
-                is Instruction.Success -> state.successState(instruction.uiModel)
+                is Instruction.Success -> state.successState(instruction.settings)
                 is Instruction.Default -> state.defaultState()
                 is Instruction.Loading -> state.loadingState()
                 is Instruction.Navigate -> {
@@ -75,8 +76,8 @@ internal fun UserSettingsScreen(
             viewModel.showUserProfile(userId)
         }
 
-        override fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {
-            viewModel.changeThemeSettings(state.uiModel.copy(theme = settings))
+        override fun onThemeSettingsChanged(settings: ThemeSettings) {
+            viewModel.changeThemeSettings(state.settings.copy(theme = settings))
         }
     }
 
@@ -95,7 +96,7 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
                 modifier = Modifier.weight(0.10f)
             ) {
                 ProfileHeader(
-                    user = state.uiModel,
+                    user = state.settings.user,
                     onClick = { profileEvents.onProfileClicked(it) })
             }
 
@@ -106,7 +107,7 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
             ) {
                 LargeLabel(text = "Theme setup")
                 ThemeSettingsUi(
-                    uiModel = state.uiModel.theme,
+                    uiModel = state.settings.theme,
                     onSettingsChanged = { profileEvents.onThemeSettingsChanged(it) }
                 )
             }
@@ -117,7 +118,7 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
 }
 
 @Composable
-private fun ProfileHeader(user: UserSettingsUiModel, onClick: (id: String) -> Unit) {
+private fun ProfileHeader(user: User, onClick: (id: String) -> Unit) {
     val profileImagePainter = rememberAsyncImagePainter(
         model = user.picture,
         placeholder = painterResource(id = R.drawable.ic_profile_on)
@@ -158,9 +159,10 @@ fun ProfileUiDarkPreview() {
     AppTheme { UserSettingsUi(state = composeState, object : ProfileEvents {}) }
 }
 
-private val composeState = ProfileState(uiModel = UserSettingsUiModel("R.Edgar"))
+private val composeState =
+    ProfileState(settings = UserSettings(user = User(id = "", picture = "", name = "R.Edgar")))
 
 interface ProfileEvents {
     fun onProfileClicked(userId: String) {}
-    fun onThemeSettingsChanged(settings: ThemeSettingsUiModel) {}
+    fun onThemeSettingsChanged(settings: ThemeSettings) {}
 }

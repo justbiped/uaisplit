@@ -7,6 +7,6 @@ class SaveUserSettingsUseCase @Inject constructor(
     private val settingsRepository: com.biped.locations.settings.SettingsRepository
 ) {
     suspend operator fun invoke(userSettings: UserSettings) {
-        settingsRepository.saveThemeSettings(userSettings.themeSettings)
+        settingsRepository.saveThemeSettings(userSettings.theme)
     }
 }

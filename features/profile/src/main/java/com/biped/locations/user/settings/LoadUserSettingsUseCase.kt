@@ -1,7 +1,7 @@
 package com.biped.locations.user.settings
 
 import com.biped.locations.settings.SettingsRepository
-import com.biped.locations.user.profile.UserRepository
+import com.biped.locations.user.profile.data.UserRepository
 import com.biped.locations.user.settings.data.UserSettings
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -17,9 +17,8 @@ class LoadUserSettingsUseCase @Inject constructor(
             settingsRepository.observeThemeSettings()
         ) { user, themeSettings ->
             UserSettings(
-                name = user.name,
-                picture = user.picture,
-                themeSettings = themeSettings
+                user = user,
+                theme = themeSettings
             )
         }
     }

@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biped.locations.user.settings.LoadUserSettingsUseCase
 import com.biped.locations.user.settings.SaveUserSettingsUseCase
-import com.biped.locations.user.settings.data.UserSettingsUiModel
-import com.biped.locations.user.settings.data.toDomainModel
-import com.biped.locations.user.settings.data.toUiModel
+import com.biped.locations.user.settings.data.UserSettings
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
 import com.favoriteplaces.core.coroutines.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,15 +30,15 @@ internal class UserSettingsViewModel @Inject constructor(
 
             loadUserSettingsUseCase().collect { userSettings ->
                 _instruction.post(
-                    Instruction.Success(userSettings.toUiModel())
+                    Instruction.Success(userSettings)
                 )
             }
         }
     }
 
-    fun changeThemeSettings(settings: UserSettingsUiModel) {
+    fun changeThemeSettings(settings: UserSettings) {
         viewModelScope.launchIO {
-            saveUserSettingsUseCase(settings.toDomainModel())
+            saveUserSettingsUseCase(settings)
         }
     }
 
