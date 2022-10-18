@@ -8,6 +8,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,7 +22,6 @@ import androidx.navigation.compose.rememberNavController
 import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.components.LargeLabel
-import com.favoriteplaces.core.compose.Launch
 import com.favoriteplaces.core.compose.currentRouteState
 
 private data class HomeComposeState(
@@ -35,7 +35,7 @@ private data class HomeComposeState(
 fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
     var state by remember { (mutableStateOf(HomeComposeState())) }
 
-    Launch {
+    LaunchedEffect(Unit) {
         viewModel.instruction.collect { instruction ->
             state = when (instruction) {
                 is HomeInstruction.UpdateTheme -> state.updateTheme(instruction.themeSettings)

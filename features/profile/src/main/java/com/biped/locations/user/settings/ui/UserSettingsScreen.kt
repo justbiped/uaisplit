@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,7 +39,6 @@ import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.theme.components.MediumHeadline
 import com.biped.locations.user.profile.data.User
 import com.biped.locations.user.settings.data.UserSettings
-import com.favoriteplaces.core.compose.Launch
 import com.favoriteplaces.core.compose.navigate
 
 private data class ProfileState(
@@ -57,7 +57,7 @@ internal fun UserSettingsScreen(
 ) {
     var state by remember { mutableStateOf(ProfileState()) }
 
-    Launch {
+    LaunchedEffect(Unit) {
         viewModel.instruction.collect { instruction ->
             state = when (instruction) {
                 is Instruction.Success -> state.successState(instruction.settings)
