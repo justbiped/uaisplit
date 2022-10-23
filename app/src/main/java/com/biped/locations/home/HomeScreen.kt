@@ -25,11 +25,15 @@ import com.biped.locations.theme.components.LargeLabel
 import com.favoriteplaces.core.compose.currentRouteState
 
 private data class HomeComposeState(
-    val themeSettings: ThemeSettings = ThemeSettings()
+    val themeSettings: ThemeSettings = ThemeSettings(),
+    val showBottomBar: Boolean = true
 ) {
     fun updateTheme(themeSettings: ThemeSettings) = copy(themeSettings = themeSettings)
+    fun navigate(route: String) = copy(showBottomBar = homeDestinations.contains(route))
     fun default() = copy(themeSettings = ThemeSettings())
 }
+
+private val homeDestinations = HomeDestination.homeDestinationsSet()
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
@@ -44,17 +48,27 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
         }
     }
 
+    fun onDestinationChanged(route: String) {
+        state = state.navigate(route)
+    }
+
     AppTheme(
         state.themeSettings.colorScheme,
         state.themeSettings.useDynamicColors
     ) {
-        HomeScreenStateless(state)
+        HomeScreenStateless(
+            state = state,
+            onDestinationChanged = { onDestinationChanged(it) }
+        )
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun HomeScreenStateless(state: HomeComposeState) {
+private fun HomeScreenStateless(
+    state: HomeComposeState,
+    onDestinationChanged: (route: String) -> Unit = {}
+) {
     val navController = rememberNavController()
     val currentRoute by navController.currentRouteState
 
@@ -65,13 +79,21 @@ private fun HomeScreenStateless(state: HomeComposeState) {
             restoreState = true
         }
     }
+    LaunchedEffect(key1 = currentRoute) {
+        onDestinationChanged(currentRoute)
+    }
 
     Scaffold(
         bottomBar = {
-            BottomNavigation(
-                currentRoute = currentRoute,
-                onSelectDestination = { navigate(it) }
-            )
+            if (state.showBottomBar) {
+                BottomNavigation(
+                    currentRoute = currentRoute,
+                    onSelectDestination = {
+                        onDestinationChanged(it)
+                        navigate(it)
+                    }
+                )
+            }
         }
     ) { paddingValues ->
         Surface(modifier = Modifier.padding(paddingValues)) {

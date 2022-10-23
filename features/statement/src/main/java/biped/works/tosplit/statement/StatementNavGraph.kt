@@ -6,17 +6,17 @@ import biped.works.tosplit.statement.ui.StatementScreen
 import com.favoriteplaces.core.compose.NavDestination
 import com.favoriteplaces.core.compose.composable
 
-sealed interface StatementDirections {
-    object Graph : NavDestination("statement_graph_route")
-    object Statement : NavDestination("statement_route")
+sealed interface StatementNavGraph {
+    companion object : NavDestination("statement_graph_route")
+    object StatementDirection : NavDestination("statement_route")
 }
 
 fun NavGraphBuilder.statementGraph(navController: NavController) {
     navigation(
-        startDestination = StatementDirections.Statement.route,
-        route = StatementDirections.Graph.route
+        startDestination = StatementNavGraph.StatementDirection.route,
+        route = StatementNavGraph.route
     ) {
-        composable(StatementDirections.Statement) {
+        composable(StatementNavGraph.StatementDirection) {
             StatementScreen(viewModel = hiltViewModel())
         }
     }

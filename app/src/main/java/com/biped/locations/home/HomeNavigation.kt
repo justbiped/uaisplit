@@ -1,6 +1,6 @@
 package com.biped.locations.home
 
-import StatementDirections
+import StatementNavGraph
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ListAlt
@@ -24,8 +24,8 @@ sealed class HomeDestination(
     val selectedIcon: ImageVector
 ) {
     object StatementGraph : HomeDestination(
-        graph = StatementDirections.Graph.route,
-        route = StatementDirections.Statement.route,
+        graph = StatementNavGraph.route,
+        route = StatementNavGraph.StatementDirection.route,
         title = R.string.statement_list_label,
         unselectedIcon = Icons.Outlined.ListAlt,
         selectedIcon = Icons.Filled.ListAlt
@@ -38,6 +38,15 @@ sealed class HomeDestination(
         unselectedIcon = Icons.Outlined.People,
         selectedIcon = Icons.Filled.People
     )
+
+    companion object {
+        fun homeDestinationsSet() = hashSetOf(
+            StatementNavGraph.route,
+            StatementNavGraph.StatementDirection.route,
+            ProfileNavGraph.SettingsDirection.route,
+            ProfileNavGraph.route
+        )
+    }
 }
 
 @Composable
