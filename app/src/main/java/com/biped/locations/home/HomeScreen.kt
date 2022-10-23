@@ -56,7 +56,7 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
         state.themeSettings.colorScheme,
         state.themeSettings.useDynamicColors
     ) {
-        HomeScreenStateless(
+        HomeScreenUi(
             state = state,
             onDestinationChanged = { onDestinationChanged(it) }
         )
@@ -65,7 +65,7 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun HomeScreenStateless(
+private fun HomeScreenUi(
     state: HomeComposeState,
     onDestinationChanged: (route: String) -> Unit = {}
 ) {
@@ -128,6 +128,6 @@ fun BottomNavigation(currentRoute: String, onSelectDestination: (route: String) 
 @Composable
 fun HomeScreenPreview() {
     AppTheme {
-        HomeScreenStateless(HomeComposeState())
+        HomeScreenUi(HomeComposeState())
     }
 }
