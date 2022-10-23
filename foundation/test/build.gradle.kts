@@ -5,6 +5,10 @@ plugins {
     id(Plugins.kapt)
 }
 
+android {
+    namespace = "com.biped.test"
+}
+
 dependencies {
     implementation(Dependencies.Android.core)
     implementation(Dependencies.Android.appCompat)
