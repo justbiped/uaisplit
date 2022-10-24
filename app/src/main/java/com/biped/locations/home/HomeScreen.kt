@@ -2,7 +2,6 @@ package com.biped.locations.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -94,7 +93,7 @@ private fun HomeScreenUi(
         bottomBar = {
             AnimatedVisibility(
                 visible = state.showBottomBar,
-                enter = expandVertically(tween(100)) + slideInVertically(tween(400)),
+                enter = slideInVertically(tween()) { it },
                 exit = shrinkVertically() + slideOutVertically { it },
             ) {
                 BottomNavigation(
