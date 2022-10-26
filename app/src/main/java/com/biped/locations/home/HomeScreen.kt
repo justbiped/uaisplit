@@ -32,9 +32,7 @@ import com.favoriteplaces.core.compose.collectWithLifecycle
 import com.favoriteplaces.core.compose.currentRouteState
 
 @Stable
-private data class HomeComposeState(
-    val navController: NavHostController
-) {
+private data class HomeComposeState(val navController: NavHostController) {
     var themeSettings: ThemeSettings by mutableStateOf(ThemeSettings())
         private set
 
@@ -80,10 +78,7 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
         }
     }
 
-    HomeScreenUi(
-        state = state,
-        onRouteSelected = { viewModel.routeChanged(it) }
-    )
+    HomeScreenUi(state = state, onRouteSelected = { viewModel.routeChanged(it) })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -92,24 +87,17 @@ private fun HomeScreenUi(
     state: HomeComposeState,
     onRouteSelected: (route: String) -> Unit = {}
 ) {
-    AppTheme(
-        state.themeSettings.colorScheme,
-        state.themeSettings.useDynamicColors
-    ) {
-        Scaffold(
-            bottomBar = {
-                AnimatedVisibility(
-                    visible = state.showBottomBar,
-                    enter = slideInVertically(tween()) { it },
-                    exit = shrinkVertically() + slideOutVertically { it },
-                ) {
-                    BottomNavigation(
-                        currentRoute = state.currentRoute,
-                        onSelectDestination = { onRouteSelected(it) }
-                    )
-                }
+    AppTheme(state.themeSettings.colorScheme, state.themeSettings.useDynamicColors) {
+        Scaffold(bottomBar = {
+            AnimatedVisibility(
+                visible = state.showBottomBar,
+                enter = slideInVertically(tween()) { it },
+                exit = shrinkVertically() + slideOutVertically { it },
+            ) {
+                BottomNavigation(currentRoute = state.currentRoute,
+                    onSelectDestination = { onRouteSelected(it) })
             }
-        ) { paddingValues ->
+        }) { paddingValues ->
             Surface(modifier = Modifier.padding(paddingValues)) {
                 NavigationGraph(navController = state.navController)
             }
@@ -118,11 +106,11 @@ private fun HomeScreenUi(
 }
 
 @Composable
-fun BottomNavigation(currentRoute: String, onSelectDestination: (route: String) -> Unit) {
-    val homeDestinations = listOf(
-        HomeDestination.StatementGraph,
-        HomeDestination.UserSettings
-    )
+fun BottomNavigation(
+    currentRoute: String,
+    onSelectDestination: (route: String) -> Unit = {}
+) {
+    val homeDestinations = listOf(HomeDestination.StatementGraph, HomeDestination.UserSettings)
 
     NavigationBar {
         homeDestinations.forEach { destination ->
@@ -144,5 +132,13 @@ fun BottomNavigation(currentRoute: String, onSelectDestination: (route: String) 
 fun HomeScreenPreview() {
     AppTheme {
         HomeScreenUi(rememberHomeState().value)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BottomBarPreview() {
+    AppTheme {
+        BottomNavigation(currentRoute = HomeDestination.StatementGraph.route)
     }
 }
