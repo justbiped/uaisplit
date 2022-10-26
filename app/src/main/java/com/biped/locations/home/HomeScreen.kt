@@ -13,7 +13,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.components.LargeLabel
+import com.favoriteplaces.core.compose.collectWithLifecycle
 import com.favoriteplaces.core.compose.currentRouteState
 
 @Stable
@@ -44,9 +44,13 @@ private data class HomeComposeState(
     val showBottomBar: Boolean
         @Composable get() = HomeDestination.homeDestinationsSet.contains(currentRoute)
 
-    fun updateTheme(settings: ThemeSettings) { themeSettings = settings }
+    fun updateTheme(settings: ThemeSettings) {
+        themeSettings = settings
+    }
 
-    fun default() { themeSettings = ThemeSettings() }
+    fun default() {
+        themeSettings = ThemeSettings()
+    }
 
     fun navigate(route: String) {
         navController.navigate(route) {
@@ -68,13 +72,11 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 
     val state by rememberHomeState()
 
-    LaunchedEffect(Unit) {
-        viewModel.instruction.collect { instruction ->
-            when (instruction) {
-                is HomeInstruction.UpdateTheme -> state.updateTheme(instruction.themeSettings)
-                is HomeInstruction.Navigate -> state.navigate(instruction.route)
-                is HomeInstruction.Default -> state.default()
-            }
+    viewModel.instruction.collectWithLifecycle { instruction ->
+        when (instruction) {
+            is HomeInstruction.UpdateTheme -> state.updateTheme(instruction.themeSettings)
+            is HomeInstruction.Navigate -> state.navigate(instruction.route)
+            is HomeInstruction.Default -> state.default()
         }
     }
 
