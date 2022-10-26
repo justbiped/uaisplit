@@ -14,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,59 +24,29 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.components.LargeLabel
 import com.favoriteplaces.core.compose.currentRouteState
 
+@Stable
 private data class HomeComposeState(
-    val themeSettings: ThemeSettings = ThemeSettings(),
-    val showBottomBar: Boolean = true
+    val navController: NavHostController
 ) {
-    fun updateTheme(themeSettings: ThemeSettings) = copy(themeSettings = themeSettings)
-    fun navigate(route: String) = copy(showBottomBar = homeDestinations.contains(route))
-    fun default() = copy(themeSettings = ThemeSettings())
-}
+    var themeSettings: ThemeSettings by mutableStateOf(ThemeSettings())
+        private set
 
-private val homeDestinations = HomeDestination.homeDestinationsSet()
+    val currentRoute: String
+        @Composable get() = navController.currentRouteState.value
 
-@Composable
-fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
-    var state by remember { (mutableStateOf(HomeComposeState())) }
+    val showBottomBar: Boolean
+        @Composable get() = HomeDestination.homeDestinationsSet.contains(currentRoute)
 
-    LaunchedEffect(Unit) {
-        viewModel.instruction.collect { instruction ->
-            state = when (instruction) {
-                is HomeInstruction.UpdateTheme -> state.updateTheme(instruction.themeSettings)
-                is HomeInstruction.Default -> state.default()
-            }
-        }
-    }
+    fun updateTheme(settings: ThemeSettings) { themeSettings = settings }
 
-    fun onDestinationChanged(route: String) {
-        state = state.navigate(route)
-    }
-
-    AppTheme(
-        state.themeSettings.colorScheme,
-        state.themeSettings.useDynamicColors
-    ) {
-        HomeScreenUi(
-            state = state,
-            onDestinationChanged = { onDestinationChanged(it) }
-        )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun HomeScreenUi(
-    state: HomeComposeState,
-    onDestinationChanged: (route: String) -> Unit = {}
-) {
-    val navController = rememberNavController()
-    val currentRoute by navController.currentRouteState
+    fun default() { themeSettings = ThemeSettings() }
 
     fun navigate(route: String) {
         navController.navigate(route) {
@@ -85,26 +56,61 @@ private fun HomeScreenUi(
         }
     }
 
-    LaunchedEffect(key1 = currentRoute) {
-        onDestinationChanged(currentRoute)
-    }
+}
 
-    Scaffold(
-        bottomBar = {
-            AnimatedVisibility(
-                visible = state.showBottomBar,
-                enter = slideInVertically(tween()) { it },
-                exit = shrinkVertically() + slideOutVertically { it },
-            ) {
-                BottomNavigation(
-                    currentRoute = currentRoute,
-                    onSelectDestination = { navigate(it) }
-                )
+@Composable
+private fun rememberHomeState(
+    navController: NavHostController = rememberNavController()
+) = remember { mutableStateOf(HomeComposeState(navController)) }
+
+@Composable
+fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
+
+    val state by rememberHomeState()
+
+    LaunchedEffect(Unit) {
+        viewModel.instruction.collect { instruction ->
+            when (instruction) {
+                is HomeInstruction.UpdateTheme -> state.updateTheme(instruction.themeSettings)
+                is HomeInstruction.Navigate -> state.navigate(instruction.route)
+                is HomeInstruction.Default -> state.default()
             }
         }
-    ) { paddingValues ->
-        Surface(modifier = Modifier.padding(paddingValues)) {
-            NavigationGraph(navController = navController)
+    }
+
+    HomeScreenUi(
+        state = state,
+        onRouteSelected = { viewModel.routeChanged(it) }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun HomeScreenUi(
+    state: HomeComposeState,
+    onRouteSelected: (route: String) -> Unit = {}
+) {
+    AppTheme(
+        state.themeSettings.colorScheme,
+        state.themeSettings.useDynamicColors
+    ) {
+        Scaffold(
+            bottomBar = {
+                AnimatedVisibility(
+                    visible = state.showBottomBar,
+                    enter = slideInVertically(tween()) { it },
+                    exit = shrinkVertically() + slideOutVertically { it },
+                ) {
+                    BottomNavigation(
+                        currentRoute = state.currentRoute,
+                        onSelectDestination = { onRouteSelected(it) }
+                    )
+                }
+            }
+        ) { paddingValues ->
+            Surface(modifier = Modifier.padding(paddingValues)) {
+                NavigationGraph(navController = state.navController)
+            }
         }
     }
 }
@@ -135,6 +141,6 @@ fun BottomNavigation(currentRoute: String, onSelectDestination: (route: String) 
 @Composable
 fun HomeScreenPreview() {
     AppTheme {
-        HomeScreenUi(HomeComposeState())
+        HomeScreenUi(rememberHomeState().value)
     }
 }

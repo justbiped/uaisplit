@@ -40,7 +40,7 @@ sealed class HomeDestination(
     )
 
     companion object {
-        fun homeDestinationsSet() = hashSetOf(
+        val homeDestinationsSet = hashSetOf(
             StatementNavGraph.route,
             StatementNavGraph.StatementDirection.route,
             ProfileNavGraph.SettingsDirection.route,

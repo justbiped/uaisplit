@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.biped.locations.settings.SettingsRepository
 import com.biped.locations.settings.ThemeSettings
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
+import com.favoriteplaces.core.coroutines.launchDefault
 import com.favoriteplaces.core.coroutines.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,6 +13,7 @@ import javax.inject.Inject
 sealed interface HomeInstruction {
     object Default : HomeInstruction
     data class UpdateTheme(val themeSettings: ThemeSettings) : HomeInstruction
+    data class Navigate(val route: String) : HomeInstruction
 }
 
 @HiltViewModel
@@ -33,5 +35,11 @@ class HomeViewModel @Inject constructor(
             }
         }
 
+    }
+
+    fun routeChanged(route: String) {
+        viewModelScope.launchDefault {
+            _instruction.emit(HomeInstruction.Navigate(route))
+        }
     }
 }
