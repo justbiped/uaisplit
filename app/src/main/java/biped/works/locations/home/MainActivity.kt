@@ -1,12 +1,12 @@
-package com.biped.locations.home
+package biped.works.locations.home
 
 import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.biped.locations.R
-import com.biped.locations.databinding.ActivityMainBinding
+import biped.works.locations.R
+import biped.works.locations.databinding.ActivityMainBinding
 import com.favoriteplaces.core.control.HOME_ACTION_INTENT
 import com.favoriteplaces.core.control.HomeAction
 import com.favoriteplaces.core.extensions.changeVisibility

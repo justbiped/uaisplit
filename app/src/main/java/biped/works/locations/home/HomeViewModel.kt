@@ -1,4 +1,4 @@
-package com.biped.locations.home
+package biped.works.locations.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

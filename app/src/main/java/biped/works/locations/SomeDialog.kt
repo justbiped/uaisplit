@@ -1,4 +1,4 @@
-package com.biped.locations
+package biped.works.locations
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

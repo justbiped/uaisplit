@@ -1,4 +1,4 @@
-package com.biped.locations.home
+package biped.works.locations.home
 
 import StatementNavGraph
 import androidx.annotation.StringRes
@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.biped.locations.R
+import biped.works.locations.R
 import com.biped.locations.user.ProfileNavGraph
 import com.biped.locations.user.profileNavGraph
 import statementGraph

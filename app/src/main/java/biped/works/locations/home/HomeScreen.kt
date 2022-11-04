@@ -1,4 +1,4 @@
-package com.biped.locations.home
+package biped.works.locations.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -57,7 +57,6 @@ private data class HomeComposeState(val navController: NavHostController) {
             restoreState = true
         }
     }
-
 }
 
 @Composable
@@ -84,10 +83,11 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreenUi(
-    state: HomeComposeState,
-    onRouteSelected: (route: String) -> Unit = {}
+    state: HomeComposeState, onRouteSelected: (route: String) -> Unit = {}
 ) {
-    AppTheme(state.themeSettings.colorScheme, state.themeSettings.useDynamicColors) {
+    AppTheme(
+        state.themeSettings.colorScheme, state.themeSettings.useDynamicColors
+    ) {
         Scaffold(bottomBar = {
             AnimatedVisibility(
                 visible = state.showBottomBar,
@@ -107,8 +107,7 @@ private fun HomeScreenUi(
 
 @Composable
 fun BottomNavigation(
-    currentRoute: String,
-    onSelectDestination: (route: String) -> Unit = {}
+    currentRoute: String, onSelectDestination: (route: String) -> Unit = {}
 ) {
     val homeDestinations = listOf(HomeDestination.StatementGraph, HomeDestination.UserSettings)
 
@@ -121,8 +120,7 @@ fun BottomNavigation(
                 selected = isSelected,
                 onClick = { onSelectDestination(destination.graph) },
                 icon = { Icon(icon, contentDescription = "") },
-                label = { LargeLabel(text = stringResource(id = destination.title)) }
-            )
+                label = { LargeLabel(text = stringResource(id = destination.title)) })
         }
     }
 }

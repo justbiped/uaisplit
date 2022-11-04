@@ -1,4 +1,4 @@
-package com.biped.locations.home
+package biped.works.locations.home
 
 import android.content.BroadcastReceiver
 import android.content.Context
