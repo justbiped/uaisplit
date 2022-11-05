@@ -31,8 +31,8 @@ dependencies {
     implementation(Dependencies.Android.constraintLayout)
     implementation(Dependencies.Android.activity)
     implementation(Dependencies.Fragment.core)
-    implementation(Dependencies.Navigator.fragment)
-    implementation(Dependencies.Navigator.ui)
+    implementation(Dependencies.Navigation.fragment)
+    implementation(Dependencies.Navigation.ui)
     implementation(Dependencies.Lifecycle.viewModel)
 
     implementation(Dependencies.Compose.coil)

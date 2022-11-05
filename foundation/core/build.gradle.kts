@@ -24,7 +24,7 @@ dependencies {
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.materialDesign)
     implementation(Dependencies.Fragment.core)
-    implementation(Dependencies.Navigator.ui)
+    implementation(Dependencies.Navigation.ui)
 
     implementation(Dependencies.Square.retrofit)
     implementation(Dependencies.Serialization.converter)
@@ -32,7 +32,7 @@ dependencies {
     implementation(Dependencies.Square.okHttp)
     implementation(Dependencies.Serialization.core)
 
-    implementation(Dependencies.Compose.navigation)
+    implementation(Dependencies.Navigation.compose)
 
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)

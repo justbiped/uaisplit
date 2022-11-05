@@ -12,8 +12,8 @@ dependencies {
 
     implementation(Dependencies.Lifecycle.runtime)
 
-    implementation(Dependencies.Navigator.ui)
-    implementation(Dependencies.Navigator.fragment)
+    implementation(Dependencies.Navigation.ui)
+    implementation(Dependencies.Navigation.fragment)
 
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)

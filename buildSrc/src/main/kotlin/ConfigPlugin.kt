@@ -84,7 +84,7 @@ private fun Project.applyAndroidConfigs() {
             dependencies {
                 localImplementation(Dependencies.Test.androidxCore)
                 localImplementation(Dependencies.Fragment.testing)
-                localImplementation(Dependencies.Navigator.testing)
+                localImplementation(Dependencies.Navigation.testing)
                 localImplementation(Dependencies.Square.mockServer)
 
                 testImplementation(Dependencies.Test.mockk)
@@ -92,7 +92,7 @@ private fun Project.applyAndroidConfigs() {
                 testImplementation(Dependencies.Test.androidxCore)
                 testImplementation(Dependencies.Test.androidxJunit)
                 testImplementation(Dependencies.Test.archCore)
-                testImplementation(Dependencies.Navigator.testing)
+                testImplementation(Dependencies.Navigation.testing)
                 testImplementation(Dependencies.Hilt.testing)
                 testImplementation(Dependencies.Test.runner)
                 testImplementation(Dependencies.Test.espresso)
@@ -101,7 +101,7 @@ private fun Project.applyAndroidConfigs() {
                 testImplementation(Dependencies.Test.assertJ)
 
                 androidTestImplementation(Dependencies.Test.androidxJunit)
-                androidTestImplementation(Dependencies.Navigator.testing)
+                androidTestImplementation(Dependencies.Navigation.testing)
                 androidTestImplementation(Dependencies.Hilt.testing)
                 androidTestImplementation(Dependencies.Test.runner)
                 androidTestImplementation(Dependencies.Test.espresso)

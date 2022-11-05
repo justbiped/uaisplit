@@ -38,7 +38,6 @@ class ComposePlugin : Plugin<Project> {
                 implementation(Dependencies.Compose.iconsExtended)
                 implementation(Dependencies.Compose.animation)
                 implementation(Dependencies.Compose.activity)
-                implementation(Dependencies.Compose.navigation)
                 implementation(Dependencies.Compose.hilt)
                 implementation(Dependencies.Compose.coil)
 

@@ -34,8 +34,7 @@ object Dependencies {
 
     object Serialization {
         const val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
-        const val converter =
-            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+        const val converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     }
 
     object Coroutines {
@@ -105,7 +104,6 @@ object Dependencies {
         const val activity = "androidx.activity:activity-compose:1.6.0"
         const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
 
-        const val navigation = "androidx.navigation:navigation-compose:2.5.2"
         const val hilt = "androidx.hilt:hilt-navigation-compose:1.0.0"
 
         const val coil = "io.coil-kt:coil-compose:2.2.0"
@@ -122,8 +120,10 @@ object Dependencies {
         const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$version"
     }
 
-    object Navigator {
-        const val version = "2.5.1"
+    object Navigation {
+        const val version = "2.5.2"
+
+        const val compose = "androidx.navigation:navigation-compose:$version"
         const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
         const val ui = "androidx.navigation:navigation-ui-ktx:$version"
         const val testing = "androidx.navigation:navigation-testing:$version"
@@ -146,7 +146,7 @@ object Plugins {
     const val play_services_version = "4.3.8"
 
     const val safe_args = "androidx.navigation.safeargs.kotlin"
-    const val safe_args_version = Dependencies.Navigator.version
+    const val safe_args_version = Dependencies.Navigation.version
 
     const val hilt = "com.google.dagger.hilt.android"
     const val hilt_version = Dependencies.Hilt.version

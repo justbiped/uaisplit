@@ -50,8 +50,8 @@ dependencies {
     implementation(Dependencies.Android.activity)
     implementation(Dependencies.Fragment.core)
 
-    implementation(Dependencies.Navigator.fragment)
-    implementation(Dependencies.Navigator.ui)
+    implementation(Dependencies.Navigation.fragment)
+    implementation(Dependencies.Navigation.ui)
 
     implementation(Dependencies.Lifecycle.liveData)
     implementation(Dependencies.Lifecycle.viewModel)
