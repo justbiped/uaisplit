@@ -7,15 +7,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.settings.ui.ThemeSettingsUi
 import com.biped.locations.theme.AppTheme
@@ -24,37 +25,59 @@ import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.components.BoxSurface
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.user.ProfileHeader
-import com.biped.locations.user.profile.data.User
 import com.biped.locations.user.settings.data.UserSettings
+import com.favoriteplaces.core.compose.Direction
+import com.favoriteplaces.core.compose.collectWithLifecycle
 import com.favoriteplaces.core.compose.navigate
 
+@Stable
 private data class ProfileState(
-    val isLoading: Boolean = false,
-    val settings: UserSettings = UserSettings()
+    val navController: NavHostController,
+    val settings: MutableState<UserSettings> = mutableStateOf(UserSettings()),
+    val isLoading: MutableState<Boolean> = mutableStateOf(true)
 ) {
-    fun defaultState() = copy(isLoading = false)
-    fun loadingState() = copy(isLoading = true)
-    fun successState(settings: UserSettings) = copy(settings = settings, isLoading = false)
+    fun defaultState() {
+        isLoading.value = false
+        settings.value = UserSettings()
+    }
+
+    fun loadingState() {
+        isLoading.value = true
+    }
+
+    fun successState(userSettings: UserSettings) {
+        isLoading.value = false
+        settings.value = userSettings
+    }
+
+    fun navigate(route: Direction) {
+        navController.navigate(route)
+    }
+}
+
+@Composable
+private fun rememberSettingsState(navigator: NavHostController) = remember {
+    mutableStateOf(
+        ProfileState(
+            navigator,
+            mutableStateOf(UserSettings()),
+            mutableStateOf(false)
+        )
+    )
 }
 
 @Composable
 internal fun UserSettingsScreen(
-    viewModel: UserSettingsViewModel,
-    navController: NavHostController
+    viewModel: UserSettingsViewModel, navController: NavHostController
 ) {
-    var state by remember { mutableStateOf(ProfileState()) }
+    val state by rememberSettingsState(navController)
 
-    LaunchedEffect(Unit) {
-        viewModel.instruction.collect { instruction ->
-            state = when (instruction) {
-                is Instruction.Success -> state.successState(instruction.settings)
-                is Instruction.Default -> state.defaultState()
-                is Instruction.Loading -> state.loadingState()
-                is Instruction.Navigate -> {
-                    navController.navigate(direction = instruction.direction)
-                    state.defaultState()
-                }
-            }
+    viewModel.instruction.collectWithLifecycle { instruction ->
+        when (instruction) {
+            is Instruction.Success -> state.successState(instruction.settings)
+            is Instruction.Default -> state.defaultState()
+            is Instruction.Loading -> state.loadingState()
+            is Instruction.Navigate -> state.navigate(instruction.direction)
         }
     }
 
@@ -63,8 +86,8 @@ internal fun UserSettingsScreen(
             viewModel.showUserProfile(userId)
         }
 
-        override fun onThemeSettingsChanged(settings: ThemeSettings) {
-            viewModel.changeThemeSettings(state.settings.copy(theme = settings))
+        override fun onThemeSettingsChanged(themeSettings: ThemeSettings) {
+            viewModel.changeThemeSettings(state.settings.value.copy(theme = themeSettings))
         }
     }
 
@@ -82,8 +105,7 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(
-                    user = state.settings.user,
+                ProfileHeader(user = state.settings.value.user,
                     onClick = { profileEvents.onProfileClicked(it) })
             }
 
@@ -93,14 +115,12 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
                 modifier = Modifier.weight(0.90f)
             ) {
                 LargeLabel(text = "Theme setup")
-                ThemeSettingsUi(
-                    uiModel = state.settings.theme,
-                    onSettingsChanged = { profileEvents.onThemeSettingsChanged(it) }
-                )
+                ThemeSettingsUi(uiModel = state.settings.value.theme,
+                    onSettingsChanged = { profileEvents.onThemeSettingsChanged(it) })
             }
         }
 
-        LoadingIndicator(isLoading = state.isLoading)
+        LoadingIndicator(isLoading = state.isLoading.value)
     }
 }
 
@@ -112,19 +132,18 @@ private fun BoxScope.LoadingIndicator(isLoading: Boolean) {
 @Preview(name = "Light preview", showBackground = true)
 @Composable
 fun ProfileUiLightPreview() {
-    AppTheme { UserSettingsUi(state = composeState, object : ProfileEvents {}) }
+    val navController = rememberNavController()
+    AppTheme { UserSettingsUi(state = ProfileState(navController), object : ProfileEvents {}) }
 }
 
 @Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun ProfileUiDarkPreview() {
-    AppTheme { UserSettingsUi(state = composeState, object : ProfileEvents {}) }
+    val navController = rememberNavController()
+    AppTheme { UserSettingsUi(state = ProfileState(navController), object : ProfileEvents {}) }
 }
-
-private val composeState =
-    ProfileState(settings = UserSettings(user = User(id = "", picture = "", name = "R.Edgar")))
 
 interface ProfileEvents {
     fun onProfileClicked(userId: String) {}
-    fun onThemeSettingsChanged(settings: ThemeSettings) {}
+    fun onThemeSettingsChanged(themeSettings: ThemeSettings) {}
 }
