@@ -9,6 +9,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
+import testImplementation
 
 val noAndroidPluginException: Throwable
     get() = Throwable("Make sure that you have declared the Application or Library plugin")
@@ -32,8 +33,8 @@ class ComposePlugin : Plugin<Project> {
             dependencies {
                 implementation(Dependencies.Compose.foundation)
                 implementation(Dependencies.Compose.ui)
-                implementation("androidx.compose.material3:material3:1.0.0-rc01")
-                implementation("androidx.compose.material3:material3-window-size-class:1.0.0-rc01")
+                implementation(Dependencies.Compose.material)
+                implementation(Dependencies.Compose.material_window)
                 implementation(Dependencies.Compose.icons)
                 implementation(Dependencies.Compose.iconsExtended)
                 implementation(Dependencies.Compose.animation)
@@ -41,9 +42,13 @@ class ComposePlugin : Plugin<Project> {
                 implementation(Dependencies.Compose.hilt)
                 implementation(Dependencies.Compose.coil)
 
-                //Preview
-                implementation(Dependencies.Compose.toolingPreview)
+                // Preview
+                implementation(Dependencies.Compose.tooling_preview)
                 devImplementation(Dependencies.Compose.tooling)
+
+                // Test
+                testImplementation(Dependencies.Compose.test_junit)
+                devImplementation(Dependencies.Compose.test_manifest)
             }
         }
     }

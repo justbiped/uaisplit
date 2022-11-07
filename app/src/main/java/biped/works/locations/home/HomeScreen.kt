@@ -13,11 +13,11 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,26 +32,24 @@ import com.favoriteplaces.core.compose.collectWithLifecycle
 import com.favoriteplaces.core.compose.currentRouteState
 
 @Stable
-private data class HomeComposeState(val navController: NavHostController) {
-    var themeSettings: ThemeSettings by mutableStateOf(ThemeSettings())
-        private set
-
-    val currentRoute: String
-        @Composable get() = navController.currentRouteState.value
-
-    val showBottomBar: Boolean
-        @Composable get() = HomeDestination.homeDestinationsSet.contains(currentRoute)
+internal data class HomeComposeState(
+    val navController: NavHostController,
+    private val themeState: MutableState<ThemeSettings> = mutableStateOf(ThemeSettings())
+) {
+    val themeSettings: ThemeSettings get() = themeState.value
+    val currentRoute: String @Composable get() = navController.currentRouteState.value
+    val showBottomBar: Boolean @Composable get() = HomeDestination.contains(currentRoute)
 
     fun updateTheme(settings: ThemeSettings) {
-        themeSettings = settings
+        themeState.value = settings
     }
 
     fun default() {
-        themeSettings = ThemeSettings()
+        themeState.value = ThemeSettings()
     }
 
-    fun navigate(route: String) {
-        navController.navigate(route) {
+    fun navigate(destination: HomeDestination) {
+        navController.navigate(destination.graph) {
             popUpTo(navController.graph.findStartDestination().id) { saveState = true }
             launchSingleTop = true
             restoreState = true
@@ -72,18 +70,19 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
             is HomeInstruction.UpdateTheme -> state.updateTheme(instruction.themeSettings)
-            is HomeInstruction.Navigate -> state.navigate(instruction.route)
+            is HomeInstruction.Navigate -> state.navigate(instruction.destination)
             is HomeInstruction.Default -> state.default()
         }
     }
 
-    HomeScreenUi(state = state, onRouteSelected = { viewModel.routeChanged(it) })
+    HomeScreenUi(state = state, onRouteSelected = { viewModel.selectHomeDestination(it) })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreenUi(
-    state: HomeComposeState, onRouteSelected: (route: String) -> Unit = {}
+    state: HomeComposeState,
+    onRouteSelected: (destination: HomeDestination) -> Unit = {}
 ) {
     AppTheme(
         state.themeSettings.colorScheme, state.themeSettings.useDynamicColors
@@ -94,7 +93,8 @@ private fun HomeScreenUi(
                 enter = slideInVertically(tween()) { it },
                 exit = shrinkVertically() + slideOutVertically { it },
             ) {
-                BottomNavigation(currentRoute = state.currentRoute,
+                BottomNavigation(
+                    currentRoute = state.currentRoute,
                     onSelectDestination = { onRouteSelected(it) })
             }
         }) { paddingValues ->
@@ -107,9 +107,12 @@ private fun HomeScreenUi(
 
 @Composable
 fun BottomNavigation(
-    currentRoute: String, onSelectDestination: (route: String) -> Unit = {}
+    currentRoute: String, onSelectDestination: (destination: HomeDestination) -> Unit = {}
 ) {
-    val homeDestinations = listOf(HomeDestination.StatementGraph, HomeDestination.UserSettings)
+    val homeDestinations = listOf(
+        HomeDestination.StatementGraph,
+        HomeDestination.UserSettings
+    )
 
     NavigationBar {
         homeDestinations.forEach { destination ->
@@ -118,7 +121,7 @@ fun BottomNavigation(
 
             NavigationBarItem(
                 selected = isSelected,
-                onClick = { onSelectDestination(destination.graph) },
+                onClick = { onSelectDestination(destination) },
                 icon = { Icon(icon, contentDescription = "") },
                 label = { LargeLabel(text = stringResource(id = destination.title)) })
         }

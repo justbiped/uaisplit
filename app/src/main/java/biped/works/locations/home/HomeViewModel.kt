@@ -30,9 +30,9 @@ class HomeViewModel @Inject constructor(
 
     }
 
-    fun routeChanged(route: String) {
+    fun selectHomeDestination(destination: HomeDestination) {
         viewModelScope.launchDefault {
-            _instruction.emit(HomeInstruction.Navigate(route))
+            _instruction.emit(HomeInstruction.Navigate(destination))
         }
     }
 }

@@ -3,6 +3,7 @@ package com.favoriteplaces.location.list
 import com.biped.test.unit.InstantTaskRule
 import com.biped.test.unit.mock
 import com.biped.test.unit.runFlowTest
+import com.biped.test.unit.runTest
 import com.biped.test.unit.test
 import com.favoriteplaces.location.list.ui.Instruction
 import com.favoriteplaces.location.list.ui.LocationListFragmentDirections

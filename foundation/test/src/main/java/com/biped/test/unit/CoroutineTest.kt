@@ -14,7 +14,7 @@ import org.assertj.core.api.AbstractObjectAssert
 import org.assertj.core.api.ListAssert
 import org.assertj.core.api.ObjectAssert
 
-fun test(
+fun runTest(
     context: CoroutineContext = UnconfinedTestDispatcher(),
     block: suspend CoroutineScope.() -> Unit
 ) {

@@ -32,22 +32,25 @@ import com.favoriteplaces.core.compose.navigate
 
 @Stable
 private data class ProfileState(
-    val navController: NavHostController,
-    val settings: MutableState<UserSettings> = mutableStateOf(UserSettings()),
-    val isLoading: MutableState<Boolean> = mutableStateOf(true)
+    private val navController: NavHostController,
+    private val settingsState: MutableState<UserSettings> = mutableStateOf(UserSettings()),
+    private val isLoadingState: MutableState<Boolean> = mutableStateOf(false)
 ) {
+    val settings: UserSettings get() = settingsState.value
+    val isLoading: Boolean get() = isLoadingState.value
+
     fun defaultState() {
-        isLoading.value = false
-        settings.value = UserSettings()
+        isLoadingState.value = false
+        settingsState.value = UserSettings()
     }
 
     fun loadingState() {
-        isLoading.value = true
+        isLoadingState.value = true
     }
 
     fun successState(userSettings: UserSettings) {
-        isLoading.value = false
-        settings.value = userSettings
+        isLoadingState.value = false
+        settingsState.value = userSettings
     }
 
     fun navigate(route: Direction) {
@@ -57,13 +60,7 @@ private data class ProfileState(
 
 @Composable
 private fun rememberSettingsState(navigator: NavHostController) = remember {
-    mutableStateOf(
-        ProfileState(
-            navigator,
-            mutableStateOf(UserSettings()),
-            mutableStateOf(false)
-        )
-    )
+    mutableStateOf(ProfileState(navigator))
 }
 
 @Composable
@@ -87,7 +84,7 @@ internal fun UserSettingsScreen(
         }
 
         override fun onThemeSettingsChanged(themeSettings: ThemeSettings) {
-            viewModel.changeThemeSettings(state.settings.value.copy(theme = themeSettings))
+            viewModel.changeThemeSettings(state.settings.copy(theme = themeSettings))
         }
     }
 
@@ -105,7 +102,7 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(user = state.settings.value.user,
+                ProfileHeader(user = state.settings.user,
                     onClick = { profileEvents.onProfileClicked(it) })
             }
 
@@ -115,12 +112,12 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
                 modifier = Modifier.weight(0.90f)
             ) {
                 LargeLabel(text = "Theme setup")
-                ThemeSettingsUi(uiModel = state.settings.value.theme,
+                ThemeSettingsUi(uiModel = state.settings.theme,
                     onSettingsChanged = { profileEvents.onThemeSettingsChanged(it) })
             }
         }
 
-        LoadingIndicator(isLoading = state.isLoading.value)
+        LoadingIndicator(isLoading = state.isLoading)
     }
 }
 

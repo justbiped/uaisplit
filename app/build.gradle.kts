@@ -42,7 +42,7 @@ dependencies {
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.materialDesign)
 
-    implementation(Dependencies.Compose.toolingPreview)
+    implementation(Dependencies.Compose.tooling_preview)
     devImplementation(Dependencies.Compose.tooling)
 
     implementation(Dependencies.Android.constraintLayout)
@@ -72,7 +72,7 @@ dependencies {
     implementation(project(":settings"))
     implementation(project(":core"))
     implementation(project(":theme"))
-    localImplementation(project(":test"))
+    testImplementation(project(":test"))
 
     kaptTest(Dependencies.Hilt.compiler)
     kaptAndroidTest(Dependencies.Hilt.compiler)

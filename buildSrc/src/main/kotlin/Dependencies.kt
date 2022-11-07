@@ -68,8 +68,8 @@ object Dependencies {
         const val androidxJunit = "androidx.test.ext:junit-ktx:1.1.3"
         const val rules = "androidx.test:rules:1.4.0"
         const val runner = "androidx.test:runner:1.4.0"
-        const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
-        const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.4.0"
+        const val espresso = "androidx.test.espresso:espresso-core:3.5.0-rc01"
+        const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.5.0-rc01"
         const val uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
     }
 
@@ -87,19 +87,21 @@ object Dependencies {
     }
 
     object Compose {
-        private const val version = "1.2.1"
+        private const val version = "1.3.0"
         const val compiler_vesion = "1.2.0"
 
         const val ui = "androidx.compose.ui:ui:$version"
         const val foundation = "androidx.compose.foundation:foundation:$version"
-        const val material = "androidx.compose.material:material:$version"
         const val icons = "androidx.compose.material:material-icons-core:$version"
         const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val animation = "androidx.compose.animation:animation:$version"
 
+        const val material = "androidx.compose.material3:material3:1.0.0"
+        const val material_window = "androidx.compose.material3:material3-window-size-class:1.0.0"
+
         const val tooling = "androidx.compose.ui:ui-tooling:$version"
-        const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
+        const val tooling_preview = "androidx.compose.ui:ui-tooling-preview:$version"
 
         const val activity = "androidx.activity:activity-compose:1.6.0"
         const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
@@ -108,8 +110,8 @@ object Dependencies {
 
         const val coil = "io.coil-kt:coil-compose:2.2.0"
 
-        const val testManifest = "androidx.compose.ui:ui-test-manifest:$version"
-        const val test = "androidx.compose.ui:ui-test-junit4:$version"
+        const val test_junit = "androidx.compose.ui:ui-test-junit4:$version"
+        const val test_manifest = "androidx.compose.ui:ui-test-manifest:$version"
     }
 
     object Lifecycle {

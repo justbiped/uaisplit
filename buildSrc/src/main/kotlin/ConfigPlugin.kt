@@ -66,7 +66,7 @@ private fun Project.applyAndroidConfigs() {
                 }
 
                 packagingOptions {
-                    resources.excludes.add("META-INF/**")
+                    resources.excludes.add("META-INF/LICENSE*.md")
                     resources.pickFirsts.add("**/attach_hotspot_windows.dll")
                 }
 
