@@ -25,7 +25,7 @@ sealed class HomeDestination(
 ) {
     object StatementGraph : HomeDestination(
         graph = StatementNavGraph.route,
-        route = StatementNavGraph.StatementDirection.route,
+        route = StatementNavGraph.startDestination,
         title = R.string.statement_list_label,
         unselectedIcon = Icons.Outlined.ListAlt,
         selectedIcon = Icons.Filled.ListAlt
@@ -33,7 +33,7 @@ sealed class HomeDestination(
 
     object UserSettings : HomeDestination(
         graph = ProfileNavGraph.route,
-        route = ProfileNavGraph.SettingsDirection.route,
+        route = ProfileNavGraph.startDestination,
         title = R.string.profile_destination_label,
         unselectedIcon = Icons.Outlined.People,
         selectedIcon = Icons.Filled.People
@@ -42,9 +42,9 @@ sealed class HomeDestination(
     companion object {
         private val homeDestinationsSet = hashSetOf(
             StatementNavGraph.route,
-            StatementNavGraph.StatementDirection.route,
-            ProfileNavGraph.SettingsDirection.route,
-            ProfileNavGraph.route
+            StatementNavGraph.startDestination,
+            ProfileNavGraph.route,
+            ProfileNavGraph.startDestination
         )
 
         fun contains(route: String) = homeDestinationsSet.contains(route)

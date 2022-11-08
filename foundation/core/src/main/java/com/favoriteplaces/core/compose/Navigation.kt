@@ -12,32 +12,32 @@ import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.PopUpToBuilder
 import androidx.navigation.compose.composable
 
-open class NavDestination(
+open class NavDirection(
     val route: String,
     val arguments: List<NamedNavArgument> = emptyList(),
     val deepLinks: List<NavDeepLink> = emptyList()
 )
 
 fun NavGraphBuilder.composable(
-    destination: NavDestination,
+    navigationRoute: NavDirection,
     content: @Composable (NavBackStackEntry) -> Unit
 ) {
     composable(
-        route = destination.route,
-        arguments = destination.arguments,
-        deepLinks = destination.deepLinks,
+        route = navigationRoute.route,
+        arguments = navigationRoute.arguments,
+        deepLinks = navigationRoute.deepLinks,
         content = content
     )
 }
 
 fun NavController.navigate(
-    direction: Direction,
+    destination: Destination,
     routeOptions: NavOptionsBuilder.() -> Unit = {},
     popUpOptions: PopUpToBuilder.() -> Unit = {}
 ) {
-    navigate(direction.route) {
+    navigate(destination.route) {
         routeOptions()
-        popUpTo(direction.route, popUpToBuilder = popUpOptions)
+        popUpTo(destination.route, popUpToBuilder = popUpOptions)
     }
 }
 
@@ -48,7 +48,7 @@ val NavController.currentRouteState: State<String>
         }
     }
 
-interface Direction {
+interface Destination {
     val route: String
     val popUpRoute: String
 }

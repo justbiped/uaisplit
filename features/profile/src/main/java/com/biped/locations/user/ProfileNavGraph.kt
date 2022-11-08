@@ -3,46 +3,42 @@ package com.biped.locations.user
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.biped.locations.user.ProfileDestination.Companion.ROUTE
 import com.biped.locations.user.profile.ui.ProfileScreen
 import com.biped.locations.user.settings.ui.UserSettingsScreen
-import com.favoriteplaces.core.compose.Direction
-import com.favoriteplaces.core.compose.NavDestination
+import com.favoriteplaces.core.compose.Destination
+import com.favoriteplaces.core.compose.NavDirection
 import com.favoriteplaces.core.compose.composable
 
-sealed class ProfileNavGraph {
-    companion object : NavDestination(route = "profile_graph_route")
+object ProfileNavGraph : NavDirection("profile_graph_route") {
+    val startDestination: String get() = SettingsRoute.route
 
-    object SettingsDirection : NavDestination(route = "user_settings_route")
+    internal object SettingsRoute : NavDirection("user_settings_route")
+    internal object ProfileRoute : NavDirection(ROUTE)
+}
 
-    data class ProfileDirection(val userId: String) : Direction {
-        override val route: String = "$rootRoute/$userId"
-        override val popUpRoute: String = SettingsDirection.route
+internal data class ProfileDestination(private val userId: String) : Destination {
+    override val route: String get() = "$HOST/$userId"
+    override val popUpRoute: String = ProfileNavGraph.SettingsRoute.route
 
-        companion object {
-            const val USER_ID_ARG = "userId"
-
-            const val rootRoute = "user_profile_route"
-            val destination = NavDestination(
-                route = "$rootRoute/{$USER_ID_ARG}",
-                arguments = listOf(navArgument(USER_ID_ARG) { type = NavType.StringType })
-            )
-        }
+    companion object {
+        private const val HOST = "user_profile_route"
+        const val USER_ID_ARG = "useId"
+        const val ROUTE = "$HOST/{$USER_ID_ARG}"
     }
 }
 
 fun NavGraphBuilder.profileNavGraph(navController: NavHostController) {
     navigation(
-        startDestination = ProfileNavGraph.SettingsDirection.route,
+        startDestination = ProfileNavGraph.startDestination,
         route = ProfileNavGraph.route
     ) {
-        composable(ProfileNavGraph.SettingsDirection) {
+        composable(ProfileNavGraph.SettingsRoute) {
             UserSettingsScreen(viewModel = hiltViewModel(), navController = navController)
         }
 
-        composable(ProfileNavGraph.ProfileDirection.destination) {
+        composable(ProfileNavGraph.ProfileRoute) {
             ProfileScreen(viewModel = hiltViewModel())
         }
     }

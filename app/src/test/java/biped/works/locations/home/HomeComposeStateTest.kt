@@ -36,7 +36,7 @@ class HomeComposeStateTest {
             val state = HomeComposeState(navController)
 
             showBottomBar = state.showBottomBar
-            navController.setCurrentDestination(HomeDestination.UserSettings.route)
+            state.navigate(HomeDestination.UserSettings)
         }
 
         assertThat(showBottomBar).isTrue

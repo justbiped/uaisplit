@@ -3,7 +3,7 @@ package com.biped.locations.user.profile.ui
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biped.locations.user.ProfileNavGraph.ProfileDirection.Companion.USER_ID_ARG
+import com.biped.locations.user.ProfileDestination.Companion.USER_ID_ARG
 import com.biped.locations.user.profile.LoadUserUseCase
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
 import com.favoriteplaces.core.coroutines.launchIO

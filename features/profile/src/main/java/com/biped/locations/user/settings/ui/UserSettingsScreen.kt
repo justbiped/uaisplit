@@ -26,7 +26,7 @@ import com.biped.locations.theme.components.BoxSurface
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.settings.data.UserSettings
-import com.favoriteplaces.core.compose.Direction
+import com.favoriteplaces.core.compose.Destination
 import com.favoriteplaces.core.compose.collectWithLifecycle
 import com.favoriteplaces.core.compose.navigate
 
@@ -53,7 +53,7 @@ private data class ProfileState(
         settingsState.value = userSettings
     }
 
-    fun navigate(route: Direction) {
+    fun navigate(route: Destination) {
         navController.navigate(route)
     }
 }
@@ -74,7 +74,7 @@ internal fun UserSettingsScreen(
             is Instruction.Success -> state.successState(instruction.settings)
             is Instruction.Default -> state.defaultState()
             is Instruction.Loading -> state.loadingState()
-            is Instruction.Navigate -> state.navigate(instruction.direction)
+            is Instruction.Navigate -> state.navigate(instruction.destination)
         }
     }
 
