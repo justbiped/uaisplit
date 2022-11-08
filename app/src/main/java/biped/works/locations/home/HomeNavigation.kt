@@ -41,9 +41,7 @@ sealed class HomeDestination(
 
     companion object {
         private val homeDestinationsSet = hashSetOf(
-            StatementNavGraph.route,
             StatementNavGraph.startDestination,
-            ProfileNavGraph.route,
             ProfileNavGraph.startDestination
         )
 
