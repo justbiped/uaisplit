@@ -21,13 +21,6 @@ fun runTest(
     runTest(context = context, testBody = block)
 }
 
-fun runFlowTest(
-    context: CoroutineContext = UnconfinedTestDispatcher(),
-    block: suspend CoroutineScope.() -> FlowTest<*>
-) {
-    runTest(context = context) { block().finish() }
-}
-
 class FlowTest<T>(
     coroutineContext: CoroutineContext = UnconfinedTestDispatcher(),
     flow: Flow<T>

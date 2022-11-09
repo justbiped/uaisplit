@@ -1,6 +1,8 @@
 package com.favoriteplaces.location.detail
 
 import com.biped.test.unit.InstantTaskRule
+import com.biped.test.unit.runTest
+import com.biped.test.unit.test
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -45,48 +47,41 @@ class LocationDetailViewModelTest {
     }
 
     @Test
-    fun `emits location detail when fetch detail is successfully done`() = runBlocking {
-        val observer = mockk<(LocationDetailUIModel) -> Unit>(relaxed = true)
+    fun `emits location detail when fetch detail is successfully done`() = runTest {
+        val flowTest = viewModel.viewInstruction.test()
         val locationDetail = getLocationDetail()
 
         every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
         coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
 
-        //  viewModel.locationDetail.observeForever(observer)
         viewModel.loadLocationDetails(0)
 
-        verify {
-            observer.invoke(withArg { detail ->
-                assertThat(detail.name).isEqualTo("Some Location")
-                assertThat(detail.type).isEqualTo("Some Type")
-            })
-        }
+        flowTest.assertEvent().isInstanceOf<Instruction.Success>()
+            .hasFieldOrProperty("locationDetailUiModel")
+
+        flowTest.finish()
     }
 
     @Test
     fun `emits error state when fetch details fail`() = runBlocking {
-        val observer = mockk<(Instruction) -> Unit>(relaxed = true)
+        val flowTest = viewModel.viewInstruction.test()
         coEvery { getLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
 
-        //  viewModel.viewInstruction.observeForever(observer)
         viewModel.loadLocationDetails(0)
 
-        verify {
-            observer.invoke(withArg { instruction ->
-                assertThat(instruction).isInstanceOf(Instruction.Failure::class.java)
-            })
-        }
+        flowTest.assertEvent().isInstanceOf<Instruction.Failure>()
+        flowTest.finish()
     }
-
-    private fun getLocationDetail() =
-        LocationDetail(
-            0,
-            "Some Location",
-            4.0,
-            "Some Type",
-            "something about",
-            "314142",
-            "some address",
-            Schedule(listOf(DaySchedule(Day.MONDAY, "10h", "11h")))
-        )
 }
+
+private fun getLocationDetail() =
+    LocationDetail(
+        0,
+        "Some Location",
+        4.0,
+        "Some Type",
+        "something about",
+        "314142",
+        "some address",
+        Schedule(listOf(DaySchedule(Day.MONDAY, "10h", "11h")))
+    )
