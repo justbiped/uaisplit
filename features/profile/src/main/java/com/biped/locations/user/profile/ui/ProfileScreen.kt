@@ -3,7 +3,6 @@ package com.biped.locations.user.profile.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -14,6 +13,7 @@ import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.profile.data.User
+import com.favoriteplaces.core.compose.collectWithLifecycle
 
 private data class ComposeState(
     val user: User = User(),
@@ -28,13 +28,11 @@ private data class ComposeState(
 internal fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
     var state by remember { mutableStateOf(ComposeState()) }
 
-    LaunchedEffect(Unit) {
-        viewModel.instruction.collect { instruction ->
-            state = when (instruction) {
-                is Instruction.Default -> state.default()
-                is Instruction.Loading -> state.loading()
-                is Instruction.UpdateUser -> state.updateUser(instruction.user)
-            }
+    viewModel.instruction.collectWithLifecycle { instruction ->
+        state = when (instruction) {
+            is Instruction.Default -> state.default()
+            is Instruction.Loading -> state.loading()
+            is Instruction.UpdateUser -> state.updateUser(instruction.user)
         }
     }
 
