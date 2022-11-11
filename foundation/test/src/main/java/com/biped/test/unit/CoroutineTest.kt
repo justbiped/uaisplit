@@ -52,7 +52,7 @@ class TestFlowSubject<T> private constructor(
 ) : Subject(failureMetadata, flow) {
 
     private val events = flow.events
-    private val receivedInstances = events.map { it!!::class }
+    private val receivedInstances = events.map { it!!::class.java }
 
     fun lastEvent(): Subject {
         assertEventReceived()

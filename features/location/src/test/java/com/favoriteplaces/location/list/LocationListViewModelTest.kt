@@ -43,8 +43,7 @@ internal class LocationListViewModelTest {
     }
 
     @Test
-    fun `post default, loading and success sequence on a successful locations load`() =
-        runTest {
+    fun `post default, loading and success sequence on a successful locations load`() = runTest {
             val testFlow = viewModel.instruction.test()
             coEvery { loadLocations() } returns Result.success(listOf(locationFixture()))
 
