@@ -3,11 +3,11 @@ package com.favoriteplaces.location.detail
 import com.favoriteplaces.location.data.LocationRepository
 import com.favoriteplaces.location.list.LoadLocationsUseCase
 import com.favoriteplaces.location.list.data.Location
+import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
-import org.assertj.core.api.Assertions
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,8 +35,8 @@ class LoadLocationsTest {
 
             val result = loadLocations()
 
-            Assertions.assertThat(result.isSuccess).isTrue()
-            Assertions.assertThat(result.getOrNull()).isEqualTo(locationList)
+            assertThat(result.isSuccess).isTrue()
+            assertThat(result.getOrNull()).isEqualTo(locationList)
         }
     }
 
@@ -48,8 +48,8 @@ class LoadLocationsTest {
 
             val result = loadLocations()
 
-            Assertions.assertThat(result.isFailure).isTrue()
-            Assertions.assertThat(result.exceptionOrNull()).isEqualTo(exception)
+            assertThat(result.isFailure).isTrue()
+            assertThat(result.exceptionOrNull()).isEqualTo(exception)
         }
     }
 

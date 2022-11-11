@@ -1,13 +1,13 @@
 package com.favoriteplaces.location.detail
 
 import com.biped.test.unit.InstantTaskRule
+import com.biped.test.unit.TestFlowSubject.Companion.assertThat
 import com.biped.test.unit.runTest
 import com.biped.test.unit.test
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.Schedule
-import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel
 import com.favoriteplaces.location.detail.ui.Instruction
 import com.favoriteplaces.location.detail.ui.LocationDetailInstructions
 import com.favoriteplaces.location.detail.ui.LocationDetailViewModel
@@ -16,10 +16,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.runBlocking
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -48,7 +45,7 @@ class LocationDetailViewModelTest {
 
     @Test
     fun `emits location detail when fetch detail is successfully done`() = runTest {
-        val flowTest = viewModel.viewInstruction.test()
+        val testFlow = viewModel.viewInstruction.test()
         val locationDetail = getLocationDetail()
 
         every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
@@ -56,21 +53,20 @@ class LocationDetailViewModelTest {
 
         viewModel.loadLocationDetails(0)
 
-        flowTest.assertEvent().isInstanceOf<Instruction.Success>()
-            .hasFieldOrProperty("locationDetailUiModel")
+        assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Success::class.java)
 
-        flowTest.finish()
+        testFlow.finish()
     }
 
     @Test
     fun `emits error state when fetch details fail`() = runBlocking {
-        val flowTest = viewModel.viewInstruction.test()
+        val testFlow = viewModel.viewInstruction.test()
         coEvery { getLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
 
         viewModel.loadLocationDetails(0)
 
-        flowTest.assertEvent().isInstanceOf<Instruction.Failure>()
-        flowTest.finish()
+        assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Failure::class.java)
+        testFlow.finish()
     }
 }
 

@@ -3,12 +3,12 @@ package com.favoriteplaces.location.data
 import com.favoriteplaces.location.list.data.Location
 import com.favoriteplaces.location.list.data.remote.LocationListRemoteEntity
 import com.favoriteplaces.location.list.data.remote.LocationRemoteEntity
+import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
+import junit.framework.TestCase.fail
 import kotlinx.coroutines.runBlocking
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,9 +46,13 @@ class LocationRepositoryTest {
         runBlocking {
             coEvery { locationHttpClient.fetchLocations() } throws Throwable("Failed to fetch locations")
 
-            assertThatThrownBy {
+
+            try {
                 runBlocking { locationRepository.fetchLocations() }
-            }.hasMessage("Failed to fetch locations")
+                fail("No exception was thrown by fetch locations")
+            } catch (error: Throwable) {
+                assertThat(error.message).isEqualTo("Failed to fetch locations")
+            }
         }
     }
 }

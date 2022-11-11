@@ -56,7 +56,7 @@ object Dependencies {
         private const val mockkVersion = "1.12.7"
 
         const val jUnit = "junit:junit:4.13"
-        const val assertJ = "org.assertj:assertj-core:3.23.1"
+        const val truth = "com.google.truth:truth:1.1.3"
         const val mockk = "io.mockk:mockk:$mockkVersion"
         const val mockkAndroid = "io.mockk:mockk-android:$mockkVersion"
 

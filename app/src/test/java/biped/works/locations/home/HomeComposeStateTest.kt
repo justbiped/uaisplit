@@ -3,7 +3,7 @@ package biped.works.locations.home
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import biped.works.test.compose.testNavController
-import org.assertj.core.api.Assertions.assertThat
+import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,7 +39,7 @@ class HomeComposeStateTest {
             state.navigate(HomeDestination.UserSettings)
         }
 
-        assertThat(showBottomBar).isTrue
+        assertThat(showBottomBar).isTrue()
     }
 
     @Test
@@ -54,7 +54,7 @@ class HomeComposeStateTest {
             navController.setCurrentDestination("no_home_destination")
         }
 
-        assertThat(showBottomBar).isFalse
+        assertThat(showBottomBar).isFalse()
     }
 
     private val homeDestinations = listOf(

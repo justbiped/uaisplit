@@ -1,6 +1,11 @@
 package com.biped.test.unit
 
-import com.biped.test.unit.Assertions.assertThat
+import com.google.common.truth.Fact.simpleFact
+import com.google.common.truth.FailureMetadata
+import com.google.common.truth.Subject
+import com.google.common.truth.Truth.assertAbout
+import com.google.common.truth.Truth.assertThat
+import com.google.common.truth.Truth.assert_
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -10,9 +15,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
-import org.assertj.core.api.AbstractObjectAssert
-import org.assertj.core.api.ListAssert
-import org.assertj.core.api.ObjectAssert
 
 fun runTest(
     context: CoroutineContext = UnconfinedTestDispatcher(),
@@ -21,12 +23,12 @@ fun runTest(
     runTest(context = context, testBody = block)
 }
 
-class FlowTest<T>(
+class TestFlow<T>(
     coroutineContext: CoroutineContext = UnconfinedTestDispatcher(),
     flow: Flow<T>
 ) {
 
-    private val events = mutableListOf<T>()
+    internal val events = mutableListOf<T>()
     private val collectScope = CoroutineScope(context = coroutineContext)
     private var collectJob: Job = collectScope.launch { }
 
@@ -35,35 +37,58 @@ class FlowTest<T>(
             .launchIn(CoroutineScope(coroutineContext))
     }
 
-    fun assertEvent(): Assertion<T> {
-        return assertThat(events[events.lastIndex])
-    }
-
-    fun assertEventAt(position: Int): Assertion<T> {
-        return assertThat(events[position])
-    }
-
-    fun assertEvents(): ListAssert<T> {
-        return org.assertj.core.api.Assertions.assertThat(events)
-    }
-
     fun finish() {
         collectJob.cancel()
     }
 }
 
-fun <T> Flow<T>.test(context: CoroutineContext = UnconfinedTestDispatcher()) =
-    FlowTest(context, this)
-
-object Assertions {
-    fun <T> assertThat(value: T) = Assertion(value)
+fun <T> Flow<T>.test(context: CoroutineContext = UnconfinedTestDispatcher()): TestFlow<T> {
+    return TestFlow(context, this)
 }
 
-open class Assertion<ACTUAL>(val value: ACTUAL) :
-    AbstractObjectAssert<ObjectAssert<ACTUAL>, ACTUAL>(value, Assertion::class.java) {
+class TestFlowSubject<T> private constructor(
+    failureMetadata: FailureMetadata,
+    private val flow: TestFlow<T>
+) : Subject(failureMetadata, flow) {
 
-    inline fun <reified T> isInstanceOf(): Assertion<T> {
-        isInstanceOf(T::class.java)
-        return Assertion(value as T)
+    private val events = flow.events
+    private val receivedInstances = events.map { it!!::class }
+
+    fun lastEvent(): Subject {
+        assertEventReceived()
+        return assert_().that(events[events.lastIndex])
+    }
+
+    fun receivedEventsOf(vararg clazz: Class<*>) {
+        assertEventReceived()
+        assertThat(receivedInstances).containsAnyIn(clazz)
+    }
+
+    fun receivedExactlyEventsOf(vararg clazz: Class<*>) {
+        assertEventReceived()
+        assertThat(receivedInstances).containsExactlyElementsIn(clazz)
+    }
+
+    fun receivedEvents(vararg event: T) {
+        assertEventReceived()
+        assertThat(flow.events).containsAnyIn(event)
+    }
+
+    fun receivedExactlyEvents(vararg event: T) {
+        assertEventReceived()
+        assertThat(receivedInstances).containsExactlyElementsIn(event)
+    }
+
+    private fun assertEventReceived() {
+        if (flow.events.isEmpty()) failWithActual(simpleFact("No events was received"))
+    }
+
+    companion object {
+        private fun <T> factory() =
+            Factory<TestFlowSubject<T>, TestFlow<T>> { data, flow -> TestFlowSubject(data, flow) }
+
+        fun <T> assertThat(testFlow: TestFlow<T>): TestFlowSubject<T> {
+            return assertAbout(factory<T>()).that(testFlow)
+        }
     }
 }

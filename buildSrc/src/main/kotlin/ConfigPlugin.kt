@@ -98,7 +98,7 @@ private fun Project.applyAndroidConfigs() {
                 testImplementation(Dependencies.Test.espresso)
                 testImplementation(Dependencies.Test.espressoContrib)
                 testImplementation(Dependencies.Test.robolectric)
-                testImplementation(Dependencies.Test.assertJ)
+                testImplementation(Dependencies.Test.truth)
 
                 androidTestImplementation(Dependencies.Test.androidxJunit)
                 androidTestImplementation(Dependencies.Navigation.testing)
@@ -107,7 +107,7 @@ private fun Project.applyAndroidConfigs() {
                 androidTestImplementation(Dependencies.Test.espresso)
                 androidTestImplementation(Dependencies.Test.espressoContrib)
                 androidTestImplementation(Dependencies.Test.robolectricAnnotations)
-                androidTestImplementation(Dependencies.Test.assertJ)
+                androidTestImplementation(Dependencies.Test.truth)
             }
         }
 

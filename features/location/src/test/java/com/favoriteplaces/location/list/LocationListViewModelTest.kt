@@ -1,6 +1,7 @@
 package com.favoriteplaces.location.list
 
 import com.biped.test.unit.InstantTaskRule
+import com.biped.test.unit.TestFlowSubject.Companion.assertThat
 import com.biped.test.unit.mock
 import com.biped.test.unit.runTest
 import com.biped.test.unit.test
@@ -35,10 +36,10 @@ internal class LocationListViewModelTest {
 
     @Test
     fun `post default state on init`() = runTest {
-        val flowTest = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test()
 
-        flowTest.assertEvent().isInstanceOf<Instruction.Default>()
-        flowTest.finish()
+        assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Default::class.java)
+        testFlow.finish()
     }
 
     @Test
@@ -49,66 +50,63 @@ internal class LocationListViewModelTest {
 
             viewModel.fetchLocations()
 
-            testFlow.assertEvents().hasExactlyElementsOfTypes(
+            assertThat(testFlow).receivedExactlyEventsOf(
                 Instruction.Default::class.java,
                 Instruction.Loading::class.java,
                 Instruction.Success::class.java
             )
+
             testFlow.finish()
         }
 
     @Test
     fun `post location list when fetch locations is successfully done`() = runTest {
         val locationList = listOf(locationUiFixture())
-        val flowTest = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test()
         coEvery { loadLocations() } returns Result.success(listOf(locationFixture()))
 
         viewModel.fetchLocations()
 
-        flowTest.assertEvent()
-            .isInstanceOf<Instruction.Success>()
-            .hasFieldOrPropertyWithValue("locations", locationList)
-        flowTest.finish()
+        assertThat(testFlow).lastEvent().isEqualTo(Instruction.Success(locationList))
+        testFlow.finish()
     }
 
     @Test
     fun `emit failed event when locations loading fail`() = runTest {
-        val flowTest = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test()
         coEvery { loadLocations() } returns Result.failure(Exception(""))
 
         viewModel.fetchLocations()
 
-        flowTest.assertEvents().hasAtLeastOneElementOfType(
-            Instruction.Failure::class.java
-        )
-        flowTest.finish()
+        assertThat(testFlow).receivedEventsOf(Instruction.Failure::class.java)
+        testFlow.finish()
     }
 
     @Test
     fun `reset to initial state after an initial locations load`() = runTest {
-        val flowTest = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test()
         coEvery { loadLocations() } returns Result.failure(Exception(""))
 
         viewModel.fetchLocations()
 
-        flowTest.assertEvent().isInstanceOf<Instruction.Default>()
-        flowTest.finish()
+        assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Default::class.java)
+        testFlow.finish()
     }
 
     @Test
     fun `emit default, loading, failure and default sequence on a loading fail`() = runTest {
-        val flowTest = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test()
         coEvery { loadLocations() } returns Result.failure(Exception(""))
 
         viewModel.fetchLocations()
 
-        flowTest.assertEvents().hasExactlyElementsOfTypes(
+        assertThat(testFlow).receivedExactlyEventsOf(
             Instruction.Default::class.java,
             Instruction.Loading::class.java,
             Instruction.Failure::class.java,
             Instruction.Default::class.java
         )
-        flowTest.finish()
+        testFlow.finish()
     }
 
     @Test
@@ -119,10 +117,7 @@ internal class LocationListViewModelTest {
 
         viewModel.onLocationSelected(location)
 
-        testFlow.assertEvent()
-            .isInstanceOf<Instruction.Navigation>()
-            .isEqualTo(Instruction.Navigation(expectedDestination))
-
+        assertThat(testFlow).lastEvent().isEqualTo(Instruction.Navigation(expectedDestination))
         testFlow.finish()
     }
 }

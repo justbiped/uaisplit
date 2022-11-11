@@ -6,9 +6,9 @@ import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.domain.Schedule
+import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import kotlinx.coroutines.runBlocking
-import org.assertj.core.api.Assertions
 import org.junit.Before
 import org.junit.Test
 
@@ -31,8 +31,8 @@ internal class GetLocationDetailsTest {
 
             val result = getLocationDetails(0)
 
-            Assertions.assertThat(result.isSuccess).isTrue()
-            Assertions.assertThat(result.getOrNull()).isEqualTo(locationDetail)
+            assertThat(result.isSuccess).isTrue()
+            assertThat(result.getOrNull()).isEqualTo(locationDetail)
         }
     }
 
@@ -44,8 +44,8 @@ internal class GetLocationDetailsTest {
 
             val result = getLocationDetails(0)
 
-            Assertions.assertThat(result.isFailure).isTrue()
-            Assertions.assertThat(result.exceptionOrNull()).isEqualTo(exception)
+            assertThat(result.isFailure).isTrue()
+            assertThat(result.exceptionOrNull()).isEqualTo(exception)
         }
     }
 
