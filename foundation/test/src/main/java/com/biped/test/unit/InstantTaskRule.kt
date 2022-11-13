@@ -6,13 +6,14 @@ import com.favoriteplaces.core.tools.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @SuppressLint("RestrictedApi")
 class InstantTaskRule(
     private val testDispatcher: CoroutineDispatcher = UnconfinedTestDispatcher()
-) : InstantTaskExecutorRule() {
+) : TestWatcher() {
 
     override fun starting(description: Description) {
         DispatcherProvider.forceDispatcher(testDispatcher)
