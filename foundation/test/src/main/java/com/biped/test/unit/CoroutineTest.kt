@@ -29,12 +29,10 @@ class TestFlow<T>(
 ) {
 
     internal val events = mutableListOf<T>()
-    private val collectScope = CoroutineScope(context = coroutineContext)
-    private var collectJob: Job = collectScope.launch { }
+    private var collectJob: Job
 
     init {
-        flow.onEach { events.add(it) }
-            .launchIn(CoroutineScope(coroutineContext))
+        collectJob = flow.onEach { events.add(it) }.launchIn(CoroutineScope(coroutineContext))
     }
 
     fun finish() {
