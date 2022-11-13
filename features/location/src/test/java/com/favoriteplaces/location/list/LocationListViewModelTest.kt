@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.list
 
-import com.biped.test.unit.InstantTaskRule
+import com.biped.test.unit.CoroutineTestRule
 import com.biped.test.unit.TestFlowSubject.Companion.assertThat
 import com.biped.test.unit.mock
 import com.biped.test.unit.runTest
@@ -22,7 +22,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 internal class LocationListViewModelTest {
 
-    @get:Rule val instantTaskRule = InstantTaskRule()
+    @get:Rule val coroutineTestRule = CoroutineTestRule()
 
     private var loadLocations = mock<LoadLocationsUseCase>()
     private val instruction = spyk(LocationListInstructions())

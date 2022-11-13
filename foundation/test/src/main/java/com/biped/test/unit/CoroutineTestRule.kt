@@ -1,7 +1,6 @@
 package com.biped.test.unit
 
 import android.annotation.SuppressLint
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.favoriteplaces.core.tools.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -11,7 +10,7 @@ import org.junit.runner.Description
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @SuppressLint("RestrictedApi")
-class InstantTaskRule(
+class CoroutineTestRule(
     private val testDispatcher: CoroutineDispatcher = UnconfinedTestDispatcher()
 ) : TestWatcher() {
 

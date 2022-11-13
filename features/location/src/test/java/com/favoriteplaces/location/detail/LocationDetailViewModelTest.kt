@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.detail
 
-import com.biped.test.unit.InstantTaskRule
+import com.biped.test.unit.CoroutineTestRule
 import com.biped.test.unit.TestFlowSubject.Companion.assertThat
 import com.biped.test.unit.runTest
 import com.biped.test.unit.test
@@ -26,7 +26,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LocationDetailViewModelTest {
 
-    @get:Rule val instantTaskRule = InstantTaskRule()
+    @get:Rule val coroutineTestRule = CoroutineTestRule()
     @MockK internal lateinit var getLocationDetails: GetLocationDetails
     @MockK internal lateinit var scheduleFormatter: ScheduleFormatter
 
