@@ -3,13 +3,16 @@ package com.biped.test.unit
 import com.google.common.truth.Fact.simpleFact
 import com.google.common.truth.FailureMetadata
 import com.google.common.truth.Subject
+import com.google.common.truth.Subject.Factory
 import com.google.common.truth.Truth.assertAbout
 import com.google.common.truth.Truth.assertThat
 import com.google.common.truth.Truth.assert_
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -17,7 +20,7 @@ import kotlinx.coroutines.test.runTest
 const val SIX_SECONDS_MS = 6000L
 
 fun runTest(
-    context: CoroutineContext = UnconfinedTestDispatcher(),
+    context: CoroutineContext = EmptyCoroutineContext,
     dispatchTimeoutMs: Long = SIX_SECONDS_MS,
     testBody: suspend CoroutineScope.() -> Unit
 ) {
@@ -30,11 +33,12 @@ class TestFlow<T>(
     flow: Flow<T>
 ) {
 
-    internal val events = mutableListOf<T>()
     private var collectJob: Job
+    private val _events = mutableListOf<T>()
+    val events: List<T> get() = _events
 
     init {
-        collectJob = coroutineScope.launch(context = context) { flow.collect { events.add(it) } }
+        collectJob = coroutineScope.launch(context = context) { flow.toList(_events) }
     }
 
     fun finish() {
@@ -62,28 +66,24 @@ class TestFlowSubject<T> private constructor(
         return assert_().that(events[events.lastIndex])
     }
 
-    fun receivedEventsOf(vararg clazz: Class<*>) {
-        assertEventReceived()
+    fun hasCollectedInstanceOf(vararg clazz: Class<*>) {
         assertThat(receivedInstances).containsAnyIn(clazz)
     }
 
-    fun receivedExactlyEventsOf(vararg clazz: Class<*>) {
-        assertEventReceived()
+    fun hasCollectedExactlyInstanceOf(vararg clazz: Class<*>) {
         assertThat(receivedInstances).containsExactlyElementsIn(clazz)
     }
 
-    fun receivedEvents(vararg event: T) {
-        assertEventReceived()
-        assertThat(flow.events).containsAnyIn(event)
+    fun hasCollected(vararg event: T) {
+        assertThat(events).containsAnyIn(event)
     }
 
-    fun receivedExactlyEvents(vararg event: T) {
-        assertEventReceived()
-        assertThat(receivedInstances).containsExactlyElementsIn(event)
+    fun hasCollectedExactly(vararg event: T) {
+        assertThat(events).containsExactlyElementsIn(event)
     }
 
     private fun assertEventReceived() {
-        if (flow.events.isEmpty()) failWithActual(simpleFact("No events was received"))
+        if (events.isEmpty()) failWithoutActual(simpleFact("No events was received"))
     }
 
     companion object {

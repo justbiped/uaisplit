@@ -49,7 +49,7 @@ internal class LocationListViewModelTest {
 
             viewModel.fetchLocations()
 
-            assertThat(testFlow).receivedExactlyEventsOf(
+            assertThat(testFlow).hasCollectedExactlyInstanceOf(
                 Instruction.Default::class.java,
                 Instruction.Loading::class.java,
                 Instruction.Success::class.java
@@ -77,7 +77,7 @@ internal class LocationListViewModelTest {
 
         viewModel.fetchLocations()
 
-        assertThat(testFlow).receivedEventsOf(Instruction.Failure::class.java)
+        assertThat(testFlow).hasCollectedInstanceOf(Instruction.Failure::class.java)
         testFlow.finish()
     }
 
@@ -99,7 +99,7 @@ internal class LocationListViewModelTest {
 
         viewModel.fetchLocations()
 
-        assertThat(testFlow).receivedExactlyEventsOf(
+        assertThat(testFlow).hasCollectedExactlyInstanceOf(
             Instruction.Default::class.java,
             Instruction.Loading::class.java,
             Instruction.Failure::class.java,

@@ -5,7 +5,7 @@ import com.biped.locations.user.settings.data.UserSettings
 import com.favoriteplaces.core.compose.Destination
 
 internal sealed interface Instruction {
-    data class Success(val settings: UserSettings) : Instruction
+    data class UpdateSettings(val settings: UserSettings) : Instruction
     data class Navigate(val destination: Destination) : Instruction
     object Loading : Instruction
     object Default : Instruction

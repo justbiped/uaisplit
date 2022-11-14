@@ -2,7 +2,7 @@ package com.biped.locations.user.settings.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biped.locations.user.settings.LoadUserSettingsUseCase
+import com.biped.locations.user.settings.ObserveUseSetitingsUseCase
 import com.biped.locations.user.settings.SaveUserSettingsUseCase
 import com.biped.locations.user.settings.data.UserSettings
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class UserSettingsViewModel @Inject constructor(
-    private val loadUserSettingsUseCase: LoadUserSettingsUseCase,
+    private val observeUseSetitingsUseCase: ObserveUseSetitingsUseCase,
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
@@ -28,10 +28,8 @@ internal class UserSettingsViewModel @Inject constructor(
         viewModelScope.launchIO {
             _instruction.post(Instruction.Loading)
 
-            loadUserSettingsUseCase().collect { userSettings ->
-                _instruction.post(
-                    Instruction.Success(userSettings)
-                )
+            observeUseSetitingsUseCase().collect { userSettings ->
+                _instruction.post(Instruction.UpdateSettings(userSettings))
             }
         }
     }

@@ -27,7 +27,7 @@ open class WarmFlow<T>(
 
         coldFlow = MutableSharedFlow()
         hotFlow = MutableSharedFlow(replay = 1, onBufferOverflow = onBufferOverflow)
-        mergedFlow = merge(hotFlow.distinctUntilChanged(), coldFlow)
+        mergedFlow = merge(hotFlow, coldFlow)
 
         hotFlow.tryEmit(initialValue)
     }

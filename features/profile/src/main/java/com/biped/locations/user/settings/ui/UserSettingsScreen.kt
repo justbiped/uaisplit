@@ -71,7 +71,7 @@ internal fun UserSettingsScreen(
 
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
-            is Instruction.Success -> state.successState(instruction.settings)
+            is Instruction.UpdateSettings -> state.successState(instruction.settings)
             is Instruction.Default -> state.defaultState()
             is Instruction.Loading -> state.loadingState()
             is Instruction.Navigate -> state.navigate(instruction.destination)
