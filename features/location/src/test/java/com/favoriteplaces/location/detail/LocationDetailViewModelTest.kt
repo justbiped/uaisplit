@@ -45,7 +45,7 @@ class LocationDetailViewModelTest {
 
     @Test
     fun `emits location detail when fetch detail is successfully done`() = runTest {
-        val testFlow = viewModel.viewInstruction.test()
+        val testFlow = viewModel.viewInstruction.test(this)
         val locationDetail = getLocationDetail()
 
         every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
@@ -60,7 +60,7 @@ class LocationDetailViewModelTest {
 
     @Test
     fun `emits error state when fetch details fail`() = runBlocking {
-        val testFlow = viewModel.viewInstruction.test()
+        val testFlow = viewModel.viewInstruction.test(this)
         coEvery { getLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
 
         viewModel.loadLocationDetails(0)

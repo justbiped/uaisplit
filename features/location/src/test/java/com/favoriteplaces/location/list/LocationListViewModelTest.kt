@@ -36,7 +36,7 @@ internal class LocationListViewModelTest {
 
     @Test
     fun `post default state on init`() = runTest {
-        val testFlow = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test(this)
 
         assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Default::class.java)
         testFlow.finish()
@@ -44,7 +44,7 @@ internal class LocationListViewModelTest {
 
     @Test
     fun `post default, loading and success sequence on a successful locations load`() = runTest {
-            val testFlow = viewModel.instruction.test()
+            val testFlow = viewModel.instruction.test(this)
             coEvery { loadLocations() } returns Result.success(listOf(locationFixture()))
 
             viewModel.fetchLocations()
@@ -61,7 +61,7 @@ internal class LocationListViewModelTest {
     @Test
     fun `post location list when fetch locations is successfully done`() = runTest {
         val locationList = listOf(locationUiFixture())
-        val testFlow = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test(this)
         coEvery { loadLocations() } returns Result.success(listOf(locationFixture()))
 
         viewModel.fetchLocations()
@@ -72,7 +72,7 @@ internal class LocationListViewModelTest {
 
     @Test
     fun `emit failed event when locations loading fail`() = runTest {
-        val testFlow = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test(this)
         coEvery { loadLocations() } returns Result.failure(Exception(""))
 
         viewModel.fetchLocations()
@@ -83,7 +83,7 @@ internal class LocationListViewModelTest {
 
     @Test
     fun `reset to initial state after an initial locations load`() = runTest {
-        val testFlow = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test(this)
         coEvery { loadLocations() } returns Result.failure(Exception(""))
 
         viewModel.fetchLocations()
@@ -94,7 +94,7 @@ internal class LocationListViewModelTest {
 
     @Test
     fun `emit default, loading, failure and default sequence on a loading fail`() = runTest {
-        val testFlow = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test(this)
         coEvery { loadLocations() } returns Result.failure(Exception(""))
 
         viewModel.fetchLocations()
@@ -112,7 +112,7 @@ internal class LocationListViewModelTest {
     fun `navigates to location details when a location was selected`() = runTest {
         val location = locationUiFixture()
         val expectedDestination = LocationListFragmentDirections.toLocationDetails(location.id)
-        val testFlow = viewModel.instruction.test()
+        val testFlow = viewModel.instruction.test(this)
 
         viewModel.onLocationSelected(location)
 

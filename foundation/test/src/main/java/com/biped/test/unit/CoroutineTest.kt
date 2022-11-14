@@ -10,21 +10,23 @@ import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 
+const val SIX_SECONDS_MS = 6000L
+
 fun runTest(
     context: CoroutineContext = UnconfinedTestDispatcher(),
-    block: suspend CoroutineScope.() -> Unit
+    dispatchTimeoutMs: Long = SIX_SECONDS_MS,
+    testBody: suspend CoroutineScope.() -> Unit
 ) {
-    runTest(context = context, testBody = block)
+    runTest(context = context, dispatchTimeoutMs = dispatchTimeoutMs, testBody = testBody)
 }
 
 class TestFlow<T>(
-    coroutineContext: CoroutineContext = UnconfinedTestDispatcher(),
+    context: CoroutineContext,
+    coroutineScope: CoroutineScope,
     flow: Flow<T>
 ) {
 
@@ -32,7 +34,7 @@ class TestFlow<T>(
     private var collectJob: Job
 
     init {
-        collectJob = flow.onEach { events.add(it) }.launchIn(CoroutineScope(coroutineContext))
+        collectJob = coroutineScope.launch(context = context) { flow.collect { events.add(it) } }
     }
 
     fun finish() {
@@ -40,8 +42,11 @@ class TestFlow<T>(
     }
 }
 
-fun <T> Flow<T>.test(context: CoroutineContext = UnconfinedTestDispatcher()): TestFlow<T> {
-    return TestFlow(context, this)
+fun <T> Flow<T>.test(
+    scope: CoroutineScope,
+    context: CoroutineContext = UnconfinedTestDispatcher()
+): TestFlow<T> {
+    return TestFlow(context, scope, this)
 }
 
 class TestFlowSubject<T> private constructor(
