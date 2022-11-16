@@ -10,7 +10,7 @@ import com.biped.test.unit.CoroutineTestRule
 import com.biped.test.unit.TestFlowSubject.Companion.assertThat
 import com.biped.test.unit.mock
 import com.biped.test.unit.runTest
-import com.biped.test.unit.test
+import com.biped.test.unit.testFlowOf
 import io.mockk.every
 import io.mockk.verify
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -44,7 +44,7 @@ class UserSettingsViewModelTest {
 
     @Test
     fun `emmit update settings instruction on receive a distinct user settings`() = runTest {
-        val testFlow = viewModel.instruction.test(this)
+        val testFlow = testFlowOf(viewModel.instruction)
 
         settingsFlow.emit(userSettingsFixture())
 
@@ -54,7 +54,7 @@ class UserSettingsViewModelTest {
 
     @Test
     fun `emmit user settings update for each distinct user settings update`() = runTest {
-        val testFlow = viewModel.instruction.test(this)
+        val testFlow = testFlowOf(viewModel.instruction)
         val settings = listOf(
             userSettingsFixture(theme = themeFixture(ColorTheme.DARK)),
             userSettingsFixture(theme = themeFixture(ColorTheme.LIGHT)),

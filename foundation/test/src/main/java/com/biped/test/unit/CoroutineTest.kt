@@ -27,6 +27,13 @@ fun runTest(
     runTest(context = context, dispatchTimeoutMs = dispatchTimeoutMs, testBody = testBody)
 }
 
+fun <T> CoroutineScope.testFlowOf(
+    flow: Flow<T>,
+    context: CoroutineContext = UnconfinedTestDispatcher()
+): TestFlow<T> {
+    return TestFlow(context, this, flow)
+}
+
 class TestFlow<T>(
     context: CoroutineContext,
     coroutineScope: CoroutineScope,
@@ -44,13 +51,6 @@ class TestFlow<T>(
     fun finish() {
         collectJob.cancel()
     }
-}
-
-fun <T> Flow<T>.test(
-    scope: CoroutineScope,
-    context: CoroutineContext = UnconfinedTestDispatcher()
-): TestFlow<T> {
-    return TestFlow(context, scope, this)
 }
 
 class TestFlowSubject<T> private constructor(

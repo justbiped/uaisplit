@@ -3,7 +3,7 @@ package com.favoriteplaces.location.detail
 import com.biped.test.unit.CoroutineTestRule
 import com.biped.test.unit.TestFlowSubject.Companion.assertThat
 import com.biped.test.unit.runTest
-import com.biped.test.unit.test
+import com.biped.test.unit.testFlowOf
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -45,7 +45,7 @@ class LocationDetailViewModelTest {
 
     @Test
     fun `emits location detail when fetch detail is successfully done`() = runTest {
-        val testFlow = viewModel.viewInstruction.test(this)
+        val testFlow = testFlowOf(viewModel.viewInstruction)
         val locationDetail = getLocationDetail()
 
         every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
@@ -60,7 +60,7 @@ class LocationDetailViewModelTest {
 
     @Test
     fun `emits error state when fetch details fail`() = runBlocking {
-        val testFlow = viewModel.viewInstruction.test(this)
+        val testFlow = testFlowOf(viewModel.viewInstruction)
         coEvery { getLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
 
         viewModel.loadLocationDetails(0)
