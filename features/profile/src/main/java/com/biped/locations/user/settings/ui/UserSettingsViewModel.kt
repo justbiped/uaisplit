@@ -6,7 +6,7 @@ import biped.works.coroutines.MutableWarmFlow
 import com.biped.locations.user.settings.ObserveUseSettingsUseCase
 import com.biped.locations.user.settings.SaveUserSettingsUseCase
 import com.biped.locations.user.settings.data.UserSettings
-import com.favoriteplaces.core.coroutines.launchIO
+import biped.works.coroutines.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn

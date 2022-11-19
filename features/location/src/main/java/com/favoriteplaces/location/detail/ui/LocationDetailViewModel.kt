@@ -3,7 +3,7 @@ package com.favoriteplaces.location.detail.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableWarmFlow
-import com.favoriteplaces.core.coroutines.launchIO
+import biped.works.coroutines.launchIO
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
 import com.favoriteplaces.location.detail.data.ui.LocationDetailUIModel

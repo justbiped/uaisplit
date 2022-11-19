@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.tools
+package biped.works.coroutines
 
 import androidx.annotation.VisibleForTesting
 import kotlinx.coroutines.CoroutineDispatcher

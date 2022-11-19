@@ -9,4 +9,5 @@ android {
 dependencies {
     implementation(Dependencies.Coroutines.test)
     implementation(Dependencies.Test.truth)
+    implementation(project(":coroutines:core"))
 }

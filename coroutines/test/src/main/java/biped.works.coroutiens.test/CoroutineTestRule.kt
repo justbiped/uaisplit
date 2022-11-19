@@ -1,7 +1,7 @@
 package biped.works.coroutiens.test
 
 import android.annotation.SuppressLint
-import com.favoriteplaces.core.tools.DispatcherProvider
+import biped.works.coroutines.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

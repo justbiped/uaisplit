@@ -8,5 +8,4 @@ android {
 }
 dependencies {
     implementation(Dependencies.Coroutines.android)
-    testImplementation(project(":coroutines:test"))
 }

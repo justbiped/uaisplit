@@ -1,6 +1,5 @@
-package com.favoriteplaces.core.coroutines
+package biped.works.coroutines
 
-import com.favoriteplaces.core.tools.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
