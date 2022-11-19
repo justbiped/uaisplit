@@ -1,4 +1,3 @@
-import biped.works.plugins.ComposePlugin
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 

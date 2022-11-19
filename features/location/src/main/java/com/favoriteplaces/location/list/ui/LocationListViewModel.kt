@@ -2,7 +2,7 @@ package com.favoriteplaces.location.list.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.favoriteplaces.core.coroutines.MutableWarmFlow
+import biped.works.coroutines.MutableWarmFlow
 import com.favoriteplaces.core.coroutines.launchIO
 import com.favoriteplaces.location.list.LoadLocationsUseCase
 import com.favoriteplaces.location.list.data.Location

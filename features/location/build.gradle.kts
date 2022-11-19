@@ -47,6 +47,9 @@ dependencies {
     implementation(project(":theme"))
     devImplementation(project(":test"))
 
+    implementation(project(":coroutines:core"))
+    testImplementation(project(":coroutines:test"))
+
     kaptTest(Dependencies.Hilt.compiler)
     kaptAndroidTest(Dependencies.Hilt.compiler)
 }

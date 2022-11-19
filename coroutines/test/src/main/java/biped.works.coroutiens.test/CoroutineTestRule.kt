@@ -1,4 +1,4 @@
-package com.biped.test.unit
+package biped.works.coroutiens.test
 
 import android.annotation.SuppressLint
 import com.favoriteplaces.core.tools.DispatcherProvider

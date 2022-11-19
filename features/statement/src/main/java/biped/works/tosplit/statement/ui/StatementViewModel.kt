@@ -1,8 +1,8 @@
 package biped.works.tosplit.statement.ui
 
 import androidx.lifecycle.ViewModel
+import biped.works.coroutines.MutableWarmFlow
 import biped.works.tosplit.statement.LoadStatementUseCase
-import com.favoriteplaces.core.coroutines.MutableWarmFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

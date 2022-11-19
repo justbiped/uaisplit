@@ -2,19 +2,19 @@ package com.biped.locations.user.settings.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biped.locations.user.MyJavaProblematicUseCase
-import com.biped.locations.user.settings.ObserveUseSetitingsUseCase
+import biped.works.coroutines.MutableWarmFlow
+import com.biped.locations.user.settings.ObserveUseSettingsUseCase
 import com.biped.locations.user.settings.SaveUserSettingsUseCase
 import com.biped.locations.user.settings.data.UserSettings
-import com.favoriteplaces.core.coroutines.MutableWarmFlow
 import com.favoriteplaces.core.coroutines.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 internal class UserSettingsViewModel @Inject constructor(
-    private val observeUseSetitingsUseCase: ObserveUseSetitingsUseCase,
+    private val observeUseSettingsUseCase: ObserveUseSettingsUseCase,
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
@@ -26,12 +26,11 @@ internal class UserSettingsViewModel @Inject constructor(
     }
 
     private fun loadUserSettings() {
-        viewModelScope.launch {
-            _instruction.post(Instruction.Loading)
-            observeUseSetitingsUseCase().collect { userSettings ->
-                _instruction.post(Instruction.UpdateSettings(userSettings))
-            }
-        }
+        _instruction.post(Instruction.Loading)
+
+        observeUseSettingsUseCase()
+            .onEach { userSettings -> _instruction.post(Instruction.UpdateSettings(userSettings)) }
+            .launchIn(viewModelScope)
     }
 
     fun changeThemeSettings(settings: UserSettings) {
@@ -41,8 +40,6 @@ internal class UserSettingsViewModel @Inject constructor(
     }
 
     fun showUserProfile(userId: String) {
-        viewModelScope.launchIO {
-            _instruction.emit(Instruction.navigateToProfile(userId))
-        }
+        _instruction.emit(Instruction.navigateToProfile(userId))
     }
 }

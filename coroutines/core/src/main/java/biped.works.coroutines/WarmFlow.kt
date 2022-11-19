@@ -1,4 +1,4 @@
-package com.favoriteplaces.core.coroutines
+package biped.works.coroutines
 
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow

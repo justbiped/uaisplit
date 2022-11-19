@@ -1,9 +1,9 @@
 package com.favoriteplaces.location.detail
 
-import com.biped.test.unit.CoroutineTestRule
-import com.biped.test.unit.TestFlowSubject.Companion.assertThat
-import com.biped.test.unit.runTest
-import com.biped.test.unit.testFlowOf
+import biped.works.coroutiens.test.CoroutineTestRule
+import biped.works.coroutiens.test.TestFlowSubject.Companion.assertThat
+import biped.works.coroutiens.test.runTest
+import biped.works.coroutiens.test.testFlowOf
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -26,7 +26,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LocationDetailViewModelTest {
 
-    @get:Rule val coroutineTestRule = CoroutineTestRule()
+    @get:Rule val coroutineTestRule = biped.works.coroutiens.test.CoroutineTestRule()
     @MockK internal lateinit var getLocationDetails: GetLocationDetails
     @MockK internal lateinit var scheduleFormatter: ScheduleFormatter
 
@@ -44,19 +44,20 @@ class LocationDetailViewModelTest {
     }
 
     @Test
-    fun `emits location detail when fetch detail is successfully done`() = runTest {
-        val testFlow = testFlowOf(viewModel.viewInstruction)
-        val locationDetail = getLocationDetail()
+    fun `emits location detail when fetch detail is successfully done`() =
+        biped.works.coroutiens.test.runTest {
+            val testFlow = testFlowOf(viewModel.viewInstruction)
+            val locationDetail = getLocationDetail()
 
-        every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
-        coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
+            every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
+            coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
 
-        viewModel.loadLocationDetails(0)
+            viewModel.loadLocationDetails(0)
 
-        assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Success::class.java)
+            assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Success::class.java)
 
-        testFlow.finish()
-    }
+            testFlow.finish()
+        }
 
     @Test
     fun `emits error state when fetch details fail`() = runBlocking {

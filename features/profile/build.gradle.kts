@@ -23,6 +23,9 @@ dependencies {
     devImplementation(project(":test"))
     devImplementation(project(":settings"))
 
+    implementation(project(":coroutines:core"))
+    testImplementation(project(":coroutines:test"))
+
     kaptTest(Dependencies.Hilt.compiler)
     kaptAndroidTest(Dependencies.Hilt.compiler)
 }

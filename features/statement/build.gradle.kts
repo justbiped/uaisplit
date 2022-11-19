@@ -16,6 +16,9 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":theme"))
 
+    implementation(project(":coroutines:core"))
+    testImplementation(project(":coroutines:test"))
+
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)
 

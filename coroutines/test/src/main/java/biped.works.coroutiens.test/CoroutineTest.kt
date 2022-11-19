@@ -1,4 +1,4 @@
-package com.biped.test.unit
+package biped.works.coroutiens.test
 
 import com.google.common.truth.Fact.simpleFact
 import com.google.common.truth.FailureMetadata

@@ -3,7 +3,7 @@ package biped.works.locations.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biped.locations.settings.SettingsRepository
-import com.favoriteplaces.core.coroutines.MutableWarmFlow
+import biped.works.coroutines.MutableWarmFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn

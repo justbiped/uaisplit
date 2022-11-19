@@ -24,6 +24,10 @@ include(":theme")
 include(":settings")
 include(":statement")
 
+include(":coroutines")
+include(":coroutines:core")
+include(":coroutines:test")
+
 project(":statement").projectDir = File(rootDir, "features/statement")
 project(":profile").projectDir = File(rootDir, "features/profile")
 project(":settings").projectDir = File(rootDir, "features/settings")
