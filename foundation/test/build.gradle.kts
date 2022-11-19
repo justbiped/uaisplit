@@ -17,8 +17,8 @@ dependencies {
     implementation(Dependencies.Test.truth)
     implementation(Dependencies.Test.mockk)
 
-    implementation(project(":core"))
-    implementation(project(":theme"))
+    implementation(project(":foundation:core"))
+    implementation(project(":foundation:theme"))
     implementation(Dependencies.Square.okHttp)
     implementation(Dependencies.Square.mockServer)
 

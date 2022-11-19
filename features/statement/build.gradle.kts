@@ -13,8 +13,8 @@ dependencies {
     implementation(Dependencies.Kotlin.core)
     implementation(Dependencies.Android.appCompat)
 
-    implementation(project(":core"))
-    implementation(project(":theme"))
+    implementation(project(":foundation:core"))
+    implementation(project(":foundation:theme"))
 
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))

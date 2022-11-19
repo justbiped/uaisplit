@@ -10,6 +10,6 @@ android {
 }
 
 dependencies {
-    androidTestImplementation(project(":test"))
+    androidTestImplementation(project(":foundation:test"))
     androidTestImplementation(Dependencies.Test.uiAutomator)
 }

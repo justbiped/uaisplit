@@ -70,9 +70,9 @@ dependencies {
     implementation(project(":profile"))
     implementation(project(":statement"))
     implementation(project(":settings"))
-    implementation(project(":core"))
-    implementation(project(":theme"))
-    testImplementation(project(":test"))
+    implementation(project(":foundation:core"))
+    implementation(project(":foundation:theme"))
+    testImplementation(project(":foundation:test"))
 
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))
