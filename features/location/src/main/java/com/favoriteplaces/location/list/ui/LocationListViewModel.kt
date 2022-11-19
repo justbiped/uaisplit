@@ -3,7 +3,6 @@ package com.favoriteplaces.location.list.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
-import com.favoriteplaces.core.coroutines.launchDefault
 import com.favoriteplaces.core.coroutines.launchIO
 import com.favoriteplaces.location.list.LoadLocationsUseCase
 import com.favoriteplaces.location.list.data.Location
@@ -22,13 +21,11 @@ internal class LocationListViewModel
     val instruction = _instruction.toWarmFlow()
 
     fun fetchLocations() {
-        viewModelScope.launchIO {
-            _instruction.post(locationListInstructions.loading())
+        _instruction.post(locationListInstructions.loading())
 
+        viewModelScope.launchIO {
             loadLocations()
-                .onSuccess {
-                    onLocationLoadSuccess(it)
-                }
+                .onSuccess { onLocationLoadSuccess(it) }
                 .onFailure {
                     _instruction.emit(locationListInstructions.failure())
                     _instruction.post(locationListInstructions.default())
@@ -36,14 +33,12 @@ internal class LocationListViewModel
         }
     }
 
-    private suspend fun onLocationLoadSuccess(locations: List<Location>) {
+    private fun onLocationLoadSuccess(locations: List<Location>) {
         val locationsUI = locations.map { LocationUIModel.fromDomain(it) }
         _instruction.post(locationListInstructions.success(locationsUI))
     }
 
     fun onLocationSelected(locationUIModel: LocationUIModel) {
-        viewModelScope.launchDefault {
-            _instruction.emit(locationListInstructions.navigateToLocationDetails(locationUIModel))
-        }
+        _instruction.emit(locationListInstructions.navigateToLocationDetails(locationUIModel))
     }
 }

@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biped.locations.settings.SettingsRepository
 import com.favoriteplaces.core.coroutines.MutableWarmFlow
-import com.favoriteplaces.core.coroutines.launchDefault
-import com.favoriteplaces.core.coroutines.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -22,17 +22,12 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadThemeSettings() {
-        viewModelScope.launchIO {
-            settingsRepository.observeThemeSettings().collect {
-                _instruction.post(HomeInstruction.UpdateTheme(it))
-            }
-        }
-
+        settingsRepository.observeThemeSettings()
+            .onEach { _instruction.post(HomeInstruction.UpdateTheme(it)) }
+            .launchIn(viewModelScope)
     }
 
     fun selectHomeDestination(destination: HomeDestination) {
-        viewModelScope.launchDefault {
-            _instruction.emit(HomeInstruction.Navigate(destination))
-        }
+        _instruction.emit(HomeInstruction.Navigate(destination))
     }
 }
