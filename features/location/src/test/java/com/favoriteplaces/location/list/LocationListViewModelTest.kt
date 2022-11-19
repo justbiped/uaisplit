@@ -2,9 +2,8 @@ package com.favoriteplaces.location.list
 
 import biped.works.coroutiens.test.CoroutineTestRule
 import biped.works.coroutiens.test.TestFlowSubject.Companion.assertThat
-import com.biped.test.unit.mock
-import biped.works.coroutiens.test.runTest
 import biped.works.coroutiens.test.testFlowOf
+import com.biped.test.unit.mock
 import com.favoriteplaces.location.list.ui.Instruction
 import com.favoriteplaces.location.list.ui.LocationListFragmentDirections
 import com.favoriteplaces.location.list.ui.LocationListInstructions
@@ -22,7 +21,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 internal class LocationListViewModelTest {
 
-    @get:Rule val coroutineTestRule = biped.works.coroutiens.test.CoroutineTestRule()
+    @get:Rule val coroutineTestRule = CoroutineTestRule()
 
     private var loadLocations = mock<LoadLocationsUseCase>()
     private val instruction = spyk(LocationListInstructions())
