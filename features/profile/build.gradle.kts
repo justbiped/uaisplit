@@ -18,10 +18,11 @@ dependencies {
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)
 
+    implementation(project(":features:settings"))
+
     implementation(project(":foundation:core"))
     implementation(project(":foundation:theme"))
     devImplementation(project(":foundation:test"))
-    implementation(project(":settings"))
 
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))

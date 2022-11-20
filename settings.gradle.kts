@@ -16,10 +16,13 @@ dependencyResolutionManagement {
 
 include(":app")
 include(":instrumentation")
-include(":location")
-include(":profile")
-include(":settings")
-include(":statement")
+
+include(":features")
+include(":features:location")
+include(":features:profile")
+include(":features:settings")
+include(":features:statement")
+
 
 include(":foundation")
 include(":foundation:core")
@@ -29,8 +32,3 @@ include(":foundation:theme")
 include(":coroutines")
 include(":coroutines:core")
 include(":coroutines:test")
-
-project(":statement").projectDir = File(rootDir, "features/statement")
-project(":profile").projectDir = File(rootDir, "features/profile")
-project(":settings").projectDir = File(rootDir, "features/settings")
-project(":location").projectDir = File(rootDir, "features/location")

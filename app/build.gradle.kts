@@ -66,10 +66,11 @@ dependencies {
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)
 
-    implementation(project(":location"))
-    implementation(project(":profile"))
-    implementation(project(":statement"))
-    implementation(project(":settings"))
+    implementation(project(":features:location"))
+    implementation(project(":features:profile"))
+    implementation(project(":features:statement"))
+    implementation(project(":features:settings"))
+
     implementation(project(":foundation:core"))
     implementation(project(":foundation:theme"))
     testImplementation(project(":foundation:test"))
