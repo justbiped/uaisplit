@@ -4,7 +4,7 @@ import biped.works.tosplit.statement.data.Statement
 import javax.inject.Inject
 import kotlinx.coroutines.flow.flowOf
 
-class LoadStatementUseCase @Inject constructor() {
+class ObserveStatementUseCase @Inject constructor() {
 
     operator fun invoke() = flowOf(
         listOf(
