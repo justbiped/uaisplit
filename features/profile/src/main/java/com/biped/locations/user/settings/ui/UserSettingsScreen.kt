@@ -12,6 +12,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,24 +34,24 @@ import com.favoriteplaces.core.compose.navigate
 @Stable
 private data class ProfileState(
     private val navController: NavHostController,
-    private val settingsState: MutableState<UserSettings> = mutableStateOf(UserSettings()),
-    private val isLoadingState: MutableState<Boolean> = mutableStateOf(false)
 ) {
-    val settings: UserSettings get() = settingsState.value
-    val isLoading: Boolean get() = isLoadingState.value
+    var isLoading: Boolean by mutableStateOf(false)
+        private set
+    var settings: UserSettings by mutableStateOf(UserSettings())
+        private set
 
     fun defaultState() {
-        isLoadingState.value = false
-        settingsState.value = UserSettings()
+        isLoading = false
+        settings = UserSettings()
     }
 
     fun loadingState() {
-        isLoadingState.value = true
+        isLoading = true
     }
 
     fun successState(userSettings: UserSettings) {
-        isLoadingState.value = false
-        settingsState.value = userSettings
+        isLoading = false
+        settings = userSettings
     }
 
     fun navigate(route: Destination) {
@@ -102,7 +103,8 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(user = state.settings.user,
+                ProfileHeader(
+                    user = state.settings.user,
                     onClick = { profileEvents.onProfileClicked(it) })
             }
 

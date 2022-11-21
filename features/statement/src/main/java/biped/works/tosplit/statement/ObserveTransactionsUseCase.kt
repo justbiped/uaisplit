@@ -1,14 +1,14 @@
 package biped.works.tosplit.statement
 
-import biped.works.tosplit.statement.data.Statement
+import biped.works.tosplit.statement.data.Transaction
 import javax.inject.Inject
 import kotlinx.coroutines.flow.flowOf
 
-class ObserveStatementUseCase @Inject constructor() {
+class ObserveTransactionsUseCase @Inject constructor() {
 
     operator fun invoke() = flowOf(
         listOf(
-            Statement(
+            Transaction(
                 id = "myId",
                 value = 1500.50,
                 description = "Rent of the trash car"

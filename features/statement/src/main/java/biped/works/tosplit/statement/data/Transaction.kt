@@ -1,6 +1,6 @@
 package biped.works.tosplit.statement.data
 
-data class Statement(
+data class Transaction(
     val id: String,
     val value: Double,
     val description: String
