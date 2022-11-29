@@ -6,13 +6,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.navigation
 import biped.works.compose.Destination
 import biped.works.compose.NavDirection
+import biped.works.compose.NavGraph
 import biped.works.compose.composable
 import com.biped.locations.user.ProfileDestination.Companion.ROUTE
 import com.biped.locations.user.profile.ui.ProfileScreen
 import com.biped.locations.user.settings.ui.UserSettingsScreen
 
-object ProfileNavGraph : NavDirection("profile_graph_route") {
-    val startDestination: String get() = SettingsRoute.route
+object ProfileNavGraph : NavGraph("profile_graph_route") {
+    override val startDestination: String get() = SettingsRoute.route
 
     internal object SettingsRoute : NavDirection("user_settings_route")
     internal object ProfileRoute : NavDirection(ROUTE)

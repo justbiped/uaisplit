@@ -3,7 +3,9 @@ package biped.works.locations.home
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.People
+import androidx.compose.material.icons.filled.ViewList
 import androidx.compose.material.icons.outlined.People
+import androidx.compose.material.icons.outlined.ViewList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
@@ -25,8 +27,8 @@ sealed class HomeDestination(
         graph = TransactionNavGraph.route,
         route = TransactionNavGraph.startDestination,
         title = R.string.transaction_list_label,
-        unselectedIcon = Icons.Outlined.People,
-        selectedIcon = Icons.Filled.People
+        unselectedIcon = Icons.Outlined.ViewList,
+        selectedIcon = Icons.Filled.ViewList
     )
 
     object UserSettings : HomeDestination(
