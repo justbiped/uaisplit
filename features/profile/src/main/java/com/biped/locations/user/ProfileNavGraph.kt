@@ -4,12 +4,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
+import biped.works.compose.Destination
+import biped.works.compose.NavDirection
+import biped.works.compose.composable
 import com.biped.locations.user.ProfileDestination.Companion.ROUTE
 import com.biped.locations.user.profile.ui.ProfileScreen
 import com.biped.locations.user.settings.ui.UserSettingsScreen
-import com.favoriteplaces.core.compose.Destination
-import com.favoriteplaces.core.compose.NavDirection
-import com.favoriteplaces.core.compose.composable
 
 object ProfileNavGraph : NavDirection("profile_graph_route") {
     val startDestination: String get() = SettingsRoute.route

@@ -1,8 +1,8 @@
 package com.biped.locations.user.settings.ui
 
+import biped.works.compose.Destination
 import com.biped.locations.user.ProfileDestination
 import com.biped.locations.user.settings.data.UserSettings
-import com.favoriteplaces.core.compose.Destination
 
 internal sealed interface Instruction {
     data class UpdateSettings(val settings: UserSettings) : Instruction

@@ -25,11 +25,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import biped.works.compose.collectWithLifecycle
+import biped.works.compose.currentRouteState
 import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.components.LargeLabel
-import com.favoriteplaces.core.compose.collectWithLifecycle
-import com.favoriteplaces.core.compose.currentRouteState
 
 @Stable
 internal data class HomeComposeState(
@@ -110,7 +110,7 @@ fun BottomNavigation(
     currentRoute: String, onSelectDestination: (destination: HomeDestination) -> Unit = {}
 ) {
     val homeDestinations = listOf(
-        HomeDestination.StatementGraph,
+        HomeDestination.Transaction,
         HomeDestination.UserSettings
     )
 
@@ -140,6 +140,6 @@ fun HomeScreenPreview() {
 @Composable
 fun BottomBarPreview() {
     AppTheme {
-        BottomNavigation(currentRoute = HomeDestination.StatementGraph.route)
+        BottomNavigation(currentRoute = HomeDestination.Transaction.route)
     }
 }

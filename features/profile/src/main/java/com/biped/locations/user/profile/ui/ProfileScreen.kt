@@ -9,11 +9,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import biped.works.compose.collectWithLifecycle
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.profile.data.User
-import com.favoriteplaces.core.compose.collectWithLifecycle
 
 private data class ComposeState(
     val user: User = User(),

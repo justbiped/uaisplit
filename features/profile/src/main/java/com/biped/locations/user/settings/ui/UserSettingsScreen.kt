@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import biped.works.compose.Destination
+import biped.works.compose.collectWithLifecycle
+import biped.works.compose.navigate
 import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.settings.ui.ThemeSettingsUi
 import com.biped.locations.theme.AppTheme
@@ -27,9 +29,6 @@ import com.biped.locations.theme.components.BoxSurface
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.settings.data.UserSettings
-import com.favoriteplaces.core.compose.Destination
-import com.favoriteplaces.core.compose.collectWithLifecycle
-import com.favoriteplaces.core.compose.navigate
 
 @Stable
 private data class ProfileState(

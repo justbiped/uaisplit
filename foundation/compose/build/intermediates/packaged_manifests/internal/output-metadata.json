@@ -1,0 +1,18 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "PACKAGED_MANIFESTS",
+    "kind": "Directory"
+  },
+  "applicationId": "biped.works.compose",
+  "variantName": "internal",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "outputFile": "../../merged_manifest/internal/AndroidManifest.xml"
+    }
+  ],
+  "elementType": "File"
+}

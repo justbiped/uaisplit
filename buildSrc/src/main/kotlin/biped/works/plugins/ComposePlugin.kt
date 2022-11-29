@@ -49,6 +49,9 @@ class ComposePlugin : Plugin<Project> {
                 // Test
                 testImplementation(Dependencies.Compose.test_junit)
                 devImplementation(Dependencies.Compose.test_manifest)
+
+                // Biped Compose Foundation
+                implementation(project(":foundation:compose"))
             }
         }
     }

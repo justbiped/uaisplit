@@ -21,13 +21,14 @@ include(":features")
 include(":features:location")
 include(":features:profile")
 include(":features:settings")
-include(":features:statement")
+include(":features:transaction")
 
 
 include(":foundation")
 include(":foundation:core")
 include(":foundation:test")
 include(":foundation:theme")
+include(":foundation:compose")
 
 include(":coroutines")
 include(":coroutines:core")
