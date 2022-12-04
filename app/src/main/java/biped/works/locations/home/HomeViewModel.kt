@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadThemeSettings() {
-        settingsRepository.observeThemeSettings()
+        settingsRepository.themeSettingsStream
             .onEach { _instruction.post(HomeInstruction.UpdateTheme(it)) }
             .launchIn(viewModelScope)
     }

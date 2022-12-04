@@ -1,4 +1,4 @@
-package com.biped.locations.user.profile.ui
+package com.biped.locations.user.profile.old
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

@@ -10,16 +10,14 @@ class SettingsRepository @Inject constructor(
     private val settingsDataStore: SettingsDataStore
 ) {
 
-    fun observeThemeSettings(): Flow<ThemeSettings> {
-        return combine(
-            settingsDataStore.dynamicColorsSettings(),
-            settingsDataStore.colorSchemeSettings().map { name -> toColorSettings(name) }
-        ) { useDynamicColors, colorScheme ->
-            ThemeSettings(
-                colorScheme = colorScheme,
-                useDynamicColors = useDynamicColors
-            )
-        }
+    val themeSettingsStream: Flow<ThemeSettings> = combine(
+        settingsDataStore.dynamicColorsSettings(),
+        settingsDataStore.colorSchemeSettings().map { name -> toColorSettings(name) }
+    ) { useDynamicColors, colorScheme ->
+        ThemeSettings(
+            colorScheme = colorScheme,
+            useDynamicColors = useDynamicColors
+        )
     }
 
     private fun toColorSettings(name: String): ColorTheme {

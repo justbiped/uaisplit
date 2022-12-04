@@ -6,5 +6,5 @@ import javax.inject.Inject
 class LoadUserUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
-    operator fun invoke(userId: String) = userRepository.observeUser()
+    operator fun invoke(userId: String) = userRepository.userStream
 }

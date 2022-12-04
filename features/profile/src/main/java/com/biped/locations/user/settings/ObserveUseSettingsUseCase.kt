@@ -13,8 +13,8 @@ class ObserveUseSettingsUseCase @Inject constructor(
 ) {
     operator fun invoke(): Flow<UserSettings> {
         return combine(
-            userRepository.observeUser(),
-            settingsRepository.observeThemeSettings()
+            userRepository.userStream,
+            settingsRepository.themeSettingsStream
         ) { user, themeSettings ->
             UserSettings(
                 user = user,
