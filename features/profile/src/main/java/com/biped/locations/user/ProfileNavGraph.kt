@@ -9,7 +9,7 @@ import biped.works.compose.NavDirection
 import biped.works.compose.NavGraph
 import biped.works.compose.composable
 import com.biped.locations.user.ProfileDestination.Companion.ROUTE
-import com.biped.locations.user.profile.old.ProfileScreen
+import com.biped.locations.user.profile.ui.ProfileScreen
 import com.biped.locations.user.settings.ui.UserSettingsScreen
 
 object ProfileNavGraph : NavGraph("profile_graph_route") {

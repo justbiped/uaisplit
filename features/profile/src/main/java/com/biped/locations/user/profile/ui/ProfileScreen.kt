@@ -1,4 +1,4 @@
-package com.biped.locations.user.profile.old
+package com.biped.locations.user.profile.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,26 +24,41 @@ import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.profile.data.User
 
-private data class ComposeState(
-    val user: User = User(),
-    val isLoading: Boolean = false
-) {
-    var name by mutableStateOf(user.name)
+@Stable
+private class ProfileState(userModel: User = User()) {
+    var user by mutableStateOf(userModel)
+        private set
 
-    fun default() = copy(isLoading = false)
-    fun loading() = copy(isLoading = true)
-    fun updateUser(user: User) = copy(user = user, isLoading = false)
+    var isLoading by mutableStateOf(false)
+        private set
+
+    fun default() {
+        isLoading = false
+    }
+
+    fun loading() {
+        isLoading = true
+    }
+
+    fun updateUser(user: User) {
+        this.user = user
+    }
+}
+
+@Composable
+private fun rememberProfileState() = remember {
+    mutableStateOf(ProfileState())
 }
 
 @Composable
 internal fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
-    var state by remember { mutableStateOf(ComposeState()) }
+    val state by rememberProfileState()
 
     viewModel.instruction.collectWithLifecycle { instruction ->
-        state = when (instruction) {
+        when (instruction) {
+            is Instruction.UpdateUser -> state.updateUser(instruction.user)
             is Instruction.Default -> state.default()
             is Instruction.Loading -> state.loading()
-            is Instruction.UpdateUser -> state.updateUser(instruction.user)
         }
     }
 
@@ -51,7 +67,7 @@ internal fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ProfileUi(state: ComposeState) {
+private fun ProfileUi(state: ProfileState) {
     Column(
         modifier = Modifier.padding(horizontal = Dimens.small)
     ) {
@@ -71,10 +87,10 @@ private fun ProfileUi(state: ComposeState) {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = state.name,
+                value = state.user.name,
                 label = { Text(text = "name") },
                 onValueChange = { newText ->
-                    state.name = newText.trimStart()
+                    state.updateUser(state.user.copy(name = newText.trimStart()))
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors()
             )
@@ -83,11 +99,9 @@ private fun ProfileUi(state: ComposeState) {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = state.name,
+                value = state.user.name,
                 label = { Text(text = "e-mail") },
-                onValueChange = { newText ->
-                    state.name = newText.trimStart()
-                },
+                onValueChange = { newText -> },
                 colors = TextFieldDefaults.outlinedTextFieldColors()
             )
         }
@@ -98,7 +112,6 @@ private fun ProfileUi(state: ComposeState) {
 @Composable
 private fun ProfileUi_Preview() {
     AppTheme {
-        ProfileUi(state = ComposeState(User(name = "Some User Name")))
+        ProfileUi(state = ProfileState(User(name = "Some User Name")))
     }
 }
-

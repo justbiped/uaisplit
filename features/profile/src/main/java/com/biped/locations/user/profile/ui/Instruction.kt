@@ -1,4 +1,4 @@
-package com.biped.locations.user.profile.old
+package com.biped.locations.user.profile.ui
 
 import com.biped.locations.user.profile.data.User
 
