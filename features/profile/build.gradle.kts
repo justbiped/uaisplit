@@ -24,6 +24,8 @@ dependencies {
     implementation(project(":foundation:theme"))
     devImplementation(project(":foundation:test"))
 
+    implementation(project(":database"))
+
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))
 

@@ -18,11 +18,6 @@ object Dependencies {
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 
         const val datastore = "androidx.datastore:datastore-preferences:1.0.0"
-
-        const val roomVersion = "2.3.0"
-        const val roomRuntime = "androidx.room:room-runtime:$roomVersion"
-        const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
-        const val roomKtx = "androidx.room:room-ktx:$roomVersion"
     }
 
     object Kotlin {
@@ -30,6 +25,14 @@ object Dependencies {
         const val core = "androidx.core:core-ktx:$version"
         const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
+    }
+
+    object Room{
+        const val version = "2.4.3"
+        const val runtime = "androidx.room:room-runtime:$version"
+        const val compiler = "androidx.room:room-compiler:$version"
+        const val extesions = "androidx.room:room-ktx:$version"
+        const val test = "androidx.room:room-testing:$version"
     }
 
     object Serialization {

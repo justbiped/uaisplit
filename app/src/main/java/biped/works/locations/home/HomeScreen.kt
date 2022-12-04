@@ -12,6 +12,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
@@ -123,7 +124,7 @@ fun BottomNavigation(
                 selected = isSelected,
                 onClick = { onSelectDestination(destination) },
                 icon = { Icon(icon, contentDescription = "") },
-                label = { LargeLabel(text = stringResource(id = destination.title)) })
+                label = { Text(text = stringResource(id = destination.title)) })
         }
     }
 }

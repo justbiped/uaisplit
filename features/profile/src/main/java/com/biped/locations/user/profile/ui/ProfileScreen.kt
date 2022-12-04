@@ -3,10 +3,10 @@ package com.biped.locations.user.profile.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import biped.works.compose.collectWithLifecycle
@@ -85,24 +86,24 @@ private fun ProfileUi(state: ProfileState) {
             modifier = Modifier.weight(0.90f)
         ) {
 
-            TextField(
+            OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = state.user.name,
                 label = { Text(text = "name") },
                 onValueChange = { newText ->
                     state.updateUser(state.user.copy(name = newText.trimStart()))
                 },
-                colors = TextFieldDefaults.outlinedTextFieldColors()
+                maxLines = 1
             )
 
             NormalSpacer()
 
-            TextField(
+            OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = state.user.name,
                 label = { Text(text = "e-mail") },
-                onValueChange = { newText -> },
-                colors = TextFieldDefaults.outlinedTextFieldColors()
+                onValueChange = { newText -> state.updateUser(state.user.copy(name = newText.trimStart()))},
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
             )
         }
     }

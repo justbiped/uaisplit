@@ -30,6 +30,8 @@ include(":foundation:test")
 include(":foundation:theme")
 include(":foundation:compose")
 
+include(":database")
+
 include(":coroutines")
 include(":coroutines:core")
 include(":coroutines:test")
