@@ -9,6 +9,7 @@ import com.biped.locations.user.ProfileDestination.Companion.USER_ID_ARG
 import com.biped.locations.user.profile.LoadUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 internal class ProfileViewModel @Inject constructor(
@@ -25,7 +26,7 @@ internal class ProfileViewModel @Inject constructor(
     }
 
     private fun loadUserProfile(userId: String) {
-        viewModelScope.launchIO {
+        viewModelScope.launch {
             loadUser(userId).collect { user ->
                 _instruction.post(Instruction.UpdateUser(user))
             }
