@@ -41,7 +41,6 @@ private data class ProfileState(
 
     fun defaultState() {
         isLoading = false
-        settings = UserSettings()
     }
 
     fun loadingState() {

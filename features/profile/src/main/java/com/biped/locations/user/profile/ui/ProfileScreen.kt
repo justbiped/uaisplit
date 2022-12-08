@@ -27,6 +27,7 @@ import com.biped.locations.user.profile.data.User
 
 @Stable
 private class ProfileState(userModel: User = User()) {
+
     var user by mutableStateOf(userModel)
         private set
 
