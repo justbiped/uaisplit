@@ -4,7 +4,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -70,44 +75,68 @@ internal fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ProfileUi(state: ProfileState) {
-    Column(
-        modifier = Modifier.padding(horizontal = Dimens.small)
-    ) {
-        BigSpacer()
+    Column {
+        TopAppbar(
+            onNavigateUp = { },
+            onSave = { }
+        )
 
         Column(
-            modifier = Modifier.weight(0.10f)
+            modifier = Modifier.padding(horizontal = Dimens.small)
         ) {
-            ProfileHeader(user = state.user)
-        }
+            Column(
+                modifier = Modifier.weight(0.10f)
+            ) {
+                ProfileHeader(user = state.user)
+            }
 
-        BigSpacer()
+            BigSpacer()
 
-        Column(
-            modifier = Modifier.weight(0.90f)
-        ) {
+            Column(
+                modifier = Modifier.weight(0.90f)
+            ) {
 
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = state.user.name,
-                label = { Text(text = "name") },
-                onValueChange = { newText ->
-                    state.updateUser(state.user.copy(name = newText.trimStart()))
-                },
-                maxLines = 1
-            )
+                OutlinedTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = state.user.name,
+                    label = { Text(text = "name") },
+                    onValueChange = { newText ->
+                        state.updateUser(state.user.copy(name = newText.trimStart()))
+                    },
+                    maxLines = 1
+                )
 
-            NormalSpacer()
+                NormalSpacer()
 
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = state.user.name,
-                label = { Text(text = "e-mail") },
-                onValueChange = { newText -> state.updateUser(state.user.copy(name = newText.trimStart()))},
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
-            )
+                OutlinedTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = state.user.name,
+                    label = { Text(text = "e-mail") },
+                    onValueChange = { newText -> state.updateUser(state.user.copy(name = newText.trimStart())) },
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
+                )
+            }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun TopAppbar(
+    onNavigateUp: () -> Unit, onSave: () -> Unit
+) {
+    CenterAlignedTopAppBar(title = { Text(text = "Profile") }, navigationIcon = {
+        IconButton(onClick = onNavigateUp) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack, contentDescription = ""
+            )
+        }
+    }, actions = {
+        IconButton(onClick = onSave) {
+            Text(text = "Save")
+        }
+    }, scrollBehavior = null
+    )
 }
 
 @Preview(showBackground = true)
