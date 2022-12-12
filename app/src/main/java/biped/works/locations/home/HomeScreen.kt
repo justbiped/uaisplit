@@ -30,10 +30,9 @@ import biped.works.compose.collectWithLifecycle
 import biped.works.compose.currentRouteState
 import com.biped.locations.settings.ThemeSettings
 import com.biped.locations.theme.AppTheme
-import com.biped.locations.theme.components.LargeLabel
 
 @Stable
-internal data class HomeComposeState(
+internal data class HomeState(
     val navController: NavHostController,
     private val themeState: MutableState<ThemeSettings> = mutableStateOf(ThemeSettings())
 ) {
@@ -50,7 +49,7 @@ internal data class HomeComposeState(
     }
 
     fun navigate(destination: HomeDestination) {
-        navController.navigate(destination.graph) {
+        navController.navigate(destination.route) {
             popUpTo(navController.graph.findStartDestination().id) { saveState = true }
             launchSingleTop = true
             restoreState = true
@@ -61,7 +60,7 @@ internal data class HomeComposeState(
 @Composable
 private fun rememberHomeState(
     navController: NavHostController = rememberNavController()
-) = remember { mutableStateOf(HomeComposeState(navController)) }
+) = remember { mutableStateOf(HomeState(navController)) }
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
@@ -82,7 +81,7 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreenUi(
-    state: HomeComposeState,
+    state: HomeState,
     onRouteSelected: (destination: HomeDestination) -> Unit = {}
 ) {
     AppTheme(

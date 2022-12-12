@@ -1,6 +1,8 @@
 package biped.works.locations.home
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import biped.works.test.compose.testNavController
 import com.google.common.truth.Truth.assertThat
@@ -9,7 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class HomeStatementStateTest {
+class HomeStateTest {
 
     @get:Rule val composeTestRule = createComposeRule()
 
@@ -18,7 +20,7 @@ class HomeStatementStateTest {
         var currentRoute = ""
         composeTestRule.setContent {
             val navController = testNavController("first_destination", "second_destination")
-            val homeState = HomeComposeState(navController)
+            val homeState = HomeState(navController)
 
             currentRoute = homeState.currentRoute
             navController.setCurrentDestination("second_destination")
@@ -32,8 +34,8 @@ class HomeStatementStateTest {
         var showBottomBar = false
 
         composeTestRule.setContent {
-            val navController = testNavController(homeDestinations)
-            val state = HomeComposeState(navController)
+            val navController = homeNavController(homeDestinations)
+            val state = HomeState(navController)
 
             showBottomBar = state.showBottomBar
             state.navigate(HomeDestination.UserSettings)
@@ -47,8 +49,11 @@ class HomeStatementStateTest {
         var showBottomBar = true
 
         composeTestRule.setContent {
-            val navController = testNavController("statement_graph_route", "no_home_destination")
-            val state = HomeComposeState(navController)
+            val navController = testNavController(
+                HomeDestination.Transaction.route,
+                "no_home_destination"
+            )
+            val state = HomeState(navController)
 
             showBottomBar = state.showBottomBar
             navController.setCurrentDestination("no_home_destination")
@@ -58,9 +63,12 @@ class HomeStatementStateTest {
     }
 
     private val homeDestinations = listOf(
-        HomeDestination.UserSettings.graph,
-        HomeDestination.UserSettings.route,
-        HomeDestination.StatementGraph.graph,
-        HomeDestination.StatementGraph.route
+        HomeDestination.UserSettings,
+        HomeDestination.Transaction,
     )
+
+    @Composable
+    fun homeNavController(graphs: List<HomeDestination>): TestNavHostController {
+        return testNavController(destinations = graphs.map { it.route })
+    }
 }

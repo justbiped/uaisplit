@@ -18,8 +18,8 @@ object TransactionNavGraph : NavGraph("transaction_nav_graph") {
 
 fun NavGraphBuilder.transactionNavGraph(navController: NavHostController) {
     navigation(
-        startDestination = TransactionNavGraph.startDestination,
-        route = TransactionNavGraph.route
+        route = TransactionNavGraph.route,
+        startDestination = TransactionNavGraph.startDestination
     ) {
         composable(TransactionNavGraph.Transactions) {
             TransactionsScreen(hiltViewModel())

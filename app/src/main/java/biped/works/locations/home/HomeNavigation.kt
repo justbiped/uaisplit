@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import biped.works.compose.NavGraph
 import biped.works.locations.R
 import biped.works.transaction.navigation.TransactionNavGraph
 import biped.works.transaction.navigation.transactionNavGraph
@@ -17,23 +18,22 @@ import com.biped.locations.user.ProfileNavGraph
 import com.biped.locations.user.profileNavGraph
 
 sealed class HomeDestination(
-    val graph: String,
-    val route: String,
+    val graph: NavGraph,
     @StringRes val title: Int,
     val unselectedIcon: ImageVector,
     val selectedIcon: ImageVector
 ) {
+    val route = graph.startDestination
+
     object Transaction : HomeDestination(
-        graph = TransactionNavGraph.route,
-        route = TransactionNavGraph.startDestination,
+        graph = TransactionNavGraph,
         title = R.string.transaction_list_label,
         unselectedIcon = Icons.Outlined.ViewList,
         selectedIcon = Icons.Filled.ViewList
     )
 
     object UserSettings : HomeDestination(
-        graph = ProfileNavGraph.route,
-        route = ProfileNavGraph.startDestination,
+        graph = ProfileNavGraph,
         title = R.string.profile_destination_label,
         unselectedIcon = Icons.Outlined.People,
         selectedIcon = Icons.Filled.People
@@ -51,7 +51,7 @@ sealed class HomeDestination(
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = HomeDestination.Transaction.graph) {
+    NavHost(navController, startDestination = HomeDestination.Transaction.graph.route) {
         transactionNavGraph(navController)
         profileNavGraph(navController)
     }
