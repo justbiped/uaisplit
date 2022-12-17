@@ -1,5 +1,8 @@
 package com.biped.locations.user.profile.ui
 
+import android.content.res.Configuration
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,6 +13,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +32,7 @@ import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.NormalSpacer
+import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.profile.data.User
 
@@ -60,8 +65,7 @@ private fun rememberProfileState() = remember {
 
 @Composable
 internal fun ProfileScreen(
-    viewModel: ProfileViewModel = viewModel(),
-    navController: NavHostController
+    viewModel: ProfileViewModel = viewModel(), navController: NavHostController
 ) {
     val state by rememberProfileState()
 
@@ -89,8 +93,9 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
     Column {
         TopAppbar(
             onNavigateUp = { interactor.onNavigateUp() },
-            onSave = { interactor.onSave() }
-        )
+            onSave = { interactor.onSave() })
+
+        SmallSpacer()
 
         Column(
             modifier = Modifier.padding(horizontal = Dimens.small)
@@ -136,17 +141,14 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
 private fun TopAppbar(
     onNavigateUp: () -> Unit, onSave: () -> Unit
 ) {
-    CenterAlignedTopAppBar(title = { Text(text = "Profile") }, navigationIcon = {
-        IconButton(onClick = onNavigateUp) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack, contentDescription = ""
-            )
-        }
-    }, actions = {
-        IconButton(onClick = onSave) {
-            Text(text = "Save")
-        }
-    }, scrollBehavior = null
+    CenterAlignedTopAppBar(
+        title = { Text(text = "Profile") },
+        navigationIcon = {
+            IconButton(onClick = onNavigateUp) {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
+            }
+        },
+        actions = { IconButton(onClick = onSave) { Text(text = "Save") } }
     )
 }
 
@@ -159,8 +161,16 @@ private interface ProfileInteractor {
 @Composable
 private fun ProfileUi_Preview() {
     AppTheme {
-        ProfileUi(
-            state = ProfileState(User(name = "Some User Name")),
-            interactor = object : ProfileInteractor {})
+        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+            ProfileUi(
+                state = ProfileState(User(name = "Some User Name")),
+                interactor = object : ProfileInteractor {})
+        }
     }
+}
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun ProfileUi_Dark_Preview() {
+    ProfileUi_Preview()
 }

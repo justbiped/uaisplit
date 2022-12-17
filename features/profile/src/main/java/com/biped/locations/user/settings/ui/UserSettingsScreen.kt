@@ -1,11 +1,14 @@
 package com.biped.locations.user.settings.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -25,7 +28,6 @@ import com.biped.locations.settings.ui.ThemeSettingsUi
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
-import com.biped.locations.theme.components.BoxSurface
 import com.biped.locations.theme.components.LargeLabel
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.settings.data.UserSettings
@@ -92,7 +94,7 @@ internal fun UserSettingsScreen(
 
 @Composable
 private fun UserSettingsUi(state: ProfileState, interactor: SettingsInteractor) {
-    BoxSurface(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.small)
         ) {
@@ -131,16 +133,25 @@ private interface SettingsInteractor {
     fun onThemeSettingsChanged(themeSettings: ThemeSettings) {}
 }
 
-@Preview(name = "Light preview", showBackground = true)
+@Preview(name = "Light Preview")
 @Composable
-fun ProfileUiLightPreview() {
+fun ProfileUi_Light_Preview() {
     val navController = rememberNavController()
-    AppTheme { UserSettingsUi(state = ProfileState(navController), object : SettingsInteractor {}) }
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background)
+        ) {
+            UserSettingsUi(
+                state = ProfileState(navController),
+                object : SettingsInteractor {})
+        }
+    }
 }
 
-@Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Preview(name = "Dark Preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun ProfileUiDarkPreview() {
-    val navController = rememberNavController()
-    AppTheme { UserSettingsUi(state = ProfileState(navController), object : SettingsInteractor {}) }
+fun ProfileUiLightPreview() {
+    ProfileUi_Light_Preview()
 }
