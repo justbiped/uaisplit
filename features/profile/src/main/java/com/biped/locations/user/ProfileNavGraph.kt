@@ -36,11 +36,17 @@ fun NavGraphBuilder.profileNavGraph(navController: NavHostController) {
         route = ProfileNavGraph.route
     ) {
         composable(ProfileNavGraph.SettingsRoute) {
-            UserSettingsScreen(viewModel = hiltViewModel(), navController = navController)
+            UserSettingsScreen(
+                viewModel = hiltViewModel(),
+                navController = navController
+            )
         }
 
         composable(ProfileNavGraph.ProfileRoute) {
-            ProfileScreen(viewModel = hiltViewModel())
+            ProfileScreen(
+                viewModel = hiltViewModel(),
+                navController = navController
+            )
         }
     }
 }

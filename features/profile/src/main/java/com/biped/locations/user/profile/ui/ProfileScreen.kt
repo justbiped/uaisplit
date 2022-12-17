@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
@@ -58,7 +59,10 @@ private fun rememberProfileState() = remember {
 }
 
 @Composable
-internal fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
+internal fun ProfileScreen(
+    viewModel: ProfileViewModel = viewModel(),
+    navController: NavHostController
+) {
     val state by rememberProfileState()
 
     viewModel.instruction.collectWithLifecycle { instruction ->
@@ -69,16 +73,23 @@ internal fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
         }
     }
 
-    ProfileUi(state = state)
+    val interactor = object : ProfileInteractor {
+        override fun onSave() {}
+        override fun onNavigateUp() {
+            navController.navigateUp()
+        }
+    }
+
+    ProfileUi(state = state, interactor = interactor)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ProfileUi(state: ProfileState) {
+private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
     Column {
         TopAppbar(
-            onNavigateUp = { },
-            onSave = { }
+            onNavigateUp = { interactor.onNavigateUp() },
+            onSave = { interactor.onSave() }
         )
 
         Column(
@@ -139,10 +150,17 @@ private fun TopAppbar(
     )
 }
 
+private interface ProfileInteractor {
+    fun onSave() {}
+    fun onNavigateUp() {}
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun ProfileUi_Preview() {
     AppTheme {
-        ProfileUi(state = ProfileState(User(name = "Some User Name")))
+        ProfileUi(
+            state = ProfileState(User(name = "Some User Name")),
+            interactor = object : ProfileInteractor {})
     }
 }

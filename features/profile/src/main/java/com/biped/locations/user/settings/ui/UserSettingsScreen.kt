@@ -77,7 +77,7 @@ internal fun UserSettingsScreen(
         }
     }
 
-    val listener = object : ProfileEvents {
+    val interactor = object : SettingsInteractor {
         override fun onProfileClicked(userId: String) {
             viewModel.showUserProfile(userId)
         }
@@ -87,11 +87,11 @@ internal fun UserSettingsScreen(
         }
     }
 
-    UserSettingsUi(state, listener)
+    UserSettingsUi(state = state, interactor = interactor)
 }
 
 @Composable
-private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
+private fun UserSettingsUi(state: ProfileState, interactor: SettingsInteractor) {
     BoxSurface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.small)
@@ -103,7 +103,7 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
             ) {
                 ProfileHeader(
                     user = state.settings.user,
-                    onClick = { profileEvents.onProfileClicked(it) })
+                    onClick = { interactor.onProfileClicked(it) })
             }
 
             BigSpacer()
@@ -113,7 +113,7 @@ private fun UserSettingsUi(state: ProfileState, profileEvents: ProfileEvents) {
             ) {
                 LargeLabel(text = "Theme setup")
                 ThemeSettingsUi(uiModel = state.settings.theme,
-                    onSettingsChanged = { profileEvents.onThemeSettingsChanged(it) })
+                    onSettingsChanged = { interactor.onThemeSettingsChanged(it) })
             }
         }
 
@@ -126,21 +126,21 @@ private fun BoxScope.LoadingIndicator(isLoading: Boolean) {
     if (isLoading) CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
 }
 
+private interface SettingsInteractor {
+    fun onProfileClicked(userId: String) {}
+    fun onThemeSettingsChanged(themeSettings: ThemeSettings) {}
+}
+
 @Preview(name = "Light preview", showBackground = true)
 @Composable
 fun ProfileUiLightPreview() {
     val navController = rememberNavController()
-    AppTheme { UserSettingsUi(state = ProfileState(navController), object : ProfileEvents {}) }
+    AppTheme { UserSettingsUi(state = ProfileState(navController), object : SettingsInteractor {}) }
 }
 
 @Preview(name = "Dark preview", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun ProfileUiDarkPreview() {
     val navController = rememberNavController()
-    AppTheme { UserSettingsUi(state = ProfileState(navController), object : ProfileEvents {}) }
-}
-
-interface ProfileEvents {
-    fun onProfileClicked(userId: String) {}
-    fun onThemeSettingsChanged(themeSettings: ThemeSettings) {}
+    AppTheme { UserSettingsUi(state = ProfileState(navController), object : SettingsInteractor {}) }
 }
