@@ -1,9 +1,7 @@
 package com.biped.locations.user.profile.ui
 
-import com.biped.locations.user.profile.data.User
-
 internal sealed interface Instruction {
-    data class UpdateUser(val user: User) : Instruction
+    data class UpdateUser(val user: UserUiModel) : Instruction
     object Default : Instruction
     object Loading : Instruction
 }

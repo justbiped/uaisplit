@@ -17,7 +17,9 @@ class ObserveUseSettingsUseCase @Inject constructor(
             settingsRepository.themeSettingsStream
         ) { user, themeSettings ->
             UserSettings(
-                user = user,
+                userId = user.id,
+                name = user.name,
+                picture = user.picture,
                 theme = themeSettings
             )
         }

@@ -4,8 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableWarmFlow
+import biped.works.coroutines.launchIO
 import com.biped.locations.user.ProfileDestination.Companion.USER_ID_ARG
 import com.biped.locations.user.profile.LoadUserUseCase
+import com.biped.locations.user.profile.SaveUserUseCase
 import com.biped.locations.user.profile.data.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,7 +16,8 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 internal class ProfileViewModel @Inject constructor(
     stateHandle: SavedStateHandle,
-    private val loadUser: LoadUserUseCase
+    private val loadUser: LoadUserUseCase,
+    private val saveUser: SaveUserUseCase
 ) : ViewModel() {
 
     private val _instruction = MutableWarmFlow<Instruction>(Instruction.Default)
@@ -28,12 +31,18 @@ internal class ProfileViewModel @Inject constructor(
     private fun loadUserProfile(userId: String) {
         viewModelScope.launch {
             loadUser(userId).collect { user ->
-                _instruction.post(Instruction.UpdateUser(user))
+                _instruction.post(Instruction.UpdateUser(user.toUiModel()))
             }
         }
     }
 
-    fun saveUser(user: User) {
-
+    fun saveUser(user: UserUiModel) {
+        viewModelScope.launchIO {
+            saveUser(user.toDomain())
+        }
     }
+
+    private fun User.toUiModel() = UserUiModel(id, name, email, picture)
+
+    private fun UserUiModel.toDomain() = User(id, name, email, picture)
 }

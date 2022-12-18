@@ -22,8 +22,13 @@ class UserRepository @Inject constructor(
         val userEntity = UserEntity(
             UUID.randomUUID().toString(),
             "Roubert Edgar",
+            "roubertedgar@gmail.com",
             "https://media-exp1.licdn.com/dms/image/C4D03AQFkXBIUIWdT2g/profile-displayphoto-shrink_400_400/0/1517979972037?e=1675900800&v=beta&t=PcXI0CPRdiMD8FTi2YAEyKtZUueQRZhgzpvTq5wM3U4"
         )
         userDao.saveUser(userEntity)
+    }
+
+    suspend fun saveUser(user: User) {
+        userDao.saveUser(user.toEntity())
     }
 }

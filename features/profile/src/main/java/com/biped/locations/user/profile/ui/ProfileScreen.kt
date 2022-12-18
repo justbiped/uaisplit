@@ -36,12 +36,11 @@ import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.SmallTitle
 import com.biped.locations.user.ProfileHeader
-import com.biped.locations.user.profile.data.User
 
 @Stable
-private class ProfileState(userModel: User = User()) {
+private class ProfileState(uiModel: UserUiModel = UserUiModel()) {
 
-    var user by mutableStateOf(userModel)
+    var user by mutableStateOf(uiModel)
         private set
 
     var isLoading by mutableStateOf(false)
@@ -55,7 +54,7 @@ private class ProfileState(userModel: User = User()) {
         isLoading = true
     }
 
-    fun updateUser(user: User) {
+    fun updateUser(user: UserUiModel) {
         this.user = user
     }
 }
@@ -108,7 +107,7 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(user = state.user)
+                ProfileHeader(name = state.user.name, imageUrl = state.user.picture)
             }
 
             BigSpacer()
@@ -181,7 +180,7 @@ private fun ProfileUi_Preview() {
     AppTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
             ProfileUi(
-                state = ProfileState(User(name = "Some User Name")),
+                state = ProfileState(UserUiModel(name = "Some User Name")),
                 interactor = object : ProfileInteractor {})
         }
     }

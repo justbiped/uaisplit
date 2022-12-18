@@ -22,26 +22,25 @@ import com.biped.locations.profile.R
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumHeadline
-import com.biped.locations.user.profile.data.User
 
 @Composable
 fun ProfileHeader(
     modifier: Modifier = Modifier,
-    user: User,
-    onClick: ((userId: String) -> Unit)? = null
+    name: String,
+    imageUrl: String = "",
+    onClick: () -> Unit = {}
 ) {
     val profileImagePainter = rememberAsyncImagePainter(
-        model = user.picture,
+        model = imageUrl,
         placeholder = painterResource(id = R.drawable.ic_profile_on)
     )
     Row(
         modifier = modifier
             .clickable(
-                enabled = onClick != null,
                 interactionSource = MutableInteractionSource(),
                 indication = null
             ) {
-                onClick?.invoke(user.id)
+                onClick()
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -54,7 +53,7 @@ fun ProfileHeader(
             contentDescription = ""
         )
         SmallSpacer()
-        MediumHeadline(text = user.name, overflow = TextOverflow.Ellipsis)
+        MediumHeadline(text = name, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -63,7 +62,7 @@ fun ProfileHeader(
 fun ProfileHeader_Preview() {
     AppTheme {
         Surface(modifier = Modifier.fillMaxWidth()) {
-            ProfileHeader(user = User(name = "R. Edgar"))
+            ProfileHeader(name = "R. Edgar")
         }
     }
 }
@@ -72,8 +71,6 @@ fun ProfileHeader_Preview() {
 @Preview(heightDp = 60, widthDp = 360, uiMode = Configuration.UI_MODE_NIGHT_YES)
 fun ProfileHeader_Preview_Dark() {
     AppTheme {
-        Surface(modifier = Modifier.fillMaxWidth()) {
-            ProfileHeader(user = User(name = "R. Edgar"))
-        }
+        ProfileHeader_Preview()
     }
 }

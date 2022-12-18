@@ -33,12 +33,12 @@ import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.settings.data.UserSettings
 
 @Stable
-private data class ProfileState(
+private data class UserSettingsState(
     private val navController: NavHostController,
 ) {
     var isLoading: Boolean by mutableStateOf(false)
         private set
-    var settings: UserSettings by mutableStateOf(UserSettings())
+    var userSettings: UserSettings by mutableStateOf(UserSettings())
         private set
 
     fun defaultState() {
@@ -51,7 +51,7 @@ private data class ProfileState(
 
     fun successState(userSettings: UserSettings) {
         isLoading = false
-        settings = userSettings
+        this.userSettings = userSettings
     }
 
     fun navigate(route: Destination) {
@@ -61,7 +61,7 @@ private data class ProfileState(
 
 @Composable
 private fun rememberSettingsState(navigator: NavHostController) = remember {
-    mutableStateOf(ProfileState(navigator))
+    mutableStateOf(UserSettingsState(navigator))
 }
 
 @Composable
@@ -85,7 +85,7 @@ internal fun UserSettingsScreen(
         }
 
         override fun onThemeSettingsChanged(themeSettings: ThemeSettings) {
-            viewModel.changeThemeSettings(state.settings.copy(theme = themeSettings))
+            viewModel.changeThemeSettings(state.userSettings.copy(theme = themeSettings))
         }
     }
 
@@ -93,7 +93,7 @@ internal fun UserSettingsScreen(
 }
 
 @Composable
-private fun UserSettingsUi(state: ProfileState, interactor: SettingsInteractor) {
+private fun UserSettingsUi(state: UserSettingsState, interactor: SettingsInteractor) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(horizontal = Dimens.small)
@@ -104,8 +104,10 @@ private fun UserSettingsUi(state: ProfileState, interactor: SettingsInteractor) 
                 modifier = Modifier.weight(0.10f)
             ) {
                 ProfileHeader(
-                    user = state.settings.user,
-                    onClick = { interactor.onProfileClicked(it) })
+                    name = state.userSettings.name,
+                    imageUrl = state.userSettings.picture,
+                    onClick = { interactor.onProfileClicked(state.userSettings.userId) }
+                )
             }
 
             BigSpacer()
@@ -114,7 +116,7 @@ private fun UserSettingsUi(state: ProfileState, interactor: SettingsInteractor) 
                 modifier = Modifier.weight(0.90f)
             ) {
                 LargeLabel(text = "Theme setup")
-                ThemeSettingsUi(uiModel = state.settings.theme,
+                ThemeSettingsUi(uiModel = state.userSettings.theme,
                     onSettingsChanged = { interactor.onThemeSettingsChanged(it) })
             }
         }
@@ -144,7 +146,7 @@ fun ProfileUi_Light_Preview() {
                 .background(color = MaterialTheme.colorScheme.background)
         ) {
             UserSettingsUi(
-                state = ProfileState(navController),
+                state = UserSettingsState(navController),
                 object : SettingsInteractor {})
         }
     }
