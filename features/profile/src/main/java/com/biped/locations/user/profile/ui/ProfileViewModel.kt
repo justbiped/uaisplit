@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableWarmFlow
 import com.biped.locations.user.ProfileDestination.Companion.USER_ID_ARG
 import com.biped.locations.user.profile.LoadUserUseCase
+import com.biped.locations.user.profile.data.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -30,5 +31,9 @@ internal class ProfileViewModel @Inject constructor(
                 _instruction.post(Instruction.UpdateUser(user))
             }
         }
+    }
+
+    fun saveUser(user: User) {
+
     }
 }

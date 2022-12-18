@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -33,6 +34,7 @@ import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.theme.SmallSpacer
+import com.biped.locations.theme.components.SmallTitle
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.profile.data.User
 
@@ -78,7 +80,10 @@ internal fun ProfileScreen(
     }
 
     val interactor = object : ProfileInteractor {
-        override fun onSave() {}
+        override fun onSave() {
+            viewModel.saveUser(state.user)
+        }
+
         override fun onNavigateUp() {
             navController.navigateUp()
         }
@@ -116,20 +121,29 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
                     modifier = Modifier.fillMaxWidth(),
                     value = state.user.name,
                     label = { Text(text = "name") },
+                    maxLines = 1,
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                     onValueChange = { newText ->
-                        state.updateUser(state.user.copy(name = newText.trimStart()))
+                        if (newText.contains("\n").not()) {
+                            state.updateUser(state.user.copy(name = newText.trimStart()))
+                        }
                     },
-                    maxLines = 1
                 )
 
                 NormalSpacer()
 
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = state.user.name,
+                    value = state.user.email,
                     label = { Text(text = "e-mail") },
-                    onValueChange = { newText -> state.updateUser(state.user.copy(name = newText.trimStart())) },
-                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Done
+                    ),
+                    onValueChange = { newText ->
+                        state.updateUser(state.user.copy(email = newText.trimStart()))
+                    },
                 )
             }
         }
@@ -148,7 +162,11 @@ private fun TopAppbar(
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
             }
         },
-        actions = { IconButton(onClick = onSave) { Text(text = "Save") } }
+        actions = {
+            IconButton(onClick = onSave) {
+                SmallTitle(text = "Save", color = MaterialTheme.colorScheme.tertiary)
+            }
+        }
     )
 }
 
