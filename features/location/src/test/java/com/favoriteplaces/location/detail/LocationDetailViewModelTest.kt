@@ -16,7 +16,6 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,7 +25,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class LocationDetailViewModelTest {
 
-    @get:Rule val coroutineTestRule = biped.works.coroutiens.test.CoroutineTestRule()
+    @get:Rule val coroutineTestRule = CoroutineTestRule()
     @MockK internal lateinit var getLocationDetails: GetLocationDetails
     @MockK internal lateinit var scheduleFormatter: ScheduleFormatter
 
@@ -44,23 +43,22 @@ class LocationDetailViewModelTest {
     }
 
     @Test
-    fun `emits location detail when fetch detail is successfully done`() =
-        biped.works.coroutiens.test.runTest {
-            val testFlow = testFlowOf(viewModel.viewInstruction)
-            val locationDetail = getLocationDetail()
+    fun `emits location detail when fetch detail is successfully done`() = runTest {
+        val testFlow = testFlowOf(viewModel.viewInstruction)
+        val locationDetail = getLocationDetail()
 
-            every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
-            coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
+        every { scheduleFormatter.format(any()) } returns "Mon to Sat: 10h at 19h"
+        coEvery { getLocationDetails(0) } returns Result.success(locationDetail)
 
-            viewModel.loadLocationDetails(0)
+        viewModel.loadLocationDetails(0)
 
-            assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Success::class.java)
+        assertThat(testFlow).lastEvent().isInstanceOf(Instruction.Success::class.java)
 
-            testFlow.finish()
-        }
+        testFlow.finish()
+    }
 
     @Test
-    fun `emits error state when fetch details fail`() = runBlocking {
+    fun `emits error state when fetch details fail`() = runTest {
         val testFlow = testFlowOf(viewModel.viewInstruction)
         coEvery { getLocationDetails(0) } returns Result.failure(Throwable("Some error message"))
 
