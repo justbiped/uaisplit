@@ -8,7 +8,12 @@ import com.biped.locations.user.settings.data.UserSettings
 fun userSettingsFixture(
     user: User = userFixture(),
     theme: ThemeSettings = themeFixture()
-) = UserSettings(user, theme)
+) = UserSettings(
+    userId = user.id,
+    name = user.name,
+    picture = user.picture,
+    theme = theme
+)
 
 fun userFixture(
     id: String = "userId",

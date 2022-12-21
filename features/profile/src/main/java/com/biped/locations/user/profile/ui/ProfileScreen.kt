@@ -18,6 +18,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +35,7 @@ import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.theme.SmallSpacer
+import com.biped.locations.theme.components.SingleLineTextField
 import com.biped.locations.theme.components.SmallTitle
 import com.biped.locations.user.ProfileHeader
 import com.biped.locations.user.profile.data.User
@@ -57,6 +59,10 @@ private class ProfileState(uiModel: User = User()) {
 
     fun updateUser(user: User) {
         this.user = user
+    }
+
+    fun updateUser(update: User.() -> User) {
+        user = update(user)
     }
 }
 
@@ -117,18 +123,12 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
                 modifier = Modifier.weight(0.90f)
             ) {
 
-                OutlinedTextField(
+                SingleLineTextField(
                     modifier = Modifier.fillMaxWidth(),
                     value = state.user.name,
                     label = { Text(text = "name") },
-                    maxLines = 1,
-                    singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                    onValueChange = { newText ->
-                        if (newText.contains("\n").not()) {
-                            state.updateUser(state.user.copy(name = newText.trimStart()))
-                        }
-                    },
+                    onValueChange = { name -> state.updateUser { copy(name = name) } },
                 )
 
                 NormalSpacer()
@@ -141,9 +141,7 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Done
                     ),
-                    onValueChange = { newText ->
-                        state.updateUser(state.user.copy(email = newText.trimStart()))
-                    },
+                    onValueChange = { email -> state.updateUser { copy(email = email) } },
                 )
             }
         }

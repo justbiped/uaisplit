@@ -9,8 +9,18 @@ import kotlinx.coroutines.flow.merge
 open class WarmFlow<T>(
     initialValue: T
 ) : Flow<T> {
-    protected val hotFlow: MutableSharedFlow<T> = MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    private val coldFlow: MutableSharedFlow<T> = MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+
+    protected val hotFlow: MutableSharedFlow<T> = MutableSharedFlow(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+
+    private val coldFlow: MutableSharedFlow<T> = MutableSharedFlow(
+        replay = 0,
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+
     private val mergedFlow: Flow<T> = merge(hotFlow, coldFlow)
 
     init {
@@ -19,7 +29,6 @@ open class WarmFlow<T>(
     }
 
     override suspend fun collect(collector: FlowCollector<T>) {
-        coldFlow.resetReplayCache()
         mergedFlow.collect(collector)
     }
 
