@@ -36,9 +36,10 @@ import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.SmallTitle
 import com.biped.locations.user.ProfileHeader
+import com.biped.locations.user.profile.data.User
 
 @Stable
-private class ProfileState(uiModel: UserUiModel = UserUiModel()) {
+private class ProfileState(uiModel: User = User()) {
 
     var user by mutableStateOf(uiModel)
         private set
@@ -54,7 +55,7 @@ private class ProfileState(uiModel: UserUiModel = UserUiModel()) {
         isLoading = true
     }
 
-    fun updateUser(user: UserUiModel) {
+    fun updateUser(user: User) {
         this.user = user
     }
 }
@@ -80,7 +81,7 @@ internal fun ProfileScreen(
 
     val interactor = object : ProfileInteractor {
         override fun onSave() {
-            viewModel.saveUser(state.user)
+            viewModel.updateUser(state.user)
         }
 
         override fun onNavigateUp() {
@@ -180,7 +181,7 @@ private fun ProfileUi_Preview() {
     AppTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
             ProfileUi(
-                state = ProfileState(UserUiModel(name = "Some User Name")),
+                state = ProfileState(User(name = "Some User Name")),
                 interactor = object : ProfileInteractor {})
         }
     }

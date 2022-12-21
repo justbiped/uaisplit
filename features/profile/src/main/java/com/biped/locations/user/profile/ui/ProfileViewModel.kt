@@ -31,18 +31,14 @@ internal class ProfileViewModel @Inject constructor(
     private fun loadUserProfile(userId: String) {
         viewModelScope.launch {
             loadUser(userId).collect { user ->
-                _instruction.post(Instruction.UpdateUser(user.toUiModel()))
+                _instruction.post(Instruction.UpdateUser(user))
             }
         }
     }
 
-    fun saveUser(user: UserUiModel) {
+    fun updateUser(user: User) {
         viewModelScope.launchIO {
-            saveUser(user.toDomain())
+            saveUser(user)
         }
     }
-
-    private fun User.toUiModel() = UserUiModel(id, name, email, picture)
-
-    private fun UserUiModel.toDomain() = User(id, name, email, picture)
 }
