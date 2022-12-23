@@ -1,4 +1,4 @@
-package com.biped.test.instrumentation
+package biped.works.test.instrumentation
 
 import android.content.ComponentName
 import android.content.Intent.makeMainActivity

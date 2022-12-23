@@ -1,6 +1,6 @@
 package com.favoriteplaces.location.detail
 
-import com.biped.test.unit.mock
+import biped.works.test.unit.mock
 import com.favoriteplaces.location.data.LocationRepository
 import com.favoriteplaces.location.detail.data.domain.Day
 import com.favoriteplaces.location.detail.data.domain.DaySchedule

@@ -8,7 +8,7 @@
         android:name="dagger.hilt.android.testing.HiltTestApplication"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".instrumentation.HiltTestActivity"
+            android:name="biped.works.test.instrumentation.HiltTestActivity"
             android:exported="false" />
     </application>
 </manifest>

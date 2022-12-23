@@ -1,4 +1,4 @@
-package com.biped.test.unit
+package biped.works.test.unit
 
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk

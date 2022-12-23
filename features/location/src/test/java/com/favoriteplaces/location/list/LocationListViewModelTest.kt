@@ -4,7 +4,7 @@ import biped.works.coroutiens.test.CoroutineTestRule
 import biped.works.coroutiens.test.TestFlowSubject.Companion.assertThat
 import biped.works.coroutiens.test.runTest
 import biped.works.coroutiens.test.testFlowOf
-import com.biped.test.unit.mock
+import biped.works.test.unit.mock
 import com.favoriteplaces.location.list.ui.Instruction
 import com.favoriteplaces.location.list.ui.LocationListFragmentDirections
 import com.favoriteplaces.location.list.ui.LocationListInstructions

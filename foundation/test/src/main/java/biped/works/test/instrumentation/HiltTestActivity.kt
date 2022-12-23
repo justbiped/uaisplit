@@ -1,4 +1,4 @@
-package com.biped.test.instrumentation
+package biped.works.test.instrumentation
 
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.biped.test.instrumentation.runner
+package biped.works.test.instrumentation.runner
 
 import android.app.Application
 import android.content.Context

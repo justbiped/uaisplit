@@ -1,4 +1,4 @@
-package com.biped.test.instrumentation.action
+package biped.works.test.instrumentation.action
 
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.assertion.ViewAssertions

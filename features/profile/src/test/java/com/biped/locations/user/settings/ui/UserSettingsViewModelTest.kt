@@ -9,7 +9,7 @@ import com.biped.locations.user.settings.SaveUserSettingsUseCase
 import com.biped.locations.user.settings.data.UserSettings
 import com.biped.locations.user.themeFixture
 import com.biped.locations.user.userSettingsFixture
-import com.biped.test.unit.mock
+import biped.works.test.unit.mock
 import io.mockk.every
 import io.mockk.verify
 import kotlinx.coroutines.flow.MutableSharedFlow

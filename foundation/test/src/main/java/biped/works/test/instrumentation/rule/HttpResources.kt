@@ -1,4 +1,4 @@
-package com.biped.test.instrumentation.rule
+package biped.works.test.instrumentation.rule
 
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

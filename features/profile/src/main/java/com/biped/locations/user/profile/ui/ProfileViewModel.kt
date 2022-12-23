@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableWarmFlow
 import biped.works.coroutines.launchIO
 import com.biped.locations.user.ProfileDestination.Companion.USER_ID_ARG
-import com.biped.locations.user.profile.LoadUserUseCase
+import com.biped.locations.user.profile.ObserveUserUseCase
 import com.biped.locations.user.profile.SaveUserUseCase
 import com.biped.locations.user.profile.data.User
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 internal class ProfileViewModel @Inject constructor(
     stateHandle: SavedStateHandle,
-    private val loadUser: LoadUserUseCase,
+    private val observeUser: ObserveUserUseCase,
     private val saveUser: SaveUserUseCase
 ) : ViewModel() {
 
@@ -30,7 +30,7 @@ internal class ProfileViewModel @Inject constructor(
 
     private fun loadUserProfile(userId: String) {
         viewModelScope.launch {
-            loadUser(userId).collect { user ->
+            observeUser().collect { user ->
                 _instruction.post(Instruction.UpdateUser(user))
             }
         }

@@ -1,4 +1,4 @@
-package com.biped.test.instrumentation.action
+package biped.works.test.instrumentation.action
 
 import android.view.View
 import androidx.test.espresso.Espresso.onView

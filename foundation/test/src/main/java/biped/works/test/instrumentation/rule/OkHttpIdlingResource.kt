@@ -1,4 +1,4 @@
-package com.biped.test.instrumentation.rule
+package biped.works.test.instrumentation.rule
 
 import androidx.test.espresso.IdlingResource
 import okhttp3.OkHttpClient
