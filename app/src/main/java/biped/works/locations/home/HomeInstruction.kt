@@ -1,6 +1,6 @@
 package biped.works.locations.home
 
-import com.biped.locations.settings.ThemeSettings
+import biped.works.user.settings.data.ThemeSettings
 
 sealed interface HomeInstruction {
     object Default : HomeInstruction

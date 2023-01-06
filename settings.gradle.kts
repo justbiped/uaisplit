@@ -19,8 +19,7 @@ include(":instrumentation")
 
 include(":features")
 include(":features:location")
-include(":features:profile")
-include(":features:settings")
+include(":features:user")
 include(":features:transaction")
 
 

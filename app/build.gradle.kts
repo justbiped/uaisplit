@@ -67,9 +67,8 @@ dependencies {
     kapt(Dependencies.Hilt.compiler)
 
     implementation(project(":features:location"))
-    implementation(project(":features:profile"))
+    implementation(project(":features:user"))
     implementation(project(":features:transaction"))
-    implementation(project(":features:settings"))
 
     implementation(project(":foundation:core"))
     implementation(project(":foundation:theme"))

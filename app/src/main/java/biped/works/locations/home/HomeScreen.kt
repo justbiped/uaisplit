@@ -28,7 +28,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import biped.works.compose.collectWithLifecycle
 import biped.works.compose.currentRouteState
-import com.biped.locations.settings.ThemeSettings
+import biped.works.user.settings.data.ThemeSettings
 import com.biped.locations.theme.AppTheme
 
 @Stable

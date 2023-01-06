@@ -14,8 +14,8 @@ import biped.works.compose.NavGraph
 import biped.works.locations.R
 import biped.works.transaction.navigation.TransactionNavGraph
 import biped.works.transaction.navigation.transactionNavGraph
-import com.biped.locations.user.ProfileNavGraph
-import com.biped.locations.user.profileNavGraph
+import biped.works.user.ProfileNavGraph
+import biped.works.user.profileNavGraph
 
 sealed class HomeDestination(
     val graph: NavGraph,

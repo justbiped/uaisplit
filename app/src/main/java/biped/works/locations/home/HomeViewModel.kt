@@ -2,7 +2,7 @@ package biped.works.locations.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biped.locations.settings.SettingsRepository
+import biped.works.user.settings.data.SettingsRepository
 import biped.works.coroutines.MutableWarmFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
