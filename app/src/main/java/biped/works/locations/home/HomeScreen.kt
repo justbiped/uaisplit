@@ -14,7 +14,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,25 +27,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import biped.works.compose.collectWithLifecycle
 import biped.works.compose.currentRouteState
-import biped.works.user.settings.data.ThemeSettings
 import com.biped.locations.theme.AppTheme
 
 @Stable
 internal data class HomeState(
-    val navController: NavHostController,
-    private val themeState: MutableState<ThemeSettings> = mutableStateOf(ThemeSettings())
+    val navController: NavHostController
 ) {
-    val themeSettings: ThemeSettings get() = themeState.value
     val currentRoute: String @Composable get() = navController.currentRouteState.value
     val showBottomBar: Boolean @Composable get() = HomeDestination.contains(currentRoute)
 
-    fun updateTheme(settings: ThemeSettings) {
-        themeState.value = settings
-    }
-
-    fun default() {
-        themeState.value = ThemeSettings()
-    }
+    fun default() {}
 
     fun navigate(destination: HomeDestination) {
         navController.navigate(destination.route) {
@@ -69,7 +59,6 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
-            is HomeInstruction.UpdateTheme -> state.updateTheme(instruction.themeSettings)
             is HomeInstruction.Navigate -> state.navigate(instruction.destination)
             is HomeInstruction.Default -> state.default()
         }
@@ -84,23 +73,20 @@ private fun HomeScreenUi(
     state: HomeState,
     onRouteSelected: (destination: HomeDestination) -> Unit = {}
 ) {
-    AppTheme(
-        state.themeSettings.colorScheme, state.themeSettings.useDynamicColors
-    ) {
-        Scaffold(bottomBar = {
-            AnimatedVisibility(
-                visible = state.showBottomBar,
-                enter = slideInVertically(tween()) { it },
-                exit = shrinkVertically() + slideOutVertically { it },
-            ) {
-                BottomNavigation(
-                    currentRoute = state.currentRoute,
-                    onSelectDestination = { onRouteSelected(it) })
-            }
-        }) { paddingValues ->
-            Surface(modifier = Modifier.padding(paddingValues)) {
-                NavigationGraph(navController = state.navController)
-            }
+
+    Scaffold(bottomBar = {
+        AnimatedVisibility(
+            visible = state.showBottomBar,
+            enter = slideInVertically(tween()) { it },
+            exit = shrinkVertically() + slideOutVertically { it },
+        ) {
+            BottomNavigation(
+                currentRoute = state.currentRoute,
+                onSelectDestination = { onRouteSelected(it) })
+        }
+    }) { paddingValues ->
+        Surface(modifier = Modifier.padding(paddingValues)) {
+            NavigationGraph(navController = state.navController)
         }
     }
 }

@@ -66,8 +66,8 @@ dependencies {
     implementation(Dependencies.Hilt.core)
     kapt(Dependencies.Hilt.compiler)
 
-    implementation(project(":features:location"))
     implementation(project(":features:user"))
+    implementation(project(":features:location"))
     implementation(project(":features:transaction"))
 
     implementation(project(":foundation:core"))
