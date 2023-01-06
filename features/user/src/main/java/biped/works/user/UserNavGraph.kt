@@ -12,7 +12,7 @@ import biped.works.user.ProfileDestination.Companion.ROUTE
 import biped.works.user.profile.ui.ProfileScreen
 import biped.works.user.settings.ui.UserSettingsScreen
 
-object ProfileNavGraph : NavGraph("profile_graph_route") {
+object UserNavGraph : NavGraph("user_graph_route") {
     override val startDestination: String get() = SettingsRoute.route
 
     internal object SettingsRoute : NavDirection("user_settings_route")
@@ -21,7 +21,7 @@ object ProfileNavGraph : NavGraph("profile_graph_route") {
 
 internal data class ProfileDestination(private val userId: String) : Destination {
     override val route: String get() = "$HOST/$userId"
-    override val popUpRoute: String = ProfileNavGraph.SettingsRoute.route
+    override val popUpRoute: String = UserNavGraph.SettingsRoute.route
 
     companion object {
         private const val HOST = "user_profile_route"
@@ -32,17 +32,17 @@ internal data class ProfileDestination(private val userId: String) : Destination
 
 fun NavGraphBuilder.profileNavGraph(navController: NavHostController) {
     navigation(
-        startDestination = ProfileNavGraph.startDestination,
-        route = ProfileNavGraph.route
+        startDestination = UserNavGraph.startDestination,
+        route = UserNavGraph.route
     ) {
-        composable(ProfileNavGraph.SettingsRoute) {
+        composable(UserNavGraph.SettingsRoute) {
             UserSettingsScreen(
                 viewModel = hiltViewModel(),
                 navController = navController
             )
         }
 
-        composable(ProfileNavGraph.ProfileRoute) {
+        composable(UserNavGraph.ProfileRoute) {
             ProfileScreen(
                 viewModel = hiltViewModel(),
                 navController = navController
