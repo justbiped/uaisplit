@@ -1,17 +1,15 @@
-package com.biped.locations.user.settings.ui
+package biped.works.user.settings
 
 import biped.works.coroutiens.test.TestFlowSubject.Companion.assertThat
 import biped.works.coroutiens.test.runTest
 import biped.works.coroutiens.test.testFlowOf
-import com.biped.locations.theme.ColorTheme
-import biped.works.user.settings.ObserveUseSettingsUseCase
-import biped.works.user.settings.SaveUserSettingsUseCase
-import biped.works.user.settings.data.UserSettings
-import com.biped.locations.user.themeFixture
-import com.biped.locations.user.userSettingsFixture
 import biped.works.test.unit.mock
+import biped.works.user.settings.data.UserSettings
 import biped.works.user.settings.ui.Instruction
 import biped.works.user.settings.ui.UserSettingsViewModel
+import com.biped.locations.theme.ColorTheme
+import com.biped.locations.user.themeFixture
+import com.biped.locations.user.userSettingsFixture
 import io.mockk.every
 import io.mockk.verify
 import kotlinx.coroutines.flow.MutableSharedFlow
