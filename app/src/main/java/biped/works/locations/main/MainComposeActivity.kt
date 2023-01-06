@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import biped.works.compose.collectWithLifecycle
-import biped.works.locations.home.HomeScreen
+import biped.works.locations.home.ui.HomeScreen
 import biped.works.user.settings.data.ThemeSettings
 import com.biped.locations.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,4 +1,4 @@
-package biped.works.locations.home
+package biped.works.locations.home.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -27,6 +27,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import biped.works.compose.collectWithLifecycle
 import biped.works.compose.currentRouteState
+import biped.works.locations.home.HomeDestination
+import biped.works.locations.home.NavigationGraph
 import com.biped.locations.theme.AppTheme
 
 @Stable

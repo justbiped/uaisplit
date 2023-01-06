@@ -1,4 +1,6 @@
-package biped.works.locations.home
+package biped.works.locations.home.ui
+
+import biped.works.locations.home.HomeDestination
 
 sealed interface HomeInstruction {
     object Default : HomeInstruction

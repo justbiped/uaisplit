@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import biped.works.locations.home.ui.HomeState
 import biped.works.test.compose.testNavController
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule

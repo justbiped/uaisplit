@@ -1,7 +1,8 @@
-package biped.works.locations.home
+package biped.works.locations.home.ui
 
 import androidx.lifecycle.ViewModel
 import biped.works.coroutines.MutableWarmFlow
+import biped.works.locations.home.HomeDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
