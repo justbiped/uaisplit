@@ -23,7 +23,7 @@ class UserRepository @Inject constructor(
             UUID.randomUUID().toString(),
             "Roubert Edgar",
             "roubertedgar@gmail.com",
-            "https://media-exp1.licdn.com/dms/image/C4D03AQFkXBIUIWdT2g/profile-displayphoto-shrink_400_400/0/1517979972037?e=1675900800&v=beta&t=PcXI0CPRdiMD8FTi2YAEyKtZUueQRZhgzpvTq5wM3U4"
+            "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         )
         userDao.saveUser(userEntity)
     }

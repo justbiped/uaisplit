@@ -32,7 +32,8 @@ fun ProfileHeader(
 ) {
     val profileImagePainter = rememberAsyncImagePainter(
         model = imageUrl,
-        placeholder = painterResource(id = R.drawable.ic_profile_on)
+        placeholder = painterResource(id = R.drawable.ic_profile_on),
+        error = painterResource(id = R.drawable.ic_profile_on),
     )
     Row(
         modifier = modifier

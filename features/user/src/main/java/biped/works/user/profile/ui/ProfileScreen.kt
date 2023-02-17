@@ -20,7 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.mapSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
@@ -29,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
+import biped.works.user.profile.data.User
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
@@ -36,13 +38,15 @@ import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.SingleLineTextField
 import com.biped.locations.theme.components.SmallTitle
-import biped.works.user.profile.data.User
 
 @Stable
-private class ProfileState(uiModel: User = User()) {
+private class ProfileState {
 
-    var user by mutableStateOf(uiModel)
-        private set
+    private var _user = User()
+    val user: User get() = _user.copy(name = name, email = email)
+
+    var name by mutableStateOf("")
+    var email by mutableStateOf("")
 
     var isLoading by mutableStateOf(false)
         private set
@@ -56,16 +60,28 @@ private class ProfileState(uiModel: User = User()) {
     }
 
     fun updateUser(user: User) {
-        this.user = user
+        _user = user
+        if (name.isEmpty()) name = user.name
+        if (email.isEmpty()) email = user.email
     }
 
-    fun updateUser(update: User.() -> User) {
-        user = update(user)
+    companion object {
+        val saver = run {
+            mapSaver(
+                save = { mapOf("name" to it.name, "email" to it.email) },
+                restore = {
+                    ProfileState().apply {
+                        name = it["name"].toString()
+                        email = it["email"].toString()
+                    }
+                }
+            )
+        }
     }
 }
 
 @Composable
-private fun rememberProfileState() = remember {
+private fun rememberProfileState() = rememberSaveable(stateSaver = ProfileState.saver) {
     mutableStateOf(ProfileState())
 }
 
@@ -123,23 +139,23 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
 
                 SingleLineTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = state.user.name,
+                    value = state.name,
                     label = { Text(text = "name") },
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                    onValueChange = { name -> state.updateUser { copy(name = name) } },
+                    onValueChange = { state.name = it },
                 )
 
                 NormalSpacer()
 
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = state.user.email,
+                    value = state.email,
                     label = { Text(text = "e-mail") },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Done
                     ),
-                    onValueChange = { email -> state.updateUser { copy(email = email) } },
+                    onValueChange = { state.email = it },
                 )
             }
         }
@@ -177,7 +193,7 @@ private fun ProfileUi_Preview() {
     AppTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
             ProfileUi(
-                state = ProfileState(User(name = "Some User Name")),
+                state = ProfileState().apply { updateUser(User(name = "Some User Name")) },
                 interactor = object : ProfileInteractor {})
         }
     }
