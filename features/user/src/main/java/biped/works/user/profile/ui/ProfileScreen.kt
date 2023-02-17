@@ -1,6 +1,7 @@
 package biped.works.user.profile.ui
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,6 +53,8 @@ private class ProfileState {
     var isLoading by mutableStateOf(false)
         private set
 
+    var message by mutableStateOf("")
+
     fun default() {
         isLoading = false
     }
@@ -63,6 +67,10 @@ private class ProfileState {
         _user = user
         if (name.isEmpty()) name = user.name
         if (email.isEmpty()) email = user.email
+    }
+
+    fun showMessage(message: String) {
+        this.message = message
     }
 
     companion object {
@@ -96,6 +104,7 @@ internal fun ProfileScreen(
             is Instruction.UpdateUser -> state.updateUser(instruction.user)
             is Instruction.Default -> state.default()
             is Instruction.Loading -> state.loading()
+            is Instruction.ShowMessage -> state.showMessage(instruction.message)
         }
     }
 
@@ -109,7 +118,13 @@ internal fun ProfileScreen(
         }
     }
 
-    ProfileUi(state = state, interactor = interactor)
+    Box {
+        ProfileUi(state = state, interactor = interactor)
+        if (state.message.isNotEmpty()) {
+            Toast.makeText(LocalContext.current, state.message, Toast.LENGTH_LONG).show()
+            state.message = ""
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
