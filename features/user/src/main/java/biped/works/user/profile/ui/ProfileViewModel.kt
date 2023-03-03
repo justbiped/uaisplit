@@ -3,7 +3,7 @@ package biped.works.user.profile.ui
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableWarmFlow
+import biped.works.coroutines.MutableViewStateFlow
 import biped.works.coroutines.launchIO
 import biped.works.user.ProfileDestination.Companion.USER_ID_ARG
 import biped.works.user.profile.ObserveUserUseCase
@@ -21,8 +21,8 @@ internal class ProfileViewModel @Inject constructor(
     private val saveUser: SaveUserUseCase
 ) : ViewModel() {
 
-    private val _instruction = MutableWarmFlow<Instruction>(Instruction.Default)
-    val instruction = _instruction.toWarmFlow()
+    private val _instruction = MutableViewStateFlow<Instruction>(Instruction.Default)
+    val instruction = _instruction.toViewStateFlow()
 
     init {
         val userId = stateHandle.get<String>(USER_ID_ARG).orEmpty()
@@ -31,7 +31,7 @@ internal class ProfileViewModel @Inject constructor(
 
     private fun loadUserProfile(userId: String) {
         observeUser()
-            .onEach { _instruction.post(Instruction.UpdateUser(it)) }
+            .onEach { user -> _instruction.post(Instruction.UpdateUser(user)) }
             .launchIn(viewModelScope)
     }
 

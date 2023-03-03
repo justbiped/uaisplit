@@ -2,11 +2,11 @@ package biped.works.user.settings.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableWarmFlow
+import biped.works.coroutines.MutableViewStateFlow
+import biped.works.coroutines.launchIO
 import biped.works.user.settings.ObserveUseSettingsUseCase
 import biped.works.user.settings.SaveUserSettingsUseCase
 import biped.works.user.settings.data.UserSettings
-import biped.works.coroutines.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
@@ -18,18 +18,18 @@ internal class UserSettingsViewModel @Inject constructor(
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
-    private val _instruction = MutableWarmFlow<Instruction>(Instruction.Default)
-    val instruction = _instruction.toWarmFlow()
+    private val _instruction = MutableViewStateFlow<Instruction>(Instruction.UpdateSettings())
+    val instruction = _instruction.toViewStateFlow()
 
     init {
         loadUserSettings()
     }
 
     private fun loadUserSettings() {
-        _instruction.post(Instruction.Loading)
+        _instruction.update { copy(isLoading = true) }
 
         observeUseSettingsUseCase()
-            .onEach { userSettings -> _instruction.post(Instruction.UpdateSettings(userSettings)) }
+            .onEach { userSettings -> _instruction.update { copy(settings = userSettings, isLoading = false) } }
             .launchIn(viewModelScope)
     }
 

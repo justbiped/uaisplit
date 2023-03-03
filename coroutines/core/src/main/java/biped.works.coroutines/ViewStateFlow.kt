@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.merge
 
-open class WarmFlow<T>(
+open class ViewStateFlow<T>(
     initialValue: T
 ) : Flow<T> {
 
@@ -24,7 +24,6 @@ open class WarmFlow<T>(
     private val mergedFlow: Flow<T> = merge(hotFlow, coldFlow)
 
     init {
-
         hotFlow.tryEmit(initialValue)
     }
 
@@ -39,13 +38,9 @@ open class WarmFlow<T>(
     internal open fun post(value: T) {
         hotFlow.tryEmit(value)
     }
-
-    internal open fun update(action: (value: T) -> T) {
-        hotFlow.tryEmit(action(hotFlow.replayCache.first()))
-    }
 }
 
-class MutableWarmFlow<T>(value: T) : WarmFlow<T>(value) {
+class MutableViewStateFlow<T>(value: T) : ViewStateFlow<T>(value) {
     var value: T
         get() = hotFlow.replayCache.first()
         set(value) = post(value)
@@ -54,13 +49,9 @@ class MutableWarmFlow<T>(value: T) : WarmFlow<T>(value) {
         super.post(value)
     }
 
-    public override fun update(action: (value: T) -> T) {
-        super.update(action)
-    }
-
     public override fun emit(value: T) {
         super.emit(value)
     }
 
-    fun toWarmFlow(): WarmFlow<T> = this
+    fun toViewStateFlow(): ViewStateFlow<T> = this
 }

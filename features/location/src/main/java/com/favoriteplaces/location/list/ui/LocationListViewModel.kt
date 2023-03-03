@@ -2,7 +2,7 @@ package com.favoriteplaces.location.list.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableWarmFlow
+import biped.works.coroutines.MutableViewStateFlow
 import biped.works.coroutines.launchIO
 import com.favoriteplaces.location.list.LoadLocationsUseCase
 import com.favoriteplaces.location.list.data.Location
@@ -17,8 +17,8 @@ internal class LocationListViewModel
     private val loadLocations: LoadLocationsUseCase
 ) : ViewModel() {
 
-    private val _instruction = MutableWarmFlow(locationListInstructions.default())
-    val instruction = _instruction.toWarmFlow()
+    private val _instruction = MutableViewStateFlow(locationListInstructions.default())
+    val instruction = _instruction.toViewStateFlow()
 
     fun fetchLocations() {
         _instruction.post(locationListInstructions.loading())

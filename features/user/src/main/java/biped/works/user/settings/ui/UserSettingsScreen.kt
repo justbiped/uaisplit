@@ -32,25 +32,13 @@ import biped.works.user.profile.ui.ProfileHeader
 import biped.works.user.settings.data.UserSettings
 
 @Stable
-private data class UserSettingsState(
+private data class StateHolder(
     private val navController: NavHostController,
 ) {
-    var isLoading: Boolean by mutableStateOf(false)
-        private set
-    var userSettings: UserSettings by mutableStateOf(UserSettings())
-        private set
+    var viewState by mutableStateOf(Instruction.UpdateSettings())
 
-    fun defaultState() {
-        isLoading = false
-    }
-
-    fun loadingState() {
-        isLoading = true
-    }
-
-    fun successState(userSettings: UserSettings) {
-        isLoading = false
-        this.userSettings = userSettings
+    fun updateSettings(viewState: Instruction.UpdateSettings) {
+        this.viewState = viewState
     }
 
     fun navigate(route: Destination) {
@@ -60,21 +48,19 @@ private data class UserSettingsState(
 
 @Composable
 private fun rememberSettingsState(navigator: NavHostController) = remember {
-    mutableStateOf(UserSettingsState(navigator))
+    mutableStateOf(StateHolder(navigator))
 }
 
 @Composable
 internal fun UserSettingsScreen(
     viewModel: UserSettingsViewModel, navController: NavHostController
 ) {
-    val state by rememberSettingsState(navController)
+    val stateHolder by rememberSettingsState(navController)
 
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
-            is Instruction.UpdateSettings -> state.successState(instruction.settings)
-            is Instruction.Default -> state.defaultState()
-            is Instruction.Loading -> state.loadingState()
-            is Instruction.Navigate -> state.navigate(instruction.destination)
+            is Instruction.UpdateSettings -> stateHolder.updateSettings(instruction)
+            is Instruction.Navigate -> stateHolder.navigate(instruction.destination)
         }
     }
 
@@ -84,43 +70,41 @@ internal fun UserSettingsScreen(
         }
 
         override fun onThemeSettingsChanged(themeSettings: ThemeSettings) {
-            viewModel.changeThemeSettings(state.userSettings.copy(theme = themeSettings))
+            viewModel.changeThemeSettings(stateHolder.viewState.settings.copy(theme = themeSettings))
         }
     }
-
-    UserSettingsUi(state = state, interactor = interactor)
+    Box(modifier = Modifier.fillMaxSize()) {
+        UserSettingsUi(userSettings = stateHolder.viewState.settings, interactor = interactor)
+        LoadingIndicator(isLoading = stateHolder.viewState.isLoading)
+    }
 }
 
 @Composable
-private fun UserSettingsUi(state: UserSettingsState, interactor: SettingsInteractor) {
-    Box(modifier = Modifier.fillMaxSize()) {
+private fun UserSettingsUi(userSettings: UserSettings, interactor: SettingsInteractor) {
+    Column(
+        modifier = Modifier.padding(horizontal = Dimens.small)
+    ) {
+        BigSpacer()
+
         Column(
-            modifier = Modifier.padding(horizontal = Dimens.small)
+            modifier = Modifier.weight(0.10f)
         ) {
-            BigSpacer()
-
-            Column(
-                modifier = Modifier.weight(0.10f)
-            ) {
-                ProfileHeader(
-                    name = state.userSettings.name,
-                    imageUrl = state.userSettings.picture,
-                    onClick = { interactor.onProfileClicked(state.userSettings.userId) }
-                )
-            }
-
-            BigSpacer()
-
-            Column(
-                modifier = Modifier.weight(0.90f)
-            ) {
-                LargeLabel(text = "Theme setup")
-                ThemeSettingsUi(uiModel = state.userSettings.theme,
-                    onSettingsChanged = { interactor.onThemeSettingsChanged(it) })
-            }
+            ProfileHeader(
+                name = userSettings.name,
+                imageUrl = userSettings.picture,
+                onClick = { interactor.onProfileClicked(userSettings.userId) }
+            )
         }
 
-        LoadingIndicator(isLoading = state.isLoading)
+        BigSpacer()
+
+        Column(
+            modifier = Modifier.weight(0.90f)
+        ) {
+            LargeLabel(text = "Theme setup")
+            ThemeSettingsUi(uiModel = userSettings.theme,
+                onSettingsChanged = { interactor.onThemeSettingsChanged(it) })
+        }
     }
 }
 
@@ -145,7 +129,7 @@ fun ProfileUi_Light_Preview() {
                 .background(color = MaterialTheme.colorScheme.background)
         ) {
             UserSettingsUi(
-                state = UserSettingsState(navController),
+                userSettings = UserSettings(),
                 object : SettingsInteractor {})
         }
     }

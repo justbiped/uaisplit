@@ -1,7 +1,7 @@
 package biped.works.transaction.ui
 
 import androidx.lifecycle.ViewModel
-import biped.works.coroutines.MutableWarmFlow
+import biped.works.coroutines.MutableViewStateFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -10,7 +10,7 @@ internal class TransactionsViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val _instruction = MutableWarmFlow<Instruction>(Instruction.Default)
-    val instruction = _instruction.toWarmFlow()
+    private val _instruction = MutableViewStateFlow<Instruction>(Instruction.Default)
+    val instruction = _instruction.toViewStateFlow()
 
 }
