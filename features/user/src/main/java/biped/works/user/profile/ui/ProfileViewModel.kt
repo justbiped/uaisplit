@@ -21,7 +21,7 @@ internal class ProfileViewModel @Inject constructor(
     private val saveUser: SaveUserUseCase
 ) : ViewModel() {
 
-    private val _instruction = MutableViewStateFlow<Instruction>(Instruction.Default)
+    private val _instruction = MutableViewStateFlow<Instruction>(Instruction.UpdateUser())
     val instruction = _instruction.toViewStateFlow()
 
     init {
@@ -31,14 +31,14 @@ internal class ProfileViewModel @Inject constructor(
 
     private fun loadUserProfile(userId: String) {
         observeUser()
-            .onEach { user -> _instruction.post(Instruction.UpdateUser(user)) }
+            .onEach { user -> _instruction.update { copy(user = user) } }
             .launchIn(viewModelScope)
     }
 
     fun updateUser(user: User) {
         viewModelScope.launchIO {
             saveUser(user)
-            _instruction.emit(Instruction.ShowMessage("Profile Saved"))
+            _instruction.emit(Instruction.ProfileSaved)
         }
     }
 }

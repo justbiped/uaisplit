@@ -18,12 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.mapSaver
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
@@ -32,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
+import biped.works.user.R
 import biped.works.user.profile.data.User
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
@@ -41,58 +37,6 @@ import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.SingleLineTextField
 import com.biped.locations.theme.components.SmallTitle
 
-@Stable
-private class ProfileState {
-
-    private var _user = User()
-    val user: User get() = _user.copy(name = name, email = email)
-
-    var name by mutableStateOf("")
-    var email by mutableStateOf("")
-
-    var isLoading by mutableStateOf(false)
-        private set
-
-    var message by mutableStateOf("")
-
-    fun default() {
-        isLoading = false
-    }
-
-    fun loading() {
-        isLoading = true
-    }
-
-    fun updateUser(user: User) {
-        _user = user
-        if (name.isEmpty()) name = user.name
-        if (email.isEmpty()) email = user.email
-    }
-
-    fun showMessage(message: String) {
-        this.message = message
-    }
-
-    companion object {
-        val saver = run {
-            mapSaver(
-                save = { mapOf("name" to it.name, "email" to it.email) },
-                restore = {
-                    ProfileState().apply {
-                        name = it["name"].toString()
-                        email = it["email"].toString()
-                    }
-                }
-            )
-        }
-    }
-}
-
-@Composable
-private fun rememberProfileState() = rememberSaveable(stateSaver = ProfileState.saver) {
-    mutableStateOf(ProfileState())
-}
-
 @Composable
 internal fun ProfileScreen(
     viewModel: ProfileViewModel = viewModel(), navController: NavHostController
@@ -101,10 +45,8 @@ internal fun ProfileScreen(
 
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
-            is Instruction.UpdateUser -> state.updateUser(instruction.user)
-            is Instruction.Default -> state.default()
-            is Instruction.Loading -> state.loading()
-            is Instruction.ShowMessage -> state.showMessage(instruction.message)
+            is Instruction.UpdateUser -> state.updateState(instruction)
+            is Instruction.ProfileSaved -> state.showMessage(R.string.profile_saved_msg)
         }
     }
 
@@ -113,23 +55,32 @@ internal fun ProfileScreen(
             viewModel.updateUser(state.user)
         }
 
+        override fun onNameChange(name: String) {
+            state.updateUser(name = name)
+        }
+
+        override fun onEmailChange(email: String) {
+            state.updateUser(email = email)
+        }
+
         override fun onNavigateUp() {
             navController.navigateUp()
         }
     }
 
     Box {
-        ProfileUi(state = state, interactor = interactor)
-        if (state.message.isNotEmpty()) {
-            Toast.makeText(LocalContext.current, state.message, Toast.LENGTH_LONG).show()
-            state.message = ""
+        if (state.viewState.isLong) Toast.makeText(LocalContext.current, "Loading", Toast.LENGTH_LONG).show()
+        if (state.messageRes > -1) {
+            Toast.makeText(LocalContext.current, state.messageRes, Toast.LENGTH_LONG).show()
+            state.messageRes = -1
         }
+        ProfileUi(user = state.user, interactor = interactor)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
+private fun ProfileUi(user: User, interactor: ProfileInteractor) {
     Column {
         TopAppbar(
             onNavigateUp = { interactor.onNavigateUp() },
@@ -143,7 +94,7 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(name = state.user.name, imageUrl = state.user.picture)
+                ProfileHeader(name = user.name, imageUrl = user.picture)
             }
 
             BigSpacer()
@@ -154,23 +105,23 @@ private fun ProfileUi(state: ProfileState, interactor: ProfileInteractor) {
 
                 SingleLineTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = state.name,
+                    value = user.name,
                     label = { Text(text = "name") },
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                    onValueChange = { state.name = it },
+                    onValueChange = { interactor.onNameChange(it) },
                 )
 
                 NormalSpacer()
 
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = state.email,
+                    value = user.email,
                     label = { Text(text = "e-mail") },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Done
                     ),
-                    onValueChange = { state.email = it },
+                    onValueChange = { interactor.onEmailChange(it) },
                 )
             }
         }
@@ -200,6 +151,8 @@ private fun TopAppbar(
 private interface ProfileInteractor {
     fun onSave() {}
     fun onNavigateUp() {}
+    fun onNameChange(name: String) {}
+    fun onEmailChange(email: String) {}
 }
 
 @Preview(showBackground = true)
@@ -208,7 +161,7 @@ private fun ProfileUi_Preview() {
     AppTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
             ProfileUi(
-                state = ProfileState().apply { updateUser(User(name = "Some User Name")) },
+                user = User(name = "Some User Name"),
                 interactor = object : ProfileInteractor {})
         }
     }
