@@ -19,7 +19,7 @@ internal class ProfileViewModel @Inject constructor(
     private val saveUser: SaveProfileUseCase
 ) : ViewModel() {
 
-    private val _instruction = MutableInstructionFlow<Instruction>(Instruction.UpdateUser())
+    private val _instruction = MutableInstructionFlow<Instruction>(Instruction.UpdateProfile())
     val instruction = _instruction.toInstructionFlow()
 
     init {

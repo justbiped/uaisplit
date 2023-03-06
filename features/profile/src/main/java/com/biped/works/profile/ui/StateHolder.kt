@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 @Stable
 internal class StateHolder {
 
-    var viewState by mutableStateOf(Instruction.UpdateUser())
+    var viewState by mutableStateOf(Instruction.UpdateProfile())
         private set
 
     var profile: ProfileUiModel by mutableStateOf(viewState.profile)
@@ -20,7 +20,7 @@ internal class StateHolder {
 
     var messageRes by mutableStateOf(-1)
 
-    fun updateState(viewState: Instruction.UpdateUser) {
+    fun updateState(viewState: Instruction.UpdateProfile) {
         this.viewState = viewState
         profile = viewState.profile.copy(
             name = profile.name.ifEmpty { viewState.profile.name },

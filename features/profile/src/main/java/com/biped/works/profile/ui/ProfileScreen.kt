@@ -44,7 +44,7 @@ internal fun ProfileScreen(
 
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
-            is Instruction.UpdateUser -> state.updateState(instruction)
+            is Instruction.UpdateProfile -> state.updateState(instruction)
             is Instruction.ProfileSaved -> state.showMessage(R.string.profile_saved_msg)
         }
     }
@@ -68,7 +68,7 @@ internal fun ProfileScreen(
     }
 
     Box {
-        if (state.viewState.isLong) Toast.makeText(LocalContext.current, "Loading", Toast.LENGTH_LONG).show()
+        if (state.viewState.isLoading) Toast.makeText(LocalContext.current, "Loading", Toast.LENGTH_LONG).show()
         if (state.messageRes > -1) {
             Toast.makeText(LocalContext.current, state.messageRes, Toast.LENGTH_LONG).show()
             state.messageRes = -1

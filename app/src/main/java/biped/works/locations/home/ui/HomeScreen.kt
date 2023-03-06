@@ -1,5 +1,6 @@
 package biped.works.locations.home.ui
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.shrinkVertically
@@ -130,4 +131,10 @@ fun BottomBarPreview() {
     AppTheme {
         BottomNavigation(currentRoute = HomeDestination.Transaction.route)
     }
+}
+
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun BottomBarPreview_Dark() {
+    BottomBarPreview()
 }
