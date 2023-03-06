@@ -7,7 +7,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
-class ObserveUseSettingsUseCase @Inject constructor(
+class ObserveUserSettingsUseCase @Inject constructor(
     private val settingsRepository: SettingsRepository,
     private val userRepository: UserRepository
 ) {

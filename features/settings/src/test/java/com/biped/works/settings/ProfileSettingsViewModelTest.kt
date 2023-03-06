@@ -19,7 +19,7 @@ class ProfileSettingsViewModelTest {
 
     @get:Rule val coroutineTestRule = biped.works.coroutiens.test.CoroutineTestRule()
 
-    private val observeUserSettings: ObserveUseSettingsUseCase = mock()
+    private val observeUserSettings: ObserveUserSettingsUseCase = mock()
     private val saveUserSettings: SaveUserSettingsUseCase = mock()
     private lateinit var viewModel: com.biped.works.settings.ui.UserSettingsViewModel
 

@@ -21,7 +21,6 @@ include(":features")
 include(":features:user")
 include(":features:profile")
 include(":features:settings")
-include(":features:location")
 include(":features:transaction")
 
 

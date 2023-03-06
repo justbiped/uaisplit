@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableInstructionFlow
 import biped.works.coroutines.launchIO
-import com.biped.works.settings.ObserveUseSettingsUseCase
+import com.biped.works.settings.ObserveUserSettingsUseCase
 import com.biped.works.settings.SaveUserSettingsUseCase
 import com.biped.works.settings.data.UserSettings
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 internal class UserSettingsViewModel @Inject constructor(
-    private val observeUseSettingsUseCase: ObserveUseSettingsUseCase,
+    private val observeUseSettingsUseCase: ObserveUserSettingsUseCase,
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
