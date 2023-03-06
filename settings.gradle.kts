@@ -18,8 +18,10 @@ include(":app")
 include(":instrumentation")
 
 include(":features")
-include(":features:location")
 include(":features:user")
+include(":features:profile")
+include(":features:settings")
+include(":features:location")
 include(":features:transaction")
 
 

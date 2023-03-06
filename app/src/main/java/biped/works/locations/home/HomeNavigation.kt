@@ -14,8 +14,8 @@ import biped.works.compose.NavGraph
 import biped.works.locations.R
 import biped.works.transaction.navigation.TransactionNavGraph
 import biped.works.transaction.navigation.transactionNavGraph
-import biped.works.user.UserNavGraph
-import biped.works.user.profileNavGraph
+import com.biped.works.settings.SettingsNavGraph
+import com.biped.works.settings.settingsNavGraph
 
 sealed class HomeDestination(
     val graph: NavGraph,
@@ -33,7 +33,7 @@ sealed class HomeDestination(
     )
 
     object UserSettings : HomeDestination(
-        graph = UserNavGraph,
+        graph = SettingsNavGraph,
         title = R.string.profile_destination_label,
         unselectedIcon = Icons.Outlined.People,
         selectedIcon = Icons.Filled.People
@@ -42,7 +42,7 @@ sealed class HomeDestination(
     companion object {
         private val homeDestinationsSet = hashSetOf(
             TransactionNavGraph.startDestination,
-            UserNavGraph.startDestination
+            SettingsNavGraph.startDestination
         )
 
         fun contains(route: String) = homeDestinationsSet.contains(route)
@@ -53,6 +53,6 @@ sealed class HomeDestination(
 fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = HomeDestination.Transaction.graph.route) {
         transactionNavGraph(navController)
-        profileNavGraph(navController)
+        settingsNavGraph(navController)
     }
 }
