@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import biped.works.compose.collectWithLifecycle
 import com.biped.locations.theme.AppTheme
 import com.biped.locations.theme.BigSpacer
@@ -120,7 +119,6 @@ private interface SettingsInteractor {
 @Preview(name = "Light Preview")
 @Composable
 fun ProfileUi_Light_Preview() {
-    val navController = rememberNavController()
     AppTheme {
         Box(
             modifier = Modifier

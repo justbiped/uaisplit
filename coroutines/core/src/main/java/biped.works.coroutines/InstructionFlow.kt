@@ -6,9 +6,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.merge
 
-open class ViewStateFlow<T>(
-    initialValue: T
-) : Flow<T> {
+open class InstructionFlow<T>(initialValue: T) : Flow<T> {
 
     protected val hotFlow: MutableSharedFlow<T> = MutableSharedFlow(
         replay = 1,
@@ -40,7 +38,7 @@ open class ViewStateFlow<T>(
     }
 }
 
-class MutableViewStateFlow<T>(value: T) : ViewStateFlow<T>(value) {
+class MutableInstructionFlow<T>(value: T) : InstructionFlow<T>(value) {
     var value: T
         get() = hotFlow.replayCache.first()
         set(value) = post(value)
@@ -53,5 +51,5 @@ class MutableViewStateFlow<T>(value: T) : ViewStateFlow<T>(value) {
         super.emit(value)
     }
 
-    fun toViewStateFlow(): ViewStateFlow<T> = this
+    fun toInstructionFlow(): InstructionFlow<T> = this
 }

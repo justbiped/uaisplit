@@ -1,9 +1,8 @@
 package com.biped.works.profile.ui
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableViewStateFlow
+import biped.works.coroutines.MutableInstructionFlow
 import biped.works.coroutines.launchIO
 import com.biped.works.profile.ObserveProfileUseCase
 import com.biped.works.profile.SaveProfileUseCase
@@ -20,8 +19,8 @@ internal class ProfileViewModel @Inject constructor(
     private val saveUser: SaveProfileUseCase
 ) : ViewModel() {
 
-    private val _instruction = MutableViewStateFlow<Instruction>(Instruction.UpdateUser())
-    val instruction = _instruction.toViewStateFlow()
+    private val _instruction = MutableInstructionFlow<Instruction>(Instruction.UpdateUser())
+    val instruction = _instruction.toInstructionFlow()
 
     init {
         loadUserProfile()

@@ -2,7 +2,7 @@ package com.biped.works.settings.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableViewStateFlow
+import biped.works.coroutines.MutableInstructionFlow
 import biped.works.coroutines.launchIO
 import com.biped.works.settings.ObserveUseSettingsUseCase
 import com.biped.works.settings.SaveUserSettingsUseCase
@@ -18,8 +18,8 @@ internal class UserSettingsViewModel @Inject constructor(
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
-    private val _instruction = MutableViewStateFlow<Instruction>(Instruction.UpdateSettings())
-    val instruction = _instruction.toViewStateFlow()
+    private val _instruction = MutableInstructionFlow<Instruction>(Instruction.UpdateSettings())
+    val instruction = _instruction.toInstructionFlow()
 
     init {
         loadUserSettings()

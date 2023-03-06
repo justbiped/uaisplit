@@ -2,7 +2,7 @@ package com.favoriteplaces.location.detail.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableViewStateFlow
+import biped.works.coroutines.MutableInstructionFlow
 import biped.works.coroutines.launchIO
 import com.favoriteplaces.location.detail.GetLocationDetails
 import com.favoriteplaces.location.detail.data.domain.LocationDetail
@@ -17,8 +17,8 @@ internal class LocationDetailViewModel @Inject constructor(
     private val scheduleFormatter: ScheduleFormatter
 ) : ViewModel() {
 
-    private val _viewInstruction = MutableViewStateFlow(detailsInstructions.default())
-    val viewInstruction = _viewInstruction.toViewStateFlow()
+    private val _viewInstruction = MutableInstructionFlow(detailsInstructions.default())
+    val viewInstruction = _viewInstruction.toInstructionFlow()
 
     fun loadLocationDetails(locationId: Int) {
         viewModelScope.launchIO {

@@ -1,6 +1,6 @@
 package com.biped.works.settings.ui
 
-import biped.works.coroutines.MutableViewStateFlow
+import biped.works.coroutines.MutableInstructionFlow
 import com.biped.works.settings.data.UserSettings
 
 internal sealed interface Instruction {
@@ -16,7 +16,7 @@ internal sealed interface Instruction {
     }
 }
 
-internal fun MutableViewStateFlow<Instruction>.update(
+internal fun MutableInstructionFlow<Instruction>.update(
     action: Instruction.UpdateSettings.() -> Instruction.UpdateSettings
 ) {
     (value as? Instruction.UpdateSettings)?.also { value = action(it) }
