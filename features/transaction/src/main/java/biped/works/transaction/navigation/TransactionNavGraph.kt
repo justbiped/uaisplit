@@ -3,29 +3,18 @@ package biped.works.transaction.navigation
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import biped.works.compose.NavDirection
-import biped.works.compose.NavGraph
-import biped.works.compose.composable
+import biped.works.compose.navigation.TransactionGraph
 import biped.works.transaction.ui.TransactionsScreen
-
-object TransactionNavGraph : NavGraph("transaction_nav_graph") {
-    override val startDestination: String = Transactions.route
-
-    internal object Transactions : NavDirection("transactions_route")
-    internal object CreateTransaction : NavDirection("create_transaction_route")
-}
 
 fun NavGraphBuilder.transactionNavGraph(navController: NavHostController) {
     navigation(
-        route = TransactionNavGraph.route,
-        startDestination = TransactionNavGraph.startDestination
+        route = TransactionGraph.route,
+        startDestination = TransactionGraph.Transaction.route
     ) {
-        composable(TransactionNavGraph.Transactions) {
+        composable(route = TransactionGraph.Transaction.route) {
             TransactionsScreen(hiltViewModel())
-        }
-
-        composable(TransactionNavGraph.CreateTransaction) {
         }
     }
 }

@@ -26,7 +26,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import biped.works.compose.collectWithLifecycle
-import biped.works.compose.currentRouteState
+import biped.works.compose.navigation.currentRouteState
 import biped.works.locations.home.HomeDestination
 import biped.works.locations.home.NavigationGraph
 import com.biped.locations.theme.AppTheme
@@ -41,7 +41,7 @@ internal data class HomeState(
     fun default() {}
 
     fun navigate(destination: HomeDestination) {
-        navController.navigate(destination.route) {
+        navController.navigate(destination.graph) {
             popUpTo(navController.graph.findStartDestination().id) { saveState = true }
             launchSingleTop = true
             restoreState = true

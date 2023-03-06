@@ -10,30 +10,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import biped.works.compose.NavGraph
+import biped.works.compose.navigation.SettingsGraph
+import biped.works.compose.navigation.TransactionGraph
 import biped.works.locations.R
-import biped.works.transaction.navigation.TransactionNavGraph
 import biped.works.transaction.navigation.transactionNavGraph
-import com.biped.works.settings.SettingsNavGraph
 import com.biped.works.settings.settingsNavGraph
 
 sealed class HomeDestination(
-    val graph: NavGraph,
+    val graph: String,
+    val route: String,
     @StringRes val title: Int,
     val unselectedIcon: ImageVector,
     val selectedIcon: ImageVector
 ) {
-    val route = graph.startDestination
-
     object Transaction : HomeDestination(
-        graph = TransactionNavGraph,
+        graph = TransactionGraph.route,
+        route = TransactionGraph.Transaction.route,
         title = R.string.transaction_list_label,
         unselectedIcon = Icons.Outlined.ViewList,
         selectedIcon = Icons.Filled.ViewList
     )
 
     object UserSettings : HomeDestination(
-        graph = SettingsNavGraph,
+        graph = SettingsGraph.route,
+        route = SettingsGraph.Settings.route,
         title = R.string.profile_destination_label,
         unselectedIcon = Icons.Outlined.People,
         selectedIcon = Icons.Filled.People
@@ -41,8 +41,8 @@ sealed class HomeDestination(
 
     companion object {
         private val homeDestinationsSet = hashSetOf(
-            TransactionNavGraph.startDestination,
-            SettingsNavGraph.startDestination
+            Transaction.route,
+            UserSettings.route
         )
 
         fun contains(route: String) = homeDestinationsSet.contains(route)
@@ -51,7 +51,7 @@ sealed class HomeDestination(
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = HomeDestination.Transaction.graph.route) {
+    NavHost(navController, startDestination = HomeDestination.Transaction.graph) {
         transactionNavGraph(navController)
         settingsNavGraph(navController)
     }
