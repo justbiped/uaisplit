@@ -1,5 +1,6 @@
 package com.biped.works.profile.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableInstructionFlow
@@ -33,9 +34,18 @@ internal class ProfileViewModel @Inject constructor(
     }
 
     fun updateProfile(profile: ProfileUiModel) {
+        _instruction.update { copy(isLoading = true) }
+
         viewModelScope.launchIO {
             saveUser(profile.toDomain())
-            _instruction.emit(Instruction.ProfileSaved)
+                .onSuccess {
+                    _instruction.update { copy(isLoading = false) }
+                    _instruction.emit(Instruction.ProfileSaved)
+                }
+                .onFailure {
+                    Log.d("COROUTINE_TEST", "view model job failure")
+                    print("")
+                }
         }
     }
 }

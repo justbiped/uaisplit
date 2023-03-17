@@ -8,4 +8,5 @@ android {
 }
 dependencies {
     implementation(Dependencies.Coroutines.android)
+    implementation("javax.inject:javax.inject:1")
 }

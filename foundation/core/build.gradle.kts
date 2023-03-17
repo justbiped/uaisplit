@@ -18,6 +18,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":coroutines:core"))
+
     implementation(Dependencies.Coroutines.android)
 
     implementation(Dependencies.Android.core)
