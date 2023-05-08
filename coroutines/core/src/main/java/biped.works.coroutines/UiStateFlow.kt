@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.merge
 
-open class InstructionFlow<T>(initialValue: T) : Flow<T> {
+open class UiStateFlow<T>(initialValue: T) : Flow<T> {
 
     protected val hotFlow: MutableSharedFlow<T> = MutableSharedFlow(
         replay = 1,
@@ -29,7 +29,7 @@ open class InstructionFlow<T>(initialValue: T) : Flow<T> {
         mergedFlow.collect(collector)
     }
 
-    internal open fun emit(value: T) {
+    internal open fun sendEvent(value: T) {
         coldFlow.tryEmit(value)
     }
 
@@ -38,7 +38,7 @@ open class InstructionFlow<T>(initialValue: T) : Flow<T> {
     }
 }
 
-class MutableInstructionFlow<T>(value: T) : InstructionFlow<T>(value) {
+class MutableUiStateFlow<T>(value: T) : UiStateFlow<T>(value) {
     var value: T
         get() = hotFlow.replayCache.first()
         set(value) = post(value)
@@ -47,9 +47,9 @@ class MutableInstructionFlow<T>(value: T) : InstructionFlow<T>(value) {
         super.post(value)
     }
 
-    public override fun emit(value: T) {
-        super.emit(value)
+    public override fun sendEvent(value: T) {
+        super.sendEvent(value)
     }
 
-    fun toInstructionFlow(): InstructionFlow<T> = this
+    fun toUiStateFlow(): UiStateFlow<T> = this
 }

@@ -36,16 +36,23 @@ import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.SingleLineTextField
 import com.biped.locations.theme.components.SmallTitle
 
+data class ProfileUiModel(
+    val userId: String = "",
+    val name: String = "",
+    val email: String = "",
+    val picture: String = ""
+)
+
 @Composable
 internal fun ProfileScreen(
     viewModel: ProfileViewModel = viewModel(), navController: NavHostController
 ) {
     val state by rememberProfileState()
 
-    viewModel.instruction.collectWithLifecycle { instruction ->
+    viewModel.uiState.collectWithLifecycle { instruction ->
         when (instruction) {
-            is Instruction.UpdateProfile -> state.updateState(instruction)
-            is Instruction.ProfileSaved -> state.showMessage(R.string.profile_saved_msg)
+            is ProfileUiState.UpdateProfile -> state.updateState(instruction)
+            is ProfileUiState.ProfileSaved -> state.showMessage(R.string.profile_saved_msg)
         }
     }
 

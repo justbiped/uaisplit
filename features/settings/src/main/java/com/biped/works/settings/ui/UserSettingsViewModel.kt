@@ -2,7 +2,7 @@ package com.biped.works.settings.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableInstructionFlow
+import biped.works.coroutines.MutableUiStateFlow
 import biped.works.coroutines.launchIO
 import com.biped.works.settings.ObserveUserSettingsUseCase
 import com.biped.works.settings.SaveUserSettingsUseCase
@@ -18,8 +18,8 @@ internal class UserSettingsViewModel @Inject constructor(
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
-    private val _instruction = MutableInstructionFlow<Instruction>(Instruction.UpdateSettings())
-    val instruction = _instruction.toInstructionFlow()
+    private val _instruction = MutableUiStateFlow<Instruction>(Instruction.UpdateSettings())
+    val instruction = _instruction.toUiStateFlow()
 
     init {
         loadUserSettings()
@@ -40,6 +40,6 @@ internal class UserSettingsViewModel @Inject constructor(
     }
 
     fun showUserProfile(userId: String) {
-        _instruction.emit(Instruction.navigateToProfile())
+        _instruction.sendEvent(Instruction.navigateToProfile())
     }
 }

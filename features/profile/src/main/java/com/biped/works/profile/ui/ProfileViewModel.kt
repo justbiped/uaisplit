@@ -3,7 +3,7 @@ package com.biped.works.profile.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableInstructionFlow
+import biped.works.coroutines.MutableUiStateFlow
 import biped.works.coroutines.launchIO
 import com.biped.works.profile.ObserveProfileUseCase
 import com.biped.works.profile.SaveProfileUseCase
@@ -20,8 +20,8 @@ internal class ProfileViewModel @Inject constructor(
     private val saveUser: SaveProfileUseCase
 ) : ViewModel() {
 
-    private val _instruction = MutableInstructionFlow<Instruction>(Instruction.UpdateProfile())
-    val instruction = _instruction.toInstructionFlow()
+    private val _uiState = MutableUiStateFlow<ProfileUiState>(ProfileUiState.UpdateProfile())
+    val uiState = _uiState.toUiStateFlow()
 
     init {
         loadUserProfile()
@@ -29,18 +29,18 @@ internal class ProfileViewModel @Inject constructor(
 
     private fun loadUserProfile() {
         observeProfile()
-            .onEach { profile -> _instruction.update { copy(profile = profile.toUiModel()) } }
+            .onEach { profile -> _uiState.update { copy(uiModel = profile.toUiModel()) } }
             .launchIn(viewModelScope)
     }
 
     fun updateProfile(profile: ProfileUiModel) {
-        _instruction.update { copy(isLoading = true) }
+        _uiState.update { copy(isLoading = true) }
 
         viewModelScope.launchIO {
             saveUser(profile.toDomain())
                 .onSuccess {
-                    _instruction.update { copy(isLoading = false) }
-                    _instruction.emit(Instruction.ProfileSaved)
+                    _uiState.update { copy(isLoading = false) }
+                    _uiState.sendEvent(ProfileUiState.ProfileSaved)
                 }
                 .onFailure {
                     Log.d("COROUTINE_TEST", "view model job failure")

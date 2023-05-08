@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_saving_error_msg">Error on save profile</string>
+</resources>

@@ -3,11 +3,12 @@
   <component name="ExportableFileTemplateSettings">
     <default_templates>
       <template name="Compose Screen.kt" file-name="${NAME}Screen" reformat="true" live-template-enabled="false">
+        <template name="Compose Screen.kt.child.0.kt" file-name="${NAME}UiState" reformat="true" live-template-enabled="false" />
         <template name="Compose Screen.kt.child.1.kt" file-name="${NAME}ViewModel" reformat="true" live-template-enabled="false" />
-        <template name="Compose Screen.kt.child.0.kt" file-name="Instruction" reformat="true" live-template-enabled="false" />
       </template>
-      <template name="Compose Screen.kt.child.0.kt" file-name="Instruction" reformat="true" live-template-enabled="false" />
+      <template name="Compose Screen.kt.child.0.kt" file-name="${NAME}UiState" reformat="true" live-template-enabled="false" />
       <template name="Compose Screen.kt.child.1.kt" file-name="${NAME}ViewModel" reformat="true" live-template-enabled="false" />
+      <template name="UI State.kt" file-name="${NAME}UiState" reformat="true" live-template-enabled="false" />
     </default_templates>
   </component>
 </project>

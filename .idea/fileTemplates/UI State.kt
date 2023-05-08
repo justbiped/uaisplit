@@ -3,7 +3,7 @@
 import biped.works.coroutines.MutableInstructionFlow
 
 internal sealed interface ${NAME}UiState {
-    data class Update${NAME}(val isLoading : Boolean = true) : ${NAME}UiState 
+    data class Update${NAME}(val isLoading : Boolean = false) : ${NAME}UiState 
     object ShowSomeMessage : ${NAME}UiState
 }
 

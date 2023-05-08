@@ -2,7 +2,7 @@ package biped.works.locations.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import biped.works.coroutines.MutableInstructionFlow
+import biped.works.coroutines.MutableUiStateFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -12,8 +12,8 @@ internal class MainViewModel @Inject constructor(
     private val settingsRepository: com.biped.works.settings.data.SettingsRepository
 ) : ViewModel() {
 
-    private val _instruction = MutableInstructionFlow<Instruction>(Instruction.Default)
-    val instruction = _instruction.toInstructionFlow()
+    private val _instruction = MutableUiStateFlow<Instruction>(Instruction.Default)
+    val instruction = _instruction.toUiStateFlow()
 
     init {
         observeThemeSettings()

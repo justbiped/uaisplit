@@ -5,7 +5,7 @@ import biped.works.coroutines.MutableWarmFlow
 
 internal class ${NAME}ViewModel : ViewModel(){
 
-    private val _instruction = MutableWarmFlow<Instruction>(Instruction.Default) 
+    private val _instruction = MutableWarmFlow<${NAME}UiState>(${NAME}UiState.Update${NAME}()) 
     val instruction = _instruction.toWarmFlow()
 
 }
