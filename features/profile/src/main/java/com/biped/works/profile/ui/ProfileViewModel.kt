@@ -1,6 +1,5 @@
 package com.biped.works.profile.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableUiStateFlow
@@ -42,10 +41,7 @@ internal class ProfileViewModel @Inject constructor(
                     _uiState.update { copy(isLoading = false) }
                     _uiState.sendEvent(ProfileUiState.ProfileSaved)
                 }
-                .onFailure {
-                    Log.d("COROUTINE_TEST", "view model job failure")
-                    print("")
-                }
+                .onFailure { _uiState.update { copy(isLoading = false) } }
         }
     }
 }
