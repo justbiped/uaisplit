@@ -24,6 +24,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
@@ -163,11 +165,11 @@ private interface ProfileInteractor {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProfileUi_Preview() {
+private fun ProfileUi_Preview(@PreviewParameter(ProfileUiModelDataProvider::class) profile: ProfileUiModel) {
     AppTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
             ProfileUi(
-                profile = ProfileUiModel(name = "Some User Name"),
+                profile = profile,
                 interactor = object : ProfileInteractor {})
         }
     }
@@ -175,6 +177,13 @@ private fun ProfileUi_Preview() {
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun ProfileUi_Dark_Preview() {
-    ProfileUi_Preview()
+private fun ProfileUi_Dark_Preview(@PreviewParameter(ProfileUiModelDataProvider::class) profile: ProfileUiModel) {
+    ProfileUi_Preview(profile)
+}
+
+private class ProfileUiModelDataProvider : PreviewParameterProvider<ProfileUiModel> {
+    override val values: Sequence<ProfileUiModel> = sequenceOf(
+        ProfileUiModel(name = "Some User Name"),
+        ProfileUiModel(name = "New User Name")
+    )
 }
