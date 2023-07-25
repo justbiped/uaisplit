@@ -30,6 +30,8 @@ deveriam vir com os objetos location e location details recebidos.
 - Testes
 - ...
 
+![1172125_android_emoji_mobile_mood_robot_icon (1)](https://github.com/justbiped/uaisplit/assets/13192434/93fa5469-eac2-4f54-8f86-f511257b876b)
+
 Podem ser observados no seguinte
 documento: [Padrões de desenvolvimento](https://hackmd.io/@roubertedgar/r1-oUxLu8)
 
