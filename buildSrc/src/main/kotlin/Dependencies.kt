@@ -21,7 +21,7 @@ object Dependencies {
     }
 
     object Kotlin {
-        const val version = "1.7.0"
+        const val version = "1.8.22"
         const val core = "androidx.core:core-ktx:$version"
         const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
@@ -90,21 +90,21 @@ object Dependencies {
     }
 
     object Compose {
-        private const val version = "1.3.0"
-        const val compiler_vesion = "1.2.0"
+        const val compiler_vesion = "1.4.8"
 
-        const val ui = "androidx.compose.ui:ui:$version"
-        const val foundation = "androidx.compose.foundation:foundation:$version"
-        const val icons = "androidx.compose.material:material-icons-core:$version"
-        const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
-        const val layout = "androidx.compose.foundation:foundation-layout:$version"
-        const val animation = "androidx.compose.animation:animation:$version"
+        const val bom = "androidx.compose:compose-bom:2023.06.01"
+        const val ui = "androidx.compose.ui:ui"
+        const val foundation = "androidx.compose.foundation:foundation"
+        const val icons = "androidx.compose.material:material-icons-core"
+        const val iconsExtended = "androidx.compose.material:material-icons-extended"
+        const val layout = "androidx.compose.foundation:foundation-layout"
+        const val animation = "androidx.compose.animation:animation"
 
-        const val material = "androidx.compose.material3:material3:1.0.0"
-        const val material_window = "androidx.compose.material3:material3-window-size-class:1.0.0"
+        const val material = "androidx.compose.material3:material3"
+        const val material_window = "androidx.compose.material3:material3-window-size-class"
 
-        const val tooling = "androidx.compose.ui:ui-tooling:$version"
-        const val tooling_preview = "androidx.compose.ui:ui-tooling-preview:$version"
+        const val tooling = "androidx.compose.ui:ui-tooling"
+        const val tooling_preview = "androidx.compose.ui:ui-tooling-preview"
 
         const val activity = "androidx.activity:activity-compose:1.6.0"
         const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
@@ -113,8 +113,8 @@ object Dependencies {
 
         const val coil = "io.coil-kt:coil-compose:2.2.0"
 
-        const val test_junit = "androidx.compose.ui:ui-test-junit4:$version"
-        const val test_manifest = "androidx.compose.ui:ui-test-manifest:$version"
+        const val test_junit = "androidx.compose.ui:ui-test-junit4"
+        const val test_manifest = "androidx.compose.ui:ui-test-manifest"
     }
 
     object Lifecycle {
@@ -165,7 +165,7 @@ object Plugins {
 }
 
 object Path {
-    const val androidGradle = "com.android.tools.build:gradle:7.3.0"
+    const val androidGradle = "com.android.tools.build:gradle:7.4.0"
     const val playServices = "com.google.gms:google-services:4.3.8"
     const val dependenciesUpdate = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
 }

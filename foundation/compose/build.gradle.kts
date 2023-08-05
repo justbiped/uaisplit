@@ -15,6 +15,8 @@ android {
     }
 }
 dependencies {
+    implementation(platform(Dependencies.Compose.bom))
+
     implementation(Dependencies.Coroutines.android)
     implementation(Dependencies.Lifecycle.runtime)
 

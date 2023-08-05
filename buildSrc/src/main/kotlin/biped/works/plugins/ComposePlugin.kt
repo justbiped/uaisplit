@@ -31,6 +31,7 @@ class ComposePlugin : Plugin<Project> {
             }
 
             dependencies {
+                implementation(enforcedPlatform(Dependencies.Compose.bom))
                 implementation(Dependencies.Compose.foundation)
                 implementation(Dependencies.Compose.ui)
                 implementation(Dependencies.Compose.material)
@@ -38,7 +39,6 @@ class ComposePlugin : Plugin<Project> {
                 implementation(Dependencies.Compose.icons)
                 implementation(Dependencies.Compose.iconsExtended)
                 implementation(Dependencies.Compose.animation)
-                implementation(Dependencies.Compose.activity)
                 implementation(Dependencies.Compose.hilt)
                 implementation(Dependencies.Compose.coil)
 

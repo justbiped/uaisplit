@@ -39,21 +39,7 @@ dependencies {
     implementation(Dependencies.Coroutines.android)
 
     implementation(Dependencies.Android.core)
-    implementation(Dependencies.Android.appCompat)
-    implementation(Dependencies.Android.materialDesign)
 
-    implementation(Dependencies.Compose.tooling_preview)
-    devImplementation(Dependencies.Compose.tooling)
-
-    implementation(Dependencies.Android.constraintLayout)
-
-    implementation(Dependencies.Android.activity)
-    implementation(Dependencies.Fragment.core)
-
-    implementation(Dependencies.Navigation.fragment)
-    implementation(Dependencies.Navigation.ui)
-
-    implementation(Dependencies.Lifecycle.liveData)
     implementation(Dependencies.Lifecycle.viewModel)
     implementation(Dependencies.Lifecycle.runtime)
 
