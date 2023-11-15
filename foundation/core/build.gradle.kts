@@ -28,9 +28,9 @@ dependencies {
     implementation(Dependencies.Navigation.ui)
 
     implementation(Dependencies.Square.retrofit)
-    implementation(Dependencies.Serialization.converter)
     implementation(Dependencies.Square.httpLogging)
     implementation(Dependencies.Square.okHttp)
+    implementation(Dependencies.Serialization.converter)
     implementation(Dependencies.Serialization.core)
 
     implementation(Dependencies.Navigation.compose)
