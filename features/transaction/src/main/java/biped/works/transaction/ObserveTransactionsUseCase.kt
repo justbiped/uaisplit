@@ -1,18 +1,9 @@
 package biped.works.transaction
 
-import biped.works.transaction.data.Transaction
+import biped.works.transaction.data.TransactionRepository
 import javax.inject.Inject
-import kotlinx.coroutines.flow.flowOf
 
-class ObserveTransactionsUseCase @Inject constructor() {
+class ObserveTransactionsUseCase @Inject constructor(private val transactionRepository: TransactionRepository) {
 
-    operator fun invoke() = flowOf(
-        listOf(
-            Transaction(
-                id = "myId",
-                value = 1500.50,
-                description = "Rent of the trash car"
-            )
-        )
-    )
+    operator fun invoke() = transactionRepository.listTransactions()
 }
