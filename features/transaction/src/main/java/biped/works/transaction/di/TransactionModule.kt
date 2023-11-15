@@ -11,7 +11,8 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @Module
 @InstallIn(ViewModelComponent::class)
 class TransactionModule {
-    //@ViewModelScoped
+
+    @ViewModelScoped
     @Provides
     fun providesTransactionApi(httpManager: HttpManager): TransactionApi {
         return httpManager.instantiate(TransactionApi::class.java, "https://uaisplit.up.railway.app/")

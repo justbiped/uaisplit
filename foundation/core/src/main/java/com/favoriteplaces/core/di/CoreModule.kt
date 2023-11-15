@@ -20,6 +20,10 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 
+private val json = Json {
+    ignoreUnknownKeys = true
+}
+
 @Module
 @InstallIn(SingletonComponent::class)
 class CoreModule {
@@ -32,7 +36,7 @@ class CoreModule {
     @Singleton
     internal fun providesHttpManager(okHttpClient: OkHttpClient): HttpManager {
         val contentType = "application/json".toMediaType()
-        val converterFactory = Json.asConverterFactory(contentType)
+        val converterFactory = json.asConverterFactory(contentType)
         return HttpManager(okHttpClient, converterFactory)
     }
 
@@ -46,5 +50,6 @@ class CoreModule {
     @Provides
     @Singleton
     @DispatcherDefault
-    fun provideScopeDefault() = CoroutineScope(SupervisorJob() + DispatcherProvider.Default + CoroutineName("Application Scope"))
+    fun provideScopeDefault() =
+        CoroutineScope(SupervisorJob() + DispatcherProvider.Default + CoroutineName("Application Scope"))
 }
