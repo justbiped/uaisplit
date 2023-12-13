@@ -142,6 +142,9 @@ object Plugins {
     const val kotlin_android = "kotlin-android"
 
     const val kapt: String = "kotlin-kapt"
+    const val ksp: String = "com.google.devtools.ksp"
+    const val ksp_version = "1.9.10-1.0.13"
+
     const val parcelize = "kotlin-parcelize"
 
     const val serialization = "org.jetbrains.kotlin.plugin.serialization"
