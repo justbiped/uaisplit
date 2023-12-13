@@ -21,14 +21,14 @@ object Dependencies {
     }
 
     object Kotlin {
-        const val version = "1.8.22"
+        const val version = "1.9.0"
         const val core = "androidx.core:core-ktx:$version"
         const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
     }
 
     object Room{
-        const val version = "2.4.3"
+        const val version = "2.6.1"
         const val runtime = "androidx.room:room-runtime:$version"
         const val compiler = "androidx.room:room-compiler:$version"
         const val extesions = "androidx.room:room-ktx:$version"
@@ -83,14 +83,14 @@ object Dependencies {
     }
 
     object Hilt {
-        const val version = "2.44"
+        const val version = "2.49"
         const val core = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
         const val testing = "com.google.dagger:hilt-android-testing:$version"
     }
 
     object Compose {
-        const val compiler_vesion = "1.4.8"
+        const val compiler_version = "1.5.0"
 
         const val bom = "androidx.compose:compose-bom:2023.06.01"
         const val ui = "androidx.compose.ui:ui"

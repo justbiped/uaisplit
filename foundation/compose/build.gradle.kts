@@ -11,7 +11,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Dependencies.Compose.compiler_vesion
+        kotlinCompilerExtensionVersion = Dependencies.Compose.compiler_version
     }
 }
 dependencies {
