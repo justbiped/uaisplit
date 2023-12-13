@@ -21,7 +21,7 @@ object Dependencies {
     }
 
     object Kotlin {
-        const val version = "1.9.0"
+        const val version = "1.9.10"
         const val core = "androidx.core:core-ktx:$version"
         const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
@@ -90,7 +90,7 @@ object Dependencies {
     }
 
     object Compose {
-        const val compiler_version = "1.5.0"
+        const val compiler_version = "1.5.3"
 
         const val bom = "androidx.compose:compose-bom:2023.06.01"
         const val ui = "androidx.compose.ui:ui"

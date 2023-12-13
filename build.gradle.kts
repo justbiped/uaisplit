@@ -9,6 +9,7 @@ plugins {
     id(Plugins.library).apply(false)
     id(Plugins.play_services).version(Plugins.play_services_version).apply(false)
     id(Plugins.kotlin).apply(false)
+    //id("com.google.devtools.ksp").version("1.9.10-1.0.13").apply(false)
     id(Plugins.serialization).version(Plugins.serialization_version).apply(false)
     id(Plugins.safe_args).version(Plugins.safe_args_version).apply(false)
     id(Plugins.hilt).version(Plugins.hilt_version).apply(false)
