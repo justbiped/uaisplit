@@ -2,7 +2,7 @@ plugins {
     id(Plugins.library)
     id(Plugins.hilt)
     id(Plugins.kotlin)
-    id(Plugins.kapt)
+    id(Plugins.ksp)
 }
 
 android {
@@ -30,5 +30,5 @@ dependencies {
     implementation(Dependencies.Test.espresso)
 
     implementation(Dependencies.Hilt.core)
-    kapt(Dependencies.Hilt.compiler)
+    ksp(Dependencies.Hilt.compiler)
 }

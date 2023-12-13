@@ -2,7 +2,7 @@ plugins {
     id(Plugins.library)
     id(Plugins.hilt)
     id(Plugins.kotlin)
-    id(Plugins.kapt)
+    id(Plugins.ksp)
     id(Plugins.parcelize)
     id(Plugins.serialization)
 }
@@ -36,5 +36,5 @@ dependencies {
     implementation(Dependencies.Navigation.compose)
 
     implementation(Dependencies.Hilt.core)
-    kapt(Dependencies.Hilt.compiler)
+    ksp(Dependencies.Hilt.compiler)
 }

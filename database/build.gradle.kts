@@ -1,9 +1,8 @@
 plugins {
     id(Plugins.library)
     id(Plugins.kotlin)
-    id(Plugins.kapt)
-    id(Plugins.hilt)
     id(Plugins.ksp)
+    id(Plugins.hilt)
 }
 
 android {
@@ -26,5 +25,5 @@ dependencies {
     ksp(Dependencies.Room.compiler)
 
     implementation(Dependencies.Hilt.core)
-    kapt(Dependencies.Hilt.compiler)
+    ksp(Dependencies.Hilt.compiler)
 }

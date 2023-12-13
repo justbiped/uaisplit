@@ -2,7 +2,7 @@ plugins {
     id(Plugins.application)
     id(Plugins.hilt)
     id(Plugins.serialization)
-    id(Plugins.kapt)
+    id(Plugins.ksp)
     id(Plugins.compose)
 }
 
@@ -50,7 +50,7 @@ dependencies {
     implementation(Dependencies.Serialization.core)
 
     implementation(Dependencies.Hilt.core)
-    kapt(Dependencies.Hilt.compiler)
+    ksp(Dependencies.Hilt.compiler)
 
     implementation(project(":features:user"))
     implementation(project(":features:settings"))
@@ -64,6 +64,6 @@ dependencies {
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))
 
-    kaptTest(Dependencies.Hilt.compiler)
-    kaptAndroidTest(Dependencies.Hilt.compiler)
+    kspTest(Dependencies.Hilt.compiler)
+    kspAndroidTest(Dependencies.Hilt.compiler)
 }
