@@ -2,6 +2,14 @@ package biped.works.automation
 
 class RefRepository(private val gitHubApi: GitHubApi) {
 
+    suspend fun getVersionFile(): GitHubFile {
+        return gitHubApi.readVersionsVile()
+    }
+
+    suspend fun updateVersionFile(file: FileUpdate){
+        gitHubApi.updateVersionFile(file)
+    }
+
     suspend fun getObject(branch: String): Object {
         return gitHubApi.listRefs()
             .first { it.ref == "refs/heads/$branch" }

@@ -8,10 +8,15 @@ import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.ResponseBody
+import okio.ByteString.Companion.decodeBase64
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Query
 import okhttp3.Response as HttpResponse
 
 interface GitHubApi {
@@ -26,7 +31,33 @@ interface GitHubApi {
 
     @POST("repos/justbiped/uaisplit/releases")
     suspend fun createRelease(@Body release: Release): ReleaseUrl
+
+    @GET("/repos/justbiped/uaisplit/contents/version.properties")
+    suspend fun readVersionsVile(@Query("ref") ref: String = "heads/version-bump"): GitHubFile
+
+    @PUT("/repos/justbiped/uaisplit/contents/version.properties")
+    suspend fun updateVersionFile(@Body file: FileUpdate): GitHubFile
 }
+
+@Serializable
+data class GitHubFile(
+    @SerialName("name") val name: String,
+    @SerialName("path") val path: String,
+    @SerialName("type") val type: String,
+    @SerialName("encoding") val encoding: String,
+    @SerialName("content") val content: String,
+    @SerialName("sha") val sha: String
+) {
+    val decodedContent: String = content.decodeBase64().toString().replace(Regex("text=|\\[|\\]"), "")
+}
+
+@Serializable
+data class FileUpdate(
+    @SerialName("sha") val sha: String,
+    @SerialName("content") val content: String,
+    @SerialName("message") val message: String,
+    @SerialName("branch") val branch: String
+)
 
 @Serializable
 data class Release(
@@ -103,7 +134,7 @@ class HeaderInterceptor : Interceptor {
         val request: Request = chain.request()
             .newBuilder()
             .addHeader("Accept", "application/vnd.github+json")
-            .addHeader("Authorization", "Bearer ")
+            .addHeader("Authorization", "Bearer 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")
             .addHeader("X-GitHub-Api-Version", "2022-11-28")
             .build()
         return chain.proceed(request)
