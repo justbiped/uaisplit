@@ -1,4 +1,4 @@
-package biped.works.github
+package biped.works.plugins.github
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

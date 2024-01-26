@@ -103,7 +103,7 @@ class HeaderInterceptor : Interceptor {
         val request: Request = chain.request()
             .newBuilder()
             .addHeader("Accept", "application/vnd.github+json")
-            .addHeader("Authorization", "Bearer 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")
+            .addHeader("Authorization", "Bearer ")
             .addHeader("X-GitHub-Api-Version", "2022-11-28")
             .build()
         return chain.proceed(request)

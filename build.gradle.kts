@@ -1,8 +1,10 @@
+import biped.works.plugins.github.GitHubPlugin
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 apply<VersionsPlugin>()
 apply<ConfigPlugin>()
+apply<GitHubPlugin>()
 
 plugins {
     id(Plugins.application).apply(false)

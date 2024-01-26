@@ -1,4 +1,9 @@
 package biped.works.plugins.github
 
-class UpdateVersionsFileTask {
+import org.gradle.api.tasks.Exec
+
+class UpdateVersionsFileTask : Exec() {
+
+
+
 }

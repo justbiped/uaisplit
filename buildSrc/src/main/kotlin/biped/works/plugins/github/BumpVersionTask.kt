@@ -15,11 +15,14 @@ open class CommitTask : Exec() {
 
     @TaskAction
     override fun exec() {
-        val currentVersion = redCurrentVersion().incrementMinor()
-        File(versionsPath).writeLines(currentVersion.inLines())
-        args("$currentVersion")
-        commandLine("sh", "$rootDir/bla.sh", currentVersion.toString())
+        val version = bumpAppVersion()
+        commandLine("sh", "$rootDir/bla.sh", version.toString())
         super.exec()
+    }
+
+    private fun bumpAppVersion() {
+        val currentVersion = redCurrentVersion()
+        File(versionsPath).writeLines(currentVersion.incrementMinor().inLines())
     }
 
     private fun redCurrentVersion(): Version {
@@ -41,6 +44,6 @@ data class Version(
     override fun toString() = "$major.$minor.$patch"
 
     fun inLines(): List<String> {
-       return "version.major=$major\nversion.minor=$minor\nversion.patch=$patch".split("\n")
+        return "version.major=$major\nversion.minor=$minor\nversion.patch=$patch".split("\n")
     }
 }

@@ -52,8 +52,6 @@ dependencies {
     implementation(Dependencies.Hilt.core)
     ksp(Dependencies.Hilt.compiler)
 
-    implementation(project(":automation"))
-
     implementation(project(":features:user"))
     implementation(project(":features:settings"))
     implementation(project(":features:profile"))
