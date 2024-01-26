@@ -1,0 +1,25 @@
+{
+  "input": {
+    "branch": {
+      "repositoryNameWithOwner": "justbiped/uaisplit",
+      "branchName": "master"
+    },
+    "message": {
+      "headline": "Bumpig version to 1.0.1"
+    },
+    "fileChanges": {
+      "additions": [
+        {
+          "path": "version.properties",
+          "contents": "echo \"version.major=1\nversion.minor=0\nersion.patch=1\" | base64"
+        }
+      ],
+      "deletions": [
+        {
+          "path": "version.properties"
+        }
+      ]
+    }
+  }
+}
+
