@@ -6,14 +6,15 @@ data class Version(
     val patch: Int
 ) {
     val fileContent = "version.major=$major\nversion.minor=$minor\nversion.patch=$patch"
+    val name = "$major.$minor.$patch"
+    val tag = "v$name"
+    val dashName = "$major-$minor"
 
-    override fun toString() = "$major.$minor.$patch"
+    fun incrementMajor(value: Int = 1) = copy(major = major + value, minor = 0, patch = 0)
+    fun incrementMinor(value: Int = 1) = copy(minor = minor + value, patch = 0)
+    fun incrementPatch(value: Int = 1) = copy(patch = patch + value)
 
-    fun incrementMinor(value: Int = 1) = copy(minor = minor + value)
-
-    fun inLines(): List<String> {
-        return fileContent.split("\n")
-    }
+    override fun toString() = name
 
     companion object {
         fun parse(content: String): Version {

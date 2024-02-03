@@ -20,24 +20,41 @@ import retrofit2.http.Query
 import okhttp3.Response as HttpResponse
 
 interface GitHubApi {
-    @GET("repos/justbiped/uaisplit/git/refs")
+    @GET("/repos/justbiped/uaisplit/git/refs")
     suspend fun listRefs(): List<Reference>
 
-    @POST("repos/justbiped/uaisplit/git/tags")
+    @POST("/repos/justbiped/uaisplit/git/tags")
     suspend fun createTagObject(@Body tag: Tag): TagObject
 
     @POST("/repos/justbiped/uaisplit/git/refs")
-    suspend fun createTagReference(@Body request: RefRequest): Reference
+    suspend fun createReference(@Body request: ReferenceRequest): Reference
 
-    @POST("repos/justbiped/uaisplit/releases")
-    suspend fun createRelease(@Body release: Release): ReleaseUrl
+    @GET("/repos/TheAthletic/android/git/refs/tags")
+    suspend fun listTags(): Response<ResponseBody>
 
     @GET("/repos/justbiped/uaisplit/contents/version.properties")
     suspend fun readVersionsVile(@Query("ref") ref: String = "heads/version-bump"): GitHubFile
 
     @PUT("/repos/justbiped/uaisplit/contents/version.properties")
-    suspend fun updateVersionFile(@Body file: FileUpdate): GitHubFile
+    suspend fun updateVersionFile(@Body file: FileUpdate): Response<ResponseBody>
+
+    @POST("/repos/justbiped/uaisplit/pulls")
+    suspend fun createPullRequest(@Body pullRequest: PullRequest): Response<ResponseBody>
+
+    @POST("/repos/justbiped/uaisplit/releases")
+    suspend fun createRelease(@Body release: Release): Response<ResponseBody>
+
+    @GET("/repos/justbiped/uaisplit/releases")
+    suspend fun getLastReleases(@Query("page") page: Int = 1, @Query("perPage") perPage: Int = 3): List<ReleaseBrief>
 }
+
+@Serializable
+data class PullRequest(
+    @SerialName("title") val title: String,
+    @SerialName("body") val body: String,
+    @SerialName("head") val head: String,
+    @SerialName("base") val base: String,
+)
 
 @Serializable
 data class GitHubFile(
@@ -60,11 +77,18 @@ data class FileUpdate(
 )
 
 @Serializable
+data class ReleaseBrief(
+    @SerialName("name") val name: String,
+    @SerialName("tag_name") val tag: String,
+    @SerialName("prerelease") val preRelease: Boolean,
+)
+
+@Serializable
 data class Release(
     @SerialName("name") val name: String,
     @SerialName("body") val description: String,
     @SerialName("tag_name") val tag: String,
-    @SerialName("target_commitish") val sourceBranch: String,
+    @SerialName("target_commitish") val branch: String,
     @SerialName("draft") val draft: Boolean,
     @SerialName("prerelease") val preRelease: Boolean,
     @SerialName("generate_release_notes") val generateReleaseNotes: Boolean,
@@ -100,7 +124,7 @@ data class Reference(
 )
 
 @Serializable
-data class RefRequest(
+data class ReferenceRequest(
     @SerialName("ref") val ref: String,
     @SerialName("sha") val sha: String,
 )
@@ -134,7 +158,7 @@ class HeaderInterceptor : Interceptor {
         val request: Request = chain.request()
             .newBuilder()
             .addHeader("Accept", "application/vnd.github+json")
-            .addHeader("Authorization", "Bearer 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")
+            .addHeader("Authorization", "Bearer ")
             .addHeader("X-GitHub-Api-Version", "2022-11-28")
             .build()
         return chain.proceed(request)
