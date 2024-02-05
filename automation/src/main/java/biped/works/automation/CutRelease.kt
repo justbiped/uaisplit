@@ -3,8 +3,6 @@ package biped.works.automation
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
-const val DEFAULT_BRANCH = "master"
-
 enum class ReleaseType {
     //MAJOR,
     MINOR,
@@ -42,7 +40,7 @@ class CutRelease(private val repository: GitHubRepository) {
             releaseVersion.version.name,
             description = "",
             branch = targetBranch,
-            tag = releaseVersion.version.tag,
+            tag = "${releaseVersion.version.tag}-beta",
             isPreRelease = true,
             generateReleaseNotes = true
         )

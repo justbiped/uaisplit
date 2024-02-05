@@ -43,14 +43,14 @@ interface GitHubApi {
     @POST("/repos/justbiped/uaisplit/pulls")
     suspend fun createPullRequest(@Body pullRequest: PullRequest): Response<ResponseBody>
 
-    @POST("/repos/justbiped/uaisplit/releases")
-    suspend fun createRelease(@Body release: Release): Response<ResponseBody>
-
-    @PATCH("/repos/justbiped/uaisplit/releases/{id}")
-    suspend fun updateRelease(@Path("id") id: String, @Body release: Release): Response<ResponseBody>
-
     @GET("/repos/justbiped/uaisplit/releases")
     suspend fun getLastReleases(@Query("page") page: Int = 1, @Query("perPage") perPage: Int = 3): List<ReleaseBrief>
+
+    @POST("/repos/justbiped/uaisplit/releases")
+    suspend fun createRelease(@Body release: Release): ReleaseBrief
+
+    @PATCH("/repos/justbiped/uaisplit/releases/{id}")
+    suspend fun updateRelease(@Path("id") id: String, @Body release: Release): ReleaseBrief
 }
 
 @Serializable
@@ -70,7 +70,10 @@ data class GitHubFile(
     @SerialName("content") val content: String,
     @SerialName("sha") val sha: String
 ) {
-    val decodedContent: String = content.decodeBase64().toString().replace(Regex("text=|\\[|\\]"), "")
+    val decodedContent: String = content
+        .decodeBase64()
+        .toString()
+        .replace(Regex("text=|\\[|\\]"), "")
 }
 
 @Serializable
@@ -85,6 +88,7 @@ data class FileUpdate(
 data class ReleaseBrief(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
+    @SerialName("url") val url: String,
     @SerialName("tag_name") val tag: String,
     @SerialName("target_commitish") val branch: String,
     @SerialName("prerelease") val isPreRelease: Boolean,
@@ -149,8 +153,7 @@ fun createGitHubApi(): GitHubApi {
     val contentType = "application/json".toMediaType()
     val converterFactory = json.asConverterFactory(contentType)
 
-    val client = OkHttpClient
-        .Builder()
+    val client = OkHttpClient.Builder()
         .addInterceptor(HeaderInterceptor())
         .build()
     return Retrofit.Builder()
@@ -163,12 +166,16 @@ fun createGitHubApi(): GitHubApi {
 
 class HeaderInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): HttpResponse {
+        val token = System.getProperty("github.token") ?: System.getenv("GIT_HUB_TOKEN") ?: throw Exception(
+            "Unable to find the authorization token for Git Hub\n" +
+                    "add github.token=<Personal Access Token here> in your ~/.gradle/gradle.properties or export GIT_HUB_TOKEN evn var"
+        )
+
         val request: Request = chain.request()
             .newBuilder()
             .addHeader("Accept", "application/vnd.github+json")
-            .addHeader("Authorization", "Bearer ")
-            .addHeader("X-GitHub-Api-Version", "2022-11-28")
-            .build()
+            .addHeader("Authorization", "Bearer $token")
+            .addHeader("X-GitHub-Api-Version", "2022-11-28").build()
         return chain.proceed(request)
     }
 }

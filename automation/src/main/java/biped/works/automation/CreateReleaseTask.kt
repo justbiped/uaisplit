@@ -14,7 +14,10 @@ class CreateReleaseTask {
 
         @JvmStatic
         fun main(args: Array<String> = arrayOf("minor")) {
-            val releaseType = ReleaseType.valueOf(args.first().uppercase())
+            defaultBranch = args[0]
+            val type = args[1].uppercase()
+
+            val releaseType = ReleaseType.valueOf(type)
             runBlocking {
                 cutRelease(releaseType)
             }

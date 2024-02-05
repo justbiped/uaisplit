@@ -14,7 +14,7 @@ fun releaseVersionn(previousVersion: Version) = object : ReleaseVersion {
     override val version: Version get() = previousVersion
     override val nextVersion: Version get() = version
 
-    override val sourceBranch: String get() = DEFAULT_BRANCH
+    override val sourceBranch: String get() = defaultBranch
     override val targetBranch: String get() = ""
     override val bumpBranch = ""
 }

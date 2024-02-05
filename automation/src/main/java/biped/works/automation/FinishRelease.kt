@@ -12,7 +12,7 @@ class FinishRelease(private val repository: GitHubRepository) {
         val release = Release(
             name = latestRelease.name,
             description = "",
-            tag = latestRelease.tag,
+            tag = "v${latestRelease.name}",
             branch = latestRelease.branch,
             isPreRelease = false,
             generateReleaseNotes = true
@@ -22,9 +22,9 @@ class FinishRelease(private val repository: GitHubRepository) {
 
         val pullRequest = PullRequest(
             title = "Merge back ${latestRelease.name}",
-            body = "",
+            body = " ",
             head = latestRelease.branch,
-            base = DEFAULT_BRANCH
+            base = defaultBranch
         )
 
         repository.createPullRequest(pullRequest)
