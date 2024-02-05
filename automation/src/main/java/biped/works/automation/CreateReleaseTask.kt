@@ -3,10 +3,9 @@ package biped.works.automation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class ManageReleaseTask() {
+class CreateReleaseTask {
 
     companion object {
         val repository: GitHubRepository = GitHubRepository(createGitHubApi())

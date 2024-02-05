@@ -25,8 +25,18 @@ dependencies {
 
 tasks.register("release", JavaExec::class) {
     group = "biped.works"
-    mainClass.set("biped.works.automation.ManageReleaseTask")
+    mainClass.set("biped.works.automation.CreateReleaseTask")
     args = listOf("minor")
+    classpath = sourceSets["main"].runtimeClasspath
+
+    debugOptions {
+        isEnabled = true
+    }
+}
+
+tasks.register("finishRelease", JavaExec::class) {
+    group = "biped.works"
+    mainClass.set("biped.works.automation.FinishReleaseTask")
     classpath = sourceSets["main"].runtimeClasspath
 
     debugOptions {

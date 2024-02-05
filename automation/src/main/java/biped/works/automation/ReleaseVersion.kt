@@ -9,7 +9,7 @@ interface ReleaseVersion {
     val bumpBranch: String
 }
 
-fun releaseVersion(previousVersion: Version) = object : ReleaseVersion {
+fun releaseVersionn(previousVersion: Version) = object : ReleaseVersion {
     override val previousVersion: Version get() = previousVersion
     override val version: Version get() = previousVersion
     override val nextVersion: Version get() = version

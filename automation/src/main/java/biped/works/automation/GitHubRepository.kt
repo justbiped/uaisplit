@@ -16,11 +16,6 @@ class GitHubRepository(private val gitHubApi: GitHubApi) {
             .objectt
     }
 
-    suspend fun listTags() {
-        val response = gitHubApi.listTags()
-        print(response)
-    }
-
     suspend fun createTag(tag: Tag): Reference {
         val tagObject = gitHubApi.createTagObject(tag)
         val reference = ReferenceRequest("refs/tags/${tag.tag}", sha = tagObject.sha)
@@ -31,8 +26,16 @@ class GitHubRepository(private val gitHubApi: GitHubApi) {
         return gitHubApi.createReference(reference)
     }
 
-    suspend fun getCurerntStable(): ReleaseBrief {
-        return gitHubApi.getLastReleases().first { !it.preRelease.not() }
+    suspend fun getCurrentStable(): ReleaseBrief {
+        return gitHubApi.getLastReleases().first { it.isPreRelease.not() }
+    }
+
+    suspend fun getLatestRelease(): ReleaseBrief {
+        return gitHubApi.getLastReleases(perPage = 1).first()
+    }
+
+    suspend fun updateRelease(id: String, release: Release) {
+        gitHubApi.updateRelease(id, release)
     }
 
     suspend fun createPullRequest(pullRequest: PullRequest) {
@@ -41,15 +44,7 @@ class GitHubRepository(private val gitHubApi: GitHubApi) {
     }
 
     suspend fun createRelease(release: Release) {
-        val bla=  gitHubApi.createRelease(release)
+        val bla = gitHubApi.createRelease(release)
         print(bla)
-    }
-}
-
-class TagRepository(private val gitHubApi: GitHubApi) {
-    suspend fun createTag(tag: Tag): Reference {
-        val tagObject = gitHubApi.createTagObject(tag)
-        val reference = ReferenceRequest("refs/tags/${tag.tag}", sha = tagObject.sha)
-        return gitHubApi.createReference(reference)
     }
 }

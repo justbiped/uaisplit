@@ -15,7 +15,7 @@ class CutRelease(private val repository: GitHubRepository) {
 
     suspend operator fun invoke(type: ReleaseType) {
         val version = getCurrentVersion()
-        val baseReleaseVersion = releaseVersion(previousVersion = version)
+        val baseReleaseVersion = releaseVersionn(previousVersion = version)
         val release = when (type) {
             //  ReleaseType.MAJOR -> MajorRelease(baseReleaseVersion)
             ReleaseType.MINOR -> MinorRelease(baseReleaseVersion)
@@ -43,8 +43,7 @@ class CutRelease(private val repository: GitHubRepository) {
             description = "",
             branch = targetBranch,
             tag = releaseVersion.version.tag,
-            draft = false,
-            preRelease = true,
+            isPreRelease = true,
             generateReleaseNotes = true
         )
         repository.createRelease(release)
@@ -56,7 +55,7 @@ class CutRelease(private val repository: GitHubRepository) {
     }
 
     private suspend fun getCurrentVersion(): Version {
-        val stableRelease = repository.getCurerntStable()
+        val stableRelease = repository.getCurrentStable()
         val (major, minor, patch) = stableRelease.tag.replace("v", "").split(".")
         return Version(major.toInt(), minor.toInt(), patch.toInt())
     }

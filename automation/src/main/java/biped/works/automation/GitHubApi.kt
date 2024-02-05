@@ -14,8 +14,10 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 import okhttp3.Response as HttpResponse
 
@@ -43,6 +45,9 @@ interface GitHubApi {
 
     @POST("/repos/justbiped/uaisplit/releases")
     suspend fun createRelease(@Body release: Release): Response<ResponseBody>
+
+    @PATCH("/repos/justbiped/uaisplit/releases/{id}")
+    suspend fun updateRelease(@Path("id") id: String, @Body release: Release): Response<ResponseBody>
 
     @GET("/repos/justbiped/uaisplit/releases")
     suspend fun getLastReleases(@Query("page") page: Int = 1, @Query("perPage") perPage: Int = 3): List<ReleaseBrief>
@@ -78,10 +83,14 @@ data class FileUpdate(
 
 @Serializable
 data class ReleaseBrief(
+    @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("tag_name") val tag: String,
-    @SerialName("prerelease") val preRelease: Boolean,
-)
+    @SerialName("target_commitish") val branch: String,
+    @SerialName("prerelease") val isPreRelease: Boolean,
+) {
+    val isStable: Boolean get() = isPreRelease.not()
+}
 
 @Serializable
 data class Release(
@@ -89,8 +98,7 @@ data class Release(
     @SerialName("body") val description: String,
     @SerialName("tag_name") val tag: String,
     @SerialName("target_commitish") val branch: String,
-    @SerialName("draft") val draft: Boolean,
-    @SerialName("prerelease") val preRelease: Boolean,
+    @SerialName("prerelease") val isPreRelease: Boolean,
     @SerialName("generate_release_notes") val generateReleaseNotes: Boolean,
 )
 
