@@ -1,50 +1,72 @@
 package biped.works.automation
 
+import retrofit2.Call
+
+class Unauthorized(override val message: String?) : Exception()
+class ResourceNotFound(override val message: String?) : Exception()
+class Conflict(override val message: String?) : Exception()
+class ValidationFailed(override val message: String?) : Exception()
+
+inline fun <reified T : Any> executeCall(call: Call<T>): T? {
+    val response = call.execute()
+    val errorMessage = response.errorBody()?.byteString().toString()
+    when (response.code()) {
+        in 200..299 -> return response.body()
+
+        401 -> throw Unauthorized(errorMessage)
+        404 -> throw ResourceNotFound(errorMessage)
+        409 -> throw Conflict(errorMessage)
+        422 -> throw ValidationFailed(errorMessage)
+        else -> throw Exception(errorMessage)
+    }
+}
+
 class GitHubRepository(private val gitHubApi: GitHubApi) {
 
-    suspend fun getVersionFile(branch: String): GitHubFile {
-        return gitHubApi.readVersionsVile(branch)
+    fun getVersionFile(branch: String): FileRequest {
+        return executeCall(gitHubApi.readVersionsVile(branch)) ?: throw Exception("No file found")
     }
 
-    suspend fun updateVersionFile(file: FileUpdate) {
-        gitHubApi.updateVersionFile(file)
+    fun updateVersionFile(file: FileUpdate) {
+        executeCall(gitHubApi.updateVersionFile(file))
     }
 
-    suspend fun getBranch(branch: String): Object {
-        return gitHubApi.listRefs()
-            .first { it.ref == "refs/heads/$branch" }
-            .objectt
+    fun getBranch(branch: String): Object {
+        return executeCall(gitHubApi.listRefs())
+            ?.first { it.ref == "refs/heads/$branch" }
+            ?.objectt ?: throw Exception("No branch found with $branch name")
     }
 
-    suspend fun createTag(tag: Tag): Reference {
-        val tagObject = gitHubApi.createTagObject(tag)
-        val reference = ReferenceRequest("refs/tags/${tag.tag}", sha = tagObject.sha)
-        return gitHubApi.createReference(reference)
+    fun createReference(reference: ReferenceRequest): ReferenceResponse {
+        return executeCall(gitHubApi.createReference(reference)) ?: throw Exception("Unable to create reference")
     }
 
-    suspend fun createReference(reference: ReferenceRequest): Reference {
-        return gitHubApi.createReference(reference)
+    fun getCurrentStable(): ReleaseResponse {
+        return executeCall(gitHubApi.getLastReleases())?.first { it.isPreRelease.not() }
+            ?: throw Exception("Unable to find a release")
     }
 
-    suspend fun getCurrentStable(): ReleaseBrief {
-        return gitHubApi.getLastReleases().first { it.isPreRelease.not() }
+    fun getLatestRelease(): ReleaseResponse {
+        return executeCall(gitHubApi.getLastReleases(perPage = 1))?.first()
+            ?: throw Exception("Unable to find the last release")
     }
 
-    suspend fun getLatestRelease(): ReleaseBrief {
-        return gitHubApi.getLastReleases(perPage = 1).first()
+    fun updateRelease(id: String, release: ReleaseRequest): ReleaseResponse? {
+        return executeCall(gitHubApi.updateRelease(id, release))
+            ?: throw Exception("Unable to update release ${release.name}")
     }
 
-    suspend fun updateRelease(id: String, release: Release) {
-        gitHubApi.updateRelease(id, release)
+    fun createPullRequest(pullRequest: PullRequest) {
+        try {
+            executeCall(gitHubApi.createPullRequest(pullRequest))
+        } catch (error: Throwable) {
+            if (error is ValidationFailed) println(
+                "Unable to open pull request, no diffs found for ${pullRequest.head} -> ${pullRequest.base}"
+            )
+        }
     }
 
-    suspend fun createPullRequest(pullRequest: PullRequest) {
-        val response = gitHubApi.createPullRequest(pullRequest)
-        print(response)
-    }
-
-    suspend fun createRelease(release: Release) {
-        val bla = gitHubApi.createRelease(release)
-        print(bla)
+    fun createRelease(release: ReleaseRequest) {
+        executeCall(gitHubApi.createRelease(release))
     }
 }

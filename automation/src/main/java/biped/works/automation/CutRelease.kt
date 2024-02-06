@@ -36,7 +36,7 @@ class CutRelease(private val repository: GitHubRepository) {
 
     private suspend fun createRelease(releaseVersion: ReleaseVersion) {
         val targetBranch = releaseVersion.targetBranch
-        val release = Release(
+        val release = ReleaseRequest(
             releaseVersion.version.name,
             description = "",
             branch = targetBranch,

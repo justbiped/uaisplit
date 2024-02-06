@@ -1,6 +1,7 @@
 package biped.works.automation
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -8,9 +9,8 @@ import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.ResponseBody
 import okio.ByteString.Companion.decodeBase64
-import retrofit2.Response
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -23,34 +23,28 @@ import okhttp3.Response as HttpResponse
 
 interface GitHubApi {
     @GET("/repos/justbiped/uaisplit/git/refs")
-    suspend fun listRefs(): List<Reference>
-
-    @POST("/repos/justbiped/uaisplit/git/tags")
-    suspend fun createTagObject(@Body tag: Tag): TagObject
+    fun listRefs(): Call<List<ReferenceResponse>>
 
     @POST("/repos/justbiped/uaisplit/git/refs")
-    suspend fun createReference(@Body request: ReferenceRequest): Reference
-
-    @GET("/repos/TheAthletic/android/git/refs/tags")
-    suspend fun listTags(): Response<ResponseBody>
+    fun createReference(@Body request: ReferenceRequest): Call<ReferenceResponse>
 
     @GET("/repos/justbiped/uaisplit/contents/version.properties")
-    suspend fun readVersionsVile(@Query("ref") ref: String = "heads/version-bump"): GitHubFile
+    fun readVersionsVile(@Query("ref") ref: String = "heads/version-bump"): Call<FileRequest>
 
     @PUT("/repos/justbiped/uaisplit/contents/version.properties")
-    suspend fun updateVersionFile(@Body file: FileUpdate): Response<ResponseBody>
+    fun updateVersionFile(@Body file: FileUpdate): Call<FileResponse>
 
     @POST("/repos/justbiped/uaisplit/pulls")
-    suspend fun createPullRequest(@Body pullRequest: PullRequest): Response<ResponseBody>
+    fun createPullRequest(@Body pullRequest: PullRequest): Call<PullResponse>
 
     @GET("/repos/justbiped/uaisplit/releases")
-    suspend fun getLastReleases(@Query("page") page: Int = 1, @Query("perPage") perPage: Int = 3): List<ReleaseBrief>
+    fun getLastReleases(@Query("page") page: Int = 1, @Query("perPage") perPage: Int = 3): Call<List<ReleaseResponse>>
 
     @POST("/repos/justbiped/uaisplit/releases")
-    suspend fun createRelease(@Body release: Release): ReleaseBrief
+    fun createRelease(@Body release: ReleaseRequest): Call<ReleaseResponse>
 
     @PATCH("/repos/justbiped/uaisplit/releases/{id}")
-    suspend fun updateRelease(@Path("id") id: String, @Body release: Release): ReleaseBrief
+    fun updateRelease(@Path("id") id: String, @Body release: ReleaseRequest): Call<ReleaseResponse>
 }
 
 @Serializable
@@ -62,7 +56,12 @@ data class PullRequest(
 )
 
 @Serializable
-data class GitHubFile(
+data class PullResponse(
+    @SerialName("url") val url: String,
+)
+
+@Serializable
+data class FileRequest(
     @SerialName("name") val name: String,
     @SerialName("path") val path: String,
     @SerialName("type") val type: String,
@@ -77,6 +76,16 @@ data class GitHubFile(
 }
 
 @Serializable
+data class FileResponse(val content: Content)
+
+@Serializable
+data class Content(
+    @SerialName("name") val name: String,
+    @SerialName("path") val path: String,
+    @SerialName("url") val url: String
+)
+
+@Serializable
 data class FileUpdate(
     @SerialName("sha") val sha: String,
     @SerialName("content") val content: String,
@@ -85,7 +94,7 @@ data class FileUpdate(
 )
 
 @Serializable
-data class ReleaseBrief(
+data class ReleaseResponse(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("url") val url: String,
@@ -97,7 +106,7 @@ data class ReleaseBrief(
 }
 
 @Serializable
-data class Release(
+data class ReleaseRequest(
     @SerialName("name") val name: String,
     @SerialName("body") val description: String,
     @SerialName("tag_name") val tag: String,
@@ -107,28 +116,7 @@ data class Release(
 )
 
 @Serializable
-data class ReleaseUrl(@SerialName("html_url") val url: String)
-
-@Serializable
-data class TagObject(
-    @SerialName("node_id") val nodeId: String,
-    @SerialName("tag") val tag: String,
-    @SerialName("sha") val sha: String,
-    @SerialName("url") val url: String,
-    @SerialName("message") val message: String,
-    @SerialName("object") val objectt: Object,
-)
-
-@Serializable
-data class Tag(
-    @SerialName("tag") val tag: String,
-    @SerialName("message") val message: String,
-    @SerialName("object") val sha: String,
-    @SerialName("type") val type: String,
-)
-
-@Serializable
-data class Reference(
+data class ReferenceResponse(
     @SerialName("ref") val ref: String,
     @SerialName("node_id") val nodeId: String,
     @SerialName("url") val url: String,
@@ -149,6 +137,8 @@ data class Object(
 )
 
 private val json = Json { ignoreUnknownKeys = true }
+
+@OptIn(ExperimentalSerializationApi::class)
 fun createGitHubApi(): GitHubApi {
     val contentType = "application/json".toMediaType()
     val converterFactory = json.asConverterFactory(contentType)
@@ -166,9 +156,9 @@ fun createGitHubApi(): GitHubApi {
 
 class HeaderInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): HttpResponse {
-        val token = System.getProperty("github.token") ?: System.getenv("GIT_HUB_TOKEN") ?: throw Exception(
+        val token = System.getProperty("github.token") ?: System.getenv("GITHUB_TOKEN") ?: throw Exception(
             "Unable to find the authorization token for Git Hub\n" +
-                    "add github.token=<Personal Access Token here> in your ~/.gradle/gradle.properties or export GIT_HUB_TOKEN evn var"
+                    "add github.token=<Personal Access Token here> in your ~/.gradle/gradle.properties or export GITHUB_TOKEN evn var"
         )
 
         val request: Request = chain.request()
