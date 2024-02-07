@@ -32,7 +32,7 @@ interface GitHubApi {
     fun readVersionsVile(@Query("ref") ref: String = "heads/version-bump"): Call<FileRequest>
 
     @PUT("/repos/justbiped/uaisplit/contents/version.properties")
-    fun updateVersionFile(@Body file: FileUpdate): Call<FileResponse>
+    fun updateVersionFile(@Body file: FileUpdateRequest): Call<FileUpdateResponse>
 
     @POST("/repos/justbiped/uaisplit/pulls")
     fun createPullRequest(@Body pullRequest: PullRequest): Call<PullResponse>
@@ -76,21 +76,21 @@ data class FileRequest(
 }
 
 @Serializable
-data class FileResponse(val content: Content)
+data class FileUpdateRequest(
+    @SerialName("sha") val sha: String,
+    @SerialName("content") val content: String,
+    @SerialName("message") val message: String,
+    @SerialName("branch") val branch: String
+)
+
+@Serializable
+data class FileUpdateResponse(val content: Content)
 
 @Serializable
 data class Content(
     @SerialName("name") val name: String,
     @SerialName("path") val path: String,
     @SerialName("url") val url: String
-)
-
-@Serializable
-data class FileUpdate(
-    @SerialName("sha") val sha: String,
-    @SerialName("content") val content: String,
-    @SerialName("message") val message: String,
-    @SerialName("branch") val branch: String
 )
 
 @Serializable
@@ -156,10 +156,7 @@ fun createGitHubApi(): GitHubApi {
 
 class HeaderInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): HttpResponse {
-        val token = System.getProperty("github.token") ?: System.getenv("GITHUB_TOKEN") ?: throw Exception(
-            "Unable to find the authorization token for Git Hub\n" +
-                    "add github.token=<Personal Access Token here> in your ~/.gradle/gradle.properties or export GITHUB_TOKEN evn var"
-        )
+        val token = System.getenv("GITHUB_TOKEN") ?: throw TokenNotFound()
 
         val request: Request = chain.request()
             .newBuilder()

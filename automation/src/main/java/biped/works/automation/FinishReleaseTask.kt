@@ -4,15 +4,15 @@ var defaultBranch = ""
 
 class FinishReleaseTask {
     companion object {
-        val repository = GitHubRepository(createGitHubApi())
-        val finishRelease = FinishRelease(repository)
+        private val repository = GitHubRepository(createGitHubApi())
+        private val finishRelease = FinishRelease(repository)
 
         @JvmStatic
         fun main(args: Array<String>) {
             try {
                 defaultBranch = args[0]
                 finishRelease()
-            }catch (error: Error){
+            } catch (error: Throwable) {
                 print(error.message)
             }
 

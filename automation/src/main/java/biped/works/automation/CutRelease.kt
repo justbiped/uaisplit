@@ -11,7 +11,7 @@ enum class ReleaseType {
 
 class CutRelease(private val repository: GitHubRepository) {
 
-    suspend operator fun invoke(type: ReleaseType) {
+    operator fun invoke(type: ReleaseType) {
         val version = getCurrentVersion()
         val baseReleaseVersion = releaseVersionn(previousVersion = version)
         val release = when (type) {
@@ -34,7 +34,7 @@ class CutRelease(private val repository: GitHubRepository) {
         }
     }
 
-    private suspend fun createRelease(releaseVersion: ReleaseVersion) {
+    private fun createRelease(releaseVersion: ReleaseVersion) {
         val targetBranch = releaseVersion.targetBranch
         val release = ReleaseRequest(
             releaseVersion.version.name,
@@ -47,30 +47,33 @@ class CutRelease(private val repository: GitHubRepository) {
         repository.createRelease(release)
     }
 
-    private suspend fun createReleaseBranch(release: ReleaseVersion, source: Object) {
+    private fun createReleaseBranch(release: ReleaseVersion, source: Object) {
+        println("Creating stable branch ${release.targetBranch} from $defaultBranch")
         val stableRefRequest = ReferenceRequest("refs/heads/${release.targetBranch}", source.sha)
         repository.createReference(stableRefRequest)
     }
 
-    private suspend fun getCurrentVersion(): Version {
+    private fun getCurrentVersion(): Version {
+        println("Getting the current stable version")
         val stableRelease = repository.getCurrentStable()
         val (major, minor, patch) = stableRelease.tag.replace("v", "").split(".")
         return Version(major.toInt(), minor.toInt(), patch.toInt())
     }
 
-    private suspend fun createBumpVersionBranch(release: ReleaseVersion, source: Object) {
+    private fun createBumpVersionBranch(release: ReleaseVersion, source: Object) {
         if (release is PatchRelease) return
-
+        println("Creating bump version branch")
         val versionRefRequest = ReferenceRequest("refs/heads/${release.bumpBranch}", source.sha)
         repository.createReference(versionRefRequest)
 
     }
 
-    private suspend fun updateVersionFile(release: ReleaseVersion) {
+    private fun updateVersionFile(release: ReleaseVersion) {
+        println("Updating version file to ${release.nextVersion}")
         val gitHubFile = repository.getVersionFile(release.bumpBranch)
         val fileContent = release.nextVersion.fileContent.encodeToBase64()
 
-        val fileUpdate = FileUpdate(
+        val fileUpdate = FileUpdateRequest(
             sha = gitHubFile.sha,
             content = fileContent,
             message = "Bumping version to ${release.nextVersion}",
@@ -79,9 +82,10 @@ class CutRelease(private val repository: GitHubRepository) {
         repository.updateVersionFile(fileUpdate)
     }
 
-    private suspend fun openBumpVersionPR(release: ReleaseVersion) {
+    private fun openBumpVersionPR(release: ReleaseVersion) {
         if (release is PatchRelease) return
 
+        println("Creating version bump PR")
         val pullRequest = PullRequest(
             "Bumping version to ${release.nextVersion}",
             "",

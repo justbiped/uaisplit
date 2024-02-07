@@ -23,7 +23,7 @@ dependencies {
     testImplementation(Dependencies.Test.jUnit)
 }
 
-tasks.register("release", JavaExec::class) {
+tasks.register("minorRelease", JavaExec::class) {
     group = "biped.works"
     mainClass.set("biped.works.automation.CreateReleaseTask")
     args = listOf("master","minor")
