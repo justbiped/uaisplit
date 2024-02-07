@@ -57,7 +57,7 @@ data class PullRequest(
 
 @Serializable
 data class PullResponse(
-    @SerialName("url") val url: String,
+    @SerialName("html_url") val url: String,
 )
 
 @Serializable
@@ -97,7 +97,7 @@ data class Content(
 data class ReleaseResponse(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
-    @SerialName("url") val url: String,
+    @SerialName("html_url") val url: String,
     @SerialName("tag_name") val tag: String,
     @SerialName("target_commitish") val branch: String,
     @SerialName("prerelease") val isPreRelease: Boolean,

@@ -56,17 +56,18 @@ class GitHubRepository(private val gitHubApi: GitHubApi) {
         executeCall(gitHubApi.updateRelease(id, release))
             ?: throw Exception("Unable to update release ${release.name}")
 
-    fun createPullRequest(pullRequest: PullRequest) {
-        try {
+    fun createPullRequest(pullRequest: PullRequest): PullResponse? {
+        return try {
             executeCall(gitHubApi.createPullRequest(pullRequest))
         } catch (error: Throwable) {
             if (error is ValidationFailed) println(
                 "Unable to open pull request, no diffs found for ${pullRequest.head} -> ${pullRequest.base}"
             )
+            null
         }
     }
 
-    fun createRelease(release: ReleaseRequest) {
-        executeCall(gitHubApi.createRelease(release))
+    fun createRelease(release: ReleaseRequest): ReleaseResponse? {
+        return executeCall(gitHubApi.createRelease(release))
     }
 }

@@ -35,6 +35,7 @@ class CutRelease(private val repository: GitHubRepository) {
     }
 
     private fun createRelease(releaseVersion: ReleaseVersion) {
+        println("Creating release ${releaseVersion.version.name}")
         val targetBranch = releaseVersion.targetBranch
         val release = ReleaseRequest(
             releaseVersion.version.name,
@@ -44,7 +45,8 @@ class CutRelease(private val repository: GitHubRepository) {
             isPreRelease = true,
             generateReleaseNotes = true
         )
-        repository.createRelease(release)
+        val response = repository.createRelease(release)
+        response?.also { println("Release created ${response.url}") }
     }
 
     private fun createReleaseBranch(release: ReleaseVersion, source: Object) {
@@ -92,7 +94,8 @@ class CutRelease(private val repository: GitHubRepository) {
             release.bumpBranch,
             release.sourceBranch
         )
-        repository.createPullRequest(pullRequest)
+        val pullResponse = repository.createPullRequest(pullRequest)
+        pullResponse?.also { println("Bump version pull request created: ${pullResponse.url}") }
     }
 }
 

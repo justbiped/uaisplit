@@ -18,7 +18,8 @@ class FinishRelease(private val repository: GitHubRepository) {
             isPreRelease = false,
             generateReleaseNotes = true
         )
-        repository.updateRelease(latestRelease.id.toString(), release)
+        val response = repository.updateRelease(latestRelease.id.toString(), release)
+        println("Release ${latestRelease.name} marked as stable: ${response.url}")
 
         println("Creating the merge-back PR from ${latestRelease.name} to $defaultBranch")
         val pullRequest = PullRequest(
@@ -27,6 +28,7 @@ class FinishRelease(private val repository: GitHubRepository) {
             head = latestRelease.branch,
             base = defaultBranch
         )
-        repository.createPullRequest(pullRequest)
+        val pullResponse = repository.createPullRequest(pullRequest)
+        pullResponse?.also { println("Merge-back PR created: ${pullResponse?.url}") }
     }
 }
