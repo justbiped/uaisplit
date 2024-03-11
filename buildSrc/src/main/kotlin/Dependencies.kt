@@ -41,7 +41,8 @@ object Dependencies {
     }
 
     object Coroutines {
-        private const val version = "1.6.4"
+        private const val version = "1.7.3"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
@@ -140,6 +141,9 @@ object Plugins {
     const val library = "com.android.library"
     const val kotlin = "org.jetbrains.kotlin.android"
     const val kotlin_android = "kotlin-android"
+
+    const val java_library = "java-library"
+    const val kotlin_jvm = "org.jetbrains.kotlin.jvm"
 
     const val kapt: String = "kotlin-kapt"
     const val ksp: String = "com.google.devtools.ksp"

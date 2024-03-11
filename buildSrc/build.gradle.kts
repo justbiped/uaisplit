@@ -15,6 +15,10 @@ gradlePlugin{
             id = "biped.works.plugins.compose"
             implementationClass = "biped.works.plugins.ComposePlugin"
         }
+        register("github"){
+            id = "biped.works.plugins.github.GitHubPlugin"
+            implementationClass = "biped.works.github.GitHubPlugin"
+        }
     }
 }
 

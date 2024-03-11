@@ -35,3 +35,5 @@ include(":database")
 include(":coroutines")
 include(":coroutines:core")
 include(":coroutines:test")
+
+include("automation")
