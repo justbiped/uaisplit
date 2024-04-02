@@ -21,6 +21,8 @@ dependencies {
 
     implementation(Dependencies.Hilt.core)
     ksp(Dependencies.Hilt.compiler)
+    implementation("com.squareup:kotlinpoet:1.16.0")
+
 
     implementation(project(":foundation:core"))
     implementation(project(":foundation:theme"))

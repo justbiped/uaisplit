@@ -3,6 +3,7 @@ package biped.works.database.di
 import android.content.Context
 import androidx.room.Room
 import biped.works.database.AppDatabase
+import biped.works.database.user.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +24,8 @@ class DatabaseModule {
         ).build()
     }
 
+    @Provides
+    fun providesUserDao(appDatabase: AppDatabase): UserDao {
+        return appDatabase.userDao()
+    }
 }

@@ -25,4 +25,5 @@ gradlePlugin{
 dependencies {
     implementation("com.android.tools.build:gradle:7.4.0")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
+    implementation("com.squareup:javapoet:1.13.0")
 }
