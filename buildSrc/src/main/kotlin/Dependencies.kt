@@ -84,7 +84,8 @@ object Dependencies {
     }
 
     object Hilt {
-        const val version = "2.49"
+        const val version = "2.51.1"
+        const val jetpack_version = "1.2.0"
         const val core = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
         const val testing = "com.google.dagger:hilt-android-testing:$version"
@@ -98,7 +99,6 @@ object Dependencies {
         const val foundation = "androidx.compose.foundation:foundation"
         const val icons = "androidx.compose.material:material-icons-core"
         const val iconsExtended = "androidx.compose.material:material-icons-extended"
-        const val layout = "androidx.compose.foundation:foundation-layout"
         const val animation = "androidx.compose.animation:animation"
 
         const val material = "androidx.compose.material3:material3"
@@ -107,10 +107,7 @@ object Dependencies {
         const val tooling = "androidx.compose.ui:ui-tooling"
         const val tooling_preview = "androidx.compose.ui:ui-tooling-preview"
 
-        const val activity = "androidx.activity:activity-compose:1.6.0"
-        const val pager = "com.google.accompanist:accompanist-pager:0.25.1"
-
-        const val hilt = "androidx.hilt:hilt-navigation-compose:1.0.0"
+        const val hilt = "androidx.hilt:hilt-navigation-compose:${Hilt.jetpack_version}"
 
         const val coil = "io.coil-kt:coil-compose:2.2.0"
 
@@ -121,9 +118,7 @@ object Dependencies {
     object Lifecycle {
         private const val version = "2.5.1"
         const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
-        const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
-        const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$version"
     }
 
     object Navigation {
