@@ -5,15 +5,12 @@ apply<VersionsPlugin>()
 apply<ConfigPlugin>()
 
 plugins {
-    id(Plugins.application).apply(false)
-    id(Plugins.library).apply(false)
-    id(Plugins.play_services).version(Plugins.play_services_version).apply(false)
-    id(Plugins.kotlin).apply(false)
-    id(Plugins.ksp).version(Plugins.ksp_version).apply(false)
-    id(Plugins.serialization).version(Plugins.serialization_version).apply(false)
+    alias(libs.plugins.android.playServices) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.dependencyUpdates)
     id(Plugins.safe_args).version(Plugins.safe_args_version).apply(false)
-    id(Plugins.hilt).version(Plugins.hilt_version).apply(false)
-    id(Plugins.dependency_updates).version(Plugins.dependency_updates_version).apply(false)
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {

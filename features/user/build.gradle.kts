@@ -19,8 +19,8 @@ dependencies {
     implementation(Dependencies.Navigation.ui)
     implementation(Dependencies.Navigation.fragment)
 
-    implementation(Dependencies.Hilt.core)
-    ksp(Dependencies.Hilt.compiler)
+    implementation(libs.hilt.core)
+    ksp(libs.hilt.compiler)
     implementation("com.squareup:kotlinpoet:1.16.0")
 
 
@@ -33,7 +33,7 @@ dependencies {
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))
 
-    kspTest(Dependencies.Hilt.compiler)
-    kspAndroidTest(Dependencies.Hilt.compiler)
+    kspTest(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.compiler)
 }
 

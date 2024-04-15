@@ -13,9 +13,6 @@ object Dependencies {
         const val core = "androidx.core:core-ktx:1.8.0"
         const val appCompat = "androidx.appcompat:appcompat:1.5.0"
         const val materialDesign = "com.google.android.material:material:1.6.1"
-        const val activity = "androidx.activity:activity-ktx:1.5.1"
-
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 
         const val datastore = "androidx.datastore:datastore-preferences:1.0.0"
     }
@@ -23,7 +20,6 @@ object Dependencies {
     object Kotlin {
         const val version = "1.9.10"
         const val core = "androidx.core:core-ktx:$version"
-        const val reflection = "org.jetbrains.kotlin:kotlin-reflect:$version"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
     }
 
@@ -162,8 +158,6 @@ object Plugins {
     const val dependency_updates_version = "0.42.0"
 
     const val compose = "biped.works.plugins.compose"
-
-    const val test = "com.android.test"
 }
 
 object Path {

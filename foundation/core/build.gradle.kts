@@ -28,13 +28,13 @@ dependencies {
     implementation(Dependencies.Navigation.ui)
 
     implementation(Dependencies.Square.retrofit)
-    implementation(Dependencies.Serialization.converter)
-    implementation(Dependencies.Square.httpLogging)
-    implementation(Dependencies.Square.okHttp)
-    implementation(Dependencies.Serialization.core)
+    implementation(libs.serialization.converter)
+    implementation(libs.http.logging)
+    implementation(libs.http.ok)
+    implementation(libs.serialization.core)
 
     implementation(Dependencies.Navigation.compose)
 
-    implementation(Dependencies.Hilt.core)
-    ksp(Dependencies.Hilt.compiler)
+    implementation(libs.hilt.core)
+    ksp(libs.hilt.compiler)
 }

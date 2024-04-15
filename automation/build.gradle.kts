@@ -15,10 +15,10 @@ dependencies {
     implementation(Dependencies.Coroutines.core)
 
     implementation(Dependencies.Square.retrofit)
-    implementation(Dependencies.Square.okHttp)
+    implementation(libs.http.ok)
 
-    implementation(Dependencies.Serialization.core)
-    implementation(Dependencies.Serialization.converter)
+    implementation(libs.serialization.core)
+    implementation(libs.serialization.converter)
 
     testImplementation(Dependencies.Test.jUnit)
 }

@@ -20,10 +20,10 @@ android {
 }
 
 dependencies {
-    api(Dependencies.Room.runtime)
+    api(libs.room.runtime)
     implementation(Dependencies.Room.extesions)
     ksp(Dependencies.Room.compiler)
 
-    implementation(Dependencies.Hilt.core)
-    ksp(Dependencies.Hilt.compiler)
+    implementation(libs.hilt.core)
+    ksp(libs.hilt.compiler)
 }

@@ -19,16 +19,16 @@ dependencies {
 
     implementation(project(":foundation:core"))
     implementation(project(":foundation:theme"))
-    implementation(Dependencies.Square.okHttp)
+    implementation(libs.http.ok)
     implementation(Dependencies.Square.mockServer)
 
-    implementation(Dependencies.Coroutines.test)
+    implementation(libs.coroutine.test)
     implementation(Dependencies.Test.archCore)
     implementation(Dependencies.Fragment.testing)
     implementation(Dependencies.Hilt.testing)
     implementation(Dependencies.Test.runner)
     implementation(Dependencies.Test.espresso)
 
-    implementation(Dependencies.Hilt.core)
-    ksp(Dependencies.Hilt.compiler)
+    implementation(libs.hilt.core)
+    ksp(libs.hilt.compiler)
 }

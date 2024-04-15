@@ -36,21 +36,20 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.Coroutines.android)
+    implementation(libs.android.core)
+    implementation(libs.coroutine.android)
 
-    implementation(Dependencies.Android.core)
+    implementation(libs.lifecycle.runtime)
+    implementation(libs.lifecycle.viewModel)
 
-    implementation(Dependencies.Lifecycle.viewModel)
-    implementation(Dependencies.Lifecycle.runtime)
+    implementation(libs.http.retrofit)
+    implementation(libs.http.logging)
+    implementation(libs.http.ok)
+    implementation(libs.serialization.core)
+    implementation(libs.serialization.converter)
 
-    implementation(Dependencies.Square.retrofit)
-    implementation(Dependencies.Square.httpLogging)
-    implementation(Dependencies.Square.okHttp)
-    implementation(Dependencies.Serialization.converter)
-    implementation(Dependencies.Serialization.core)
-
-    implementation(Dependencies.Hilt.core)
-    ksp(Dependencies.Hilt.compiler)
+    implementation(libs.hilt.core)
+    ksp(libs.hilt.compiler)
 
     implementation(project(":automation"))
     implementation(project(":features:user"))
@@ -65,6 +64,6 @@ dependencies {
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))
 
-    kspTest(Dependencies.Hilt.compiler)
-    kspAndroidTest(Dependencies.Hilt.compiler)
+    kspTest(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.compiler)
 }
