@@ -10,17 +10,17 @@ java {
 }
 
 dependencies {
-    implementation(Dependencies.Kotlin.stdlib)
+    implementation(libs.kotlin.stdlib)
 
-    implementation(Dependencies.Coroutines.core)
+    implementation(libs.coroutine.core)
 
-    implementation(Dependencies.Square.retrofit)
+    implementation(libs.http.retrofit)
     implementation(libs.http.ok)
 
     implementation(libs.serialization.core)
     implementation(libs.serialization.converter)
 
-    testImplementation(Dependencies.Test.jUnit)
+    testImplementation(libs.test.junit)
 }
 
 tasks.register("minorRelease", JavaExec::class) {

@@ -1,11 +1,11 @@
 package biped.works.plugins
 
 import AndroidExtension
-import Dependencies
 import android
 import devImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.dependencies
@@ -28,29 +28,29 @@ class ComposePlugin : Plugin<Project> {
                 }
 
                 composeOptions {
-                    kotlinCompilerExtensionVersion = Dependencies.Compose.compiler_version
+                    kotlinCompilerExtensionVersion = libs.requiredVersion("compose.compiler")
                 }
             }
 
             dependencies {
-                implementation(libs.findLibrary("compose.bom").get())
-                implementation(libs.findLibrary("compose.foundation").get())
-                implementation(libs.findLibrary("compose.ui").get())
-                implementation(libs.findLibrary("compose.material").get())
-                implementation(libs.findLibrary("compose.windowSizeClass").get())
-                implementation(libs.findLibrary("compose.icons").get())
-                implementation(libs.findLibrary("compose.iconsExtended").get())
-                implementation(libs.findLibrary("compose.animation").get())
-                implementation(libs.findLibrary("compose.hilt").get())
-                implementation(libs.findLibrary("compose.coil").get())
+                implementation(libs.library("compose.bom"))
+                implementation(libs.library("compose.foundation"))
+                implementation(libs.library("compose.ui"))
+                implementation(libs.library("compose.material"))
+                implementation(libs.library("compose.windowSizeClass"))
+                implementation(libs.library("compose.icons"))
+                implementation(libs.library("compose.iconsExtended"))
+                implementation(libs.library("compose.animation"))
+                implementation(libs.library("compose.hilt"))
+                implementation(libs.library("compose.coil"))
 
                 // Preview
-                implementation(libs.findLibrary("compose.toolingPreview").get())
-                devImplementation(libs.findLibrary("compose.tooling").get())
+                implementation(libs.library("compose.toolingPreview"))
+                devImplementation(libs.library("compose.tooling"))
 
                 // Test
-                testImplementation(libs.findLibrary("compose.testJunit").get())
-                devImplementation(libs.findLibrary("compose.testManifest").get())
+                testImplementation(libs.library("compose.testJunit"))
+                devImplementation(libs.library("compose.testManifest"))
 
                 // Biped Compose Foundation
                 implementation(project(":foundation:compose"))
@@ -62,3 +62,6 @@ class ComposePlugin : Plugin<Project> {
 private fun DependencyHandlerScope.implementation(dependencyNotation: Any) {
     add("implementation", dependencyNotation)
 }
+
+fun VersionCatalog.library(key: String) = findLibrary(key).get()
+fun VersionCatalog.requiredVersion(key:String) : String = findVersion(key).get().requiredVersion

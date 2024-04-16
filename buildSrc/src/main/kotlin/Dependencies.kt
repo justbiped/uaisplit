@@ -28,11 +28,6 @@ object Dependencies {
         const val test = "androidx.room:room-testing:$version"
     }
 
-    object Serialization {
-        const val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
-        const val converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
-    }
-
     object Coroutines {
         private const val version = "1.7.3"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
