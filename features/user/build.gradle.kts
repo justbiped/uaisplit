@@ -17,7 +17,6 @@ dependencies {
     implementation(Dependencies.Lifecycle.runtime)
 
     implementation(Dependencies.Navigation.ui)
-    implementation(Dependencies.Navigation.fragment)
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)

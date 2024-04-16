@@ -121,7 +121,6 @@ object Dependencies {
         const val version = "2.5.2"
 
         const val compose = "androidx.navigation:navigation-compose:$version"
-        const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
         const val ui = "androidx.navigation:navigation-ui-ktx:$version"
         const val testing = "androidx.navigation:navigation-testing:$version"
     }
