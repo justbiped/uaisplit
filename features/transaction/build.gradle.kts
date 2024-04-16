@@ -9,7 +9,7 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.Android.core)
+    implementation(libs.android.core)
 
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))

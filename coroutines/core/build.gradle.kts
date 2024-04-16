@@ -7,6 +7,6 @@ android {
     namespace = "biped.works.coroutines"
 }
 dependencies {
-    implementation(Dependencies.Coroutines.android)
+    implementation(libs.coroutine.android)
     implementation("javax.inject:javax.inject:1")
 }

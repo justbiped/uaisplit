@@ -5,6 +5,6 @@ plugins {
 }
 
 dependencies {
-    implementation(Dependencies.Lifecycle.runtime)
+    implementation(libs.lifecycle.runtime)
     implementation(Dependencies.Android.materialDesign)
 }

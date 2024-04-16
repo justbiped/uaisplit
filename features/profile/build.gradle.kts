@@ -10,13 +10,13 @@ android{
 }
 
 dependencies {
-    implementation(Dependencies.Android.core)
-    implementation(Dependencies.Android.appCompat)
-    implementation(Dependencies.Android.datastore)
+    implementation(libs.android.core)
+    implementation(libs.android.compat)
+    implementation(libs.android.datastore)
 
-    implementation(Dependencies.Lifecycle.runtime)
+    implementation(libs.lifecycle.runtime)
 
-    implementation(Dependencies.Navigation.ui)
+    implementation(libs.navigation.ui)
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)

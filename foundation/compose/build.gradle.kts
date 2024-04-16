@@ -11,29 +11,29 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Dependencies.Compose.compiler_version
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 }
 dependencies {
-    implementation(platform(Dependencies.Compose.bom))
+    implementation(platform(libs.compose.bom))
 
-    implementation(Dependencies.Coroutines.android)
-    implementation(Dependencies.Lifecycle.runtime)
+    implementation(libs.coroutine.android)
+    implementation(libs.lifecycle.runtime)
 
-    implementation(Dependencies.Compose.foundation)
-    implementation(Dependencies.Compose.ui)
-    implementation(Dependencies.Compose.material)
-    implementation(Dependencies.Compose.material_window)
-    implementation(Dependencies.Compose.icons)
-    implementation(Dependencies.Compose.iconsExtended)
-    implementation(Dependencies.Compose.animation)
-    implementation(Dependencies.Compose.coil)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.windowSizeClass)
+    implementation(libs.compose.icons)
+    implementation(libs.compose.iconsExtended)
+    implementation(libs.compose.animation)
+    implementation(libs.compose.coil)
 
-    implementation(Dependencies.Navigation.compose)
+    implementation(libs.compose.navigation)
 
-    implementation(Dependencies.Compose.tooling_preview)
-    devImplementation(Dependencies.Compose.tooling)
+    implementation(libs.compose.toolingPreview)
+    devImplementation(libs.compose.tooling)
 
-    testImplementation(Dependencies.Compose.test_junit)
-    devImplementation(Dependencies.Compose.test_manifest)
+    testImplementation(libs.compose.testJunit)
+    devImplementation(libs.compose.testManifest)
 }

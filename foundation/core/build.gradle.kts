@@ -19,21 +19,21 @@ android {
 
 dependencies {
     implementation(project(":coroutines:core"))
-    implementation(Dependencies.Coroutines.android)
 
-    implementation(Dependencies.Android.core)
-    implementation(Dependencies.Android.appCompat)
-    implementation(Dependencies.Android.materialDesign)
-    implementation(Dependencies.Fragment.core)
-    implementation(Dependencies.Navigation.ui)
+    implementation(libs.coroutine.android)
 
-    implementation(Dependencies.Square.retrofit)
+    implementation(libs.android.core)
+    implementation(libs.android.compat)
+
+    implementation(libs.navigation.ui)
+
+    implementation(libs.http.retrofit)
     implementation(libs.serialization.converter)
     implementation(libs.http.logging)
     implementation(libs.http.ok)
     implementation(libs.serialization.core)
 
-    implementation(Dependencies.Navigation.compose)
+    implementation(libs.compose.navigation)
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)

@@ -4,14 +4,11 @@ object Dependencies {
         const val retrofitVersion = "2.9.0"
         const val okHttpVersion = "4.10.0"
         const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
-        const val httpLogging = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
-        const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
         const val mockServer = "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     }
 
     object Android {
         const val core = "androidx.core:core-ktx:1.8.0"
-        const val appCompat = "androidx.appcompat:appcompat:1.5.0"
         const val materialDesign = "com.google.android.material:material:1.6.1"
 
         const val datastore = "androidx.datastore:datastore-preferences:1.0.0"
@@ -101,14 +98,10 @@ object Dependencies {
         const val material_window = "androidx.compose.material3:material3-window-size-class"
 
         const val tooling = "androidx.compose.ui:ui-tooling"
-        const val tooling_preview = "androidx.compose.ui:ui-tooling-preview"
 
         const val hilt = "androidx.hilt:hilt-navigation-compose:${Hilt.jetpack_version}"
 
         const val coil = "io.coil-kt:coil-compose:2.2.0"
-
-        const val test_junit = "androidx.compose.ui:ui-test-junit4"
-        const val test_manifest = "androidx.compose.ui:ui-test-manifest"
     }
 
     object Lifecycle {
@@ -119,7 +112,6 @@ object Dependencies {
 
     object Navigation {
         const val version = "2.5.2"
-
         const val compose = "androidx.navigation:navigation-compose:$version"
         const val ui = "androidx.navigation:navigation-ui-ktx:$version"
         const val testing = "androidx.navigation:navigation-testing:$version"
