@@ -1,9 +1,9 @@
 plugins {
-    id(Plugins.application)
-    id(Plugins.hilt)
-    id(Plugins.serialization)
-    id(Plugins.ksp)
-    id(Plugins.compose)
+    apply(libs.plugins.android.application)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    apply(libs.plugins.compose)
 }
 
 android {

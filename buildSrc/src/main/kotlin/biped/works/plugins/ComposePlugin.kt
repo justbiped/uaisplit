@@ -44,12 +44,12 @@ class ComposePlugin : Plugin<Project> {
                 implementation(libs.library("compose.coil"))
 
                 // Preview
-                implementation(libs.library("compose.toolingPreview"))
-                devImplementation(libs.library("compose.tooling"))
+                implementation(libs.library("compose.ui.tooling.preview"))
+                devImplementation(libs.library("compose.ui.tooling"))
 
                 // Test
-                testImplementation(libs.library("compose.testJunit"))
-                devImplementation(libs.library("compose.testManifest"))
+                testImplementation(libs.library("compose.test.junit"))
+                devImplementation(libs.library("compose.test.manifest"))
 
                 // Biped Compose Foundation
                 implementation(project(":foundation:compose"))

@@ -31,9 +31,9 @@ dependencies {
 
     implementation(libs.compose.navigation)
 
-    implementation(libs.compose.toolingPreview)
-    devImplementation(libs.compose.tooling)
+    implementation(libs.compose.ui.tooling.preview)
+    devImplementation(libs.compose.ui.tooling)
 
-    testImplementation(libs.compose.testJunit)
-    devImplementation(libs.compose.testManifest)
+    testImplementation(libs.compose.test.junit)
+    devImplementation(libs.compose.test.manifest)
 }

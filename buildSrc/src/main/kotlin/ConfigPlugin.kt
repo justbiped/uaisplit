@@ -88,7 +88,7 @@ private fun Project.applyAndroidConfigs() {
                 localImplementation(libs.library("navigation.testing"))
                 localImplementation(libs.library("http.mockserver"))
 
-                testImplementation(libs.library("test.mockk.mockk"))
+                testImplementation(libs.library("test.mockk"))
                 testImplementation(libs.library("coroutine.test"))
                 testImplementation(libs.library("android.test.core"))
                 testImplementation(libs.library("android.test.junit"))
@@ -98,7 +98,7 @@ private fun Project.applyAndroidConfigs() {
                 testImplementation(libs.library("android.test.runner"))
                 testImplementation(libs.library("android.test.espresso"))
                 testImplementation(libs.library("android.test.contrib"))
-                testImplementation(libs.library("test.robolectric.robolectric"))
+                testImplementation(libs.library("test.robolectric"))
                 testImplementation(libs.library("test.truth"))
 
                 androidTestImplementation(libs.library("android.test.junit"))

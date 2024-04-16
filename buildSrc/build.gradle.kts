@@ -14,6 +14,7 @@ gradlePlugin{
         register("jetpack-compose") {
             id = "biped.works.plugins.compose"
             implementationClass = "biped.works.plugins.ComposePlugin"
+            version = "1.0.0"
         }
         register("github"){
             id = "biped.works.plugins.github.GitHubPlugin"
@@ -23,7 +24,7 @@ gradlePlugin{
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:7.4.0")
+    implementation(libs.android.gradle)
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
     implementation("com.squareup:javapoet:1.13.0")
 }

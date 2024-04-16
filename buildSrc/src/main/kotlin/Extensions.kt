@@ -1,5 +1,9 @@
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.api.provider.Provider
+import org.gradle.kotlin.dsl.PluginDependenciesSpecScope
+import org.gradle.plugin.use.PluginDependenciesSpec
+import org.gradle.plugin.use.PluginDependency
 
 /**
  * ### Imports only on development
@@ -45,3 +49,7 @@ fun DependencyHandler.testImplementation(dependencyNotation: Any) =
  **/
 fun DependencyHandler.androidTestImplementation(dependencyNotation: Any) =
     add("androidTestImplementation", dependencyNotation)
+
+fun PluginDependenciesSpec.apply(plugin: Provider<PluginDependency>) {
+    id(plugin.get().pluginId)
+}

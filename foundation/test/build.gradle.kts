@@ -1,8 +1,8 @@
 plugins {
-    id(Plugins.library)
-    id(Plugins.hilt)
-    id(Plugins.kotlin)
-    id(Plugins.ksp)
+    apply(libs.plugins.android.library)
+    alias(libs.plugins.hilt)
+    apply(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -14,7 +14,7 @@ dependencies {
     implementation(libs.android.compat)
 
     implementation(libs.test.truth)
-    implementation(libs.test.mockk.mockk)
+    implementation(libs.test.mockk)
 
     implementation(libs.http.ok)
     implementation(libs.http.mockserver)
