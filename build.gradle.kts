@@ -10,7 +10,6 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.dependencyUpdates)
-    id(Plugins.safe_args).version(Plugins.safe_args_version).apply(false)
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {

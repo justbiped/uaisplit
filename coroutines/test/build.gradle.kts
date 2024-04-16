@@ -8,6 +8,6 @@ android {
 }
 dependencies {
     implementation(libs.coroutine.test)
-    implementation(Dependencies.Test.truth)
+    implementation(libs.test.truth)
     implementation(project(":coroutines:core"))
 }

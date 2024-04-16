@@ -1,3 +1,5 @@
+import biped.works.library
+import biped.works.libs
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -82,32 +84,31 @@ private fun Project.applyAndroidConfigs() {
             }
 
             dependencies {
-                localImplementation(Dependencies.Test.androidxCore)
-                localImplementation(Dependencies.Fragment.testing)
-                localImplementation(Dependencies.Navigation.testing)
-                localImplementation(Dependencies.Square.mockServer)
+                localImplementation(libs.library("android.test.core"))
+                localImplementation(libs.library("navigation.testing"))
+                localImplementation(libs.library("http.mockserver"))
 
-                testImplementation(Dependencies.Test.mockk)
-                testImplementation(Dependencies.Coroutines.test)
-                testImplementation(Dependencies.Test.androidxCore)
-                testImplementation(Dependencies.Test.androidxJunit)
-                testImplementation(Dependencies.Test.archCore)
-                testImplementation(Dependencies.Navigation.testing)
-                testImplementation(Dependencies.Hilt.testing)
-                testImplementation(Dependencies.Test.runner)
-                testImplementation(Dependencies.Test.espresso)
-                testImplementation(Dependencies.Test.espressoContrib)
-                testImplementation(Dependencies.Test.robolectric)
-                testImplementation(Dependencies.Test.truth)
+                testImplementation(libs.library("test.mockk.mockk"))
+                testImplementation(libs.library("coroutine.test"))
+                testImplementation(libs.library("android.test.core"))
+                testImplementation(libs.library("android.test.junit"))
+                testImplementation(libs.library("android.test.arch"))
+                testImplementation(libs.library("navigation.testing"))
+                testImplementation(libs.library("hilt.testing"))
+                testImplementation(libs.library("android.test.runner"))
+                testImplementation(libs.library("android.test.espresso"))
+                testImplementation(libs.library("android.test.contrib"))
+                testImplementation(libs.library("test.robolectric.robolectric"))
+                testImplementation(libs.library("test.truth"))
 
-                androidTestImplementation(Dependencies.Test.androidxJunit)
-                androidTestImplementation(Dependencies.Navigation.testing)
-                androidTestImplementation(Dependencies.Hilt.testing)
-                androidTestImplementation(Dependencies.Test.runner)
-                androidTestImplementation(Dependencies.Test.espresso)
-                androidTestImplementation(Dependencies.Test.espressoContrib)
-                androidTestImplementation(Dependencies.Test.robolectricAnnotations)
-                androidTestImplementation(Dependencies.Test.truth)
+                androidTestImplementation(libs.library("android.test.junit"))
+                androidTestImplementation(libs.library("android.test.runner"))
+                androidTestImplementation(libs.library("android.test.espresso"))
+                androidTestImplementation(libs.library("android.test.contrib"))
+                androidTestImplementation(libs.library("navigation.testing"))
+                androidTestImplementation(libs.library("hilt.testing"))
+                androidTestImplementation(libs.library("test.robolectric.annotations"))
+                androidTestImplementation(libs.library("test.truth"))
             }
         }
 

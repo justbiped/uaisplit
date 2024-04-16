@@ -17,7 +17,7 @@ dependencies {
     implementation(libs.test.mockk.mockk)
 
     implementation(libs.http.ok)
-    implementation(libs.http.mockServer)
+    implementation(libs.http.mockserver)
 
     implementation(libs.coroutine.test)
     implementation(libs.android.test.arch)

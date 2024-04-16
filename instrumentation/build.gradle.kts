@@ -11,5 +11,5 @@ android {
 
 dependencies {
     androidTestImplementation(project(":foundation:test"))
-    androidTestImplementation(Dependencies.Test.uiAutomator)
+    androidTestImplementation(libs.android.test.uiautomator)
 }

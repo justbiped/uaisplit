@@ -1,12 +1,5 @@
 // @formatter:off
 object Dependencies {
-    object Square {
-        const val retrofitVersion = "2.9.0"
-        const val okHttpVersion = "4.10.0"
-        const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
-        const val mockServer = "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
-    }
-
     object Android {
         const val core = "androidx.core:core-ktx:1.8.0"
         const val materialDesign = "com.google.android.material:material:1.6.1"
@@ -26,49 +19,6 @@ object Dependencies {
         const val compiler = "androidx.room:room-compiler:$version"
         const val extesions = "androidx.room:room-ktx:$version"
         const val test = "androidx.room:room-testing:$version"
-    }
-
-    object Coroutines {
-        private const val version = "1.7.3"
-        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
-        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
-        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
-    }
-
-    object Firebase {
-        const val bom = "com.google.firebase:firebase-bom:28.0.1"
-        const val messaging = "com.google.firebase:firebase-messaging"
-        const val analytics = "com.google.firebase:firebase-analytics"
-        const val auth = "com.google.firebase:firebase-auth-ktx:19.3.2"
-        const val playServicesAuth = "com.google.android.gms:play-services-auth:18.1.0"
-    }
-
-    object Test {
-        private const val robolectricVersion = "4.8.1"
-        private const val mockkVersion = "1.12.7"
-
-        const val jUnit = "junit:junit:4.13"
-        const val truth = "com.google.truth:truth:1.1.3"
-        const val mockk = "io.mockk:mockk:$mockkVersion"
-        const val mockkAndroid = "io.mockk:mockk-android:$mockkVersion"
-
-        const val robolectric = "org.robolectric:robolectric:${robolectricVersion}"
-        const val robolectricAnnotations = "org.robolectric:annotations:${robolectricVersion}"
-
-        const val androidxCore = "androidx.test:core-ktx:1.4.0"
-        const val archCore = "androidx.arch.core:core-testing:2.1.0"
-        const val androidxJunit = "androidx.test.ext:junit-ktx:1.1.3"
-        const val rules = "androidx.test:rules:1.4.0"
-        const val runner = "androidx.test:runner:1.4.0"
-        const val espresso = "androidx.test.espresso:espresso-core:3.5.0-rc01"
-        const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.5.0-rc01"
-        const val uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
-    }
-
-    object Fragment {
-        private const val version = "1.5.2"
-        const val core = "androidx.fragment:fragment-ktx:$version"
-        const val testing = "androidx.fragment:fragment-testing:$version"
     }
 
     object Hilt {
@@ -97,12 +47,6 @@ object Dependencies {
         const val hilt = "androidx.hilt:hilt-navigation-compose:${Hilt.jetpack_version}"
 
         const val coil = "io.coil-kt:coil-compose:2.2.0"
-    }
-
-    object Lifecycle {
-        private const val version = "2.5.1"
-        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
-        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }
 
     object Navigation {
