@@ -3,14 +3,18 @@ package biped.works.plugins
 import AndroidExtension
 import android
 import devImplementation
+import java.util.Optional
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.utils.`is`
 import testImplementation
 
 val noAndroidPluginException: Throwable
@@ -63,5 +67,9 @@ private fun DependencyHandlerScope.implementation(dependencyNotation: Any) {
     add("implementation", dependencyNotation)
 }
 
-fun VersionCatalog.library(key: String) = findLibrary(key).get()
-fun VersionCatalog.requiredVersion(key:String) : String = findVersion(key).get().requiredVersion
+fun VersionCatalog.library(key: String): Provider<MinimalExternalModuleDependency> {
+    val library = findLibrary(key)
+    return if (library.isPresent) library.get() else throw Exception("Unable to find $key in the version catalog")
+}
+
+fun VersionCatalog.requiredVersion(key: String): String = findVersion(key).get().requiredVersion

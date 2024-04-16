@@ -20,10 +20,10 @@ dependencies {
     implementation(libs.http.mockServer)
 
     implementation(libs.coroutine.test)
-    implementation(libs.test.archCore)
+    implementation(libs.android.test.arch)
     implementation(libs.hilt.testing)
-    implementation(libs.test.androidx.runner)
-    implementation(libs.test.androidx.espresso)
+    implementation(libs.android.test.runner)
+    implementation(libs.android.test.espresso)
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
