@@ -30,7 +30,6 @@ android {
 
         production {
             signingConfig = signingConfigs.getByName("production")
-            buildConfigField("String", "BASE_URL", "\"https://hotmart-mobile-app.herokuapp.com/\"")
         }
     }
 }

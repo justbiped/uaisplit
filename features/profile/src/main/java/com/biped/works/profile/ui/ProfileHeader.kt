@@ -17,9 +17,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import biped.works.user.R
 import coil.compose.rememberAsyncImagePainter
 import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.R
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumHeadline
 

@@ -40,6 +40,7 @@ private fun Project.applyAndroidConfigs() {
 
                 buildFeatures.apply {
                     viewBinding = true
+                    buildConfig = true
                 }
 
                 compileOptions {

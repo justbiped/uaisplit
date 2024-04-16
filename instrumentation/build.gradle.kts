@@ -5,6 +5,7 @@ plugins {
 
 android {
     defaultConfig {
+        namespace = "com.biped.locations.instrumentation"
         testApplicationId = "com.biped.locations.instrumentation"
     }
 }
