@@ -2,9 +2,9 @@ package biped.works.plugins
 
 import AndroidExtension
 import android
-import biped.works.library
-import biped.works.libs
-import biped.works.requiredVersion
+import library
+import catalog
+import requiredVersion
 import devImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -27,29 +27,29 @@ class ComposePlugin : Plugin<Project> {
                 }
 
                 composeOptions {
-                    kotlinCompilerExtensionVersion = libs.requiredVersion("compose.compiler")
+                    kotlinCompilerExtensionVersion = catalog.requiredVersion("compose.compiler")
                 }
             }
 
             dependencies {
-                implementation(libs.library("compose.bom"))
-                implementation(libs.library("compose.foundation"))
-                implementation(libs.library("compose.ui"))
-                implementation(libs.library("compose.material"))
-                implementation(libs.library("compose.windowSizeClass"))
-                implementation(libs.library("compose.icons"))
-                implementation(libs.library("compose.iconsExtended"))
-                implementation(libs.library("compose.animation"))
-                implementation(libs.library("compose.hilt"))
-                implementation(libs.library("compose.coil"))
+                implementation(catalog.library("compose.bom"))
+                implementation(catalog.library("compose.foundation"))
+                implementation(catalog.library("compose.ui"))
+                implementation(catalog.library("compose.material"))
+                implementation(catalog.library("compose.windowSizeClass"))
+                implementation(catalog.library("compose.icons"))
+                implementation(catalog.library("compose.iconsExtended"))
+                implementation(catalog.library("compose.animation"))
+                implementation(catalog.library("compose.hilt"))
+                implementation(catalog.library("compose.coil"))
 
                 // Preview
-                implementation(libs.library("compose.ui.tooling.preview"))
-                devImplementation(libs.library("compose.ui.tooling"))
+                implementation(catalog.library("compose.ui.tooling.preview"))
+                devImplementation(catalog.library("compose.ui.tooling"))
 
                 // Test
-                testImplementation(libs.library("compose.test.junit"))
-                devImplementation(libs.library("compose.test.manifest"))
+                testImplementation(catalog.library("compose.test.junit"))
+                devImplementation(catalog.library("compose.test.manifest"))
 
                 // Biped Compose Foundation
                 implementation(project(":foundation:compose"))

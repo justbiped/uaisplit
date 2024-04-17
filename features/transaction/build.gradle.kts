@@ -1,6 +1,6 @@
 plugins {
     id(Plugins.library)
-    id(Plugins.kotlin)
+    apply(libs.plugins.kotlin.android)
     id(Plugins.compose)
 }
 

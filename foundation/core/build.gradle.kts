@@ -1,10 +1,10 @@
 plugins {
-    id(Plugins.library)
-    id(Plugins.hilt)
-    id(Plugins.kotlin)
-    id(Plugins.ksp)
-    id(Plugins.parcelize)
-    id(Plugins.serialization)
+    apply(libs.plugins.android.library)
+    apply(libs.plugins.hilt)
+    apply(libs.plugins.kotlin.android)
+    apply(libs.plugins.ksp)
+    apply(libs.plugins.kotlin.parcelize)
+    apply(libs.plugins.kotlin.serialization)
 }
 
 android {

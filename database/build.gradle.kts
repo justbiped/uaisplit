@@ -1,7 +1,7 @@
 plugins {
     id(Plugins.library)
-    id(Plugins.kotlin)
-    id(Plugins.ksp)
+    apply(libs.plugins.kotlin.android)
+    apply(libs.plugins.ksp)
     id(Plugins.hilt)
 }
 

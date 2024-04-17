@@ -1,7 +1,7 @@
 plugins {
     id(Plugins.library)
     id(Plugins.hilt)
-    id(Plugins.ksp)
+    apply(libs.plugins.ksp)
     id(Plugins.compose)
 }
 
