@@ -1,5 +1,7 @@
 package com.biped.locations.theme
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
@@ -82,7 +84,7 @@ fun AppTheme(
         ColorTheme.LIGHT -> false
     }
 
-    val colorScheme = if (useDynamicColors) {
+    val colorScheme = if (useDynamicColors && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         getDynamicColorScheme(isDarkMode)
     } else {
         getAppColorScheme(isDarkMode)
@@ -100,6 +102,7 @@ fun getAppColorScheme(isDarkMode: Boolean): ColorScheme {
     return if (isDarkMode) DarkColors else LightColors
 }
 
+@RequiresApi(Build.VERSION_CODES.S)
 @Composable
 private fun getDynamicColorScheme(isDarkMode: Boolean): ColorScheme {
     return if (isDarkMode) {
