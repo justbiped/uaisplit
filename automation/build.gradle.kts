@@ -1,6 +1,6 @@
 plugins {
-    id(Plugins.java_library)
-    id(Plugins.kotlin_jvm)
+    apply(libs.plugins.java)
+    apply(libs.plugins.kotlin.jvm)
     apply(libs.plugins.kotlin.serialization)
 }
 

@@ -1,8 +1,8 @@
 plugins {
     apply(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
+    apply(libs.plugins.hilt)
     apply(libs.plugins.kotlin.android)
-    alias(libs.plugins.ksp)
+    apply(libs.plugins.ksp)
 }
 
 android {

@@ -21,8 +21,7 @@ class ConfigPlugin : Plugin<Project> {
 private fun Project.applyAndroidConfigs() {
     subprojects {
         onAndroidSetup {
-            plugins.apply(Plugins.kotlin)
-            plugins.apply(Plugins.kotlin_android)
+            plugins.apply(catalog.plugin("kotlin.android").id)
 
             android {
                 compileSdkVersion(34)

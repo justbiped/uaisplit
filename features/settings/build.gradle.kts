@@ -1,8 +1,8 @@
 plugins {
-    id(Plugins.library)
-    id(Plugins.hilt)
+    apply(libs.plugins.android.library)
+    apply(libs.plugins.hilt)
     apply(libs.plugins.ksp)
-    id(Plugins.compose)
+    apply(libs.plugins.compose)
 }
 
 android{

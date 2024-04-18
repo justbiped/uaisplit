@@ -1,8 +1,8 @@
 plugins {
     apply(libs.plugins.android.application)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
+    apply(libs.plugins.hilt)
+    apply(libs.plugins.kotlin.serialization)
+    apply(libs.plugins.ksp)
     apply(libs.plugins.compose)
 }
 
