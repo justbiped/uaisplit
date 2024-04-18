@@ -12,5 +12,5 @@ android {
 
 dependencies {
     implementation(libs.lifecycle.runtime)
-    implementation(Dependencies.Android.materialDesign)
+    implementation(libs.android.material)
 }
