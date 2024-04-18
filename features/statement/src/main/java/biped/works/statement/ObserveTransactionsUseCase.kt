@@ -1,6 +1,6 @@
-package biped.works.transaction
+package biped.works.statement
 
-import biped.works.transaction.data.Transaction
+import biped.works.statement.data.Transaction
 import javax.inject.Inject
 import kotlinx.coroutines.flow.flowOf
 

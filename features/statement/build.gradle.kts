@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "biped.works.transaction"
+    namespace = "biped.works.statement"
 }
 
 dependencies {

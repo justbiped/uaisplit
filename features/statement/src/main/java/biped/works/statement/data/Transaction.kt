@@ -1,4 +1,4 @@
-package biped.works.transaction.data
+package biped.works.statement.data
 
 data class Transaction(
     val id: String,

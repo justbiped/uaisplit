@@ -54,7 +54,7 @@ dependencies {
     implementation(project(":features:user"))
     implementation(project(":features:settings"))
     implementation(project(":features:profile"))
-    implementation(project(":features:transaction"))
+    implementation(project(":features:statement"))
 
     implementation(project(":foundation:core"))
     implementation(project(":foundation:theme"))

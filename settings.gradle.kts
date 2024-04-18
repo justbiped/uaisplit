@@ -21,7 +21,7 @@ include(":features")
 include(":features:user")
 include(":features:profile")
 include(":features:settings")
-include(":features:transaction")
+include(":features:statement")
 
 
 include(":foundation")

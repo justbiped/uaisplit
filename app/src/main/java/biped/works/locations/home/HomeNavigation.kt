@@ -13,7 +13,7 @@ import androidx.navigation.compose.NavHost
 import biped.works.compose.navigation.SettingsGraph
 import biped.works.compose.navigation.TransactionGraph
 import biped.works.locations.R
-import biped.works.transaction.navigation.transactionNavGraph
+import biped.works.statement.navigation.transactionNavGraph
 import com.biped.works.settings.settingsNavGraph
 
 sealed class HomeDestination(
