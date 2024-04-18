@@ -14,14 +14,14 @@ sealed class Direction(val route: String) {
 
 }
 
-object TransactionGraph : Graph("transaction_graph") {
-    object Transaction : Direction("transaction")
+data object StatementGraph : Graph("statement_graph") {
+    data object Statement : Direction("statement")
 }
 
-object SettingsGraph : Graph("settings_graph") {
-    object Settings : Direction("settings")
+data object SettingsGraph : Graph("settings_graph") {
+    data object Settings : Direction("settings")
 }
 
-object ProfileGraph : Graph("profile_graph") {
-    object Profile : Direction("profile")
+data object ProfileGraph : Graph("profile_graph") {
+    data object Profile : Direction("profile")
 }

@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import biped.works.compose.navigation.SettingsGraph
-import biped.works.compose.navigation.TransactionGraph
+import biped.works.compose.navigation.StatementGraph
 import biped.works.locations.R
 import biped.works.statement.navigation.transactionNavGraph
 import com.biped.works.settings.settingsNavGraph
@@ -24,8 +24,8 @@ sealed class HomeDestination(
     val selectedIcon: ImageVector
 ) {
     object Transaction : HomeDestination(
-        graph = TransactionGraph.route,
-        route = TransactionGraph.Transaction.route,
+        graph = StatementGraph.route,
+        route = StatementGraph.Statement.route,
         title = R.string.transaction_list_label,
         unselectedIcon = Icons.Outlined.ViewList,
         selectedIcon = Icons.Filled.ViewList
