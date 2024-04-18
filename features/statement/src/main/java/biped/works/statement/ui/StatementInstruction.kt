@@ -2,10 +2,11 @@ package biped.works.statement.ui
 
 import biped.works.coroutines.MutableUiStateFlow
 import biped.works.statement.data.Statement
+import biped.works.statement.data.TimeSpan
 
 internal sealed interface StatementInstruction {
     data class State(
-        val uiModel: Statement = Statement(emptyList()),
+        val uiModel: Statement = Statement("", emptyList(), TimeSpan("", "")),
         val isLoading: Boolean = false
     ) : StatementInstruction
 
