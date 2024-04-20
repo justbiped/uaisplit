@@ -12,7 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,7 +41,7 @@ internal fun StatementScreen(viewModel: StatementViewModel = viewModel()) {
     when {
         state.isLoading -> LoadingUi()
         state.isEmpty -> EmptyStatementUi()
-        else -> ColumnTest()
+        else -> StatementUi()
     }
 }
 
@@ -57,7 +56,7 @@ private fun EmptyStatementUi() {
 }
 
 @Composable
-private fun ColumnTest() {
+private fun StatementUi() {
     Column(Modifier.verticalScroll(rememberScrollState())) {
         for (i in 0..20) {
             Box(
