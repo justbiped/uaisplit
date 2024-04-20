@@ -16,4 +16,5 @@ dependencies {
     testImplementation(project(":coroutines:test"))
 
     implementation(project(":foundation:core"))
+    implementation(project(":foundation:api"))
 }

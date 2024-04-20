@@ -31,10 +31,11 @@ dependencies {
 
     implementation(libs.navigation.ui)
 
+    implementation(libs.http)
     implementation(libs.http.retrofit)
-    implementation(libs.serialization.converter)
     implementation(libs.http.logging)
-    implementation(libs.http.ok)
+
+    implementation(libs.serialization.converter)
     implementation(libs.serialization.core)
 
     implementation(libs.compose.navigation)

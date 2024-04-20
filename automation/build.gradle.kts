@@ -11,11 +11,10 @@ java {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
-
     implementation(libs.coroutine.core)
 
+    implementation(libs.http)
     implementation(libs.http.retrofit)
-    implementation(libs.http.ok)
 
     implementation(libs.serialization.core)
     implementation(libs.serialization.converter)

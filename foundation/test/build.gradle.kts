@@ -16,7 +16,7 @@ dependencies {
     implementation(libs.test.truth)
     implementation(libs.test.mockk)
 
-    implementation(libs.http.ok)
+    implementation(libs.http)
     implementation(libs.http.mockserver)
 
     implementation(libs.coroutine.test)

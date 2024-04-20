@@ -16,12 +16,13 @@ compose-compiler = "1.5.3"
 
 robolectricVersion = "4.8.1"
 mockkVersion = "1.12.7"
+junit = "1.1.5"
 
 [libraries]
 # Http / Retrofit
 http-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 http-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttp" }
-http-ok = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp" }
+http = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp" }
 http-mockserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okHttp" }
 
 # Android
@@ -109,6 +110,7 @@ test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" 
 test-mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockkVersion" }
 test-robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectricVersion" }
 test-robolectric-annotations = { group = "org.robolectric", name = "annotations", version.ref = "robolectricVersion" }
+junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

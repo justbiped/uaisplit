@@ -41,9 +41,10 @@ dependencies {
     implementation(libs.lifecycle.runtime)
     implementation(libs.lifecycle.viewModel)
 
+    implementation(libs.http)
     implementation(libs.http.retrofit)
     implementation(libs.http.logging)
-    implementation(libs.http.ok)
+
     implementation(libs.serialization.core)
     implementation(libs.serialization.converter)
 

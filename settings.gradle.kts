@@ -37,3 +37,4 @@ include(":coroutines:core")
 include(":coroutines:test")
 
 include("automation")
+include(":foundation:api")
