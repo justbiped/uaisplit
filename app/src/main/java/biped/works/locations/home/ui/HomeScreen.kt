@@ -97,7 +97,7 @@ fun BottomNavigation(
     currentRoute: String, onSelectDestination: (destination: HomeDestination) -> Unit = {}
 ) {
     val homeDestinations = listOf(
-        HomeDestination.Transaction,
+        HomeDestination.Statement,
         HomeDestination.UserSettings
     )
 
@@ -127,7 +127,7 @@ fun HomeScreenPreview() {
 @Composable
 fun BottomBarPreview() {
     AppTheme {
-        BottomNavigation(currentRoute = HomeDestination.Transaction.route)
+        BottomNavigation(currentRoute = HomeDestination.Statement.route)
     }
 }
 

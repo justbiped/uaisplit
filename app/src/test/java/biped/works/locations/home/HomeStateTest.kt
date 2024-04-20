@@ -51,7 +51,7 @@ class HomeStateTest {
 
         composeTestRule.setContent {
             val navController = testNavController(
-                HomeDestination.Transaction.route,
+                HomeDestination.Statement.route,
                 "no_home_destination"
             )
             val state = HomeState(navController)
@@ -65,7 +65,7 @@ class HomeStateTest {
 
     private val homeDestinations = listOf(
         HomeDestination.UserSettings,
-        HomeDestination.Transaction,
+        HomeDestination.Statement,
     )
 
     @Composable

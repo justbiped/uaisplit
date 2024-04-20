@@ -8,7 +8,9 @@ internal sealed interface StatementInstruction {
     data class State(
         val uiModel: Statement = Statement("", emptyList(), TimeSpan("", "")),
         val isLoading: Boolean = false
-    ) : StatementInstruction
+    ) : StatementInstruction {
+        val isEmpty get() = uiModel.transactions.isEmpty()
+    }
 
     object FailedToFetchStatement : StatementInstruction
 }

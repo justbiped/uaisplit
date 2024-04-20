@@ -6,9 +6,7 @@ import biped.works.statement.data.Transaction
 import javax.inject.Inject
 import kotlinx.coroutines.flow.flowOf
 
-class ObserveStatementUseCase @Inject constructor(
-
-) {
+class ObserveStatementUseCase @Inject constructor() {
     operator fun invoke() = flowOf(
         Statement(
             balance = "",

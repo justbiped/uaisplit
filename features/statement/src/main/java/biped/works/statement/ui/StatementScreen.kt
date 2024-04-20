@@ -12,7 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.Stable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,37 +28,32 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import biped.works.compose.collectWithLifecycle
 
-@Stable
-private class TransactionsState {
-    var isLoading by mutableStateOf(false)
-        private set
-
-    fun default() {
-        isLoading = false
-    }
-
-    fun loading() {
-        isLoading = true
-    }
-}
-
 @Composable
-private fun rememberTransactionsState() = remember {
-    mutableStateOf(TransactionsState())
-}
-
-@Composable
-internal fun TransactionsScreen(viewModel: StatementViewModel = viewModel()) {
-    val state by rememberTransactionsState()
+internal fun StatementScreen(viewModel: StatementViewModel = viewModel()) {
+    var state by remember { mutableStateOf(StatementInstruction.State()) }
 
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
-            is Instruction.Default -> state.default()
-            is Instruction.Loading -> state.loading()
+            is StatementInstruction.State -> state = instruction
+            is StatementInstruction.FailedToFetchStatement -> print("blabla")
         }
     }
 
-    ColumnTest()
+    when {
+        state.isLoading -> LoadingUi()
+        state.isEmpty -> EmptyStatementUi()
+        else -> ColumnTest()
+    }
+}
+
+@Composable
+private fun LoadingUi() {
+
+}
+
+@Composable
+private fun EmptyStatementUi() {
+
 }
 
 @Composable

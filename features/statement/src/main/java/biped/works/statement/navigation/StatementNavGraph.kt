@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import biped.works.compose.navigation.StatementGraph
-import biped.works.statement.ui.TransactionsScreen
+import biped.works.statement.ui.StatementScreen
 
 fun NavGraphBuilder.transactionNavGraph(navController: NavHostController) {
     navigation(
@@ -14,7 +14,7 @@ fun NavGraphBuilder.transactionNavGraph(navController: NavHostController) {
         startDestination = StatementGraph.Statement.route
     ) {
         composable(route = StatementGraph.Statement.route) {
-            TransactionsScreen(hiltViewModel())
+            StatementScreen(hiltViewModel())
         }
     }
 }

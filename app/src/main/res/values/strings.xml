@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="transaction_list_label">Transactions</string>
-    <string name="profile_destination_label">Profile</string>
+    <string name="statement_destination_label" translatable="false">Statement</string>
+    <string name="profile_destination_label" translatable="false">Profile</string>
 </resources>

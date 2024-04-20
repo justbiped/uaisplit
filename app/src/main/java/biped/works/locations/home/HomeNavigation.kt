@@ -23,15 +23,15 @@ sealed class HomeDestination(
     val unselectedIcon: ImageVector,
     val selectedIcon: ImageVector
 ) {
-    object Transaction : HomeDestination(
+    data object Statement : HomeDestination(
         graph = StatementGraph.route,
         route = StatementGraph.Statement.route,
-        title = R.string.transaction_list_label,
+        title = R.string.statement_destination_label,
         unselectedIcon = Icons.Outlined.ViewList,
         selectedIcon = Icons.Filled.ViewList
     )
 
-    object UserSettings : HomeDestination(
+    data object UserSettings : HomeDestination(
         graph = SettingsGraph.route,
         route = SettingsGraph.Settings.route,
         title = R.string.profile_destination_label,
@@ -41,7 +41,7 @@ sealed class HomeDestination(
 
     companion object {
         private val homeDestinationsSet = hashSetOf(
-            Transaction.route,
+            Statement.route,
             UserSettings.route
         )
 
@@ -51,7 +51,7 @@ sealed class HomeDestination(
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = HomeDestination.Transaction.graph) {
+    NavHost(navController, startDestination = HomeDestination.Statement.graph) {
         transactionNavGraph(navController)
         settingsNavGraph(navController)
     }

@@ -86,7 +86,6 @@ internal fun ProfileScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ProfileUi(profile: ProfileUiModel, interactor: ProfileInteractor) {
     Column {
