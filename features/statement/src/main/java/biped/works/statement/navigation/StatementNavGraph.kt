@@ -14,7 +14,7 @@ fun NavGraphBuilder.transactionNavGraph(navController: NavHostController) {
         startDestination = StatementGraph.Statement.route
     ) {
         composable(route = StatementGraph.Statement.route) {
-            StatementScreen(hiltViewModel())
+            StatementScreen(viewModel = hiltViewModel())
         }
     }
 }

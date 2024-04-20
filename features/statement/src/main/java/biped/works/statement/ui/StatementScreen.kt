@@ -1,7 +1,6 @@
 package biped.works.statement.ui
 
 import android.util.Log
-import android.widget.Spinner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -27,12 +25,11 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import biped.works.compose.collectWithLifecycle
 import com.biped.locations.theme.components.LargeDisplayText
 
 @Composable
-internal fun StatementScreen(viewModel: StatementViewModel = viewModel()) {
+internal fun StatementScreen(viewModel: StatementViewModel) {
     var state by remember { mutableStateOf(StatementInstruction.State()) }
 
     viewModel.instruction.collectWithLifecycle { instruction ->
