@@ -11,6 +11,7 @@ android {
 dependencies {
     implementation(libs.android.core)
 
+    implementation(project(":foundation:theme"))
     implementation(project(":coroutines:core"))
     testImplementation(project(":coroutines:test"))
 

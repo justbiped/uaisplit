@@ -1,6 +1,7 @@
 package biped.works.statement.ui
 
 import android.util.Log
+import android.widget.Spinner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,6 +29,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import biped.works.compose.collectWithLifecycle
+import com.biped.locations.theme.components.LargeDisplayText
 
 @Composable
 internal fun StatementScreen(viewModel: StatementViewModel = viewModel()) {
@@ -47,12 +51,12 @@ internal fun StatementScreen(viewModel: StatementViewModel = viewModel()) {
 
 @Composable
 private fun LoadingUi() {
-
+    CircularProgressIndicator()
 }
 
 @Composable
 private fun EmptyStatementUi() {
-
+    LargeDisplayText(text = "You don't have any transaction registered yet, try to create one.")
 }
 
 @Composable
