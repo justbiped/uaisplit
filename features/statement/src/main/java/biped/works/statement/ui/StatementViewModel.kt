@@ -25,6 +25,8 @@ internal class StatementViewModel @Inject constructor(
     }
 
     private fun onStatementUpdate(statement: Statement) {
-        print(statement)
+        _instruction.updateState {
+            copy(uiModel = statement, isLoading = false)
+        }
     }
 }

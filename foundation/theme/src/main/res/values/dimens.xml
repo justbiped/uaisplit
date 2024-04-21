@@ -2,8 +2,8 @@
 <resources>
     <dimen name="micro">4dp</dimen>
     <dimen name="tiny">8dp</dimen>
-    <dimen name="small">14dp</dimen>
-    <dimen name="normal">22dp</dimen>
-    <dimen name="big">32dp</dimen>
-    <dimen name="huge">44dp</dimen>
+    <dimen name="small">16dp</dimen>
+    <dimen name="normal">24dp</dimen>
+    <dimen name="big">36dp</dimen>
+    <dimen name="huge">48dp</dimen>
 </resources>

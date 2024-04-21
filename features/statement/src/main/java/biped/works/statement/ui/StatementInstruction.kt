@@ -7,7 +7,7 @@ import biped.works.statement.data.TimeSpan
 internal sealed interface StatementInstruction {
     data class State(
         val uiModel: Statement = Statement("", emptyList(), TimeSpan("", "")),
-        val isLoading: Boolean = false
+        val isLoading: Boolean = true
     ) : StatementInstruction {
         val isEmpty get() = uiModel.transactions.isEmpty()
     }

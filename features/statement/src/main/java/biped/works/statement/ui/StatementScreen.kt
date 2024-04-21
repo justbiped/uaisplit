@@ -1,15 +1,11 @@
 package biped.works.statement.ui
 
-import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,15 +14,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import biped.works.compose.collectWithLifecycle
+import biped.works.statement.data.Statement
+import biped.works.statement.data.Transaction
+import coil.size.Dimension
+import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.Dimens
+import com.biped.locations.theme.components.LargeBody
 import com.biped.locations.theme.components.LargeDisplayText
+import com.biped.locations.theme.components.LargeTitle
+import com.biped.locations.theme.components.MediumTitle
 
 @Composable
 internal fun StatementScreen(viewModel: StatementViewModel) {
@@ -42,13 +47,15 @@ internal fun StatementScreen(viewModel: StatementViewModel) {
     when {
         state.isLoading -> LoadingUi()
         state.isEmpty -> EmptyStatementUi()
-        else -> StatementUi()
+        else -> StatementUi(state.uiModel)
     }
 }
 
 @Composable
 private fun LoadingUi() {
-    CircularProgressIndicator()
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator()
+    }
 }
 
 @Composable
@@ -57,18 +64,31 @@ private fun EmptyStatementUi() {
 }
 
 @Composable
-private fun StatementUi() {
-    Column(Modifier.verticalScroll(rememberScrollState())) {
-        for (i in 0..20) {
-            Box(
-                modifier = Modifier
-                    .height(150.dp)
-                    .fillMaxWidth()
-                    .onVisibilityChange { Log.d("VISIBILITY", "visible: $it | index:$i") }
-                    .background(Color.Green)
-            )
-            Spacer(Modifier.padding(top = 6.dp))
+private fun StatementUi(statement: Statement) {
+    LazyColumn {
+        items(statement.transactions) { transaction ->
+            TransactionCell(transaction)
         }
+    }
+}
+
+@Composable
+private fun TransactionCell(transaction: Transaction) {
+    Column(
+        Modifier
+            .padding(horizontal = Dimens.small)
+            .padding(vertical = Dimens.normal)
+    ) {
+        LargeBody(text = transaction.description)
+        MediumTitle(text = transaction.value.toString())
+    }
+}
+
+@Preview(showBackground = true, widthDp = 360)
+@Composable
+fun TransactionCell_Preview() {
+    AppTheme {
+        TransactionCell(transaction = Transaction("", "Preview Transaction", 2300.00))
     }
 }
 

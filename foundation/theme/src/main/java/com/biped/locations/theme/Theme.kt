@@ -84,7 +84,7 @@ fun AppTheme(
         ColorTheme.LIGHT -> false
     }
 
-    val colorScheme = if (useDynamicColors && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+    val colorScheme = if (useDynamicColors && isDynamicColorsSupported()) {
         getDynamicColorScheme(isDarkMode)
     } else {
         getAppColorScheme(isDarkMode)
@@ -101,6 +101,8 @@ fun AppTheme(
 fun getAppColorScheme(isDarkMode: Boolean): ColorScheme {
     return if (isDarkMode) DarkColors else LightColors
 }
+
+private fun isDynamicColorsSupported() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
