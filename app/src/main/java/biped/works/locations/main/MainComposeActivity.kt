@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import biped.works.compose.collectWithLifecycle
 import biped.works.locations.home.ui.HomeScreen
-import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.CashTheme
 import com.biped.works.settings.data.ThemeSettings
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +36,7 @@ class MainComposeActivity : ComponentActivity() {
                 }
             }
 
-            AppTheme(
+            CashTheme(
                 themeSettings.colorScheme,
                 themeSettings.useDynamicColors
             ) {

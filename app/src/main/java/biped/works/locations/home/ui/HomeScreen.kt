@@ -29,7 +29,7 @@ import biped.works.compose.collectWithLifecycle
 import biped.works.compose.navigation.currentRouteState
 import biped.works.locations.home.HomeDestination
 import biped.works.locations.home.NavigationGraph
-import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.CashTheme
 
 @Stable
 internal data class HomeState(
@@ -118,7 +118,7 @@ fun BottomNavigation(
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    AppTheme {
+    CashTheme {
         HomeScreenUi(rememberHomeState().value)
     }
 }
@@ -126,7 +126,7 @@ fun HomeScreenPreview() {
 @Preview(showBackground = true)
 @Composable
 fun BottomBarPreview() {
-    AppTheme {
+    CashTheme {
         BottomNavigation(currentRoute = HomeDestination.Statement.route)
     }
 }

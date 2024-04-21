@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
-import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.components.LargeLabel
@@ -119,7 +119,7 @@ private interface SettingsInteractor {
 @Preview(name = "Light Preview")
 @Composable
 fun ProfileUi_Light_Preview() {
-    AppTheme {
+    CashTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()

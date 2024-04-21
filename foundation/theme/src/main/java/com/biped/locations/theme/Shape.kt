@@ -19,7 +19,7 @@ val AppShapes = Shapes(
 @Preview
 @Composable
 fun Shapes() {
-    AppTheme {
+    CashTheme {
         Card(
             modifier = Modifier
                 .width(200.dp)

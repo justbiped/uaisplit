@@ -73,7 +73,7 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun AppTheme(
+fun CashTheme(
     colorTheme: ColorTheme = ColorTheme.SYSTEM,
     useDynamicColors: Boolean = false,
     content: @Composable () -> Unit

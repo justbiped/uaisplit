@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.biped.works.settings.data.ThemeSettings
-import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.ColorTheme
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumTitle
@@ -80,7 +80,7 @@ fun ColorSchemeSelector(
 @Preview(name = "Light preview", showBackground = true)
 @Composable
 private fun ThemeLightConfigPreview() {
-    AppTheme {
+    CashTheme {
         Surface {
             ThemeSettingsUi(settingsUi)
         }
@@ -90,7 +90,7 @@ private fun ThemeLightConfigPreview() {
 @Preview(name = "Dark preview", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ThemeDarkConfigPreview() {
-    AppTheme {
+    CashTheme {
         Surface {
             ThemeSettingsUi(settingsUi)
         }

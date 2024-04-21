@@ -26,11 +26,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
 import biped.works.user.R
-import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.NormalSpacer
@@ -165,7 +164,7 @@ private interface ProfileInteractor {
 @Preview(showBackground = true)
 @Composable
 private fun ProfileUi_Preview(@PreviewParameter(ProfileUiModelDataProvider::class) profile: ProfileUiModel) {
-    AppTheme {
+    CashTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
             ProfileUi(
                 profile = profile,

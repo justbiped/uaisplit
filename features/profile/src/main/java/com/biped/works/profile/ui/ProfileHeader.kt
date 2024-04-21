@@ -18,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
-import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.R
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumHeadline
@@ -61,7 +61,7 @@ fun ProfileHeader(
 @Composable
 @Preview(heightDp = 60, widthDp = 360)
 fun ProfileHeader_Preview() {
-    AppTheme {
+    CashTheme {
         Surface(modifier = Modifier.fillMaxWidth()) {
             ProfileHeader(name = "R. Edgar")
         }
@@ -71,7 +71,7 @@ fun ProfileHeader_Preview() {
 @Composable
 @Preview(heightDp = 60, widthDp = 360, uiMode = Configuration.UI_MODE_NIGHT_YES)
 fun ProfileHeader_Preview_Dark() {
-    AppTheme {
+    CashTheme {
         ProfileHeader_Preview()
     }
 }

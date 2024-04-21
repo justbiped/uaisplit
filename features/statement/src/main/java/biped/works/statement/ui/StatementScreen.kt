@@ -21,16 +21,13 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import biped.works.compose.collectWithLifecycle
 import biped.works.statement.data.Statement
 import biped.works.statement.data.Transaction
-import coil.size.Dimension
-import com.biped.locations.theme.AppTheme
+import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.components.LargeBody
 import com.biped.locations.theme.components.LargeDisplayText
-import com.biped.locations.theme.components.LargeTitle
 import com.biped.locations.theme.components.MediumTitle
 
 @Composable
@@ -87,7 +84,7 @@ private fun TransactionCell(transaction: Transaction) {
 @Preview(showBackground = true, widthDp = 360)
 @Composable
 fun TransactionCell_Preview() {
-    AppTheme {
+    CashTheme {
         TransactionCell(transaction = Transaction("", "Preview Transaction", 2300.00))
     }
 }
