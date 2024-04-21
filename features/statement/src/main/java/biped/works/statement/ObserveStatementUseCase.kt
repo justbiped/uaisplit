@@ -1,23 +1,21 @@
 package biped.works.statement
 
-import biped.works.statement.data.Statement
-import biped.works.statement.data.TimeSpan
-import biped.works.statement.data.Transaction
+import android.util.Log
+import biped.works.statement.data.StatementRepository
 import javax.inject.Inject
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onEach
 
-class ObserveStatementUseCase @Inject constructor() {
-    operator fun invoke() = flowOf(
-        Statement(
-            balance = "",
-            transactions = listOf(
-                Transaction(
-                    id = "myId",
-                    value = 1500.50,
-                    description = "Rent of the trash car"
-                )
-            ),
-            timeSpan = TimeSpan("", "")
-        )
-    )
+class ObserveStatementUseCase @Inject constructor(
+    private val statementRepository: StatementRepository
+) {
+    operator fun invoke() = statementRepository
+        .statementStream
+        .onEach {
+            print(it)
+            it
+        }
+        .catch {
+            Log.d("statement", it.message?:"")
+        }
 }

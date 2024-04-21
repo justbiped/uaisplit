@@ -1,0 +1,14 @@
+{
+  "timeSpan": {
+    "entry": "2024-01-01",
+    "conclusion": "2024-01-30"
+  },
+  "balance": "3200.0",
+  "transactions": [
+    {
+      "id": "c570233b-be57-4cfe-91ed-73e085d6c7d4",
+      "value": 3200.0,
+      "description": "Nao quero mais morar aqui"
+    }
+  ]
+}

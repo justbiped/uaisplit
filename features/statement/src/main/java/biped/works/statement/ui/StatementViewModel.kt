@@ -12,20 +12,19 @@ import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 internal class StatementViewModel @Inject constructor(
-   // observeStatement: ObserveStatementUseCase
+    observeStatement: ObserveStatementUseCase
 ) : ViewModel() {
 
     private val _instruction = MutableUiStateFlow<StatementInstruction>(StatementInstruction.State())
     val instruction = _instruction.toUiStateFlow()
 
-//    init {
-//        observeStatement()
-//            .onEach { onStatementUpdate(it) }
-//            .launchIn(viewModelScope)
-//    }
-//
-//    private fun onStatementUpdate(statement: Statement) {
-//
-//    }
+    init {
+        observeStatement()
+            .onEach { onStatementUpdate(it) }
+            .launchIn(viewModelScope)
+    }
 
+    private fun onStatementUpdate(statement: Statement) {
+        print(statement)
+    }
 }

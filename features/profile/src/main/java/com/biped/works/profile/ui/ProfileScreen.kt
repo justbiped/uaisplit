@@ -47,7 +47,7 @@ data class ProfileUiModel(
 
 @Composable
 internal fun ProfileScreen(
-    viewModel: ProfileViewModel = viewModel(), navController: NavHostController
+    viewModel: ProfileViewModel, navController: NavHostController
 ) {
     val state by rememberProfileState()
 

@@ -11,6 +11,10 @@ import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 
+val json = Json {
+    ignoreUnknownKeys = true
+}
+
 @Module
 @InstallIn(SingletonComponent::class)
 class APIModule {
@@ -21,12 +25,12 @@ class APIModule {
     @Provides
     @Singleton
     internal fun providesApiFactory(okHttpClient: OkHttpClient): ApiBuilder {
-        val converterFactory = Json.asConverterFactory("application/json")
+        val converterFactory = json.asConverterFactory("application/json")
 
         return ApiBuilder
             .client(okHttpClient)
             .converter(converterFactory)
-            .baseUrl("http::/localhost:8080")
+            .baseUrl("http://10.0.2.2:8080/")
 
     }
 }

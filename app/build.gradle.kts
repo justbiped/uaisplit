@@ -52,10 +52,10 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(project(":automation"))
-    implementation(project(":features:user"))
-    implementation(project(":features:settings"))
-    implementation(project(":features:profile"))
     implementation(project(":features:statement"))
+    implementation(project(":features:profile"))
+    implementation(project(":features:settings"))
+    implementation(project(":features:user"))
 
     implementation(project(":foundation:core"))
     implementation(project(":foundation:theme"))
