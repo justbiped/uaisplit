@@ -1,7 +1,9 @@
 package biped.works.statement.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -64,20 +66,22 @@ private fun EmptyStatementUi() {
 private fun StatementUi(statement: Statement) {
     LazyColumn {
         items(statement.transactions) { transaction ->
-            TransactionCell(transaction)
+            TransactionCell(transaction, {})
         }
     }
 }
 
 @Composable
-private fun TransactionCell(transaction: Transaction) {
-    Column(
-        Modifier
-            .padding(horizontal = Dimens.small)
-            .padding(vertical = Dimens.normal)
-    ) {
-        LargeBody(text = transaction.description)
-        MediumTitle(text = transaction.value.toString())
+private fun TransactionCell(transaction: Transaction, onClick: (String) -> Unit) {
+    Row(modifier = Modifier.clickable { onClick(transaction.id) }) {
+        Column(
+            Modifier
+                .padding(horizontal = Dimens.small)
+                .padding(vertical = Dimens.normal)
+        ) {
+            LargeBody(text = transaction.description)
+            MediumTitle(text = transaction.value.toString())
+        }
     }
 }
 
@@ -85,7 +89,10 @@ private fun TransactionCell(transaction: Transaction) {
 @Composable
 fun TransactionCell_Preview() {
     CashTheme {
-        TransactionCell(transaction = Transaction("", "Preview Transaction", 2300.00))
+        TransactionCell(
+            onClick = {},
+            transaction = Transaction("", "Preview Transaction", 2300.00)
+        )
     }
 }
 
