@@ -2,19 +2,29 @@ package biped.works.locations.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.toArgb
+import androidx.core.graphics.ColorUtils
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import biped.works.compose.collectWithLifecycle
 import biped.works.locations.home.ui.HomeScreen
 import com.biped.locations.theme.CashTheme
+import com.biped.locations.theme.statusBarColor
 import com.biped.works.settings.data.ThemeSettings
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.max
+import kotlin.math.min
 
 @AndroidEntryPoint
 class MainComposeActivity : ComponentActivity() {
@@ -40,6 +50,7 @@ class MainComposeActivity : ComponentActivity() {
                 themeSettings.colorScheme,
                 themeSettings.useDynamicColors
             ) {
+                window.statusBarColor(colorScheme.background)
                 HomeScreen()
             }
         }

@@ -5,7 +5,7 @@
         <item name="colorSurface">@color/surfaceColor</item>
         <item name="backgroundColor">@color/backgroundColor</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:statusBarColor">?colorPrimary</item>
+        <item name="android:statusBarColor">?colorSurface</item>
 
         <item name="textAppearanceHeadline4">@style/TextAppearance.H4</item>
         <item name="textAppearanceHeadline6">@style/TextAppearance.H6</item>
