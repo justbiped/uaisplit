@@ -13,12 +13,22 @@ data class RemoteStatement(
 @Serializable
 data class RemoteTransaction(
     @SerialName("id") val id: String,
-    @SerialName("value") val value: Double,
-    @SerialName("description") val description: String
+    @SerialName("metaId") val metaId: String,
+    @SerialName("owner") val owner: String,
+    @SerialName("name") val name: String,
+    @SerialName("description") val description: String,
+    @SerialName("due") val due: String,
+    @SerialName("value") val value: RemoteValue
 )
 
 @Serializable
 data class RemoteTimeSpan(
     @SerialName("entry") val entry: String,
     @SerialName("conclusion") val conclusion: String
+)
+
+@Serializable
+data class RemoteValue(
+    @SerialName("amount") val amount: Double,
+    @SerialName("currency") val currency: String
 )
