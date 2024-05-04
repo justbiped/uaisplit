@@ -23,9 +23,7 @@ object ApiBuilder {
         return this
     }
 
-    fun <T> create(serverClass: Class<T>, baseUrl: String = ""): T {
-        if (baseUrl.isNotBlank()) builder.baseUrl(baseUrl)
-
+    fun <T> create(serverClass: Class<T>): T {
         return builder
             .build()
             .create(serverClass)

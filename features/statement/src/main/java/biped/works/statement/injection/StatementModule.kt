@@ -5,7 +5,6 @@ import biped.works.statement.data.remote.StatementApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -15,5 +14,5 @@ class StatementModule {
 
     @Provides
     @Singleton
-    fun providesStatementApi(apiFactory: ApiBuilder) = apiFactory.create(StatementApi::class.java)
+    fun providesStatementApi(builder: ApiBuilder) = builder.create(StatementApi::class.java)
 }
