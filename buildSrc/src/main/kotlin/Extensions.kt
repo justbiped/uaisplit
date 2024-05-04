@@ -5,6 +5,9 @@ import org.gradle.kotlin.dsl.PluginDependenciesSpecScope
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependency
 
+fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? {
+    return add("implementation", dependencyNotation)
+}
 /**
  * ### Imports only on development
  * Use this to apply dependencies that should exists only on development environment.

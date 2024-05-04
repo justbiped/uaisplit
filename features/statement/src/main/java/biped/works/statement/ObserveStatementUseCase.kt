@@ -13,7 +13,6 @@ class ObserveStatementUseCase @Inject constructor(
         .statementStream
         .onEach {
             print(it)
-            it
         }
         .catch {
             Log.d("statement", it.message?:"")

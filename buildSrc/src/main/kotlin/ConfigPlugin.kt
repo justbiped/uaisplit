@@ -82,6 +82,8 @@ private fun Project.applyAndroidConfigs() {
             }
 
             dependencies {
+                implementation(catalog.library("timber"))
+
                 localImplementation(catalog.library("android.test.core"))
                 localImplementation(catalog.library("navigation.testing"))
                 localImplementation(catalog.library("http.mockserver"))
