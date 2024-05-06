@@ -11,7 +11,7 @@ val green_500 = Color(0xFF064300)
 val green_600 = Color(0xFF063A00)
 val green_700 = Color(0xFF092D00)
 val green_800 = Color(0xFF002000)
-val green_900 = Color(0xFF001000)
+val green_900 = Color(0xFF040704)
 
 val cream_50 = Color(0xFFf9FBE8)
 val cream_100 = Color(0xFFf9FBE8)
@@ -22,7 +22,7 @@ val cream_500 = Color(0xFF9B9D8B)
 val cream_600 = Color(0xFF727463)
 val cream_700 = Color(0xFF5E6050)
 val cream_800 = Color(0xFF3F4132)
-val cream_900 = Color(0xFF1E2012)
+val cream_900 = Color(0xFF0C0C0C)
 
 //============Light===================
 val light_primary = green_200

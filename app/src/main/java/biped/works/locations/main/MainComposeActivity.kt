@@ -50,7 +50,7 @@ class MainComposeActivity : ComponentActivity() {
                 themeSettings.colorScheme,
                 themeSettings.useDynamicColors
             ) {
-                window.statusBarColor(colorScheme.background)
+                //window.statusBarColor(colorScheme.background)
                 HomeScreen()
             }
         }
