@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
@@ -127,7 +128,7 @@ fun CashTheme(
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.background.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = isDarkMode.not()
-            window.navigationBarColor = colorScheme.surfaceColorAtElevation(3.dp).toArgb()
+            window.navigationBarColor = colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation).toArgb()
         }
     }
 
