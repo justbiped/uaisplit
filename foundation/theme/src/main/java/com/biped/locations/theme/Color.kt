@@ -56,7 +56,7 @@ val light_inverseOnSurface = Color(0xFFF3F1E8)
 val light_inverseSurface = Color(0xFF30312B)
 val light_inversePrimary = Color(0xFFBCD063)
 val light_shadow = Color(0xFF000000)
-val light_surfaceTint = Color(0xFF556500)
+val light_surfaceTint = cream_900
 //============Light===================
 
 //============Dark====================
@@ -91,6 +91,6 @@ val dark_inverseOnSurface = Color(0xFF1B1C17)
 val dark_inverseSurface = Color(0xFFE5E2DA)
 val dark_inversePrimary = Color(0xFF556500)
 val dark_shadow = Color(0xFF000000)
-val dark_surfaceTint = Color(0xFFBCD063)
+val dark_surfaceTint = cream_900
 
 val seed = Color(0xFF5E6050)
