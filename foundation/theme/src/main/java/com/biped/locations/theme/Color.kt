@@ -11,7 +11,7 @@ val green_500 = Color(0xFF064300)
 val green_600 = Color(0xFF063A00)
 val green_700 = Color(0xFF092D00)
 val green_800 = Color(0xFF002000)
-val green_900 = Color(0xFF040704)
+val green_900 = Color(0xFF040804)
 
 val cream_50 = Color(0xFFf9FBE8)
 val cream_100 = Color(0xFFf9FBE8)
