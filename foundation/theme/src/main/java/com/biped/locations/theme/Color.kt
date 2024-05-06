@@ -22,7 +22,7 @@ val cream_500 = Color(0xFF9B9D8B)
 val cream_600 = Color(0xFF727463)
 val cream_700 = Color(0xFF5E6050)
 val cream_800 = Color(0xFF3F4132)
-val cream_900 = Color(0xFF0C0C0C)
+val cream_900 = Color(0xFF151613)
 
 //============Light===================
 val light_primary = green_200
@@ -61,9 +61,9 @@ val light_surfaceTint = Color(0xFF556500)
 
 //============Dark====================
 val dark_primary = cream_600
-val dark_onPrimary = green_800
+val dark_onPrimary = cream_300
 val dark_primaryContainer = cream_600
-val dark_onPrimaryContainer = cream_100
+val dark_onPrimaryContainer = cream_300
 
 val dark_secondary = cream_200
 val dark_onSecondary = cream_800
@@ -80,11 +80,11 @@ val dark_errorContainer = Color(0xFF93000A)
 val dark_onError = Color(0xFF690005)
 val dark_onErrorContainer = Color(0xFFFFDAD6)
 
-val dark_background = green_900
-val dark_onBackground = green_100
-val dark_surface = green_900
-val dark_onSurface = green_100
-val dark_surfaceVariant = Color(0xFF46483C)
+val dark_background = cream_900
+val dark_onBackground = cream_300
+val dark_surface = cream_900
+val dark_onSurface = cream_300
+val dark_surfaceVariant = cream_900
 val dark_onSurfaceVariant = Color(0xFFC7C8B7)
 val dark_outline = Color(0xFF919283)
 val dark_inverseOnSurface = Color(0xFF1B1C17)
