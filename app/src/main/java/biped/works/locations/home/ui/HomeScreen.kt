@@ -6,12 +6,10 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,10 +19,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -34,7 +30,6 @@ import biped.works.compose.navigation.currentRouteState
 import biped.works.locations.home.HomeDestination
 import biped.works.locations.home.NavigationGraph
 import com.biped.locations.theme.CashTheme
-import com.biped.locations.theme.dark_background
 
 @Stable
 internal data class HomeState(
@@ -106,10 +101,7 @@ fun BottomNavigation(
         HomeDestination.UserSettings
     )
 
-    NavigationBar(
-        containerColor = CashTheme.colorScheme.background,
-        tonalElevation = 1.dp
-    ) {
+    NavigationBar {
         homeDestinations.forEach { destination ->
             val isSelected = destination.route == currentRoute
             val icon = if (isSelected) destination.selectedIcon else destination.unselectedIcon
