@@ -13,4 +13,5 @@ android {
 dependencies {
     implementation(libs.lifecycle.runtime)
     implementation(libs.android.material)
+    implementation(libs.compose.ui.googlefonts)
 }

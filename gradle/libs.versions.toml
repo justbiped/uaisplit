@@ -75,6 +75,7 @@ compose-animation = { group = "androidx.compose.animation", name = "animation" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-ui-googlefonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version = "1.6.7" }
 
 compose-coil = { group = "io.coil-kt", name = "coil-compose", version = "2.2.0" }
 

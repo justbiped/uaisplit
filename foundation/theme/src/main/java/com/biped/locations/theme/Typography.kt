@@ -2,44 +2,40 @@ package com.biped.locations.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.googlefonts.Font
+import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.unit.sp
 
+val provider = GoogleFont.Provider(
+    providerAuthority = "com.google.android.gms.fonts",
+    providerPackage = "com.google.android.gms",
+    certificates = R.array.com_google_android_gms_fonts_certs
+)
+
+val font = GoogleFont("Courier Prime")
+
 val AppFontFamily = FontFamily(
-    fonts = listOf(
-        Font(resId = R.font.courier_prime),
-
-        Font(
-            resId = R.font.courier_prime_bold,
-            weight = FontWeight.Bold
-        ),
-
-        Font(
-            resId = R.font.courier_prime_italic,
-            style = FontStyle.Italic
-        ),
-
-        Font(
-            resId = R.font.courier_prime_bold_italic,
-            weight = FontWeight.Bold,
-            style = FontStyle.Italic
-        )
+    Font(
+        googleFont = font,
+        fontProvider = provider,
+        weight = FontWeight.Normal,
+        style = FontStyle.Normal
     )
 )
 val AppTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = AppFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 58.sp
+        fontSize = 57.sp
     ),
 
     displayMedium = TextStyle(
         fontFamily = AppFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 46.sp
+        fontSize = 45.sp
     ),
 
     displaySmall = TextStyle(
@@ -71,14 +67,14 @@ val AppTypography = Typography(
 
     titleMedium = TextStyle(
         fontFamily = AppFontFamily,
-        fontWeight = FontWeight.Bold,
-        fontSize = 18.sp
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
     ),
 
     titleSmall = TextStyle(
         fontFamily = AppFontFamily,
-        fontWeight = FontWeight.Bold,
-        fontSize = 16.sp
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
     ),
 
     bodyLarge = TextStyle(

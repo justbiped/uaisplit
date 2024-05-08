@@ -15,6 +15,7 @@ import com.biped.works.settings.data.ThemeSettings
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.ColorTheme
 import com.biped.locations.theme.SmallSpacer
+import com.biped.locations.theme.components.MediumLabel
 import com.biped.locations.theme.components.MediumTitle
 import com.biped.locations.theme.components.SegmentButton
 import com.biped.locations.theme.components.SegmentItem
@@ -31,7 +32,7 @@ fun ThemeSettingsUi(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            MediumTitle(text = "Use dynamic colors")
+            MediumLabel(text = "Use dynamic colors")
             Switch(
                 checked = uiModel.useDynamicColors,
                 onCheckedChange = { onSettingsChanged(uiModel.copy(useDynamicColors = it)) }

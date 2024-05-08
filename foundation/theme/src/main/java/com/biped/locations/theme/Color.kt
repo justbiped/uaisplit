@@ -6,7 +6,7 @@ val green_50 = Color(0xFFDEE5D9)
 val green_100 = Color(0xFFaFBFA1)
 val green_200 = Color(0xFF7B9665)
 val green_300 = Color(0xFF4B722C)
-val green_400 = Color(0xFF295B00)
+val green_400 = Color(0xFF4C6539)
 val green_500 = Color(0xFF064300)
 val green_600 = Color(0xFF063A00)
 val green_700 = Color(0xFF092D00)
@@ -30,7 +30,7 @@ val light_onPrimary = green_50
 val light_primaryContainer = green_200
 val light_onPrimaryContainer = green_800
 
-val light_secondary = cream_800
+val light_secondary = green_400
 val light_onSecondary = green_50
 val light_secondaryContainer = green_100
 val light_onSecondaryContainer = green_700
@@ -65,7 +65,7 @@ val dark_onPrimary = cream_300
 val dark_primaryContainer = cream_600
 val dark_onPrimaryContainer = cream_300
 
-val dark_secondary = cream_200
+val dark_secondary = cream_400
 val dark_onSecondary = cream_800
 val dark_secondaryContainer = cream_800
 val dark_onSecondaryContainer = cream_200
