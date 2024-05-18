@@ -32,16 +32,21 @@ class ComposePlugin : Plugin<Project> {
             }
 
             dependencies {
-                implementation(catalog.library("compose.bom"))
+                //implementation(catalog.library("compose.bom"))
                 implementation(catalog.library("compose.foundation"))
                 implementation(catalog.library("compose.ui"))
-                implementation(catalog.library("compose.material"))
-                implementation(catalog.library("compose.windowSizeClass"))
                 implementation(catalog.library("compose.icons"))
                 implementation(catalog.library("compose.iconsExtended"))
                 implementation(catalog.library("compose.animation"))
                 implementation(catalog.library("compose.hilt"))
                 implementation(catalog.library("compose.coil"))
+
+                implementation(catalog.library("compose.material"))
+                implementation(catalog.library("compose.material.window"))
+                implementation(catalog.library("compose.material.navigation"))
+
+                // Navigation
+                implementation(catalog.library("compose.navigation"))
 
                 // Preview
                 implementation(catalog.library("compose.ui.tooling.preview"))

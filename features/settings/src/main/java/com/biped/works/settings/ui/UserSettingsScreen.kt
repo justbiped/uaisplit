@@ -2,6 +2,9 @@ package com.biped.works.settings.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.net.Uri
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -49,9 +52,12 @@ private fun rememberSettingsState(navigator: NavHostController) = remember {
     mutableStateOf(StateHolder(navigator))
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-internal fun UserSettingsScreen(
-    viewModel: UserSettingsViewModel, navController: NavHostController
+internal fun SharedTransitionScope.UserSettingsScreen(
+    viewModel: UserSettingsViewModel,
+    animatedScope: AnimatedVisibilityScope,
+    navController: NavHostController
 ) {
     val stateHolder by rememberSettingsState(navController)
 
@@ -72,13 +78,22 @@ internal fun UserSettingsScreen(
         }
     }
     Box(modifier = Modifier.fillMaxSize()) {
-        UserSettingsUi(userSettings = stateHolder.viewState.settings, interactor = interactor)
+        UserSettingsUi(
+            userSettings = stateHolder.viewState.settings,
+            animatedScope = animatedScope,
+            interactor = interactor
+        )
         LoadingIndicator(isLoading = stateHolder.viewState.isLoading)
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-private fun UserSettingsUi(userSettings: UserSettings, interactor: SettingsInteractor) {
+private fun SharedTransitionScope.UserSettingsUi(
+    userSettings: UserSettings,
+    animatedScope: AnimatedVisibilityScope,
+    interactor: SettingsInteractor
+) {
     Column(
         modifier = Modifier.padding(horizontal = Dimens.small)
     ) {
@@ -88,6 +103,10 @@ private fun UserSettingsUi(userSettings: UserSettings, interactor: SettingsInter
             modifier = Modifier.weight(0.10f)
         ) {
             ProfileHeader(
+                modifier = Modifier.sharedElement(
+                    state = rememberSharedContentState(key = "profile"),
+                    animatedVisibilityScope = animatedScope
+                ),
                 name = userSettings.name,
                 imageUrl = userSettings.picture,
                 onClick = { interactor.onProfileClicked(userSettings.userId) }
@@ -125,9 +144,9 @@ fun ProfileUi_Light_Preview() {
                 .fillMaxSize()
                 .background(color = MaterialTheme.colorScheme.background)
         ) {
-            UserSettingsUi(
-                userSettings = UserSettings(),
-                object : SettingsInteractor {})
+//            UserSettingsUi(
+//                userSettings = UserSettings(),
+//                object : SettingsInteractor {})
         }
     }
 }

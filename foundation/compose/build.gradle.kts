@@ -23,7 +23,7 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
-    implementation(libs.compose.windowSizeClass)
+    implementation(libs.compose.material.window)
     implementation(libs.compose.icons)
     implementation(libs.compose.iconsExtended)
     implementation(libs.compose.animation)

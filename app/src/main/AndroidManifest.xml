@@ -5,12 +5,14 @@
     <application
         android:name=".UiSplitApplication"
         android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:name">
+        tools:replace="android:name"
+        tools:targetApi="tiramisu">
 
         <activity
             android:name=".main.MainComposeActivity"
@@ -23,7 +25,9 @@
             </intent-filter>
 
             <intent-filter>
-                <data android:scheme="http" android:host="biped.works" />
+                <data
+                    android:host="biped.works"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
 

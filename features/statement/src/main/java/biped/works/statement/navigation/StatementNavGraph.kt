@@ -1,5 +1,7 @@
 package biped.works.statement.navigation
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -8,7 +10,8 @@ import androidx.navigation.compose.navigation
 import biped.works.compose.navigation.StatementGraph
 import biped.works.statement.ui.StatementScreen
 
-fun NavGraphBuilder.transactionNavGraph(navController: NavHostController) {
+@OptIn(ExperimentalSharedTransitionApi::class)
+fun NavGraphBuilder.transactionNavGraph(navController: NavHostController, transitionScope: SharedTransitionScope) {
     navigation(
         route = StatementGraph.route,
         startDestination = StatementGraph.Statement.route

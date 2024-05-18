@@ -1,5 +1,7 @@
 package com.biped.works.settings
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -9,7 +11,11 @@ import biped.works.compose.navigation.SettingsGraph
 import com.biped.works.profile.profileNavGraph
 import com.biped.works.settings.ui.UserSettingsScreen
 
-fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
+@OptIn(ExperimentalSharedTransitionApi::class)
+fun NavGraphBuilder.settingsNavGraph(
+    navController: NavHostController,
+    transitionScope: SharedTransitionScope
+) = with(transitionScope) {
     navigation(
         route = SettingsGraph.route,
         startDestination = SettingsGraph.Settings.route
@@ -20,10 +26,10 @@ fun NavGraphBuilder.settingsNavGraph(navController: NavHostController) {
         ) {
             UserSettingsScreen(
                 viewModel = hiltViewModel(),
+                animatedScope = this,
                 navController = navController
             )
         }
-
-        profileNavGraph(navController)
+        profileNavGraph(navController, transitionScope)
     }
 }

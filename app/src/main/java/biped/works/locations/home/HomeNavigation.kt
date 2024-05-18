@@ -1,6 +1,8 @@
 package biped.works.locations.home
 
 import androidx.annotation.StringRes
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.ViewList
@@ -49,10 +51,15 @@ sealed class HomeDestination(
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun NavigationGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = HomeDestination.Statement.graph) {
-        transactionNavGraph(navController)
-        settingsNavGraph(navController)
+    SharedTransitionLayout {
+        val transitionScope = this
+        NavHost(navController, startDestination = HomeDestination.Statement.graph) {
+            transactionNavGraph(navController, transitionScope)
+            settingsNavGraph(navController, transitionScope = transitionScope)
+        }
     }
+
 }

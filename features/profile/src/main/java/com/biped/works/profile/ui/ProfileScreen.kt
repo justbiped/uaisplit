@@ -2,6 +2,9 @@ package com.biped.works.profile.ui
 
 import android.content.res.Configuration
 import android.widget.Toast
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,9 +47,10 @@ data class ProfileUiModel(
     val picture: String = ""
 )
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-internal fun ProfileScreen(
-    viewModel: ProfileViewModel, navController: NavHostController
+internal fun SharedTransitionScope.ProfileScreen(
+    viewModel: ProfileViewModel, navController: NavHostController, animatedScope: AnimatedContentScope
 ) {
     val state by rememberProfileState()
 
@@ -81,12 +85,21 @@ internal fun ProfileScreen(
             Toast.makeText(LocalContext.current, state.messageRes, Toast.LENGTH_LONG).show()
             state.messageRes = -1
         }
-        ProfileUi(profile = state.profile, interactor = interactor)
+        ProfileUi(
+            profile = state.profile,
+            animatedScope = animatedScope,
+            interactor = interactor
+        )
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-private fun ProfileUi(profile: ProfileUiModel, interactor: ProfileInteractor) {
+private fun SharedTransitionScope.ProfileUi(
+    profile: ProfileUiModel,
+    animatedScope: AnimatedContentScope,
+    interactor: ProfileInteractor
+) {
     Column {
         TopAppbar(
             onNavigateUp = { interactor.onNavigateUp() },
@@ -100,7 +113,13 @@ private fun ProfileUi(profile: ProfileUiModel, interactor: ProfileInteractor) {
             Column(
                 modifier = Modifier.weight(0.10f)
             ) {
-                ProfileHeader(name = profile.name, imageUrl = profile.picture)
+                ProfileHeader(
+                    modifier = Modifier.sharedElement(
+                        state = rememberSharedContentState(key = "profile"),
+                        animatedVisibilityScope = animatedScope
+                    ),
+                    name = profile.name, imageUrl = profile.picture
+                )
             }
 
             BigSpacer()
@@ -166,9 +185,9 @@ private interface ProfileInteractor {
 private fun ProfileUi_Preview(@PreviewParameter(ProfileUiModelDataProvider::class) profile: ProfileUiModel) {
     CashTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            ProfileUi(
-                profile = profile,
-                interactor = object : ProfileInteractor {})
+//            ProfileUi(
+//                profile = profile,
+//                interactor = object : ProfileInteractor {})
         }
     }
 }
