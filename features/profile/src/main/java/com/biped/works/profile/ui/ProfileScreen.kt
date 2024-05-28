@@ -114,11 +114,9 @@ private fun SharedTransitionScope.ProfileUi(
                 modifier = Modifier.weight(0.10f)
             ) {
                 ProfileHeader(
-                    modifier = Modifier.sharedElement(
-                        state = rememberSharedContentState(key = "profile"),
-                        animatedVisibilityScope = animatedScope
-                    ),
-                    name = profile.name, imageUrl = profile.picture
+                    name = profile.name,
+                    imageUrl = profile.picture,
+                    animatedScope = animatedScope
                 )
             }
 
@@ -185,9 +183,9 @@ private interface ProfileInteractor {
 private fun ProfileUi_Preview(@PreviewParameter(ProfileUiModelDataProvider::class) profile: ProfileUiModel) {
     CashTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-//            ProfileUi(
-//                profile = profile,
-//                interactor = object : ProfileInteractor {})
+            //            ProfileUi(
+            //                profile = profile,
+            //                interactor = object : ProfileInteractor {})
         }
     }
 }

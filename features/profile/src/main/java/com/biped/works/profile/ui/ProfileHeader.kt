@@ -1,6 +1,9 @@
 package com.biped.works.profile.ui
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,13 +27,16 @@ import com.biped.locations.theme.R
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumHeadline
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun ProfileHeader(
+fun SharedTransitionScope.ProfileHeader(
     modifier: Modifier = Modifier,
     name: String,
     imageUrl: String = "",
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    animatedScope: AnimatedVisibilityScope
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     val profileImagePainter = rememberAsyncImagePainter(
         model = imageUrl,
         placeholder = painterResource(id = R.drawable.ic_profile_on),
@@ -37,8 +44,12 @@ fun ProfileHeader(
     )
     Row(
         modifier = modifier
+            .sharedBounds(
+                rememberSharedContentState(key = "profile"),
+                animatedVisibilityScope = animatedScope
+            )
             .clickable(
-                interactionSource = MutableInteractionSource(),
+                interactionSource = interactionSource,
                 indication = null
             ) {
                 onClick()
@@ -63,7 +74,7 @@ fun ProfileHeader(
 fun ProfileHeader_Preview() {
     CashTheme {
         Surface(modifier = Modifier.fillMaxWidth()) {
-            ProfileHeader(name = "R. Edgar")
+            //          ProfileHeader(name = "R. Edgar")
         }
     }
 }

@@ -3,9 +3,9 @@ package com.biped.locations.theme
 import androidx.compose.ui.graphics.Color
 
 val green_50 = Color(0xFFDEE5D9)
-val green_100 = Color(0xFFaFBFA1)
-val green_200 = Color(0xFF7B9665)
-val green_300 = Color(0xFF4B722C)
+val green_100 = Color(0xFFC5D6B5)
+val green_200 = Color(0xFFaFBFA1)
+val green_300 = Color(0xFF7B9665)
 val green_400 = Color(0xFF4C6539)
 val green_500 = Color(0xFF064300)
 val green_600 = Color(0xFF063A00)
@@ -48,6 +48,7 @@ val light_onErrorContainer = Color(0xFF410002)
 val light_background = green_50
 val light_onBackground = green_800
 val light_surface = green_50
+val light_surfaceContainer = green_100
 val light_onSurface = green_800
 val light_surfaceVariant = green_100
 val light_onSurfaceVariant = Color(0xFF46483C)

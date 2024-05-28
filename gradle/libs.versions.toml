@@ -27,6 +27,8 @@ http = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp"
 http-mockserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okHttp" }
 
 # Android
+android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+
 android-core = { group = "androidx.core", name = "core-ktx", version = "1.8.0" }
 android-compat = { group = "androidx.appcompat", name = "appcompat", version = "1.5.0" }
 android-material = { group = "com.google.android.material", name = "material", version = "1.6.1" }
@@ -42,11 +44,12 @@ android-test-espresso = { group = "androidx.test.espresso", name = "espresso-cor
 android-test-contrib = { group = "com.android.support.test.espresso", name = "espresso-contrib", version = "3.5.0-rc01" }
 android-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version = "2.2.0" }
 
-android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
-
 # Kotlin
 kotlin-core = { group = "androidx.core", name = "core-ktx", version.ref = "kotlin" }
+kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlin" }
+
+javapoet = { module = "com.squareup:javapoet", version = "1.13.0" }
 
 # Coroutine
 coroutine-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }

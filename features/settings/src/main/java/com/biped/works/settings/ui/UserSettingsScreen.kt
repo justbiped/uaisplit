@@ -103,12 +103,9 @@ private fun SharedTransitionScope.UserSettingsUi(
             modifier = Modifier.weight(0.10f)
         ) {
             ProfileHeader(
-                modifier = Modifier.sharedElement(
-                    state = rememberSharedContentState(key = "profile"),
-                    animatedVisibilityScope = animatedScope
-                ),
                 name = userSettings.name,
                 imageUrl = userSettings.picture,
+                animatedScope = animatedScope,
                 onClick = { interactor.onProfileClicked(userSettings.userId) }
             )
         }

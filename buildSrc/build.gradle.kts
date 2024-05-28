@@ -25,6 +25,9 @@ gradlePlugin{
 
 dependencies {
     implementation(libs.android.gradle)
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
-    implementation("com.squareup:javapoet:1.13.0")
+    implementation(libs.kotlin.gradle)
+    implementation(libs.javapoet)
+
+    // https://github.com/gradle/gradle/issues/15383
+    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }

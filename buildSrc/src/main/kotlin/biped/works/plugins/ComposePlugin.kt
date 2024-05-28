@@ -2,10 +2,8 @@ package biped.works.plugins
 
 import AndroidExtension
 import android
-import library
-import catalog
-import requiredVersion
 import devImplementation
+import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.DependencyHandlerScope
@@ -27,34 +25,34 @@ class ComposePlugin : Plugin<Project> {
                 }
 
                 composeOptions {
-                    kotlinCompilerExtensionVersion = catalog.requiredVersion("compose.compiler")
+                    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
                 }
             }
 
             dependencies {
                 //implementation(catalog.library("compose.bom"))
-                implementation(catalog.library("compose.foundation"))
-                implementation(catalog.library("compose.ui"))
-                implementation(catalog.library("compose.icons"))
-                implementation(catalog.library("compose.iconsExtended"))
-                implementation(catalog.library("compose.animation"))
-                implementation(catalog.library("compose.hilt"))
-                implementation(catalog.library("compose.coil"))
+                implementation(libs.compose.foundation)
+                implementation(libs.compose.ui)
+                implementation(libs.compose.icons)
+                implementation(libs.compose.iconsExtended)
+                implementation(libs.compose.animation)
+                implementation(libs.compose.hilt)
+                implementation(libs.compose.coil)
 
-                implementation(catalog.library("compose.material"))
-                implementation(catalog.library("compose.material.window"))
-                implementation(catalog.library("compose.material.navigation"))
+                implementation(libs.compose.material)
+                implementation(libs.compose.material.window)
+                implementation(libs.compose.material.navigation)
 
                 // Navigation
-                implementation(catalog.library("compose.navigation"))
+                implementation(libs.compose.navigation)
 
                 // Preview
-                implementation(catalog.library("compose.ui.tooling.preview"))
-                devImplementation(catalog.library("compose.ui.tooling"))
+                implementation(libs.compose.ui.tooling.preview)
+                devImplementation(libs.compose.ui.tooling)
 
                 // Test
-                testImplementation(catalog.library("compose.test.junit"))
-                devImplementation(catalog.library("compose.test.manifest"))
+                testImplementation(libs.compose.test.junit)
+                devImplementation(libs.compose.test.manifest)
 
                 // Biped Compose Foundation
                 implementation(project(":foundation:compose"))
