@@ -2,6 +2,7 @@ package biped.works.locations.home.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
@@ -78,7 +79,7 @@ private fun HomeScreenUi(
     Scaffold(bottomBar = {
         AnimatedVisibility(
             visible = state.showBottomBar,
-            enter = slideInVertically(tween()) { it },
+            enter = slideInVertically(spring()) { it },
             exit = shrinkVertically() + slideOutVertically { it },
         ) {
             BottomNavigation(
