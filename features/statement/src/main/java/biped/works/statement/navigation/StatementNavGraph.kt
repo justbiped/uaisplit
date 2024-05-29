@@ -11,7 +11,10 @@ import biped.works.compose.navigation.StatementGraph
 import biped.works.statement.ui.StatementScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
-fun NavGraphBuilder.transactionNavGraph(navController: NavHostController, transitionScope: SharedTransitionScope) {
+fun NavGraphBuilder.transactionNavGraph(
+    navController: NavHostController,
+    transitionScope: SharedTransitionScope
+) {
     navigation(
         route = StatementGraph.route,
         startDestination = StatementGraph.Statement.route

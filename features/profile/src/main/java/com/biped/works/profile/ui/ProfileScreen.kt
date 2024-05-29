@@ -3,8 +3,6 @@ package com.biped.works.profile.ui
 import android.content.res.Configuration
 import android.widget.Toast
 import androidx.compose.animation.AnimatedContentScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,13 +30,14 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
 import biped.works.user.R
-import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.BigSpacer
+import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.SingleLineTextField
 import com.biped.locations.theme.components.SmallTitle
+import com.biped.works.profile.SharedAnimationScope
 
 data class ProfileUiModel(
     val userId: String = "",
@@ -47,10 +46,10 @@ data class ProfileUiModel(
     val picture: String = ""
 )
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-internal fun SharedTransitionScope.ProfileScreen(
-    viewModel: ProfileViewModel, navController: NavHostController, animatedScope: AnimatedContentScope
+internal fun SharedAnimationScope.ProfileScreen(
+    viewModel: ProfileViewModel,
+    navController: NavHostController,
 ) {
     val state by rememberProfileState()
 
@@ -87,17 +86,14 @@ internal fun SharedTransitionScope.ProfileScreen(
         }
         ProfileUi(
             profile = state.profile,
-            animatedScope = animatedScope,
             interactor = interactor
         )
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-private fun SharedTransitionScope.ProfileUi(
+private fun SharedAnimationScope.ProfileUi(
     profile: ProfileUiModel,
-    animatedScope: AnimatedContentScope,
     interactor: ProfileInteractor
 ) {
     Column {
@@ -115,8 +111,7 @@ private fun SharedTransitionScope.ProfileUi(
             ) {
                 ProfileHeader(
                     name = profile.name,
-                    imageUrl = profile.picture,
-                    animatedScope = animatedScope
+                    imageUrl = profile.picture
                 )
             }
 

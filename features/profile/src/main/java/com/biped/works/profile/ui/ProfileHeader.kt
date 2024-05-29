@@ -1,15 +1,9 @@
 package com.biped.works.profile.ui
 
 import android.content.res.Configuration
-import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.BoundsTransform
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.animation.core.ArcMode
-import androidx.compose.animation.core.ExperimentalAnimationSpecApi
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.keyframes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
@@ -24,25 +18,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.biped.locations.theme.CashTheme
-import com.biped.locations.theme.R
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumHeadline
+import com.biped.works.profile.SharedAnimationScope
 
-@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalAnimationSpecApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun SharedTransitionScope.ProfileHeader(
+fun SharedAnimationScope.ProfileHeader(
     modifier: Modifier = Modifier,
     name: String,
     imageUrl: String = "",
-    onClick: () -> Unit = {},
-    animatedScope: AnimatedVisibilityScope
+    onClick: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val imageRequest = ImageRequest.Builder(LocalContext.current)
@@ -62,7 +53,7 @@ fun SharedTransitionScope.ProfileHeader(
         modifier = modifier
             .sharedBounds(
                 rememberSharedContentState(key = imageUrl),
-                animatedVisibilityScope = animatedScope,
+                animatedVisibilityScope = animatedContentScope,
                 boundsTransform = boundsTransform
             )
             .clickable(

@@ -2,9 +2,6 @@ package com.biped.works.settings.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.net.Uri
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -24,10 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
-import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.BigSpacer
+import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.components.LargeLabel
+import com.biped.works.profile.SharedAnimationScope
 import com.biped.works.profile.ui.ProfileHeader
 import com.biped.works.settings.data.ThemeSettings
 import com.biped.works.settings.data.UserSettings
@@ -52,11 +50,9 @@ private fun rememberSettingsState(navigator: NavHostController) = remember {
     mutableStateOf(StateHolder(navigator))
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-internal fun SharedTransitionScope.UserSettingsScreen(
+internal fun SharedAnimationScope.UserSettingsScreen(
     viewModel: UserSettingsViewModel,
-    animatedScope: AnimatedVisibilityScope,
     navController: NavHostController
 ) {
     val stateHolder by rememberSettingsState(navController)
@@ -80,18 +76,15 @@ internal fun SharedTransitionScope.UserSettingsScreen(
     Box(modifier = Modifier.fillMaxSize()) {
         UserSettingsUi(
             userSettings = stateHolder.viewState.settings,
-            animatedScope = animatedScope,
             interactor = interactor
         )
         LoadingIndicator(isLoading = stateHolder.viewState.isLoading)
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-private fun SharedTransitionScope.UserSettingsUi(
+private fun SharedAnimationScope.UserSettingsUi(
     userSettings: UserSettings,
-    animatedScope: AnimatedVisibilityScope,
     interactor: SettingsInteractor
 ) {
     Column(
@@ -105,7 +98,6 @@ private fun SharedTransitionScope.UserSettingsUi(
             ProfileHeader(
                 name = userSettings.name,
                 imageUrl = userSettings.picture,
-                animatedScope = animatedScope,
                 onClick = { interactor.onProfileClicked(userSettings.userId) }
             )
         }
@@ -141,9 +133,9 @@ fun ProfileUi_Light_Preview() {
                 .fillMaxSize()
                 .background(color = MaterialTheme.colorScheme.background)
         ) {
-//            UserSettingsUi(
-//                userSettings = UserSettings(),
-//                object : SettingsInteractor {})
+            //            UserSettingsUi(
+            //                userSettings = UserSettings(),
+            //                object : SettingsInteractor {})
         }
     }
 }

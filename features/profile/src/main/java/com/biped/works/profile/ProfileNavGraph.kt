@@ -1,7 +1,9 @@
 package com.biped.works.profile
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -14,7 +16,7 @@ import com.biped.works.profile.ui.ProfileScreen
 fun NavGraphBuilder.profileNavGraph(
     navController: NavHostController,
     transitionScope: SharedTransitionScope
-) = with(transitionScope) {
+) {
     navigation(
         route = ProfileGraph.route,
         startDestination = ProfileGraph.Profile.route
@@ -23,11 +25,27 @@ fun NavGraphBuilder.profileNavGraph(
             route = ProfileGraph.Profile.route,
             deepLinks = listOf(ProfileGraph.Profile.deepLink)
         ) {
-            ProfileScreen(
-                viewModel = hiltViewModel(),
-                animatedScope = this,
-                navController = navController
-            )
+            SharedAnimation(transitionScope) {
+                ProfileScreen(
+                    viewModel = hiltViewModel(),
+                    navController = navController
+                )
+            }
         }
     }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+class SharedAnimationScope(
+    private val sharedTransitionScope: SharedTransitionScope,
+    val animatedContentScope: AnimatedContentScope,
+) : SharedTransitionScope by sharedTransitionScope
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+fun AnimatedContentScope.SharedAnimation(
+    transitionScope: SharedTransitionScope,
+    sharedAnimationScope: @Composable SharedAnimationScope.() -> Unit
+) {
+    SharedAnimationScope(transitionScope, this).sharedAnimationScope()
 }
