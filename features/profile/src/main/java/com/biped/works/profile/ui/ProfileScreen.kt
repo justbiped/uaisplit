@@ -1,11 +1,11 @@
 package com.biped.works.profile.ui
 
 import android.content.res.Configuration
-import android.widget.Toast
-import androidx.compose.animation.AnimatedContentScope
+import androidx.collection.intSetOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,7 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -78,17 +77,17 @@ internal fun SharedAnimationScope.ProfileScreen(
         }
     }
 
-    Box {
-        if (state.viewState.isLoading) Toast.makeText(LocalContext.current, "Loading", Toast.LENGTH_LONG).show()
-        if (state.messageRes > -1) {
-            Toast.makeText(LocalContext.current, state.messageRes, Toast.LENGTH_LONG).show()
-            state.messageRes = -1
-        }
-        ProfileUi(
-            profile = state.profile,
-            interactor = interactor
-        )
-    }
+    //    Box {
+    //        if (state.viewState.isLoading) Toast.makeText(LocalContext.current, "Loading", Toast.LENGTH_LONG).show()
+    //        if (state.messageRes > -1) {
+    //            Toast.makeText(LocalContext.current, state.messageRes, Toast.LENGTH_LONG).show()
+    //            state.messageRes = -1
+    //        }
+    ProfileUi(
+        profile = state.profile,
+        interactor = interactor
+    )
+    //    }
 }
 
 @Composable
@@ -99,7 +98,8 @@ private fun SharedAnimationScope.ProfileUi(
     Column {
         TopAppbar(
             onNavigateUp = { interactor.onNavigateUp() },
-            onSave = { interactor.onSave() })
+            onSave = { interactor.onSave() },
+        )
 
         SmallSpacer()
 

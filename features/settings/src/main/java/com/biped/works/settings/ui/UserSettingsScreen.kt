@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -82,13 +85,17 @@ internal fun SharedAnimationScope.UserSettingsScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SharedAnimationScope.UserSettingsUi(
     userSettings: UserSettings,
     interactor: SettingsInteractor
 ) {
     Column(
-        modifier = Modifier.padding(horizontal = Dimens.small)
+        modifier = Modifier
+            .windowInsetsPadding(TopAppBarDefaults.windowInsets)
+            .padding(horizontal = Dimens.small)
+
     ) {
         BigSpacer()
 

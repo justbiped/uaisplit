@@ -1,18 +1,18 @@
 package biped.works.locations.home.ui
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -71,23 +71,25 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 }
 
 @Composable
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 private fun HomeScreenUi(
     state: HomeState,
     onRouteSelected: (destination: HomeDestination) -> Unit = {}
 ) {
-
-    Scaffold(bottomBar = {
-        AnimatedVisibility(
-            visible = state.showBottomBar,
-            enter = slideInVertically(spring()) { it },
-            exit = shrinkVertically() + slideOutVertically { it },
-        ) {
-            BottomNavigation(
-                currentRoute = state.currentRoute,
-                onSelectDestination = { onRouteSelected(it) })
+    Scaffold(
+        bottomBar = {
+            AnimatedVisibility(
+                visible = state.showBottomBar,
+                enter = slideInVertically(spring()) { it },
+                exit = shrinkVertically() + slideOutVertically { it },
+            ) {
+                BottomNavigation(
+                    currentRoute = state.currentRoute,
+                    onSelectDestination = { onRouteSelected(it) })
+            }
         }
-    }) { paddingValues ->
-        Surface(modifier = Modifier.padding(paddingValues)) {
+    ) {
+        Column {
             NavigationGraph(navController = state.navController)
         }
     }
