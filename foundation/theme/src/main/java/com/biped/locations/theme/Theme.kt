@@ -127,9 +127,9 @@ fun CashTheme(
     if (view.isInEditMode.not()) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.background.toArgb()
+            //window.statusBarColor = colorScheme.background.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = isDarkMode.not()
-            window.navigationBarColor = colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation).toArgb()
+            //window.navigationBarColor = colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation).toArgb()
         }
     }
 

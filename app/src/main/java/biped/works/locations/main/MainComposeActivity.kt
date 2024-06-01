@@ -1,6 +1,7 @@
 package biped.works.locations.main
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,10 +26,13 @@ class MainComposeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+        }
+
         enableEdgeToEdge()
 
         var themeSettings by mutableStateOf(ThemeSettings())
-
         setContent {
             navController = rememberNavController()
 
