@@ -28,11 +28,10 @@ private fun Project.applyAndroidConfigs() {
                 buildToolsVersion("33.0.0")
 
                 defaultConfig {
-                    minSdk = 24
-                    targetSdk = 34
+                    minSdk = 29
+                    targetSdk = 35
 
-                    testInstrumentationRunner =
-                        "com.biped.test.instrumentation.runner.LocationTestRunner"
+                    testInstrumentationRunner = "com.biped.test.instrumentation.runner.LocationTestRunner"
                 }
 
                 buildFeatures.apply {

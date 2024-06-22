@@ -26,14 +26,12 @@ class MainComposeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            window.isNavigationBarContrastEnforced = false
-        }
-
         enableEdgeToEdge()
 
         var themeSettings by mutableStateOf(ThemeSettings())
         setContent {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) window.isNavigationBarContrastEnforced = false
+
             navController = rememberNavController()
 
             viewModel.instruction.collectWithLifecycle { instruction ->
