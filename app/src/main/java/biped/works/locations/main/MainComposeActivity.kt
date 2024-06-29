@@ -30,8 +30,7 @@ class MainComposeActivity : ComponentActivity() {
 
         var themeSettings by mutableStateOf(ThemeSettings())
         setContent {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) window.isNavigationBarContrastEnforced = false
-
+            window.isNavigationBarContrastEnforced = false
             navController = rememberNavController()
 
             viewModel.instruction.collectWithLifecycle { instruction ->
