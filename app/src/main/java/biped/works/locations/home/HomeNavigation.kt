@@ -15,7 +15,7 @@ import androidx.navigation.compose.NavHost
 import biped.works.compose.navigation.SettingsGraph
 import biped.works.compose.navigation.StatementGraph
 import biped.works.locations.R
-import biped.works.statement.navigation.transactionNavGraph
+import biped.works.statement.navigation.statementNavGraph
 import com.biped.works.settings.settingsNavGraph
 
 sealed class HomeDestination(
@@ -57,7 +57,7 @@ fun NavigationGraph(navController: NavHostController) {
     SharedTransitionLayout {
         val transitionScope = this
         NavHost(navController, startDestination = HomeDestination.Statement.graph) {
-            transactionNavGraph(navController, transitionScope)
+            statementNavGraph(navController, transitionScope)
             settingsNavGraph(navController, transitionScope = transitionScope)
         }
     }

@@ -17,11 +17,14 @@ dependencyResolutionManagement {
 include(":app")
 include(":instrumentation")
 
+include(":transaction")
+include(":transaction:transaction")
+include(":transaction:statement")
+
 include(":features")
 include(":features:user")
 include(":features:profile")
 include(":features:settings")
-include(":features:statement")
 
 
 include(":foundation")
