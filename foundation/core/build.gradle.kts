@@ -35,8 +35,8 @@ dependencies {
     implementation(libs.http.retrofit)
     implementation(libs.http.logging)
 
-    implementation(libs.serialization.converter)
-    implementation(libs.serialization.core)
+    implementation(libs.kotlin.serialization.converter)
+    implementation(libs.kotlin.serialization)
 
     implementation(libs.compose.navigation)
 

@@ -19,7 +19,7 @@ dependencies {
     implementation(libs.http)
     implementation(libs.http.retrofit)
 
-    implementation(libs.serialization.core)
+    implementation(libs.kotlin.serialization)
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)

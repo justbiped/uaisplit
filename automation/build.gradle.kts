@@ -16,8 +16,8 @@ dependencies {
     implementation(libs.http)
     implementation(libs.http.retrofit)
 
-    implementation(libs.serialization.core)
-    implementation(libs.serialization.converter)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.kotlin.serialization.converter)
 
     testImplementation(libs.test.junit)
 }
