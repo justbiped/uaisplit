@@ -35,6 +35,21 @@ android {
 }
 
 dependencies {
+    implementation(project(":transaction:statement"))
+    implementation(project(":transaction:transaction"))
+
+    implementation(project(":automation"))
+    implementation(project(":features:profile"))
+    implementation(project(":features:settings"))
+    implementation(project(":features:user"))
+
+    implementation(project(":foundation:core"))
+    implementation(project(":foundation:theme"))
+    testImplementation(project(":foundation:test"))
+
+    implementation(project(":coroutines:core"))
+    testImplementation(project(":coroutines:test"))
+
     implementation(libs.android.core)
     implementation(libs.coroutine.android)
 
@@ -50,19 +65,6 @@ dependencies {
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
-
-    implementation(project(":automation"))
-    implementation(project(":transaction:statement"))
-    implementation(project(":features:profile"))
-    implementation(project(":features:settings"))
-    implementation(project(":features:user"))
-
-    implementation(project(":foundation:core"))
-    implementation(project(":foundation:theme"))
-    testImplementation(project(":foundation:test"))
-
-    implementation(project(":coroutines:core"))
-    testImplementation(project(":coroutines:test"))
 
     kspTest(libs.hilt.compiler)
     kspAndroidTest(libs.hilt.compiler)

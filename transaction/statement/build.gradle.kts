@@ -12,6 +12,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":transaction:transaction"))
+
+    implementation(project(":foundation:core"))
+    implementation(project(":foundation:api"))
+    implementation(project(":foundation:theme"))
+
+    implementation(project(":coroutines:core"))
+    testImplementation(project(":coroutines:test"))
+
     implementation(libs.android.core)
     implementation(libs.coroutine.core)
     implementation(libs.coroutine.android)
@@ -23,11 +32,4 @@ dependencies {
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
-
-    implementation(project(":foundation:theme"))
-    implementation(project(":coroutines:core"))
-    testImplementation(project(":coroutines:test"))
-
-    implementation(project(":foundation:core"))
-    implementation(project(":foundation:api"))
 }

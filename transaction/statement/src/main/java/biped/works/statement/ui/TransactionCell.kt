@@ -25,6 +25,7 @@ import com.biped.locations.theme.components.LargeBody
 @Composable
 fun TransactionCell(transaction: Transaction, onClick: (String) -> Unit) {
     val balanceIndicator = if (transaction.value < 0) R.drawable.debt_arrow else R.drawable.credit_arrow
+
     Row(modifier = Modifier.clickable { onClick(transaction.id) }) {
         Column(
             Modifier

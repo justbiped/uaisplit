@@ -29,4 +29,8 @@ internal class StatementViewModel @Inject constructor(
             copy(uiModel = statement, isLoading = false)
         }
     }
+
+    fun openTransaction(transactionId: String) {
+        _instruction.sendEvent(StatementInstruction.OpenTransaction(transactionId))
+    }
 }

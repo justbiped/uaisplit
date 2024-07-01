@@ -16,18 +16,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import biped.works.compose.collectWithLifecycle
 import biped.works.statement.data.Statement
 import biped.works.statement.data.TimeSpan
 import com.biped.locations.theme.components.LargeDisplayText
 
 @Composable
-internal fun StatementScreen(viewModel: StatementViewModel) {
+internal fun StatementScreen(viewModel: StatementViewModel, onNavigate: (destination: Any) -> Unit) {
     var state by remember { mutableStateOf(StatementInstruction.State()) }
 
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
             is StatementInstruction.State -> state = instruction
+            is StatementInstruction.OpenTransaction -> onNavigate(instruction.destination)
             is StatementInstruction.FailedToFetchStatement -> print("blabla")
         }
     }
@@ -35,7 +37,10 @@ internal fun StatementScreen(viewModel: StatementViewModel) {
     when {
         state.isLoading -> LoadingUi()
         state.isEmpty -> EmptyStatementUi()
-        else -> StatementUi(state.uiModel)
+        else -> StatementUi(
+            statement = state.uiModel,
+            onTransactionClick = viewModel::openTransaction
+        )
     }
 }
 
@@ -56,7 +61,7 @@ private fun EmptyStatementUi() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun StatementUi(statement: Statement) {
+private fun StatementUi(statement: Statement, onTransactionClick: (String) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .windowInsetsPadding(TopAppBarDefaults.windowInsets)
@@ -64,7 +69,7 @@ private fun StatementUi(statement: Statement) {
         items(statement.transactions) { transaction ->
             TransactionCell(
                 transaction,
-                {}
+                onTransactionClick
             )
         }
     }
@@ -73,5 +78,8 @@ private fun StatementUi(statement: Statement) {
 @Preview(showBackground = true)
 @Composable
 fun StatementUi_Preview() {
-    StatementUi(statement = Statement("Balance", emptyList(), timeSpan = TimeSpan("", "")))
+    StatementUi(
+        statement = Statement("Balance", emptyList(), timeSpan = TimeSpan("", "")),
+        onTransactionClick = {}
+    )
 }

@@ -16,11 +16,11 @@ import com.biped.locations.theme.components.SmallTitle
 
 @Composable
 fun TransactionScreen() {
-    TransactionPane()
+    TransactionPanel()
 }
 
 @Composable
-fun TransactionPane() {
+fun TransactionPanel() {
     TopAppbar({}, {})
     Column {
     }
@@ -49,5 +49,5 @@ private fun TopAppbar(
 @Preview
 @Composable
 fun TransactionPane_Preview() {
-    TransactionPane()
+    TransactionPanel()
 }

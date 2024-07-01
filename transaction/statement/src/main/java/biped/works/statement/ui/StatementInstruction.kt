@@ -3,6 +3,7 @@ package biped.works.statement.ui
 import biped.works.coroutines.MutableUiStateFlow
 import biped.works.statement.data.Statement
 import biped.works.statement.data.TimeSpan
+import biped.works.transaction.TransactionRoute
 
 internal sealed interface StatementInstruction {
     data class State(
@@ -12,7 +13,11 @@ internal sealed interface StatementInstruction {
         val isEmpty get() = uiModel.transactions.isEmpty()
     }
 
-    object FailedToFetchStatement : StatementInstruction
+    data class OpenTransaction(private val id: String) : StatementInstruction {
+        val destination = TransactionRoute
+    }
+
+    data object FailedToFetchStatement : StatementInstruction
 }
 
 internal fun MutableUiStateFlow<StatementInstruction>.updateState(

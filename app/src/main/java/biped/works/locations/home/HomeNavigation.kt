@@ -5,8 +5,8 @@ import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import biped.works.statement.navigation.StatementGraph
-import biped.works.statement.navigation.statementNavGraph
+import biped.works.statement.StatementGraph
+import biped.works.statement.statementNavGraph
 import com.biped.works.settings.SettingsGraph
 import com.biped.works.settings.settingsNavGraph
 

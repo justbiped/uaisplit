@@ -31,7 +31,7 @@ import biped.works.locations.home.NavigationGraph
 import biped.works.locations.main.BottomNavItem
 import biped.works.locations.main.SettingsNavItem
 import biped.works.locations.main.StatementNavItem
-import biped.works.statement.navigation.StatementGraph
+import biped.works.statement.StatementGraph
 import com.biped.locations.theme.CashTheme
 import com.biped.works.settings.SettingsGraph
 
