@@ -14,14 +14,6 @@ sealed class Direction(val route: String) {
 
 }
 
-data object StatementGraph : Graph("statement_graph") {
-    data object Statement : Direction("statement")
-}
-
-data object SettingsGraph : Graph("settings_graph") {
-    data object Settings : Direction("settings")
-}
-
 data object ProfileGraph : Graph("profile_graph") {
     data object Profile : Direction("profile")
 }

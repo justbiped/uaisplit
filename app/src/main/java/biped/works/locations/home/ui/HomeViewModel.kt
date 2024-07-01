@@ -2,7 +2,6 @@ package biped.works.locations.home.ui
 
 import androidx.lifecycle.ViewModel
 import biped.works.coroutines.MutableUiStateFlow
-import biped.works.locations.home.HomeDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -13,7 +12,7 @@ class HomeViewModel @Inject constructor(
     private val _instruction = MutableUiStateFlow<HomeInstruction>(HomeInstruction.Default)
     val instruction = _instruction.toUiStateFlow()
 
-    fun selectHomeDestination(destination: HomeDestination) {
+    fun selectHomeDestination(destination: Any){
         _instruction.sendEvent(HomeInstruction.Navigate(destination))
     }
 }

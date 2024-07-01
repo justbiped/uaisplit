@@ -23,7 +23,7 @@ class HomeStateTest {
             val navController = testNavController("first_destination", "second_destination")
             val homeState = HomeState(navController)
 
-            currentRoute = homeState.currentRoute
+            currentRoute = homeState.currentDestination
             navController.setCurrentDestination("second_destination")
         }
 

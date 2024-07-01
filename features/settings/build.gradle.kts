@@ -3,6 +3,7 @@ plugins {
     apply(libs.plugins.hilt)
     apply(libs.plugins.ksp)
     apply(libs.plugins.compose)
+    apply(libs.plugins.kotlin.serialization)
 }
 
 android{
@@ -17,6 +18,7 @@ dependencies {
     implementation(libs.lifecycle.runtime)
 
     implementation(libs.navigation.ui)
+    implementation(libs.kotlin.serialization)
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)

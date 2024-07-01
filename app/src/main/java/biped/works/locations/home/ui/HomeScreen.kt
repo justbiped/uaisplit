@@ -8,7 +8,6 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -19,7 +18,6 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,21 +26,31 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import biped.works.compose.collectWithLifecycle
 import biped.works.compose.navigation.currentRouteState
-import biped.works.locations.home.HomeDestination
+import biped.works.locations.home.HomeNavigation
 import biped.works.locations.home.NavigationGraph
+import biped.works.locations.main.BottomNavItem
+import biped.works.locations.main.SettingsNavItem
+import biped.works.locations.main.StatementNavItem
+import biped.works.statement.navigation.StatementGraph
 import com.biped.locations.theme.CashTheme
+import com.biped.works.settings.SettingsGraph
 
 @Stable
 internal data class HomeState(
     val navController: NavHostController
 ) {
-    val currentRoute: String @Composable get() = navController.currentRouteState.value
-    val showBottomBar: Boolean @Composable get() = HomeDestination.contains(currentRoute)
+    val currentDestination: Any?
+        @Composable get() {
+            val currentRoute = navController.currentRouteState.value
+            return HomeNavigation.getDestination(currentRoute)
+        }
+
+    val showBottomBar: Boolean @Composable get() = HomeNavigation.contains(currentDestination)
 
     fun default() {}
 
-    fun navigate(destination: HomeDestination) {
-        navController.navigate(destination.graph) {
+    fun navigate(destination: Any) {
+        navController.navigate(destination) {
             popUpTo(navController.graph.findStartDestination().id) { saveState = true }
             launchSingleTop = true
             restoreState = true
@@ -74,7 +82,7 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 private fun HomeScreenUi(
     state: HomeState,
-    onRouteSelected: (destination: HomeDestination) -> Unit = {}
+    onRouteSelected: (destination: Any) -> Unit = {}
 ) {
     Scaffold(
         bottomBar = {
@@ -84,7 +92,7 @@ private fun HomeScreenUi(
                 exit = shrinkVertically() + slideOutVertically { it },
             ) {
                 BottomNavigation(
-                    currentRoute = state.currentRoute,
+                    currentRoute = state.currentDestination,
                     onSelectDestination = { onRouteSelected(it) })
             }
         }
@@ -97,24 +105,28 @@ private fun HomeScreenUi(
 
 @Composable
 fun BottomNavigation(
-    currentRoute: String, onSelectDestination: (destination: HomeDestination) -> Unit = {}
+    currentRoute: Any?, onSelectDestination: (destination: Any) -> Unit = {}
 ) {
-    val homeDestinations = listOf(
-        HomeDestination.Statement,
-        HomeDestination.UserSettings
-    )
-
     NavigationBar {
-        homeDestinations.forEach { destination ->
-            val isSelected = destination.route == currentRoute
-            val icon = if (isSelected) destination.selectedIcon else destination.unselectedIcon
+        HomeNavigation.destinations.forEach { destination ->
+            val navItem = getMenuNavItem(destination)
+            val isSelected = destination == currentRoute
+            val icon = if (isSelected) navItem.selectedIcon else navItem.unselectedIcon
 
             NavigationBarItem(
                 selected = isSelected,
                 onClick = { onSelectDestination(destination) },
                 icon = { Icon(icon, contentDescription = "") },
-                label = { Text(text = stringResource(id = destination.title)) })
+                label = { Text(text = stringResource(id = navItem.title)) })
         }
+    }
+}
+
+private fun getMenuNavItem(destination: Any): BottomNavItem {
+    return when (destination) {
+        is StatementGraph -> StatementNavItem
+        is SettingsGraph -> SettingsNavItem
+        else -> StatementNavItem
     }
 }
 
@@ -130,7 +142,7 @@ fun HomeScreenPreview() {
 @Composable
 fun BottomBarPreview() {
     CashTheme {
-        BottomNavigation(currentRoute = HomeDestination.Statement.route)
+        BottomNavigation(currentRoute = HomeNavigation.destinations.first())
     }
 }
 

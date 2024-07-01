@@ -7,20 +7,28 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import biped.works.compose.navigation.StatementGraph
+import biped.works.compose.navigation.NavGraph
 import biped.works.statement.ui.StatementScreen
+import kotlinx.serialization.Serializable
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.statementNavGraph(
     navController: NavHostController,
     transitionScope: SharedTransitionScope
 ) {
-    navigation(
-        route = StatementGraph.route,
-        startDestination = StatementGraph.Statement.route
+    navigation<StatementGraph>(
+        startDestination = StatementGraph.startDestination
     ) {
-        composable(route = StatementGraph.Statement.route) {
+        composable<StatementScreenDestination> {
             StatementScreen(viewModel = hiltViewModel())
         }
     }
 }
+
+@Serializable
+object StatementGraph : NavGraph {
+    override val startDestination = StatementScreenDestination
+}
+
+@Serializable
+object StatementScreenDestination
