@@ -32,7 +32,7 @@ private fun TopAppbar(
     onNavigateUp: () -> Unit, onSave: () -> Unit
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(text = "Profile") },
+        title = { Text(text = "Transaction") },
         navigationIcon = {
             IconButton(onClick = onNavigateUp) {
                 Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "")
