@@ -14,7 +14,7 @@ internal sealed interface StatementInstruction {
     }
 
     data class OpenTransaction(private val id: String) : StatementInstruction {
-        val destination = TransactionRoute
+        val destination = TransactionRoute(id)
     }
 
     data object FailedToFetchStatement : StatementInstruction
