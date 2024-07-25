@@ -2,6 +2,7 @@ plugins {
     apply(libs.plugins.android.application)
     apply(libs.plugins.hilt)
     apply(libs.plugins.kotlin.serialization)
+    apply(libs.plugins.kotlin.kover)
     apply(libs.plugins.ksp)
     apply(libs.plugins.compose)
 }
@@ -68,4 +69,14 @@ dependencies {
 
     kspTest(libs.hilt.compiler)
     kspAndroidTest(libs.hilt.compiler)
+}
+
+//dependencies {
+//    kover(project(":feed"))
+//}
+
+kover {
+    reports {
+        filters.excludes.androidGeneratedClasses()
+    }
 }
