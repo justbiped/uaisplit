@@ -71,9 +71,15 @@ dependencies {
     kspAndroidTest(libs.hilt.compiler)
 }
 
-//dependencies {
-//    kover(project(":feed"))
-//}
+dependencies {
+    kover(project(":transaction:statement"))
+    kover(project(":transaction:transaction"))
+
+    kover(project(":automation"))
+    kover(project(":features:profile"))
+    kover(project(":features:settings"))
+    kover(project(":features:user"))
+}
 
 kover {
     reports {

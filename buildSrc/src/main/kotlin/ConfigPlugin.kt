@@ -22,6 +22,7 @@ private fun Project.applyAndroidConfigs() {
     subprojects {
         onAndroidSetup {
             plugins.apply(catalog.plugin("kotlin.android").id)
+            plugins.apply(libs.plugins.kotlin.kover.id)
 
             android {
                 compileSdkVersion(34)
