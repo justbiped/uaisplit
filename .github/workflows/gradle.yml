@@ -43,7 +43,7 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@v2
         with:
-          files: '**/build/reports/kover/*.xml'
+          files: app/build/reports/kover/*.xml features/**/build/reports/kover/*.xml transaction/**/build/reports/kover/*.xml
           github-token: ${{ secrets.COVERALLS }}
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
