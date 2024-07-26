@@ -83,6 +83,12 @@ dependencies {
 
 kover {
     reports {
+        filters.excludes.classes(
+            "*_Hilt*",
+            "*hilt_*",
+            "*dagger*",
+            "*.injection*"
+        )
         filters.excludes.androidGeneratedClasses()
     }
 }
