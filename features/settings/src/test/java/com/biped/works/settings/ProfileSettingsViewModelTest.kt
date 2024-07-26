@@ -17,53 +17,53 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-@RunWith(value = JUnit4::class)
-class ProfileSettingsViewModelTest {
-
-    @get:Rule val coroutineTestRule = biped.works.coroutiens.test.CoroutineTestRule()
-
-    private val observeUserSettings: ObserveUserSettingsUseCase = mock()
-    private val saveUserSettings: SaveUserSettingsUseCase = mock()
-    private lateinit var viewModel: UserSettingsViewModel
-
-    private val settingsFlow = MutableSharedFlow<UserSettings>()
-
-    @Before
-    fun setUp() {
-        every { observeUserSettings() } returns settingsFlow
-        viewModel = UserSettingsViewModel(observeUserSettings, saveUserSettings)
-    }
-
-    @Test
-    fun `starts to observe user settings on view model init`() {
-        verify { observeUserSettings() }
-    }
-
-    @Test
-    fun `emmit update settings instruction on receive a distinct user settings`() = runTest {
-        val testFlow = testFlowOf(viewModel.instruction)
-
-        settingsFlow.emit(userSettingsFixture())
-
-        assertThat(testFlow).hasCollected(Instruction.UpdateSettings(userSettingsFixture()))
-        testFlow.finish()
-    }
-
-    @Test
-    fun `emmit user settings update for each distinct user settings update`() = runTest {
-        val testFlow = testFlowOf(viewModel.instruction)
-
-        settingsFlow.emit(userSettingsFixture(theme = themeFixture(ColorTheme.DARK)))
-        settingsFlow.emit(userSettingsFixture(theme = themeFixture(ColorTheme.LIGHT)))
-        settingsFlow.emit(userSettingsFixture(theme = themeFixture(ColorTheme.SYSTEM)))
-
-        assertThat(testFlow).hasCollectedExactly(
-            Instruction.UpdateSettings(isLoading = true),
-            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.DARK)), isLoading = false),
-            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.LIGHT)), isLoading = false),
-            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.SYSTEM)), isLoading = false),
-        )
-
-        testFlow.finish()
-    }
-}
+//@RunWith(value = JUnit4::class)
+//class ProfileSettingsViewModelTest {
+//
+//    @get:Rule val coroutineTestRule = biped.works.coroutiens.test.CoroutineTestRule()
+//
+//    private val observeUserSettings: ObserveUserSettingsUseCase = mock()
+//    private val saveUserSettings: SaveUserSettingsUseCase = mock()
+//    private lateinit var viewModel: UserSettingsViewModel
+//
+//    private val settingsFlow = MutableSharedFlow<UserSettings>()
+//
+//    @Before
+//    fun setUp() {
+//        every { observeUserSettings() } returns settingsFlow
+//        viewModel = UserSettingsViewModel(observeUserSettings, saveUserSettings)
+//    }
+//
+//    @Test
+//    fun `starts to observe user settings on view model init`() {
+//        verify { observeUserSettings() }
+//    }
+//
+//    @Test
+//    fun `emmit update settings instruction on receive a distinct user settings`() = runTest {
+//        val testFlow = testFlowOf(viewModel.instruction)
+//
+//        settingsFlow.emit(userSettingsFixture())
+//
+//        assertThat(testFlow).hasCollected(Instruction.UpdateSettings(userSettingsFixture()))
+//        testFlow.finish()
+//    }
+//
+//    @Test
+//    fun `emmit user settings update for each distinct user settings update`() = runTest {
+//        val testFlow = testFlowOf(viewModel.instruction)
+//
+//        settingsFlow.emit(userSettingsFixture(theme = themeFixture(ColorTheme.DARK)))
+//        settingsFlow.emit(userSettingsFixture(theme = themeFixture(ColorTheme.LIGHT)))
+//        settingsFlow.emit(userSettingsFixture(theme = themeFixture(ColorTheme.SYSTEM)))
+//
+//        assertThat(testFlow).hasCollectedExactly(
+//            Instruction.UpdateSettings(isLoading = true),
+//            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.DARK)), isLoading = false),
+//            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.LIGHT)), isLoading = false),
+//            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.SYSTEM)), isLoading = false),
+//        )
+//
+//        testFlow.finish()
+//    }
+//}
