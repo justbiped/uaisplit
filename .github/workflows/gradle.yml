@@ -40,7 +40,7 @@ jobs:
           files: app/build/reports/kover/*.xml
           token: ${{ secrets.CODECOV }}
 
-      - name: Generate Coverage reports
+      - name: Upload coverage reports
         uses: coverallsapp/github-action@v2
         with:
           files: app/build/reports/kover/*.xml
