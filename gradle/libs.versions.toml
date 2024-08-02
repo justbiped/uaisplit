@@ -1,5 +1,6 @@
 [versions]
 agp = "8.4.1"
+javaxInject = "1"
 kotlin = "1.9.20"
 coroutine = "1.7.3"
 
@@ -50,7 +51,8 @@ kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", v
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.6.3" }
 kotlin-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
 
-javapoet = { module = "com.squareup:javapoet", version = "1.13.0" }
+java-poet = { module = "com.squareup:javapoet", version = "1.13.0" }
+java-inject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
 
 # Coroutine
 coroutine-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }

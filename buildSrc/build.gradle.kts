@@ -26,7 +26,7 @@ gradlePlugin{
 dependencies {
     implementation(libs.android.gradle)
     implementation(libs.kotlin.gradle)
-    implementation(libs.javapoet)
+    implementation(libs.java.poet)
 
     // https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))

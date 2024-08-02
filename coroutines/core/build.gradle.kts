@@ -8,5 +8,5 @@ android {
 }
 dependencies {
     implementation(libs.coroutine.android)
-    implementation("javax.inject:javax.inject:1")
+    implementation(libs.java.inject)
 }
