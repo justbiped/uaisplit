@@ -4,7 +4,7 @@ import biped.works.coroutines.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 
 object CoroutineTestDispatcher {
-    private val forcedDispatcherField = DispatcherProvider::class.java.getDeclaredField("forcedDispatcher").apply {
+    private val forcedDispatcherField = DispatcherProvider::class.java.getDeclaredField("reflectionForcedTestDispatcher").apply {
         isAccessible = true
     }
 
