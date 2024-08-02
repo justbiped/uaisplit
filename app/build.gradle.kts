@@ -87,7 +87,10 @@ kover {
             "*_Hilt*",
             "*hilt_*",
             "*dagger*",
-            "*.injection*"
+            "*.injection*",
+            "*_Factory",
+            "com.bumptech.glide*",
+            "com.mlykotom.valifi*"
         )
         filters.excludes.androidGeneratedClasses()
     }

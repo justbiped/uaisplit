@@ -29,3 +29,17 @@ tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
 tasks.create<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+
+tasks.create<Exec>("coverageXmlReport") {
+    commandLine(
+        "./gradlew",
+        ":app:koverXMLReportLocal"
+    )
+}
+
+tasks.create<Exec>("coverageHtmlReport") {
+    commandLine(
+        "./gradlew",
+        ":app:koverHTMLReportLocal"
+    )
+}
