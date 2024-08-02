@@ -10,12 +10,4 @@ object DispatcherProvider {
     val Default: CoroutineDispatcher get() = forcedDispatcher ?: Dispatchers.Default
     val Main: CoroutineDispatcher get() = forcedDispatcher ?: Dispatchers.Main
     val Unconfined: CoroutineDispatcher get() = forcedDispatcher ?: Dispatchers.Unconfined
-
-    private fun forceDispatcher(dispatcher: CoroutineDispatcher) {
-        forcedDispatcher = dispatcher
-    }
-
-    private fun reset() {
-        forcedDispatcher = null
-    }
 }
