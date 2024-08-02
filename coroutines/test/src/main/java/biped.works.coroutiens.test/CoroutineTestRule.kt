@@ -18,13 +18,13 @@ class CoroutineTestRule(
 ) : TestWatcher() {
 
     override fun starting(description: Description) {
-        DispatcherProvider.forceDispatcher(testDispatcher)
+        CoroutineTestDispatcher.forceDispatcher(testDispatcher)
         Dispatchers.setMain(testDispatcher)
         super.starting(description)
     }
 
     override fun finished(description: Description) {
-        DispatcherProvider.reset()
+        CoroutineTestDispatcher.reset()
         Dispatchers.resetMain()
         super.finished(description)
     }

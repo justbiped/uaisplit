@@ -1,6 +1,5 @@
 package biped.works.coroutines
 
-import androidx.annotation.VisibleForTesting
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
@@ -12,13 +11,11 @@ object DispatcherProvider {
     val Main: CoroutineDispatcher get() = forcedDispatcher ?: Dispatchers.Main
     val Unconfined: CoroutineDispatcher get() = forcedDispatcher ?: Dispatchers.Unconfined
 
-    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    fun forceDispatcher(dispatcher: CoroutineDispatcher) {
+    private fun forceDispatcher(dispatcher: CoroutineDispatcher) {
         forcedDispatcher = dispatcher
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    fun reset() {
+    private fun reset() {
         forcedDispatcher = null
     }
 }

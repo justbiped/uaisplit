@@ -1,5 +1,6 @@
 package com.biped.works.settings
 
+import biped.works.coroutiens.test.CoroutineTestRule
 import biped.works.coroutiens.test.TestFlowSubject.Companion.assertThat
 import biped.works.coroutiens.test.runTest
 import biped.works.coroutiens.test.testFlowOf
@@ -8,6 +9,7 @@ import com.biped.locations.theme.ColorTheme
 import com.biped.works.settings.data.UserSettings
 import com.biped.works.settings.ui.Instruction
 import com.biped.works.settings.ui.UserSettingsViewModel
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.verify
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,9 +20,9 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(value = JUnit4::class)
-class ProfileSettingsViewModelTest {
+class UserSettingsViewModelTest {
 
-    @get:Rule val coroutineTestRule = biped.works.coroutiens.test.CoroutineTestRule()
+    @get:Rule val coroutineTestRule = CoroutineTestRule()
 
     private val observeUserSettings: ObserveUserSettingsUseCase = mock()
     private val saveUserSettings: SaveUserSettingsUseCase = mock()
@@ -65,5 +67,14 @@ class ProfileSettingsViewModelTest {
         )
 
         testFlow.finish()
+    }
+
+    @Test
+    fun `update user settings on change theme settings`(){
+        val userSettings = UserSettings()
+
+        viewModel.changeThemeSettings(userSettings)
+
+        coVerify { saveUserSettings(userSettings) }
     }
 }
