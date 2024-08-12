@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
@@ -41,6 +42,7 @@ private val LightColors = lightColorScheme(
     surface = light_surface,
     onSurface = light_onSurface,
     surfaceContainer = light_surfaceContainer,
+    surfaceContainerHighest = light_surfaceContainer,
     surfaceVariant = light_surfaceVariant,
     onSurfaceVariant = light_onSurfaceVariant,
     outline = light_outline,

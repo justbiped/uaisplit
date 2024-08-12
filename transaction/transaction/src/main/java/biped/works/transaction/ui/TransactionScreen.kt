@@ -1,7 +1,6 @@
 package biped.works.transaction.ui
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,7 +27,6 @@ import biped.works.compose.collectWithLifecycle
 import biped.works.transaction.R
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
-import com.biped.locations.theme.TinySpacer
 import com.biped.locations.theme.components.LoadingPanel
 import com.biped.locations.theme.components.SmallTitle
 
@@ -65,7 +63,14 @@ fun TransactionPanel(uiModel: TransactionUiModel) {
             SmallSpacer()
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
+                value = uiModel.description,
+                label = { Text(stringResource(R.string.transaction_description)) },
+                onValueChange = {})
+            SmallSpacer()
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = uiModel.amount.toString(),
+                prefix = { Text(uiModel.currency) },
                 label = { Text(stringResource(R.string.transaction_amount)) },
                 onValueChange = {})
         }
@@ -95,5 +100,14 @@ private fun TopAppbar(
 @Preview
 @Composable
 fun TransactionPane_Preview() {
-    TransactionPanel(TransactionUiModel())
+    TransactionPanel(
+        TransactionUiModel(
+            id = "24325dfe",
+            name = "Car Rent",
+            description = "For the trip from x to y",
+            due = "13 Feb 2024",
+            amount = 320.00,
+            currency = "R$"
+        )
+    )
 }
