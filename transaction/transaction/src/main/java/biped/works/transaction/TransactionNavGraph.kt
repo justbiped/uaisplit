@@ -1,5 +1,6 @@
 package biped.works.transaction
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
@@ -8,8 +9,8 @@ import kotlinx.serialization.Serializable
 
 fun NavGraphBuilder.transactionNavGraph() {
     navigation<TransactionGraph>(startDestination = TransactionRoute::class) {
-        composable<TransactionRoute> { backStackEntry ->
-            TransactionScreen()
+        composable<TransactionRoute> {
+            TransactionScreen(viewModel = hiltViewModel())
         }
     }
 }
