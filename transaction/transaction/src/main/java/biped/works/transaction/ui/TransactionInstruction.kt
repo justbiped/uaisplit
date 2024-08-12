@@ -3,9 +3,12 @@ package biped.works.transaction.ui
 import biped.works.coroutines.MutableUiStateFlow
 
 internal sealed interface TransactionInstruction {
-    object State : TransactionInstruction
+    data class State(
+        val isLoading: Boolean = true,
+        val uiModel: TransactionUiModel = TransactionUiModel()
+    ) : TransactionInstruction
 
-    object FailedToUpdate : TransactionInstruction
+    data object FailedToUpdate : TransactionInstruction
 }
 
 internal fun MutableUiStateFlow<TransactionInstruction>.updateState(

@@ -1,7 +1,6 @@
 package biped.works.automation
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -138,7 +137,6 @@ data class Object(
 
 private val json = Json { ignoreUnknownKeys = true }
 
-@OptIn(ExperimentalSerializationApi::class)
 fun createGitHubApi(): GitHubApi {
     val contentType = "application/json".toMediaType()
     val converterFactory = json.asConverterFactory(contentType)
