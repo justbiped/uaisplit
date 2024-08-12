@@ -25,8 +25,8 @@ private fun Project.applyAndroidConfigs() {
             plugins.apply(libs.plugins.kotlin.kover.id)
 
             android {
-                compileSdkVersion(34)
-                buildToolsVersion("33.0.0")
+                compileSdkVersion(35)
+                buildToolsVersion("34.0.0")
 
                 defaultConfig {
                     minSdk = 29

@@ -27,7 +27,7 @@ object HomeNavigation {
 fun NavigationGraph(navController: NavHostController) {
     SharedTransitionLayout {
         val transitionScope = this
-        NavHost(navController, startDestination = HomeNavigation.destinations.first()) {
+        NavHost(navController, startDestination = StatementGraph::class) {
             statementNavGraph(navController, transitionScope)
             settingsNavGraph(navController, transitionScope = transitionScope)
         }

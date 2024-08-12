@@ -13,7 +13,6 @@ data class RemoteStatement(
 @Serializable
 data class RemoteTransaction(
     @SerialName("id") val id: String,
-    @SerialName("metaId") val metaId: String,
     @SerialName("owner") val owner: String,
     @SerialName("name") val name: String,
     @SerialName("description") val description: String,
