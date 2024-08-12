@@ -1,8 +1,10 @@
 package biped.works.transaction.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
@@ -20,8 +22,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import biped.works.compose.collectWithLifecycle
+import biped.works.transaction.R
+import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.TinySpacer
 import com.biped.locations.theme.components.LoadingPanel
@@ -50,15 +55,20 @@ fun TransactionPanel(uiModel: TransactionUiModel) {
             .windowInsetsPadding(WindowInsets.systemBars)
     ) {
         TopAppbar({}, {})
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = uiModel.name,
-            onValueChange = {})
         SmallSpacer()
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = uiModel.amount.toString(),
-            onValueChange = {})
+        Column(modifier = Modifier.padding(horizontal = Dimens.small)) {
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = uiModel.name,
+                label = { Text(stringResource(R.string.transaction_name)) },
+                onValueChange = {})
+            SmallSpacer()
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = uiModel.amount.toString(),
+                label = { Text(stringResource(R.string.transaction_amount)) },
+                onValueChange = {})
+        }
     }
 }
 

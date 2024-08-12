@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">transaction</string>
+    <string name="transaction_name">Name</string>
+    <string name="transaction_amount">Amount</string>
 </resources>
