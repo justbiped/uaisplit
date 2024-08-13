@@ -14,8 +14,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,6 +28,7 @@ import biped.works.compose.collectWithLifecycle
 import biped.works.transaction.R
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
+import com.biped.locations.theme.components.EditText
 import com.biped.locations.theme.components.LoadingPanel
 import com.biped.locations.theme.components.SmallTitle
 
@@ -69,35 +68,25 @@ fun TransactionPanel(
         TopAppbar({}, {})
         SmallSpacer()
         Column(modifier = Modifier.padding(horizontal = Dimens.small)) {
-
-            val editTextColors = OutlinedTextFieldDefaults.colors()
-                .copy(
-                    focusedLabelColor = MaterialTheme.colorScheme.secondary,
-                    focusedIndicatorColor = MaterialTheme.colorScheme.secondary
-                )
-
-            OutlinedTextField(
+            EditText(
                 modifier = Modifier.fillMaxWidth(),
                 value = form.name,
                 label = { Text(text = stringResource(R.string.transaction_name)) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                colors = editTextColors,
                 onValueChange = { form = form.copy(name = it) })
             SmallSpacer()
-            OutlinedTextField(
+            EditText(
                 modifier = Modifier.fillMaxWidth(),
                 value = form.description,
                 label = { Text(stringResource(R.string.transaction_description)) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                colors = editTextColors,
                 onValueChange = { form = form.copy(description = it) })
             SmallSpacer()
-            OutlinedTextField(
+            EditText(
                 modifier = Modifier.fillMaxWidth(),
                 value = form.amount.toString(),
                 prefix = { Text(uiModel.currency) },
                 label = { Text(stringResource(R.string.transaction_amount)) },
-                colors = editTextColors,
                 onValueChange = { })
         }
     }

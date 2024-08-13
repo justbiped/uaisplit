@@ -7,9 +7,9 @@ val green_100 = Color(0xFFC5D6B5)
 val green_200 = Color(0xFFaFBFA1)
 val green_300 = Color(0xFF7B9665)
 val green_400 = Color(0xFF4C6539)
-val green_500 = Color(0xFF064300)
-val green_600 = Color(0xFF063A00)
-val green_700 = Color(0xFF092D00)
+val green_500 = Color(0xFF384B2A)
+val green_600 = Color(0xFF29361E)
+val green_700 = Color(0xFF1F2514)
 val green_800 = Color(0xFF0A140A)
 val green_900 = Color(0xFF040804)
 
@@ -25,12 +25,12 @@ val cream_800 = Color(0xFF3F4132)
 val cream_900 = Color(0xFF151613)
 
 //============Light===================
-val light_primary = green_200
+val light_primary = green_300
 val light_onPrimary = green_50
 val light_primaryContainer = green_200
-val light_onPrimaryContainer = green_800
+val light_onPrimaryContainer = green_700
 
-val light_secondary = green_400
+val light_secondary = green_500
 val light_onSecondary = green_50
 val light_secondaryContainer = green_200
 val light_onSecondaryContainer = green_700
@@ -46,10 +46,10 @@ val light_onError = Color(0xFFFFFFFF)
 val light_onErrorContainer = Color(0xFF410002)
 
 val light_background = green_50
-val light_onBackground = green_800
+val light_onBackground = green_700
 val light_surface = green_50
 val light_surfaceContainer = green_100
-val light_onSurface = green_800
+val light_onSurface = green_700
 val light_surfaceVariant = green_100
 val light_onSurfaceVariant = Color(0xFF46483C)
 val light_outline = Color(0xFF77786A)
