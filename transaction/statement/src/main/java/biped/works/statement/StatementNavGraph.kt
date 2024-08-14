@@ -25,7 +25,7 @@ fun NavGraphBuilder.statementNavGraph(
                 viewModel = hiltViewModel(),
                 onNavigate = { destination -> navController.navigate(destination) })
         }
-        transactionNavGraph()
+        transactionNavGraph(navController)
     }
 }
 

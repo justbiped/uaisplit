@@ -16,6 +16,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import biped.works.compose.collectWithLifecycle
 import biped.works.transaction.R
+import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.EditText
@@ -33,7 +35,10 @@ import com.biped.locations.theme.components.LoadingPanel
 import com.biped.locations.theme.components.SmallTitle
 
 @Composable
-internal fun TransactionScreen(viewModel: TransactionViewModel) {
+internal fun TransactionScreen(
+    viewModel: TransactionViewModel,
+    onNavigateUp: () -> Unit
+) {
     var state by remember { mutableStateOf(TransactionInstruction.State()) }
 
     viewModel.instruction.collectWithLifecycle { instruction ->
@@ -47,8 +52,9 @@ internal fun TransactionScreen(viewModel: TransactionViewModel) {
         LoadingPanel()
     } else {
         TransactionPanel(
-            state.uiModel,
-            onFormChange = {}
+            uiModel = state.uiModel,
+            onNavigateUp = onNavigateUp,
+            onSave = {}
         )
     }
 }
@@ -56,7 +62,8 @@ internal fun TransactionScreen(viewModel: TransactionViewModel) {
 @Composable
 fun TransactionPanel(
     uiModel: TransactionUiModel,
-    onFormChange: () -> Unit = {}
+    onSave: () -> Unit = {},
+    onNavigateUp: () -> Unit = {}
 ) {
     var form by remember { mutableStateOf(uiModel) }
 
@@ -65,7 +72,7 @@ fun TransactionPanel(
             .fillMaxWidth()
             .windowInsetsPadding(WindowInsets.systemBars)
     ) {
-        TopAppbar({}, {})
+        TopAppbar(onNavigateUp = onNavigateUp, onSave = onSave)
         SmallSpacer()
         Column(modifier = Modifier.padding(horizontal = Dimens.small)) {
             EditText(
@@ -115,14 +122,17 @@ private fun TopAppbar(
 @Preview
 @Composable
 fun TransactionPane_Preview() {
-    TransactionPanel(
-        TransactionUiModel(
-            id = "24325dfe",
-            name = "Car Rent",
-            description = "For the trip from x to y",
-            due = "13 Feb 2024",
-            amount = 320.00,
-            currency = "R$"
+    CashTheme {
+        TransactionPanel(
+            TransactionUiModel(
+                id = "24325dfe",
+                name = "Car Rent",
+                description = "For the trip from x to y",
+                due = "13 Feb 2024",
+                amount = 320.00,
+                currency = "R$"
+            )
         )
-    )
+    }
+
 }
