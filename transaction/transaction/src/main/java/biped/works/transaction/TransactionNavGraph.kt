@@ -9,9 +9,8 @@ import biped.works.transaction.ui.TransactionScreen
 import kotlinx.serialization.Serializable
 
 fun NavGraphBuilder.transactionNavGraph(navController: NavHostController) {
-    navigation<TransactionGraph>(startDestination = TransactionRoute::class) {
-        composable<TransactionRoute> {
-
+    navigation<TransactionGraph>(startDestination = TransactionRoute("")) {
+        composable<TransactionRoute> { backStackEntry ->
             TransactionScreen(
                 viewModel = hiltViewModel(),
                 onNavigateUp = { navController.navigateUp() }
