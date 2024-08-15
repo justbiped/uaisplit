@@ -6,6 +6,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 typealias App = com.android.build.gradle.AppPlugin
@@ -71,6 +72,12 @@ private fun Project.applyAndroidConfigs() {
                 }
 
                 setupTests()
+            }
+
+            kotlin {
+                sourceSets.all {
+                    languageSettings.enableLanguageFeature("ExplicitBackingFields")
+                }
             }
 
             androidComponents {
@@ -148,4 +155,8 @@ internal fun Project.android(action: AndroidExtension.() -> Unit) {
 
 internal fun Project.androidComponents(action: ApplicationAndroidComponentsExtension.() -> Unit) {
     extensions.findByType<ApplicationAndroidComponentsExtension>()?.action()
+}
+
+internal fun Project.kotlin(action: KotlinAndroidProjectExtension.() -> Unit) {
+    extensions.findByType<KotlinAndroidProjectExtension>()?.action()
 }
