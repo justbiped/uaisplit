@@ -3,6 +3,7 @@ package biped.works.plugins
 import AndroidExtension
 import android
 import devImplementation
+import id
 import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -19,13 +20,11 @@ class ComposePlugin : Plugin<Project> {
         project.allprojects {
             project.extensions.findByType<AndroidExtension>() ?: noAndroidPluginException
 
+            project.plugins.apply(libs.plugins.compose.compiler.id)
+
             android {
                 buildFeatures.apply {
                     compose = true
-                }
-
-                composeOptions {
-                    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
                 }
             }
 

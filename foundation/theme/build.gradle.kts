@@ -1,7 +1,7 @@
 plugins {
     apply(libs.plugins.android.library)
     apply(libs.plugins.kotlin.android)
-    apply(libs.plugins.compose)
+    apply(libs.plugins.compose.core)
 }
 
 android {

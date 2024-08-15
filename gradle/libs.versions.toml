@@ -1,7 +1,7 @@
 [versions]
-agp = "8.4.1"
+agp = "8.5.2"
 javaxInject = "1"
-kotlin = "1.9.20"
+kotlin = "2.0.0"
 coroutine = "1.7.3"
 
 lifecycle = "2.5.1"
@@ -123,7 +123,7 @@ timber = { group = "com.jakewharton.timber", name = "timber", version = "5.0.1" 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-android-playServices = { id = "com.google.gms.google-services", version = "4.3.8" }
+android-playServices = { id = "com.google.gms.google-services", version = "4.3.10" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger_hilt" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -133,7 +133,9 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm" }
 kotlin-kover = { id = "org.jetbrains.kotlinx.kover", version = "0.8.3" }
 java = { id = "java-library" }
 
-ksp = { id = "com.google.devtools.ksp", version = "1.9.20-1.0.14" }
+compose-core = { id = "biped.works.plugins.compose", version = "1.0.0" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+ksp = { id = "com.google.devtools.ksp", version = "2.0.0-1.0.24" }
 
 dependencyUpdates = { id = "com.github.ben-manes.versions", version = "0.42.0" }
-compose = { id = "biped.works.plugins.compose", version = "1.0.0" }

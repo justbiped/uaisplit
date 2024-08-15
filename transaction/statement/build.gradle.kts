@@ -3,7 +3,7 @@ plugins {
     apply(libs.plugins.kotlin.android)
     apply(libs.plugins.kotlin.serialization)
     apply(libs.plugins.hilt)
-    apply(libs.plugins.compose)
+    apply(libs.plugins.compose.core)
     apply(libs.plugins.ksp)
 }
 

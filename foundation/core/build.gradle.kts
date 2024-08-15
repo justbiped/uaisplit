@@ -12,10 +12,6 @@ android {
         namespace = "com.favoriteplaces.core"
     }
 
-    buildFeatures.apply {
-        compose = true
-    }
-
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }

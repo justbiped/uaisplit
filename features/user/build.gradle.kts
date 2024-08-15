@@ -2,7 +2,7 @@ plugins {
     apply(libs.plugins.android.library)
     apply(libs.plugins.hilt)
     apply(libs.plugins.ksp)
-    apply(libs.plugins.compose)
+    apply(libs.plugins.compose.core)
 }
 
 android{

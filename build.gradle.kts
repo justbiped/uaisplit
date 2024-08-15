@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.kotlin.kover) apply false
     alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.dependencyUpdates)
 }
 

@@ -4,7 +4,7 @@ plugins {
     apply(libs.plugins.kotlin.serialization)
     apply(libs.plugins.kotlin.kover)
     apply(libs.plugins.ksp)
-    apply(libs.plugins.compose)
+    apply(libs.plugins.compose.core)
 }
 
 android {
