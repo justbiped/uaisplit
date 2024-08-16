@@ -16,7 +16,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,7 +30,7 @@ import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.EditText
-import com.biped.locations.theme.components.LoadingPanel
+import com.biped.locations.theme.components.Loading
 import com.biped.locations.theme.components.SmallTitle
 
 @Composable
@@ -49,7 +48,7 @@ internal fun TransactionScreen(
     }
 
     if (state.isLoading) {
-        LoadingPanel()
+        Loading()
     } else {
         TransactionPanel(
             uiModel = state.uiModel,
