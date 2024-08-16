@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableUiStateFlow
-import biped.works.coroutines.UiStateFlow
 import biped.works.coroutines.launchIO
 import biped.works.transaction.GetTransactionUseCase
 import biped.works.transaction.data.Transaction
@@ -13,12 +12,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class TransactionViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val getTransactionUseCase: GetTransactionUseCase
 ) : ViewModel() {
 
-    val instruction: UiStateFlow<TransactionInstruction>
-        field = MutableUiStateFlow<TransactionInstruction>(TransactionInstruction.State())
+    private val _instruction = MutableUiStateFlow<TransactionInstruction>(TransactionInstruction.State())
+    val instruction = _instruction.toUiStateFlow()
 
     init {
         savedStateHandle.get<String>("id")?.also { id ->
@@ -35,12 +34,12 @@ internal class TransactionViewModel @Inject constructor(
     }
 
     private fun onTransactionUpdate(transaction: Transaction) {
-        instruction.updateState {
+        _instruction.updateState {
             TransactionInstruction.State(isLoading = false, transaction.toUiModel())
         }
     }
 
-    fun onLoadTransactionError() {
-        instruction.sendEvent(TransactionInstruction.FailedToUpdate)
+    private fun onLoadTransactionError() {
+        _instruction.sendEvent(TransactionInstruction.FailedToUpdate)
     }
 }
