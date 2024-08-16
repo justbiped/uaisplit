@@ -4,15 +4,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import biped.works.statement.R
@@ -27,8 +24,6 @@ fun TransactionCell(
     transaction: Transaction,
     onClick: (String) -> Unit
 ) {
-    val balanceIndicator = if (transaction.value < 0) R.drawable.debt_arrow else R.drawable.credit_arrow
-
     Row(modifier = Modifier.clickable { onClick(transaction.id) }) {
         Column(
             Modifier
@@ -41,15 +36,28 @@ fun TransactionCell(
             ) {
                 LargeBody(text = transaction.description)
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(painter = painterResource(id = balanceIndicator), null, tint = CashTheme.colorScheme.primary)
+                    BalanceIcon(transaction.value)
                     TinySpacer()
                     LargeBody(text = "$${transaction.value}")
                 }
-
             }
-
         }
     }
+}
+
+@Composable
+private fun BalanceIcon(value: Double) {
+    val (balanceIndicator, balanceDescription) = if (value < 0) {
+        Pair(R.drawable.debt_arrow, "Negative balance icon")
+    } else {
+        Pair(R.drawable.credit_arrow, "Positive balance icon")
+    }
+
+    Icon(
+        painter = painterResource(id = balanceIndicator),
+        tint = CashTheme.colorScheme.primary,
+        contentDescription = balanceDescription
+    )
 }
 
 @Preview(showBackground = true, widthDp = 360)
