@@ -16,8 +16,11 @@ import biped.works.statement.R
 import biped.works.statement.data.Transaction
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
+import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.TinySpacer
 import com.biped.locations.theme.components.LargeBody
+import com.biped.locations.theme.components.MediumBody
+import com.biped.locations.theme.components.MediumTitle
 
 @Composable
 fun TransactionCell(
@@ -27,20 +30,22 @@ fun TransactionCell(
     Row(modifier = Modifier.clickable { onClick(transaction.id) }) {
         Column(
             Modifier
-                .padding(horizontal = Dimens.small)
+                .padding(horizontal = Dimens.normal)
                 .padding(vertical = Dimens.normal)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                LargeBody(text = transaction.description)
+                MediumTitle(text = transaction.name)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     BalanceIcon(transaction.value)
                     TinySpacer()
                     LargeBody(text = "$${transaction.value}")
                 }
             }
+            SmallSpacer()
+            MediumBody(text = transaction.description)
         }
     }
 }
@@ -66,7 +71,11 @@ fun TransactionCell_Preview() {
     CashTheme {
         TransactionCell(
             onClick = {},
-            transaction = Transaction("", "Preview Transaction", 2300.00)
+            transaction = Transaction(
+                "", name = "Rent",
+                description = "Preview Transaction",
+                2300.00
+            )
         )
     }
 }

@@ -15,6 +15,7 @@ fun List<RemoteTransaction>.toDomain() = map { it.toDomain() }
 
 fun RemoteTransaction.toDomain() = Transaction(
     id = id,
+    name = name,
     description = description,
     value = value.toDomain().amount
 )
