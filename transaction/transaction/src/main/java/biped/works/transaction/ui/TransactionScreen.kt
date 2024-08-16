@@ -53,7 +53,7 @@ internal fun TransactionScreen(
         TransactionPanel(
             uiModel = state.uiModel,
             onNavigateUp = onNavigateUp,
-            onSave = {}
+            onSave = viewModel::saveTransaction
         )
     }
 }
@@ -61,7 +61,7 @@ internal fun TransactionScreen(
 @Composable
 fun TransactionPanel(
     uiModel: TransactionUiModel,
-    onSave: () -> Unit = {},
+    onSave: (TransactionUiModel) -> Unit = {},
     onNavigateUp: () -> Unit = {}
 ) {
     var form by remember { mutableStateOf(uiModel) }
@@ -71,7 +71,7 @@ fun TransactionPanel(
             .fillMaxWidth()
             .windowInsetsPadding(WindowInsets.systemBars)
     ) {
-        TopAppbar(onNavigateUp = onNavigateUp, onSave = onSave)
+        TopAppbar(onNavigateUp = onNavigateUp, onSave = { onSave(form) })
         SmallSpacer()
         Column(modifier = Modifier.padding(horizontal = Dimens.small)) {
             EditText(

@@ -13,4 +13,13 @@ class TransactionRepository @Inject constructor(
     fun transactionStream(id: String) = emptyFlow<String>()
 
     suspend fun getTransaction(id: String): Transaction = transactionApi.getTransaction(id).toDomain()
+
+    suspend fun saveTransaction(transactionUpdate: TransactionUpdate) {
+        try {
+            val result = transactionApi.saveTransaction(transactionUpdate.toRemote())
+            print(result)
+        } catch (error: Throwable) {
+            error.printStackTrace()
+        }
+    }
 }
