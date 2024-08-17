@@ -2,10 +2,18 @@ package biped.works.statement.ui
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,6 +26,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import biped.works.compose.collectWithLifecycle
 import biped.works.statement.data.Statement
 import biped.works.statement.data.TimeSpan
+import biped.works.statement.data.Transaction
+import com.biped.locations.theme.CashTheme
+import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.components.LargeDisplayText
 import com.biped.locations.theme.components.Loading
 
@@ -52,15 +63,29 @@ private fun EmptyStatement() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun StatementPanel(statement: Statement, onTransactionClick: (String) -> Unit) {
-    LazyColumn(
-        modifier = Modifier
-            .windowInsetsPadding(TopAppBarDefaults.windowInsets)
-    ) {
-        items(statement.transactions) { transaction ->
-            TransactionCell(
-                transaction,
-                onTransactionClick
-            )
+    Column {
+        Card(
+            Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(bottomStart = Dimens.normal, bottomEnd = Dimens.normal)
+        ) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(Dimens.normal)
+                    .windowInsetsPadding(TopAppBarDefaults.windowInsets),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text("Balance")
+                Text(statement.balance)
+            }
+        }
+        LazyColumn {
+            items(statement.transactions) { transaction ->
+                TransactionCell(
+                    transaction,
+                    onTransactionClick
+                )
+            }
         }
     }
 }
@@ -69,11 +94,30 @@ fun showFetchFailToast(context: Context) {
     Toast.makeText(context, "Unable to update", Toast.LENGTH_SHORT).show()
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = "id:pixel_8")
 @Composable
 fun StatementUi_Preview() {
-    StatementPanel(
-        statement = Statement("Balance", emptyList(), timeSpan = TimeSpan("", "")),
-        onTransactionClick = {}
-    )
+    CashTheme {
+        StatementPanel(
+            statement = Statement(
+                "Balance",
+                transactions = listOf(
+                    Transaction(
+                        id = "",
+                        name = "Test Transaction",
+                        description = "Some Description here",
+                        value = 300.00
+                    ),
+                    Transaction(
+                        id = "",
+                        name = "Test Transaction",
+                        description = "Some Description here",
+                        value = 300.00
+                    )
+                ),
+                timeSpan = TimeSpan("", "")
+            ),
+            onTransactionClick = {}
+        )
+    }
 }
