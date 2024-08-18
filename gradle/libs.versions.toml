@@ -19,6 +19,7 @@ compose = "1.7.0-beta07"
 robolectricVersion = "4.9.2"
 mockkVersion = "1.13.12"
 junit = "1.2.1"
+runtimeAndroid = "1.7.0-beta06"
 
 [libraries]
 # Http / Retrofit
@@ -119,6 +120,7 @@ test-robolectric-annotations = { group = "org.robolectric", name = "annotations"
 junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
 timber = { group = "com.jakewharton.timber", name = "timber", version = "5.0.1" }
+runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
