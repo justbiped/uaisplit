@@ -6,15 +6,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.sharp.ArrowBackIos
+import androidx.compose.material.icons.automirrored.sharp.ArrowForwardIos
+import androidx.compose.material.icons.filled.ArrowBackIos
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,8 +35,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.min
 import biped.works.compose.collectWithLifecycle
 import biped.works.statement.data.Statement
 import biped.works.statement.data.TimeSpan
@@ -59,34 +72,12 @@ internal fun StatementScreen(viewModel: StatementViewModel, onNavigate: (destina
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun StatementPanel(statement: Statement, onTransactionClick: (String) -> Unit) {
+    val minHeight = getTopWindowInset() + 60.dp
     CollapsingLayout(
-        minHeight = 48.dp,
-        header = {
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .background(
-                        CashTheme.colorScheme.surfaceContainer,
-                        RoundedCornerShape(bottomStart = Dimens.normal, bottomEnd = Dimens.normal)
-                    ),
-                contentAlignment = Alignment.BottomCenter
-            ) {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(Dimens.normal)
-                        .windowInsetsPadding(TopAppBarDefaults.windowInsets),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    LargeTitle(text = "Balance")
-                    LargeTitle(text = statement.balance)
-                }
-            }
-        },
+        minHeight = minHeight,
+        header = { BalanceHeader(statement) },
         content = { insets ->
             LazyColumn(contentPadding = insets.asPaddingValues()) {
                 items(statement.transactions) { transaction ->
@@ -101,8 +92,30 @@ private fun StatementPanel(statement: Statement, onTransactionClick: (String) ->
 }
 
 @Composable
+private fun BalanceHeader(statement: Statement) {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .background(
+                CashTheme.colorScheme.surfaceContainer,
+                RoundedCornerShape(bottomStart = Dimens.normal, bottomEnd = Dimens.normal)
+            ),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        MonthSelector()
+    }
+}
+
+@Composable
 private fun EmptyStatement() {
     LargeDisplayText(text = "You don't have any transaction registered yet, try to create one.")
+}
+
+@Composable
+private fun getTopWindowInset() = with(LocalDensity.current) {
+    val topInset = WindowInsets.systemBars.getTop(LocalDensity.current)
+    topInset.toDp()
 }
 
 fun showFetchFailToast(context: Context) {

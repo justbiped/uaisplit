@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -37,7 +39,7 @@ fun CollapsingLayout(
     val insets by remember { derivedStateOf { with(layoutDensity) { layoutHeightPx.toDp() } } }
     val minHeightPx by remember {
         val minimum = with(layoutDensity) { minHeight.roundToPx() }
-        derivedStateOf { if (minimum == 0) -layoutHeightPx else -minimum }
+        derivedStateOf { if (minimum == 0) -layoutHeightPx else -(layoutHeightPx -minimum) }
     }
 
     var offset by rememberSaveable { mutableIntStateOf(0) }
