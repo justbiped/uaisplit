@@ -1,5 +1,15 @@
 package biped.works.statement.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
+import androidx.compose.animation.with
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,12 +41,15 @@ import java.time.format.TextStyle
 @Composable
 fun MonthSelector(start: YearMonth = YearMonth.now()) {
     var currentYearMonth by remember { mutableStateOf(start) }
+    var isIncrement by remember { mutableStateOf(false) }
 
     fun incrementMonth() {
+        isIncrement = true
         currentYearMonth = currentYearMonth.plusMonths(1)
     }
 
     fun decrementMonth() {
+        isIncrement = false
         currentYearMonth = currentYearMonth.plusMonths(-1)
     }
 
@@ -52,15 +65,32 @@ fun MonthSelector(start: YearMonth = YearMonth.now()) {
         IconButton(onClick = { incrementMonth() }) {
             Icon(Icons.AutoMirrored.Sharp.ArrowBackIos, null)
         }
-        LargeTitle(
-            currentYearMonth.month.getDisplayName(TextStyle.FULL, Locale.current.platformLocale)
-        )
+        AnimatedContent(
+            targetState = currentYearMonth,
+            transitionSpec = {
+                if (isIncrement) {
+                    (slideInHorizontally { width -> -width } + fadeIn())
+                        .togetherWith(slideOutHorizontally { width -> width } + fadeOut())
+                } else {
+                    (slideInHorizontally { width -> width } + fadeIn())
+                        .togetherWith(slideOutHorizontally { width -> -width } + fadeOut())
+                }.using(
+                    SizeTransform(clip = false)
+                )
+            },
+            label = ""
+        ) { yearMonth ->
+            LargeTitle(
+                yearMonth.month.getDisplayName(TextStyle.FULL, Locale.current.platformLocale)
+            )
+        }
         IconButton(onClick = { decrementMonth() }) {
             Icon(
                 Icons.AutoMirrored.Sharp.ArrowForwardIos, null
             )
         }
     }
+
 }
 
 @Preview
