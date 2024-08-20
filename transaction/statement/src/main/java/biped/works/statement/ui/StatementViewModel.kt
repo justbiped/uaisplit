@@ -3,25 +3,32 @@ package biped.works.statement.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.MutableUiStateFlow
-import biped.works.statement.ObserveStatementUseCase
+import biped.works.coroutines.launchIO
+import biped.works.statement.FetchStatementUseCase
 import biped.works.statement.data.Statement
+import biped.works.statement.data.TimeSpan
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDate
+import java.time.YearMonth
 import javax.inject.Inject
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 internal class StatementViewModel @Inject constructor(
-    observeStatement: ObserveStatementUseCase
+    private val fetchStatementUseCase: FetchStatementUseCase
 ) : ViewModel() {
 
     private val _instruction = MutableUiStateFlow<StatementInstruction>(StatementInstruction.State())
     val instruction = _instruction.toUiStateFlow()
 
-    init {
-        observeStatement()
-            .onEach { onStatementUpdate(it) }
-            .launchIn(viewModelScope)
+    fun loadStatement(yearMonth: YearMonth) {
+        val timeSpan = TimeSpan(
+            yearMonth.toLocalDate(1).toString(),
+            yearMonth.toLocalDate(yearMonth.lengthOfMonth()).toString()
+        )
+        viewModelScope.launchIO {
+            fetchStatementUseCase(timeSpan)
+                .onSuccess { onStatementUpdate(it) }
+        }
     }
 
     private fun onStatementUpdate(statement: Statement) {
@@ -33,4 +40,6 @@ internal class StatementViewModel @Inject constructor(
     fun openTransaction(transactionId: String) {
         _instruction.sendEvent(StatementInstruction.OpenTransaction(transactionId))
     }
+
+    private fun YearMonth.toLocalDate(day: Int) = LocalDate.of(year, month.value, day)
 }

@@ -3,30 +3,15 @@ package biped.works.statement.ui
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.sharp.ArrowBackIos
-import androidx.compose.material.icons.automirrored.sharp.ArrowForwardIos
-import androidx.compose.material.icons.filled.ArrowBackIos
-import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.ArrowForwardIos
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,7 +23,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.min
 import biped.works.compose.collectWithLifecycle
 import biped.works.statement.data.Statement
 import biped.works.statement.data.TimeSpan
@@ -46,8 +30,8 @@ import biped.works.statement.data.Transaction
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.components.LargeDisplayText
-import com.biped.locations.theme.components.LargeTitle
 import com.biped.locations.theme.components.Loading
+import java.time.YearMonth
 
 @Composable
 internal fun StatementScreen(viewModel: StatementViewModel, onNavigate: (destination: Any) -> Unit) {
@@ -62,37 +46,46 @@ internal fun StatementScreen(viewModel: StatementViewModel, onNavigate: (destina
         }
     }
 
-    when {
-        state.isLoading -> Loading()
-        state.isEmpty -> EmptyStatement()
-        else -> StatementPanel(
-            statement = state.uiModel,
-            onTransactionClick = viewModel::openTransaction
-        )
-    }
-}
-
-@Composable
-private fun StatementPanel(statement: Statement, onTransactionClick: (String) -> Unit) {
-    val minHeight = getTopWindowInset() + 60.dp
-    CollapsingLayout(
-        minHeight = minHeight,
-        header = { BalanceHeader(statement) },
-        content = { insets ->
-            LazyColumn(contentPadding = insets.asPaddingValues()) {
-                items(statement.transactions) { transaction ->
-                    TransactionCell(
-                        transaction,
-                        onTransactionClick
-                    )
-                }
-            }
-        }
+    StatementPanel(
+        statement = state.uiModel,
+        isLoading = state.isLoading,
+        isEmpty = state.isEmpty,
+        onTransactionClick = viewModel::openTransaction,
+        onMonthSelected = viewModel::loadStatement
     )
 }
 
 @Composable
-private fun BalanceHeader(statement: Statement) {
+private fun StatementPanel(
+    statement: Statement,
+    isLoading: Boolean = false,
+    isEmpty: Boolean = false,
+    onTransactionClick: (String) -> Unit = {},
+    onMonthSelected: (YearMonth) -> Unit = {}
+) {
+    val minHeight = getTopWindowInset() + 60.dp
+    CollapsingLayout(
+        minHeight = minHeight,
+        header = { BalanceHeader(statement, onMonthSelected = onMonthSelected) }) { insets ->
+        when {
+            isLoading -> Loading()
+            isEmpty -> EmptyStatement()
+            else -> {
+                LazyColumn(contentPadding = insets.asPaddingValues()) {
+                    items(statement.transactions) { transaction ->
+                        TransactionCell(
+                            transaction,
+                            onTransactionClick
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BalanceHeader(statement: Statement, onMonthSelected: (YearMonth) -> Unit = {}) {
     Box(
         Modifier
             .fillMaxWidth()
@@ -103,7 +96,7 @@ private fun BalanceHeader(statement: Statement) {
             ),
         contentAlignment = Alignment.BottomCenter
     ) {
-        MonthSelector()
+        MonthSelector(onMonthSelected = onMonthSelected)
     }
 }
 

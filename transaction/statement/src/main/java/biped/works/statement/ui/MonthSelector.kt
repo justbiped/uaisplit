@@ -1,15 +1,12 @@
 package biped.works.statement.ui
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
-import androidx.compose.animation.with
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,9 +20,11 @@ import androidx.compose.material.icons.automirrored.sharp.ArrowForwardIos
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,9 +38,11 @@ import java.time.YearMonth
 import java.time.format.TextStyle
 
 @Composable
-fun MonthSelector(start: YearMonth = YearMonth.now()) {
-    var currentYearMonth by remember { mutableStateOf(start) }
+fun MonthSelector(start: YearMonth = YearMonth.now(), onMonthSelected: (YearMonth) -> Unit) {
+    var currentYearMonth by rememberSaveable { mutableStateOf(start) }
     var isIncrement by remember { mutableStateOf(false) }
+
+    LaunchedEffect(currentYearMonth) { onMonthSelected(currentYearMonth) }
 
     fun incrementMonth() {
         isIncrement = true
@@ -62,18 +63,18 @@ fun MonthSelector(start: YearMonth = YearMonth.now()) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.Bottom
     ) {
-        IconButton(onClick = { incrementMonth() }) {
+        IconButton(onClick = { decrementMonth() }) {
             Icon(Icons.AutoMirrored.Sharp.ArrowBackIos, null)
         }
         AnimatedContent(
             targetState = currentYearMonth,
             transitionSpec = {
                 if (isIncrement) {
-                    (slideInHorizontally { width -> -width } + fadeIn())
-                        .togetherWith(slideOutHorizontally { width -> width } + fadeOut())
-                } else {
                     (slideInHorizontally { width -> width } + fadeIn())
                         .togetherWith(slideOutHorizontally { width -> -width } + fadeOut())
+                } else {
+                    (slideInHorizontally { width -> -width } + fadeIn())
+                        .togetherWith(slideOutHorizontally { width -> width } + fadeOut())
                 }.using(
                     SizeTransform(clip = false)
                 )
@@ -84,7 +85,7 @@ fun MonthSelector(start: YearMonth = YearMonth.now()) {
                 yearMonth.month.getDisplayName(TextStyle.FULL, Locale.current.platformLocale)
             )
         }
-        IconButton(onClick = { decrementMonth() }) {
+        IconButton(onClick = { incrementMonth() }) {
             Icon(
                 Icons.AutoMirrored.Sharp.ArrowForwardIos, null
             )
@@ -98,7 +99,7 @@ fun MonthSelector(start: YearMonth = YearMonth.now()) {
 fun MonthSelector_Preview() {
     CashTheme {
         Box(Modifier.background(CashTheme.colorScheme.surfaceContainer)) {
-            MonthSelector()
+            MonthSelector(onMonthSelected = {})
         }
     }
 }
