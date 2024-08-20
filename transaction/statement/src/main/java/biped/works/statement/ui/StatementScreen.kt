@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.systemBars
@@ -29,7 +30,7 @@ import biped.works.statement.data.TimeSpan
 import biped.works.statement.data.Transaction
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
-import com.biped.locations.theme.components.LargeDisplayText
+import com.biped.locations.theme.components.LargeTitle
 import com.biped.locations.theme.components.Loading
 import java.time.YearMonth
 
@@ -102,7 +103,9 @@ private fun BalanceHeader(statement: Statement, onMonthSelected: (YearMonth) -> 
 
 @Composable
 private fun EmptyStatement() {
-    LargeDisplayText(text = "You don't have any transaction registered yet, try to create one.")
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        LargeTitle(text = "You don't have any transaction registered yet, try to create one.")
+    }
 }
 
 @Composable
