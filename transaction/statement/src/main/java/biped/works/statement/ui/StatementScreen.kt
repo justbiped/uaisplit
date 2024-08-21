@@ -9,10 +9,16 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,6 +58,7 @@ internal fun StatementScreen(viewModel: StatementViewModel, onNavigate: (destina
         isLoading = state.isLoading,
         isEmpty = state.isEmpty,
         onTransactionClick = viewModel::openTransaction,
+        onAddButtonClick = viewModel::addTransaction,
         onMonthSelected = viewModel::loadStatement
     )
 }
@@ -62,6 +69,7 @@ private fun StatementPanel(
     isLoading: Boolean = false,
     isEmpty: Boolean = false,
     onTransactionClick: (String) -> Unit = {},
+    onAddButtonClick: () -> Unit = {},
     onMonthSelected: (YearMonth) -> Unit = {}
 ) {
     val minHeight = getTopWindowInset() + 60.dp
@@ -71,19 +79,38 @@ private fun StatementPanel(
         when {
             isLoading -> Loading()
             isEmpty -> EmptyStatement()
-            else -> {
-                LazyColumn(contentPadding = insets.asPaddingValues()) {
-                    items(statement.transactions) { transaction ->
-                        TransactionCell(
-                            transaction,
-                            onTransactionClick
-                        )
-                    }
-                }
+            else -> Content(insets, statement, onTransactionClick, onAddButtonClick)
+        }
+    }
+}
+
+@Composable
+private fun Content(
+    insets: WindowInsets,
+    statement: Statement,
+    onTransactionClick: (String) -> Unit,
+    onAddButtonClick: () -> Unit
+) {
+    Box(Modifier.fillMaxSize()) {
+        FloatingActionButton(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(bottom = getBottomPadding() + Dimens.big, end = Dimens.normal),
+            shape = RoundedCornerShape(Dimens.small),
+            onClick = onAddButtonClick
+        ) {
+            Icon(Icons.Sharp.Add, contentDescription = null)
+        }
+        LazyColumn(contentPadding = insets.asPaddingValues()) {
+            items(statement.transactions) { transaction ->
+                TransactionCell(transaction, onTransactionClick)
             }
         }
     }
 }
+
+@Composable
+private fun getBottomPadding() = WindowInsets.navigationBars.getBottom(LocalDensity.current).dp
 
 @Composable
 private fun BalanceHeader(statement: Statement, onMonthSelected: (YearMonth) -> Unit = {}) {

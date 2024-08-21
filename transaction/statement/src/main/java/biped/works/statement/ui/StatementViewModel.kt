@@ -37,6 +37,10 @@ internal class StatementViewModel @Inject constructor(
         }
     }
 
+    fun addTransaction() {
+        // todo: Navigate to transaction screen
+    }
+
     fun openTransaction(transactionId: String) {
         _instruction.sendEvent(StatementInstruction.OpenTransaction(transactionId))
     }
