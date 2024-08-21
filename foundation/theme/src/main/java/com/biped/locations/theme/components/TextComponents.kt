@@ -1,5 +1,6 @@
 package com.biped.locations.theme.components
 
+import android.graphics.Paint.Align
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
