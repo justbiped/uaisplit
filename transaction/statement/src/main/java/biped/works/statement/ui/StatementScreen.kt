@@ -3,9 +3,7 @@ package biped.works.statement.ui
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -23,7 +21,6 @@ import androidx.compose.material.icons.sharp.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,9 +42,7 @@ import biped.works.statement.data.Transaction
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.TinySpacer
-import com.biped.locations.theme.components.LargeTitle
 import com.biped.locations.theme.components.Loading
-import com.biped.locations.theme.components.MediumTitle
 import java.time.YearMonth
 
 @Composable
@@ -88,7 +83,7 @@ private fun StatementPanel(
         header = { BalanceHeader(statement, onMonthSelected = onMonthSelected) }) { insets ->
         when {
             isLoading -> Loading()
-            isEmpty -> EmptyStatement()
+            isEmpty -> EmptyStatement(onAddButtonClick)
             else -> Content(insets, statement, onTransactionClick, onAddButtonClick)
         }
     }
@@ -120,10 +115,10 @@ private fun Content(
 }
 
 @Composable
-private fun getBottomPadding() = WindowInsets.navigationBars.getBottom(LocalDensity.current).dp
-
-@Composable
-private fun BalanceHeader(statement: Statement, onMonthSelected: (YearMonth) -> Unit = {}) {
+private fun BalanceHeader(
+    statement: Statement,
+    onMonthSelected: (YearMonth) -> Unit = {}
+) {
     Box(
         Modifier
             .fillMaxWidth()
@@ -139,12 +134,12 @@ private fun BalanceHeader(statement: Statement, onMonthSelected: (YearMonth) -> 
 }
 
 @Composable
-private fun EmptyStatement() {
+private fun EmptyStatement(onAddButtonClick: () -> Unit) {
     Box(
         Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Button(onClick = {}) {
+        Button(onClick = onAddButtonClick) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Sharp.Add, contentDescription = null)
                 TinySpacer()
@@ -159,6 +154,9 @@ private fun getTopWindowInset() = with(LocalDensity.current) {
     val topInset = WindowInsets.systemBars.getTop(LocalDensity.current)
     topInset.toDp()
 }
+
+@Composable
+private fun getBottomPadding() = WindowInsets.navigationBars.getBottom(LocalDensity.current).dp
 
 fun showFetchFailToast(context: Context) {
     Toast.makeText(context, "Unable to update", Toast.LENGTH_SHORT).show()
@@ -196,6 +194,6 @@ fun StatementUi_Preview() {
 @Composable
 fun StatementUiEmpty_Preview() {
     CashTheme {
-        EmptyStatement()
+        EmptyStatement({})
     }
 }
