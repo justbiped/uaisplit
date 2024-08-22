@@ -5,6 +5,7 @@ plugins {
     apply(libs.plugins.kotlin.kover)
     apply(libs.plugins.ksp)
     apply(libs.plugins.compose.core)
+    id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
 }
 
 android {
@@ -94,4 +95,8 @@ kover {
         )
         filters.excludes.androidGeneratedClasses()
     }
+}
+
+coverallsJacoco{
+    reportPath = "build/reports/kover/*.xml"
 }
