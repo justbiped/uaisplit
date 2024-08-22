@@ -1,5 +1,6 @@
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import kotlinx.kover.gradle.plugin.dsl.KoverProjectExtension
 
 apply<VersionsPlugin>()
 apply<ConfigPlugin>()
@@ -46,6 +47,11 @@ tasks.create<Exec>("coverageHtmlReport") {
     )
 }
 
-coverallsJacoco{
+coverallsJacoco {
     reportPath = "app/build/reports/kover/reportLocal.xml"
+    reportSourceSets = listOf(
+        File("features/profile/src"),
+        File("features/settings/src"),
+        File("features/user/src")
+    )
 }
