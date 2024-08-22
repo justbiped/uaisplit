@@ -98,5 +98,5 @@ kover {
 }
 
 coverallsJacoco{
-    reportPath = "build/reports/kover/*.xml"
+    reportPath = "app/build/reports/kover/reportLocal.xml"
 }
