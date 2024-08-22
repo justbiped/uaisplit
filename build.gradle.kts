@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.dependencyUpdates)
+    id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
@@ -43,4 +44,8 @@ tasks.create<Exec>("coverageHtmlReport") {
         "./gradlew",
         ":app:koverHTMLReportLocal"
     )
+}
+
+coverallsJacoco{
+    reportPath = "app/build/reports/kover/reportLocal.xml"
 }
