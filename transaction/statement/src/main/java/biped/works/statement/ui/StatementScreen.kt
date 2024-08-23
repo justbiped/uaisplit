@@ -54,6 +54,7 @@ internal fun StatementScreen(viewModel: StatementViewModel, onNavigate: (destina
         when (instruction) {
             is StatementInstruction.State -> state = instruction
             is StatementInstruction.OpenTransaction -> onNavigate(instruction.destination)
+            is StatementInstruction.AddTransaction -> onNavigate(instruction.destination)
             is StatementInstruction.FailedToFetchStatement -> showFetchFailToast(context)
         }
     }

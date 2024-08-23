@@ -17,6 +17,10 @@ internal sealed interface StatementInstruction {
         val destination = TransactionRoute(id)
     }
 
+    data object AddTransaction : StatementInstruction {
+        val destination = TransactionRoute("")
+    }
+
     data object FailedToFetchStatement : StatementInstruction
 }
 

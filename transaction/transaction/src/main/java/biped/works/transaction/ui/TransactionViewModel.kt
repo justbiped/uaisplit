@@ -23,7 +23,7 @@ internal class TransactionViewModel @Inject constructor(
 
     init {
         savedStateHandle.get<String>("id")?.also { id ->
-            if (id.isNotBlank()) loadTransaction(id) else onLoadTransactionError()
+            if (id.isNotBlank()) loadTransaction(id)
         }
     }
 
@@ -34,6 +34,7 @@ internal class TransactionViewModel @Inject constructor(
     }
 
     private fun loadTransaction(id: String) {
+        _instruction.updateState { copy(isLoading = true) }
         viewModelScope.launchIO {
             getTransactionUseCase(id)
                 .onSuccess { transaction -> onTransactionUpdate(transaction) }
@@ -48,6 +49,7 @@ internal class TransactionViewModel @Inject constructor(
     }
 
     private fun onLoadTransactionError() {
+        _instruction.updateState { copy(isLoading = false) }
         _instruction.sendEvent(TransactionInstruction.FailedToUpdate)
     }
 }

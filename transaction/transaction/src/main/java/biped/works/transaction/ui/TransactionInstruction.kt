@@ -4,7 +4,7 @@ import biped.works.coroutines.MutableUiStateFlow
 
 internal sealed interface TransactionInstruction {
     data class State(
-        val isLoading: Boolean = true,
+        val isLoading: Boolean = false,
         val uiModel: TransactionUiModel = TransactionUiModel()
     ) : TransactionInstruction
 
