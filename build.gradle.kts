@@ -47,13 +47,11 @@ tasks.create<Exec>("coverageHtmlReport") {
 }
 
 coverallsJacoco {
-    val sourceSetDirectories = subprojects.map { subProject ->
-        if (subProject.buildFile.exists()) {
-            "${subProject.projectDir.path}/src/main/java"
-        } else {
-            null
-        }
-    }.filterNotNull()
-    reportSourceSets = sourceSetDirectories.map { File(it) }
-    reportPath = "${rootDir}/mobile/build/reports/kover/reportDevDebug.xml"
+    val sourceSets = subprojects
+        .filter { project -> project.buildFile.exists() }
+        .map { project -> "${project.projectDir.path}/src/main/java" }
+        .map { File(it) }
+
+    reportSourceSets = sourceSets
+    reportPath = "${rootDir}/app/build/reports/kover/reportLocal.xml"
 }
