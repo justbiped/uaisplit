@@ -1,3 +1,5 @@
+import biped.works.plugins.UNIT_TEST_VARIANT
+import biped.works.plugins.reportsConfig
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
@@ -8,11 +10,11 @@ plugins {
     alias(libs.plugins.android.playServices) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlin.serialization) apply false
-    alias(libs.plugins.kotlin.kover) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.dependencyUpdates)
-    id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
+    apply(libs.plugins.kotlin.kover)
+    //id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
@@ -35,23 +37,30 @@ tasks.create<Delete>("clean") {
 tasks.create<Exec>("coverageXmlReport") {
     commandLine(
         "./gradlew",
-        ":app:koverXMLReportLocal"
+        "koverXMLReportLocal"
     )
 }
 
 tasks.create<Exec>("coverageHtmlReport") {
     commandLine(
         "./gradlew",
-        ":app:koverHTMLReportLocal"
+        "koverHTMLReportLocal"
     )
 }
 
-coverallsJacoco {
-    val sourceSets = subprojects
-        .filter { project -> project.buildFile.exists() }
-        .map { project -> "${project.projectDir.path}/src/main/java" }
-        .map { File(it) }
-
-    reportSourceSets = sourceSets
-    reportPath = "${rootDir}/app/build/reports/kover/reportLocal.xml"
+kover {
+    currentProject {
+        createVariant(UNIT_TEST_VARIANT) {}
+    }
+    reports(reportsConfig)
 }
+
+//coverallsJacoco {
+//    val sourceSets = subprojects
+//        .filter { project -> project.buildFile.exists() }
+//        .map { project -> "${project.projectDir.path}/src/main/java" }
+//        .map { File(it) }
+//
+//    reportSourceSets = sourceSets
+//    reportPath = "${rootDir}/app/build/reports/kover/reportLocal.xml"
+//}

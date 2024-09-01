@@ -22,7 +22,7 @@ class ConfigPlugin : Plugin<Project> {
 private fun Project.applyAndroidConfigs() {
     subprojects {
         onAndroidSetup {
-            plugins.apply(catalog.plugin("kotlin.android").id)
+            plugins.apply(libs.plugins.kotlin.android.id)
             plugins.apply(libs.plugins.kotlin.kover.id)
 
             android {
@@ -90,32 +90,6 @@ private fun Project.applyAndroidConfigs() {
 
             dependencies {
                 implementation(libs.timber)
-
-                localImplementation(libs.android.test.core)
-                localImplementation(libs.navigation.testing)
-                localImplementation(libs.http.mockserver)
-
-                testImplementation(libs.test.mockk)
-                testImplementation(libs.coroutine.test)
-                testImplementation(libs.android.test.core)
-                testImplementation(libs.android.test.junit)
-                testImplementation(libs.android.test.arch)
-                testImplementation(libs.navigation.testing)
-                testImplementation(libs.hilt.testing)
-                testImplementation(libs.android.test.runner)
-                testImplementation(libs.android.test.espresso)
-                testImplementation(libs.android.test.contrib)
-                testImplementation(libs.test.robolectric)
-                testImplementation(libs.test.truth)
-
-                androidTestImplementation(libs.android.test.junit)
-                androidTestImplementation(libs.android.test.runner)
-                androidTestImplementation(libs.android.test.espresso)
-                androidTestImplementation(libs.android.test.contrib)
-                androidTestImplementation(libs.navigation.testing)
-                androidTestImplementation(libs.hilt.testing)
-                androidTestImplementation(libs.test.robolectric.annotations)
-                androidTestImplementation(libs.test.truth)
             }
         }
 

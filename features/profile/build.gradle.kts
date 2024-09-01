@@ -2,11 +2,12 @@ plugins {
     apply(libs.plugins.android.library)
     apply(libs.plugins.kotlin.android)
     apply(libs.plugins.hilt)
-    apply(libs.plugins.compose.core)
     apply(libs.plugins.ksp)
+    apply(libs.plugins.biped.compose)
+    apply(libs.plugins.biped.test)
 }
 
-android{
+android {
     namespace = "biped.works.profile"
 }
 

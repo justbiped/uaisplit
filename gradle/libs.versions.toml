@@ -19,6 +19,7 @@ compose = "1.7.0-beta07"
 robolectricVersion = "4.9.2"
 mockkVersion = "1.13.12"
 junit = "1.2.1"
+kover = "0.8.3"
 runtimeAndroid = "1.7.0-beta06"
 
 [libraries]
@@ -51,6 +52,7 @@ kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin",
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlin" }
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.6.3" }
 kotlin-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version = "1.0.0" }
+kotlin-kover = { group = "org.jetbrains.kotlinx", name = "kover-gradle-plugin", version.ref = "kover" }
 
 java-poet = { module = "com.squareup:javapoet", version = "1.13.0" }
 java-inject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
@@ -132,11 +134,12 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-parcelize = { id = "kotlin-parcelize" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm" }
-kotlin-kover = { id = "org.jetbrains.kotlinx.kover", version = "0.8.3" }
+kotlin-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 java = { id = "java-library" }
 
-compose-core = { id = "biped.works.plugins.compose", version = "1.0.0" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+biped-compose = { id = "biped.works.plugins.compose", version = "1.0.0" }
+biped-test = { id = "biped.works.plugins.test", version = "1.0.0" }
 
 ksp = { id = "com.google.devtools.ksp", version = "2.0.0-1.0.24" }
 

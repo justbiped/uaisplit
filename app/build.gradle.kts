@@ -4,7 +4,8 @@ plugins {
     apply(libs.plugins.kotlin.serialization)
     apply(libs.plugins.kotlin.kover)
     apply(libs.plugins.ksp)
-    apply(libs.plugins.compose.core)
+    apply(libs.plugins.biped.compose)
+    apply(libs.plugins.biped.test)
 }
 
 android {
@@ -69,29 +70,4 @@ dependencies {
 
     kspTest(libs.hilt.compiler)
     kspAndroidTest(libs.hilt.compiler)
-}
-
-dependencies {
-    kover(project(":transaction:statement"))
-    kover(project(":transaction:transaction"))
-
-    kover(project(":automation"))
-    kover(project(":features:profile"))
-    kover(project(":features:settings"))
-    kover(project(":features:user"))
-}
-
-kover {
-    reports {
-        filters.excludes.classes(
-            "*_Hilt*",
-            "*hilt_*",
-            "*dagger*",
-            "*.injection*",
-            "*_Factory",
-            "com.bumptech.glide*",
-            "com.mlykotom.valifi*"
-        )
-        filters.excludes.androidGeneratedClasses()
-    }
 }

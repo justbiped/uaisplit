@@ -1,65 +1,75 @@
 package biped.works.plugins
 
 import AndroidExtension
-import android
-import devImplementation
+import androidTestImplementation
 import id
+import kotlinx.kover.gradle.plugin.dsl.KoverProjectExtension
+import kotlinx.kover.gradle.plugin.dsl.KoverReportsConfig
 import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
 import testImplementation
 
-val noAndroidPluginException: Throwable
-    get() = Throwable("Make sure that you have declared the Application or Library plugin")
+const val UNIT_TEST_VARIANT = "unitTest"
 
-class ComposePlugin : Plugin<Project> {
+class TestPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.allprojects {
             project.extensions.findByType<AndroidExtension>() ?: noAndroidPluginException
 
-            project.plugins.apply(libs.plugins.compose.compiler.id)
+            project.plugins.apply(libs.plugins.kotlin.kover.id)
 
-            android {
-                buildFeatures.apply {
-                    compose = true
+            kover {
+                currentProject {
+                    createVariant(UNIT_TEST_VARIANT) {
+                        add("local")
+                    }
                 }
+                reports(reportsConfig)
             }
 
             dependencies {
-                //implementation(catalog.library("compose.bom"))
-                implementation(libs.compose.foundation)
-                implementation(libs.compose.ui)
-                implementation(libs.compose.icons)
-                implementation(libs.compose.iconsExtended)
-                implementation(libs.compose.animation)
-                implementation(libs.compose.hilt)
-                implementation(libs.compose.coil)
+                testImplementation(libs.test.mockk)
+                testImplementation(libs.coroutine.test)
+                testImplementation(libs.android.test.core)
+                testImplementation(libs.android.test.junit)
+                testImplementation(libs.android.test.arch)
+                testImplementation(libs.navigation.testing)
+                testImplementation(libs.hilt.testing)
+                testImplementation(libs.android.test.runner)
+                testImplementation(libs.android.test.espresso)
+                testImplementation(libs.android.test.contrib)
+                testImplementation(libs.test.robolectric)
+                testImplementation(libs.test.truth)
 
-                implementation(libs.compose.material)
-                implementation(libs.compose.material.window)
-                implementation(libs.compose.material.navigation)
-
-                // Navigation
-                implementation(libs.compose.navigation)
-
-                // Preview
-                implementation(libs.compose.ui.tooling.preview)
-                devImplementation(libs.compose.ui.tooling)
-
-                // Test
-                testImplementation(libs.compose.test.junit)
-                devImplementation(libs.compose.test.manifest)
-
-                // Biped Compose Foundation
-                implementation(project(":foundation:compose"))
+                androidTestImplementation(libs.android.test.junit)
+                androidTestImplementation(libs.android.test.runner)
+                androidTestImplementation(libs.android.test.espresso)
+                androidTestImplementation(libs.android.test.contrib)
+                androidTestImplementation(libs.navigation.testing)
+                androidTestImplementation(libs.hilt.testing)
+                androidTestImplementation(libs.test.robolectric.annotations)
+                androidTestImplementation(libs.test.truth)
             }
         }
     }
 }
 
-private fun DependencyHandlerScope.implementation(dependencyNotation: Any) {
-    add("implementation", dependencyNotation)
+internal fun Project.kover(action: KoverProjectExtension.() -> Unit) {
+    extensions.findByType<KoverProjectExtension>()?.also(action)
+}
+
+val reportsConfig: KoverReportsConfig.() -> Unit = {
+    filters.excludes.classes(
+        "*_Hilt*",
+        "*hilt_*",
+        "*dagger*",
+        "*.injection*",
+        "*_Factory",
+        "com.bumptech.glide*",
+        "com.mlykotom.valifi*"
+    )
+    filters.excludes.androidGeneratedClasses()
 }
