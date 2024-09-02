@@ -1,8 +1,8 @@
+import biped.works.plugins.NoAndroidPluginException
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.withType
@@ -21,8 +21,8 @@ class ConfigPlugin : Plugin<Project> {
 
 private fun Project.applyAndroidConfigs() {
     subprojects {
-        onAndroidSetup {
-            plugins.apply(catalog.plugin("kotlin.android").id)
+        setupAndroidProjects {
+            plugins.apply(libs.plugins.kotlin.android.id)
             plugins.apply(libs.plugins.kotlin.kover.id)
 
             android {
@@ -32,8 +32,6 @@ private fun Project.applyAndroidConfigs() {
                 defaultConfig {
                     minSdk = 29
                     targetSdk = 35
-
-                    testInstrumentationRunner = "com.biped.test.instrumentation.runner.LocationTestRunner"
                 }
 
                 buildFeatures.apply {
@@ -70,8 +68,6 @@ private fun Project.applyAndroidConfigs() {
                     resources.excludes.add("META-INF/LICENSE*.md")
                     resources.pickFirsts.add("**/attach_hotspot_windows.dll")
                 }
-
-                setupTests()
             }
 
             kotlin {
@@ -90,67 +86,20 @@ private fun Project.applyAndroidConfigs() {
 
             dependencies {
                 implementation(libs.timber)
-
-                localImplementation(libs.android.test.core)
-                localImplementation(libs.navigation.testing)
-                localImplementation(libs.http.mockserver)
-
-                testImplementation(libs.test.mockk)
-                testImplementation(libs.coroutine.test)
-                testImplementation(libs.android.test.core)
-                testImplementation(libs.android.test.junit)
-                testImplementation(libs.android.test.arch)
-                testImplementation(libs.navigation.testing)
-                testImplementation(libs.hilt.testing)
-                testImplementation(libs.android.test.runner)
-                testImplementation(libs.android.test.espresso)
-                testImplementation(libs.android.test.contrib)
-                testImplementation(libs.test.robolectric)
-                testImplementation(libs.test.truth)
-
-                androidTestImplementation(libs.android.test.junit)
-                androidTestImplementation(libs.android.test.runner)
-                androidTestImplementation(libs.android.test.espresso)
-                androidTestImplementation(libs.android.test.contrib)
-                androidTestImplementation(libs.navigation.testing)
-                androidTestImplementation(libs.hilt.testing)
-                androidTestImplementation(libs.test.robolectric.annotations)
-                androidTestImplementation(libs.test.truth)
             }
         }
 
     }
 }
 
-private fun AndroidExtension.setupTests() {
-    testOptions {
-        unitTests.all {
-            it.testLogging {
-                events = setOf(
-                    TestLogEvent.FAILED,
-                    TestLogEvent.PASSED,
-                    TestLogEvent.SKIPPED,
-                    TestLogEvent.STANDARD_ERROR,
-                    TestLogEvent.STANDARD_OUT
-                )
-            }
-        }
-
-        unitTests.isIncludeAndroidResources = true
-        unitTests.isReturnDefaultValues = true
-        animationsDisabled = true
-        testBuildType = local
-    }
-}
-
-private fun Project.onAndroidSetup(action: () -> Unit) {
+private fun Project.setupAndroidProjects(action: () -> Unit) {
     plugins.whenPluginAdded {
         if (this is App || this is Library) action()
     }
 }
 
 internal fun Project.android(action: AndroidExtension.() -> Unit) {
-    extensions.findByType<AndroidExtension>()?.action()
+    extensions.findByType<AndroidExtension>()?.action() ?: throw NoAndroidPluginException()
 }
 
 internal fun Project.androidComponents(action: ApplicationAndroidComponentsExtension.() -> Unit) {

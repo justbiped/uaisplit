@@ -2,7 +2,8 @@ plugins {
     apply(libs.plugins.android.library)
     apply(libs.plugins.hilt)
     apply(libs.plugins.ksp)
-    apply(libs.plugins.compose.core)
+    apply(libs.plugins.biped.compose)
+    apply(libs.plugins.biped.test)
 }
 
 android{

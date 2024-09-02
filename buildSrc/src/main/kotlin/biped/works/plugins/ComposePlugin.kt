@@ -1,6 +1,5 @@
 package biped.works.plugins
 
-import AndroidExtension
 import android
 import devImplementation
 import id
@@ -9,17 +8,11 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.findByType
 import testImplementation
-
-val noAndroidPluginException: Throwable
-    get() = Throwable("Make sure that you have declared the Application or Library plugin")
 
 class ComposePlugin : Plugin<Project> {
     override fun apply(project: Project) {
-        project.allprojects {
-            project.extensions.findByType<AndroidExtension>() ?: noAndroidPluginException
-
+        project.run {
             project.plugins.apply(libs.plugins.compose.compiler.id)
 
             android {

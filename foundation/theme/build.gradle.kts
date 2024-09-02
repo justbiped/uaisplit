@@ -1,7 +1,8 @@
 plugins {
     apply(libs.plugins.android.library)
     apply(libs.plugins.kotlin.android)
-    apply(libs.plugins.compose.core)
+    apply(libs.plugins.biped.compose)
+    apply(libs.plugins.biped.test)
 }
 
 android {

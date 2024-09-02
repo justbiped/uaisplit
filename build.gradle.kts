@@ -1,3 +1,6 @@
+import biped.works.plugins.UNIT_TEST_VARIANT
+import biped.works.plugins.hasTestPlugin
+import biped.works.plugins.reportsConfig
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
@@ -8,10 +11,10 @@ plugins {
     alias(libs.plugins.android.playServices) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlin.serialization) apply false
-    alias(libs.plugins.kotlin.kover) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.dependencyUpdates)
+    apply(libs.plugins.kotlin.kover)
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
@@ -34,13 +37,39 @@ tasks.create<Delete>("clean") {
 tasks.create<Exec>("coverageXmlReport") {
     commandLine(
         "./gradlew",
-        ":app:koverXMLReportLocal"
+        "koverXMLReportUnitTest"
     )
+    dependsOn("prepareKoverDependencies")
 }
 
 tasks.create<Exec>("coverageHtmlReport") {
     commandLine(
         "./gradlew",
-        ":app:koverHTMLReportLocal"
+        "koverHTMLReportUnitTest"
     )
+    dependsOn("prepareKoverDependencies")
+}
+
+project.tasks.create("prepareKoverDependencies") {
+    val includeSubprojects = System.getenv("INCLUDE_SUBPROJECT").toBoolean()
+    if (includeSubprojects) {
+        val testedDependencies = project.subprojects
+            .filter { it.hasTestPlugin }
+            .map { it.dependency }
+
+        dependencies {
+            testedDependencies.forEach { dependency ->
+                kover(project(dependency))
+            }
+        }
+
+        println("Tracking unit test coverage for modules: $testedDependencies")
+    }
+}
+
+kover {
+    currentProject {
+        createVariant(UNIT_TEST_VARIANT) {}
+    }
+    reports(reportsConfig)
 }

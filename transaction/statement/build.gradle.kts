@@ -3,8 +3,9 @@ plugins {
     apply(libs.plugins.kotlin.android)
     apply(libs.plugins.kotlin.serialization)
     apply(libs.plugins.hilt)
-    apply(libs.plugins.compose.core)
     apply(libs.plugins.ksp)
+    apply(libs.plugins.biped.compose)
+    apply(libs.plugins.biped.test)
 }
 
 android {
