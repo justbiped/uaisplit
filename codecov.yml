@@ -6,7 +6,7 @@ coverage:
   status:
     project:
       default:
-        target: 80
+        target: auto
         threshold: 2
         base: 1
         branches:
