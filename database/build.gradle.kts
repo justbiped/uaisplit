@@ -3,6 +3,7 @@ plugins {
     apply(libs.plugins.kotlin.android)
     apply(libs.plugins.ksp)
     apply(libs.plugins.hilt)
+    apply(libs.plugins.biped.test)
 }
 
 android {

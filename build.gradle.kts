@@ -14,7 +14,6 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.dependencyUpdates)
     apply(libs.plugins.kotlin.kover)
-    //id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
 }
 
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
@@ -44,9 +43,26 @@ tasks.create<Exec>("coverageXmlReport") {
 tasks.create<Exec>("coverageHtmlReport") {
     commandLine(
         "./gradlew",
-        "koverHTMLReportLocal"
+        "koverHTMLReportUnitTest"
     )
+}.dependsOn("prepareKoverDependencies")
+
+project.tasks.create("prepareKoverDependencies") {
+    val testedDependencies = project.subprojects
+        .filter { it.hasTestPlugin }
+        .map { it.dependency }
+
+    dependencies {
+        testedDependencies.forEach { dependency ->
+            kover(project(dependency))
+        }
+    }
+
+    println("Tracking unit test coverage for modules: $testedDependencies")
 }
+
+val Project.hasTestPlugin: Boolean
+    get() = buildFile.exists() && buildFile.readText().contains("libs.plugins.biped.test")
 
 kover {
     currentProject {

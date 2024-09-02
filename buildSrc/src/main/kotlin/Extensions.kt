@@ -1,13 +1,14 @@
+import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.provider.Provider
-import org.gradle.kotlin.dsl.PluginDependenciesSpecScope
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependency
 
 fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? {
     return add("implementation", dependencyNotation)
 }
+
 /**
  * ### Imports only on development
  * Use this to apply dependencies that should exists only on development environment.
@@ -56,3 +57,8 @@ fun DependencyHandler.androidTestImplementation(dependencyNotation: Any) =
 fun PluginDependenciesSpec.apply(plugin: Provider<PluginDependency>) {
     id(plugin.get().pluginId)
 }
+
+val Project.dependency
+    get() = displayName
+        .replace("project ", "")
+        .replace("'", "")
