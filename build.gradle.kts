@@ -1,4 +1,5 @@
 import biped.works.plugins.UNIT_TEST_VARIANT
+import biped.works.plugins.hasTestPlugin
 import biped.works.plugins.reportsConfig
 import com.github.benmanes.gradle.versions.VersionsPlugin
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
@@ -36,8 +37,9 @@ tasks.create<Delete>("clean") {
 tasks.create<Exec>("coverageXmlReport") {
     commandLine(
         "./gradlew",
-        "koverXMLReportLocal"
+        "koverXMLReportUnitTest"
     )
+    dependsOn("prepareKoverDependencies")
 }
 
 tasks.create<Exec>("coverageHtmlReport") {
@@ -45,24 +47,25 @@ tasks.create<Exec>("coverageHtmlReport") {
         "./gradlew",
         "koverHTMLReportUnitTest"
     )
-}.dependsOn("prepareKoverDependencies")
-
-project.tasks.create("prepareKoverDependencies") {
-    val testedDependencies = project.subprojects
-        .filter { it.hasTestPlugin }
-        .map { it.dependency }
-
-    dependencies {
-        testedDependencies.forEach { dependency ->
-            kover(project(dependency))
-        }
-    }
-
-    println("Tracking unit test coverage for modules: $testedDependencies")
+    dependsOn("prepareKoverDependencies")
 }
 
-val Project.hasTestPlugin: Boolean
-    get() = buildFile.exists() && buildFile.readText().contains("libs.plugins.biped.test")
+project.tasks.create("prepareKoverDependencies") {
+    val includeSubprojects = System.getenv("INCLUDE_SUBPROJECT").toBoolean()
+    if (includeSubprojects) {
+        val testedDependencies = project.subprojects
+            .filter { it.hasTestPlugin }
+            .map { it.dependency }
+
+        dependencies {
+            testedDependencies.forEach { dependency ->
+                kover(project(dependency))
+            }
+        }
+
+        println("Tracking unit test coverage for modules: $testedDependencies")
+    }
+}
 
 kover {
     currentProject {
@@ -70,13 +73,3 @@ kover {
     }
     reports(reportsConfig)
 }
-
-//coverallsJacoco {
-//    val sourceSets = subprojects
-//        .filter { project -> project.buildFile.exists() }
-//        .map { project -> "${project.projectDir.path}/src/main/java" }
-//        .map { File(it) }
-//
-//    reportSourceSets = sourceSets
-//    reportPath = "${rootDir}/app/build/reports/kover/reportLocal.xml"
-//}

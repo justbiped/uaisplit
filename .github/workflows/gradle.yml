@@ -32,22 +32,13 @@ jobs:
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
       - name: Unit Test
-        run: ./gradlew coverageXmlReport
+        run: INCLUDE_SUBPROJECT=true ./gradlew coverageXmlReport
 
-      - name: Upload to coveralls
-        run: COVERALLS_REPO_TOKEN=${{ secrets.COVERALLS }} ./gradlew coverallsJacoco --no-configuration-cache
-
-#      - name: Upload coverage reports to Codecov
-#        uses: codecov/codecov-action@v4.0.1
-#        with:
-#          files: app/build/reports/kover/*.xml
-#          token: ${{ secrets.CODECOV }}
-
-  #      - name: Upload coverage reports
-  #        uses: coverallsapp/github-action@v2
-  #        with:
-  #          files: app/build/reports/kover/*.xml
-  #          github-token: ${{ secrets.COVERALLS }}
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          files: build/reports/kover/*.xml
+          token: ${{ secrets.CODECOV }}
 
   dependency-submission:
     runs-on: ubuntu-latest

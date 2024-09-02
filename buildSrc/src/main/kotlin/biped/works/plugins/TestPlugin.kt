@@ -17,6 +17,7 @@ import testImplementation
 const val UNIT_TEST_VARIANT = "unitTest"
 
 class TestPlugin : Plugin<Project> {
+
     override fun apply(project: Project) {
         project.run {
             project.plugins.apply(libs.plugins.kotlin.kover.id)
@@ -94,3 +95,12 @@ val reportsConfig: KoverReportsConfig.() -> Unit = {
     )
     filters.excludes.androidGeneratedClasses()
 }
+
+val Project.hasTestPlugin: Boolean
+    get() {
+        if (!buildFile.exists()) return false
+
+        val hasTestPluginId = (buildFile.readText().contains("biped.works.plugins.test"))
+        val hasTestPluginCatalog = buildFile.readText().contains("libs.plugins.biped.test")
+        return hasTestPluginId || hasTestPluginCatalog
+    }
