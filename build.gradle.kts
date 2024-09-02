@@ -35,19 +35,23 @@ tasks.create<Delete>("clean") {
 }
 
 tasks.create<Exec>("coverageXmlReport") {
+    dependsOn("prepareKoverDependencies")
+
+    environment("INCLUDE_SUBPROJECT" to "true")
     commandLine(
         "./gradlew",
         "koverXMLReportUnitTest"
     )
-    dependsOn("prepareKoverDependencies")
 }
 
 tasks.create<Exec>("coverageHtmlReport") {
+    dependsOn("prepareKoverDependencies")
+
+    environment("INCLUDE_SUBPROJECT" to "true")
     commandLine(
         "./gradlew",
         "koverHTMLReportUnitTest"
     )
-    dependsOn("prepareKoverDependencies")
 }
 
 project.tasks.create("prepareKoverDependencies") {
