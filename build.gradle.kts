@@ -34,26 +34,6 @@ tasks.create<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
 
-tasks.create<Exec>("coverageXmlReport") {
-    dependsOn("prepareKoverDependencies")
-
-    environment("INCLUDE_SUBPROJECT" to "true")
-    commandLine(
-        "./gradlew",
-        "koverXMLReportUnitTest"
-    )
-}
-
-tasks.create<Exec>("coverageHtmlReport") {
-    dependsOn("prepareKoverDependencies")
-
-    environment("INCLUDE_SUBPROJECT" to "true")
-    commandLine(
-        "./gradlew",
-        "koverHTMLReportUnitTest"
-    )
-}
-
 project.tasks.create("prepareKoverDependencies") {
     val includeSubprojects = System.getenv("INCLUDE_SUBPROJECT").toBoolean()
     if (includeSubprojects) {
@@ -69,6 +49,24 @@ project.tasks.create("prepareKoverDependencies") {
 
         println("Tracking unit test coverage for modules: $testedDependencies")
     }
+}
+
+tasks.create<Exec>("coverageXmlReport") {
+    environment("INCLUDE_SUBPROJECT" to "true")
+    dependsOn("prepareKoverDependencies")
+    commandLine(
+        "./gradlew",
+        "koverXMLReportUnitTest"
+    )
+}
+
+tasks.create<Exec>("coverageHtmlReport") {
+    environment("INCLUDE_SUBPROJECT" to "true")
+    dependsOn("prepareKoverDependencies")
+    commandLine(
+        "./gradlew",
+        "koverHTMLReportUnitTest"
+    )
 }
 
 kover {
