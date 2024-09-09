@@ -31,20 +31,20 @@ http-mockserver = { group = "com.squareup.okhttp3", name = "mockwebserver", vers
 # Android
 android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 
-android-core = { group = "androidx.core", name = "core-ktx", version = "1.8.0" }
-android-compat = { group = "androidx.appcompat", name = "appcompat", version = "1.5.0" }
-android-material = { group = "com.google.android.material", name = "material", version = "1.6.1" }
-android-datastore = { group = "androidx.datastore", name = "datastore-preferences", version = "1.0.0" }
+android-core = { group = "androidx.core", name = "core-ktx", version = "1.13.1" }
+android-compat = { group = "androidx.appcompat", name = "appcompat", version = "1.7.0" }
+android-material = { group = "com.google.android.material", name = "material", version = "1.12.0" }
+android-datastore = { group = "androidx.datastore", name = "datastore-preferences", version = "1.1.1" }
 
 # Android Test
 android-test-core = { group = "androidx.test", name = "core-ktx", version = "1.4.0" }
-android-test-arch = { group = "androidx.arch.core", name = "core-testing", version = "2.1.0" }
-android-test-junit = { group = "androidx.test.ext", name = "junit-ktx", version = "1.1.3" }
-android-test-rules = { group = "androidx.test", name = "rules", version = "1.4.0" }
-android-test-runner = { group = "androidx.test", name = "runner", version = "1.4.0" }
-android-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version = "3.5.0-rc01" }
+android-test-arch = { group = "androidx.arch.core", name = "core-testing", version = "2.2.0" }
+android-test-junit = { group = "androidx.test.ext", name = "junit-ktx", version = "1.2.1" }
+android-test-rules = { group = "androidx.test", name = "rules", version = "1.6.1" }
+android-test-runner = { group = "androidx.test", name = "runner", version = "1.6.2" }
+android-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version = "3.6.1" }
 android-test-contrib = { group = "com.android.support.test.espresso", name = "espresso-contrib", version = "3.5.0-rc01" }
-android-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version = "2.2.0" }
+android-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version = "2.3.0" }
 
 # Kotlin
 kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
