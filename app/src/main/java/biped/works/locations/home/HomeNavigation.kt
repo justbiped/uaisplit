@@ -14,7 +14,7 @@ import com.biped.works.settings.SettingsGraph
 import com.biped.works.settings.settingsNavGraph
 
 object HomeNavigation {
-    val destinations = hashSetOf(
+    val destinations = setOf(
         StatementGraph,
         SettingsGraph
     )
