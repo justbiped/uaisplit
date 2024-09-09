@@ -15,8 +15,8 @@ val LocalSharedTransitionScope = compositionLocalOf<SharedTransitionScope?> { nu
 val LocalNavAnimatedVisibilityScope = compositionLocalOf<AnimatedVisibilityScope?> { null }
 
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
-inline fun Modifier.block(
-    modifier: Modifier.() -> Modifier
+inline fun Modifier.apply(
+    modifier: Modifier.() -> Modifier,
 ): Modifier = modifier(Modifier)
 
 @Composable

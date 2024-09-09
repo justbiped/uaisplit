@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import biped.works.compose.animtation.LocalNavAnimatedVisibilityScope
 import biped.works.compose.animtation.LocalSharedTransitionScope
-import biped.works.compose.animtation.block
+import biped.works.compose.animtation.apply
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.biped.locations.theme.CashTheme
@@ -53,14 +53,14 @@ fun ProfileHeader(
 
         Row(
             modifier = modifier
-                .block {
+                .apply {
                     if (this@with != null && animatedVisibilityScope != null) {
                         sharedBounds(
                             rememberSharedContentState(key = imageUrl),
                             animatedVisibilityScope = animatedVisibilityScope,
                             boundsTransform = boundsTransform
                         )
-                    } else Modifier
+                    } else this
                 }
                 .clickable(
                     interactionSource = interactionSource,
@@ -89,7 +89,7 @@ fun ProfileHeader(
 fun ProfileHeader_Preview() {
     CashTheme {
         Surface(modifier = Modifier.fillMaxWidth()) {
-            //          ProfileHeader(name = "R. Edgar")
+            ProfileHeader(name = "R. Edgar")
         }
     }
 }
