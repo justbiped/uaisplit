@@ -64,10 +64,9 @@ fun ProfileHeader(
                 }
                 .clickable(
                     interactionSource = interactionSource,
+                    onClick = onClick,
                     indication = null
-                ) {
-                    onClick()
-                },
+                ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
