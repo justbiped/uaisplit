@@ -6,6 +6,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -35,17 +36,18 @@ private fun Project.applyAndroidConfigs() {
                 }
 
                 buildFeatures.apply {
-                    viewBinding = true
                     buildConfig = true
                 }
 
                 compileOptions {
-                    targetCompatibility = JavaVersion.VERSION_11
-                    sourceCompatibility = JavaVersion.VERSION_11
+                    targetCompatibility = JavaVersion.VERSION_17
+                    sourceCompatibility = JavaVersion.VERSION_17
                 }
 
-                tasks.withType<KotlinCompile> {
-                    kotlinOptions { jvmTarget = "11" }
+                kotlin {
+                    compilerOptions {
+                        jvmTarget.set(JvmTarget.JVM_17)
+                    }
                 }
 
                 buildTypes {

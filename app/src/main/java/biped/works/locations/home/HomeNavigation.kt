@@ -3,8 +3,11 @@ package biped.works.locations.home
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import biped.works.compose.animtation.LocalNavAnimatedVisibilityScope
+import biped.works.compose.animtation.LocalSharedTransitionScope
 import biped.works.statement.StatementGraph
 import biped.works.statement.statementNavGraph
 import com.biped.works.settings.SettingsGraph
@@ -26,10 +29,13 @@ object HomeNavigation {
 @Composable
 fun NavigationGraph(navController: NavHostController) {
     SharedTransitionLayout {
-        val transitionScope = this
-        NavHost(navController, startDestination = StatementGraph::class) {
-            statementNavGraph(navController, transitionScope)
-            settingsNavGraph(navController, transitionScope = transitionScope)
+        CompositionLocalProvider(
+            LocalSharedTransitionScope provides this
+        ) {
+            NavHost(navController, startDestination = StatementGraph::class) {
+                statementNavGraph(navController)
+                settingsNavGraph(navController)
+            }
         }
     }
 }

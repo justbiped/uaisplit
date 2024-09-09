@@ -20,16 +20,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import biped.works.compose.animtation.LocalNavAnimatedVisibilityScope
+import biped.works.compose.animtation.LocalSharedTransitionScope
+import biped.works.compose.animtation.block
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumHeadline
-import com.biped.works.profile.SharedAnimationScope
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun SharedAnimationScope.ProfileHeader(
+fun ProfileHeader(
     modifier: Modifier = Modifier,
     name: String,
     imageUrl: String = "",
@@ -43,37 +45,42 @@ fun SharedAnimationScope.ProfileHeader(
         .memoryCacheKey(imageUrl)
         .build()
 
-    val boundsTransform = BoundsTransform { initialBounds, targetBounds ->
-        keyframes {
-            durationMillis = 200
+    with(LocalSharedTransitionScope.current) {
+        val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
+        val boundsTransform = BoundsTransform { _, _ ->
+            keyframes { durationMillis = 200 }
         }
-    }
 
-    Row(
-        modifier = modifier
-            .sharedBounds(
-                rememberSharedContentState(key = imageUrl),
-                animatedVisibilityScope = animatedContentScope,
-                boundsTransform = boundsTransform
+        Row(
+            modifier = modifier
+                .block {
+                    if (this@with != null && animatedVisibilityScope != null) {
+                        sharedBounds(
+                            rememberSharedContentState(key = imageUrl),
+                            animatedVisibilityScope = animatedVisibilityScope,
+                            boundsTransform = boundsTransform
+                        )
+                    } else Modifier
+                }
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+                ) {
+                    onClick()
+                },
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            AsyncImage(
+                model = imageRequest,
+                modifier = Modifier
+                    .aspectRatio(1f)
+                    .clip(CircleShape),
+                contentScale = ContentScale.Crop,
+                contentDescription = ""
             )
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null
-            ) {
-                onClick()
-            },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        AsyncImage(
-            model = imageRequest,
-            modifier = Modifier
-                .aspectRatio(1f)
-                .clip(CircleShape),
-            contentScale = ContentScale.Crop,
-            contentDescription = ""
-        )
-        SmallSpacer()
-        MediumHeadline(text = name, overflow = TextOverflow.Ellipsis)
+            SmallSpacer()
+            MediumHeadline(text = name, overflow = TextOverflow.Ellipsis)
+        }
     }
 }
 

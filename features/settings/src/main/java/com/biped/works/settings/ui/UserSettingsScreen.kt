@@ -28,7 +28,6 @@ import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.components.LargeLabel
-import com.biped.works.profile.SharedAnimationScope
 import com.biped.works.profile.ui.ProfileHeader
 import com.biped.works.settings.data.ThemeSettings
 import com.biped.works.settings.data.UserSettings
@@ -54,7 +53,7 @@ private fun rememberSettingsState(navigator: NavHostController) = remember {
 }
 
 @Composable
-internal fun SharedAnimationScope.UserSettingsScreen(
+internal fun UserSettingsScreen(
     viewModel: UserSettingsViewModel,
     navController: NavHostController
 ) {
@@ -87,7 +86,7 @@ internal fun SharedAnimationScope.UserSettingsScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SharedAnimationScope.UserSettingsUi(
+private fun UserSettingsUi(
     userSettings: UserSettings,
     interactor: SettingsInteractor
 ) {

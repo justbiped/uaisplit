@@ -1,11 +1,9 @@
 package com.biped.works.profile.ui
 
 import android.content.res.Configuration
-import androidx.collection.intSetOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -36,7 +34,6 @@ import com.biped.locations.theme.NormalSpacer
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.SingleLineTextField
 import com.biped.locations.theme.components.SmallTitle
-import com.biped.works.profile.SharedAnimationScope
 
 data class ProfileUiModel(
     val userId: String = "",
@@ -46,7 +43,7 @@ data class ProfileUiModel(
 )
 
 @Composable
-internal fun SharedAnimationScope.ProfileScreen(
+internal fun ProfileScreen(
     viewModel: ProfileViewModel,
     navController: NavHostController,
 ) {
@@ -91,7 +88,7 @@ internal fun SharedAnimationScope.ProfileScreen(
 }
 
 @Composable
-private fun SharedAnimationScope.ProfileUi(
+private fun ProfileUi(
     profile: ProfileUiModel,
     interactor: ProfileInteractor
 ) {

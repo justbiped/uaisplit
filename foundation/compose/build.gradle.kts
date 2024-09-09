@@ -10,10 +10,6 @@ android {
     buildFeatures.apply {
         compose = true
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
 }
 dependencies {
     implementation(platform(libs.compose.bom))
