@@ -101,7 +101,7 @@ private fun Content(
         FloatingActionButton(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(bottom = getBottomPadding() + Dimens.big, end = Dimens.normal),
+                .padding(bottom = Dimens.normal, end = Dimens.normal),
             shape = RoundedCornerShape(Dimens.small),
             onClick = onAddButtonClick
         ) {
