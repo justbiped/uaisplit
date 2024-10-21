@@ -5,7 +5,7 @@
 !/.idea/codeStyles/
 !/.idea/file.template.settings.xml
 !/.idea/fileTemplates
-!/.kotlin
+.kotlin
 
 /local.properties
 .DS_Store

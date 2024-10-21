@@ -138,8 +138,8 @@ fun CurrencySelector(
     onSelect: (String) -> Unit
 ) {
     val supportedCurrencies = listOf(
-        MenuItem("USD", displayText = "$", menuDisplayText = "USD $"),
-        MenuItem("BRL", displayText = "R$", menuDisplayText = "BRL R$")
+        MenuItem(Currency.USD.code, displayText = Currency.USD.symbol, menuDisplayText = Currency.USD.toString()),
+        MenuItem(Currency.BRL.code, displayText = Currency.BRL.symbol, menuDisplayText = Currency.BRL.toString()),
     )
 
     val selectedCurrency by remember {
@@ -155,6 +155,16 @@ fun CurrencySelector(
         selected = selectedCurrency,
         onSelect = { onSelect(it.key) }
     )
+}
+
+enum class Currency(
+    val code: String,
+    val symbol: String
+) {
+    BRL("BRL", "R$"),
+    USD("USD", "$");
+
+    override fun toString() = "$code $symbol"
 }
 
 @Preview
