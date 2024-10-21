@@ -18,13 +18,18 @@ import androidx.compose.ui.Modifier
 fun DropDownItemSelector(
     items: List<MenuItem>,
     modifier: Modifier = Modifier,
+    selected: MenuItem? = null,
     label: @Composable () -> Unit = {},
     onSelect: (item: MenuItem) -> Unit
 ) {
     if (items.isEmpty()) return
 
     var expanded by remember { mutableStateOf(false) }
-    var selectedItem by remember { mutableStateOf(items.first()) }
+
+    var selectedItem by remember {
+        val selectedItem = if (selected != null) selected else items.first()
+        mutableStateOf(selectedItem)
+    }
 
     ExposedDropdownMenuBox(
         modifier = modifier,
