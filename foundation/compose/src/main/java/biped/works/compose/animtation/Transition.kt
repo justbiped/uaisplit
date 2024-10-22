@@ -29,3 +29,11 @@ fun AnimatedContentScope.LocalAnimatedVisibilityProvider(content: @Composable ()
         content = content
     )
 }
+
+@Composable
+fun LocalMainPadding(padding: PaddingValues, content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        value = LocalMainPadding provides padding,
+        content = content
+    )
+}

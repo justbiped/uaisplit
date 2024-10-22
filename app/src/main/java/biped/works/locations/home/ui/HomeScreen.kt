@@ -99,7 +99,7 @@ private fun HomeScreenUi(
             }
         }
     ) { innerPadding ->
-        CompositionLocalProvider(LocalMainPadding provides innerPadding) {
+        LocalMainPadding(innerPadding) {
             Column {
                 NavigationGraph(navController = state.navController)
             }
