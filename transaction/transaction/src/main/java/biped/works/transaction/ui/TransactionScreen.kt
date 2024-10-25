@@ -19,6 +19,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -99,25 +100,13 @@ fun TransactionPanel(
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 onValueChange = { form = form.copy(description = it) })
             SmallSpacer()
-            TextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = form.amount.toString(),
-                prefix = { Text(uiModel.currency) },
-                label = { Text(stringResource(R.string.transaction_amount)) },
-                onValueChange = { })
-            SmallSpacer()
             Row {
-                DropDownItemSelector(
-                    modifier = Modifier.width(100.dp),
-                    label = { Text("Currency") },
-                    items = listOf(
-                        MenuItem("usd", displayText = "$", menuDisplayText = "USD $"),
-                        MenuItem("brl", displayText = "R$", menuDisplayText = "BRL R$")
-                    ),
+                CurrencySelector(
+                    selected = uiModel.currency,
                     onSelect = {}
                 )
                 TinySpacer()
-                TextField(value = "12.00", onValueChange = {}, label = { Text("Amount") })
+                TextField(value = uiModel.amount.toString(), onValueChange = {}, label = { Text("Amount") })
             }
         }
     }
@@ -141,6 +130,41 @@ private fun TopAppbar(
             }
         }
     )
+}
+
+@Composable
+fun CurrencySelector(
+    selected: String = "",
+    onSelect: (String) -> Unit
+) {
+    val supportedCurrencies = listOf(
+        MenuItem(Currency.USD.code, displayText = Currency.USD.symbol, menuDisplayText = Currency.USD.toString()),
+        MenuItem(Currency.BRL.code, displayText = Currency.BRL.symbol, menuDisplayText = Currency.BRL.toString()),
+    )
+
+    val selectedCurrency by remember {
+        derivedStateOf {
+            supportedCurrencies.firstOrNull { it.key == selected } ?: supportedCurrencies.first()
+        }
+    }
+
+    DropDownItemSelector(
+        modifier = Modifier.width(100.dp),
+        label = { Text("Currency") },
+        items = supportedCurrencies,
+        selected = selectedCurrency,
+        onSelect = { onSelect(it.key) }
+    )
+}
+
+enum class Currency(
+    val code: String,
+    val symbol: String
+) {
+    BRL("BRL", "R$"),
+    USD("USD", "$");
+
+    override fun toString() = "$code $symbol"
 }
 
 @Preview
