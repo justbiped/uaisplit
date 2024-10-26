@@ -16,11 +16,11 @@ fun Transaction.toUiModel() = TransactionUiModel(
 )
 
 fun TransactionUiModel.toTransactionUpdate() = TransactionUpdate(
-    id = null,
+    id = if (id.isNotBlank()) id else null,
     owner = owner,
     name = name,
     description = description,
-    due = "2024-08-20",
-    value = Amount(200.00, "BRL"),
+    due = due,
+    value = Amount(amount.toDouble(), currency),
     recurrence = Recurrence("times=1", "MONTHLY")
 )
