@@ -6,6 +6,6 @@ data class TransactionUiModel(
     val name: String = "",
     val description: String = "",
     val due: String = "",
-    val amount: Double = 0.0,
+    val amount: String = "",
     val currency: String = ""
 )

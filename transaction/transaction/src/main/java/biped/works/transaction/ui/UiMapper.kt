@@ -11,7 +11,7 @@ fun Transaction.toUiModel() = TransactionUiModel(
     name = name,
     description = description,
     due = due,
-    amount = value.amount,
+    amount = value.amount.toString(),
     currency = value.currency
 )
 

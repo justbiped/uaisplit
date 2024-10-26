@@ -103,11 +103,19 @@ fun TransactionPanel(
             Row {
                 CurrencySelector(
                     selected = uiModel.currency,
-                    onSelect = {}
+                    onSelect = { code -> form = form.copy(currency = code) }
                 )
                 TinySpacer()
-                TextField(value = uiModel.amount.toString(), onValueChange = {}, label = { Text("Amount") })
+                TextField(value = form.amount,
+                    onValueChange = { form = form.copy(amount = it) },
+                    label = { Text("Amount") })
             }
+            SmallSpacer()
+            TextField(
+                value = form.due,
+                onValueChange = { form = form.copy(due = it) },
+                label = { Text("Due") }
+            )
         }
     }
 }
@@ -177,7 +185,7 @@ fun TransactionPane_Preview() {
                 name = "Car Rent",
                 description = "For the trip from x to y",
                 due = "13 Feb 2024",
-                amount = 320.00,
+                amount = "320.00",
                 currency = "R$"
             )
         )
