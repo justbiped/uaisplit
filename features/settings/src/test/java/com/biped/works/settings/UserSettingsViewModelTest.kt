@@ -7,7 +7,7 @@ import biped.works.coroutiens.test.testFlowOf
 import biped.works.test.unit.mock
 import com.biped.locations.theme.ColorTheme
 import com.biped.works.settings.data.UserSettings
-import com.biped.works.settings.ui.Instruction
+import com.biped.works.settings.ui.UserSettingsInstruction
 import com.biped.works.settings.ui.UserSettingsViewModel
 import io.mockk.coVerify
 import io.mockk.every
@@ -47,7 +47,7 @@ class UserSettingsViewModelTest {
 
         settingsFlow.emit(userSettingsFixture())
 
-        assertThat(testFlow).hasCollected(Instruction.UpdateSettings(userSettingsFixture()))
+        assertThat(testFlow).hasCollected(UserSettingsInstruction.UserSettingsState(userSettingsFixture()))
         testFlow.finish()
     }
 
@@ -60,10 +60,10 @@ class UserSettingsViewModelTest {
         settingsFlow.emit(userSettingsFixture(theme = themeFixture(ColorTheme.SYSTEM)))
 
         assertThat(testFlow).hasCollectedExactly(
-            Instruction.UpdateSettings(isLoading = true),
-            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.DARK)), isLoading = false),
-            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.LIGHT)), isLoading = false),
-            Instruction.UpdateSettings(userSettingsFixture(theme = themeFixture(ColorTheme.SYSTEM)), isLoading = false),
+            UserSettingsInstruction.UserSettingsState(isLoading = true),
+            UserSettingsInstruction.UserSettingsState(userSettingsFixture(theme = themeFixture(ColorTheme.DARK)), isLoading = false),
+            UserSettingsInstruction.UserSettingsState(userSettingsFixture(theme = themeFixture(ColorTheme.LIGHT)), isLoading = false),
+            UserSettingsInstruction.UserSettingsState(userSettingsFixture(theme = themeFixture(ColorTheme.SYSTEM)), isLoading = false),
         )
 
         testFlow.finish()

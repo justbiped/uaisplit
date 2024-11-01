@@ -33,7 +33,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import biped.works.compose.animtation.LocalMainPadding
+import biped.works.compose.animtation.LocalPadding
 import biped.works.compose.collectWithLifecycle
 import biped.works.statement.R
 import biped.works.statement.data.Statement
@@ -97,7 +97,7 @@ private fun Content(
     onTransactionClick: (String) -> Unit,
     onAddButtonClick: () -> Unit
 ) {
-    val bottomPadding = LocalMainPadding.current.calculateBottomPadding() + Dimens.normal
+    val bottomPadding = LocalPadding.current.calculateBottomPadding() + Dimens.normal
     Box(Modifier.fillMaxSize()) {
         FloatingActionButton(
             modifier = Modifier

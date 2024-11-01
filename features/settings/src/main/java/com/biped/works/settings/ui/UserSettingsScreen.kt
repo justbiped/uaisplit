@@ -36,9 +36,9 @@ import com.biped.works.settings.data.UserSettings
 private data class StateHolder(
     private val navController: NavHostController,
 ) {
-    var viewState by mutableStateOf(Instruction.UpdateSettings())
+    var viewState by mutableStateOf(UserSettingsInstruction.UserSettingsState())
 
-    fun updateSettings(viewState: Instruction.UpdateSettings) {
+    fun updateSettings(viewState: UserSettingsInstruction.UserSettingsState) {
         this.viewState = viewState
     }
 
@@ -61,8 +61,8 @@ internal fun UserSettingsScreen(
 
     viewModel.instruction.collectWithLifecycle { instruction ->
         when (instruction) {
-            is Instruction.UpdateSettings -> stateHolder.updateSettings(instruction)
-            is Instruction.Navigate -> stateHolder.navigateToProfile(instruction.destination)
+            is UserSettingsInstruction.UserSettingsState -> stateHolder.updateSettings(instruction)
+            is UserSettingsInstruction.Navigate -> stateHolder.navigateToProfile(instruction.destination)
         }
     }
 
@@ -75,9 +75,11 @@ internal fun UserSettingsScreen(
             viewModel.changeThemeSettings(stateHolder.viewState.settings.copy(theme = themeSettings))
         }
     }
+
     Box(modifier = Modifier.fillMaxSize()) {
         UserSettingsUi(
             userSettings = stateHolder.viewState.settings,
+            isDynamicColorSupported = stateHolder.viewState.isDynamicColorSupported,
             interactor = interactor
         )
         LoadingIndicator(isLoading = stateHolder.viewState.isLoading)
@@ -88,6 +90,7 @@ internal fun UserSettingsScreen(
 @Composable
 private fun UserSettingsUi(
     userSettings: UserSettings,
+    isDynamicColorSupported: Boolean,
     interactor: SettingsInteractor
 ) {
     Column(
@@ -114,8 +117,11 @@ private fun UserSettingsUi(
             modifier = Modifier.weight(0.90f)
         ) {
             LargeLabel(text = "Theme setup")
-            ThemeSettingsUi(uiModel = userSettings.theme,
-                onSettingsChanged = { interactor.onThemeSettingsChanged(it) })
+            ThemeSettingsUi(
+                uiModel = userSettings.theme,
+                isDynamicColorSupported = isDynamicColorSupported,
+                onSettingsChanged = { interactor.onThemeSettingsChanged(it) }
+            )
         }
     }
 }

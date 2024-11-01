@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalSharedTransitionApi::class)
 val LocalSharedTransitionScope = compositionLocalOf<SharedTransitionScope?> { null }
 val LocalNavAnimatedVisibilityScope = compositionLocalOf<AnimatedVisibilityScope?> { null }
-val LocalMainPadding = compositionLocalOf { PaddingValues(0.dp) }
+val LocalPadding = compositionLocalOf { PaddingValues(0.dp) }
 
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 inline fun Modifier.apply(
@@ -31,9 +31,9 @@ fun AnimatedContentScope.LocalAnimatedVisibilityProvider(content: @Composable ()
 }
 
 @Composable
-fun LocalMainPadding(padding: PaddingValues, content: @Composable () -> Unit) {
+fun LocalPadding(padding: PaddingValues, content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        value = LocalMainPadding provides padding,
+        value = LocalPadding provides padding,
         content = content
     )
 }
