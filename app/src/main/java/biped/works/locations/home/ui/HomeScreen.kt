@@ -14,7 +14,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,7 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import biped.works.compose.animtation.LocalMainPadding
+import biped.works.compose.animtation.LocalPadding
 import biped.works.compose.collectWithLifecycle
 import biped.works.compose.navigation.currentRouteState
 import biped.works.locations.home.HomeNavigation
@@ -99,7 +98,7 @@ private fun HomeScreenUi(
             }
         }
     ) { innerPadding ->
-        LocalMainPadding(innerPadding) {
+        LocalPadding(innerPadding) {
             Column {
                 NavigationGraph(navController = state.navController)
             }

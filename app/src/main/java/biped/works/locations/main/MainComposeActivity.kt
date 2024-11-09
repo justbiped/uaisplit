@@ -39,8 +39,8 @@ class MainComposeActivity : ComponentActivity() {
             }
 
             CashTheme(
-                themeSettings.colorScheme,
-                themeSettings.useDynamicColors
+                colorTheme = themeSettings.colorScheme,
+                useDynamicColors = themeSettings.useDynamicColors
             ) {
                 HomeScreen()
             }

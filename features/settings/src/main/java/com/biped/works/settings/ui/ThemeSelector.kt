@@ -11,37 +11,47 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.biped.works.settings.data.ThemeSettings
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.ColorTheme
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.components.MediumLabel
-import com.biped.locations.theme.components.MediumTitle
 import com.biped.locations.theme.components.SegmentButton
 import com.biped.locations.theme.components.SegmentItem
 import com.biped.locations.theme.components.rememberSegmentState
+import com.biped.works.settings.data.ThemeSettings
 
 @Composable
 fun ThemeSettingsUi(
     uiModel: ThemeSettings,
+    isDynamicColorSupported: Boolean = false,
     onSettingsChanged: (ThemeSettings) -> Unit = {}
 ) {
     Column {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            MediumLabel(text = "Use dynamic colors")
-            Switch(
-                checked = uiModel.useDynamicColors,
-                onCheckedChange = { onSettingsChanged(uiModel.copy(useDynamicColors = it)) }
+        if (isDynamicColorSupported) {
+            DynamicColorToggle(
+                useDynamicColor = uiModel.useDynamicColors,
+                onSettingsChanged = { onSettingsChanged(uiModel.copy(useDynamicColors = it)) }
             )
         }
         SmallSpacer()
         ColorSchemeSelector(
             colorScheme = uiModel.colorScheme,
             onSchemeSelected = { onSettingsChanged(uiModel.copy(colorScheme = it)) }
+        )
+    }
+}
+
+@Composable
+fun DynamicColorToggle(useDynamicColor: Boolean, onSettingsChanged: (Boolean) -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        MediumLabel(text = "Use dynamic colors")
+        Switch(
+            checked = useDynamicColor,
+            onCheckedChange = { onSettingsChanged(it) }
         )
     }
 }
