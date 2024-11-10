@@ -27,7 +27,7 @@ fun DropDownItemSelector(
     var expanded by remember { mutableStateOf(false) }
 
     var selectedItem by remember {
-        val selectedItem = if (selected != null) selected else items.first()
+        val selectedItem = selected ?: items.first()
         mutableStateOf(selectedItem)
     }
 
