@@ -37,7 +37,7 @@ import com.biped.locations.theme.TinySpacer
 import com.biped.locations.theme.components.Loading
 import com.biped.locations.theme.components.SmallTitle
 import com.biped.locations.theme.components.TextField
-import com.favoriteplaces.core.date.asTime
+import com.favoriteplaces.core.date.asEpoch
 import com.favoriteplaces.core.date.formatAsDate
 
 @Composable
@@ -111,7 +111,7 @@ fun TransactionPanel(
             }
             SmallSpacer()
             DatePickerTextField(
-                initialTime = form.due.asTime(),
+                initialTime = form.due.asEpoch(),
                 onDateSelect = {
                     form = form.copy(due = it.formatAsDate())
                 }

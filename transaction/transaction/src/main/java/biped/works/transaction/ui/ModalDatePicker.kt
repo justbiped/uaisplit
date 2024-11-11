@@ -20,13 +20,13 @@ import java.time.Instant
 @Composable
 fun DatePickerTextField(
     onDateSelect: (Long) -> Unit,
-    initialTime: Instant = Instant.now(),
+    initialTime: Long = Instant.now().toEpochMilli(),
     label: @Composable (() -> Unit)? = null,
 ) {
     var openDatePicker by remember { mutableStateOf(false) }
 
     ClickableTextField(
-        value = formatDate(initialTime.toEpochMilli()),
+        value = formatDate(initialTime),
         onClick = { openDatePicker = true },
         onValueChange = { },
         label = label
@@ -46,11 +46,11 @@ private fun formatDate(initialValue: Long) =
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DatePickerModal(
-    initialTime: Instant,
+    initialTime: Long,
     onDateSelected: (Long) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = initialTime.toEpochMilli())
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = initialTime)
     val colors = DatePickerDefaults.colors().copy(containerColor = CashTheme.colorScheme.surfaceContainer)
     DatePickerDialog(
         colors = colors,
