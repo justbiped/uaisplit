@@ -38,6 +38,7 @@ import com.biped.locations.theme.components.Loading
 import com.biped.locations.theme.components.SmallTitle
 import com.biped.locations.theme.components.TextField
 import com.favoriteplaces.core.date.asTime
+import com.favoriteplaces.core.date.formatAsDate
 
 @Composable
 internal fun TransactionScreen(
@@ -109,7 +110,12 @@ fun TransactionPanel(
                     label = { Text("Amount") })
             }
             SmallSpacer()
-            DatePickerTextField(initialTime = form.due.asTime(), onDateSelect = {})
+            DatePickerTextField(
+                initialTime = form.due.asTime(),
+                onDateSelect = {
+                    form = form.copy(due = it.formatAsDate())
+                }
+            )
         }
     }
 }

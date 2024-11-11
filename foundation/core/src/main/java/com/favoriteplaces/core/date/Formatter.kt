@@ -7,11 +7,11 @@ import java.util.Date
 import java.util.Locale
 import timber.log.Timber
 
-fun Long.formatAsDate(pattern: String = "yyyy-mm-dd"): String {
+fun Long.formatAsDate(pattern: String = "yyyy-MM-dd"): String {
     return SimpleDateFormat(pattern, Locale.getDefault()).format(Date(this))
 }
 
-fun String.asTime(pattern: String = "yyyy-mm-dd"): Instant {
+fun String.asTime(pattern: String = "yyyy-MM-dd"): Instant {
     val formatter = SimpleDateFormat(pattern, Locale.getDefault())
     return try {
         formatter.parse(this)?.toInstant() ?: throw ParseException("Parse result was null", 0)
