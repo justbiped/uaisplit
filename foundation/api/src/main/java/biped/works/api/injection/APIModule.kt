@@ -30,6 +30,6 @@ class APIModule {
         return ApiBuilder
             .client(okHttpClient)
             .converter(converterFactory)
-            .baseUrl("http://10.0.2.2:8080/")
+            .baseUrl("http://192.168.15.3:8080/")
     }
 }

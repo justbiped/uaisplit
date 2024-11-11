@@ -16,7 +16,6 @@ import androidx.compose.runtime.setValue
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.components.ClickableTextField
 import java.time.Instant
-import java.util.Date
 
 @Composable
 fun DatePickerTextField(
@@ -33,7 +32,10 @@ fun DatePickerTextField(
         label = label
     )
 
-    if (openDatePicker) DatePickerModal(onDateSelected = onDateSelect, onDismiss = { openDatePicker = false })
+    if (openDatePicker) DatePickerModal(
+        initialTime = initialTime,
+        onDateSelected = onDateSelect,
+        onDismiss = { openDatePicker = false })
 }
 
 @Composable
@@ -44,10 +46,11 @@ private fun formatDate(initialValue: Long) =
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DatePickerModal(
+    initialTime: Instant,
     onDateSelected: (Long) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = Date().time)
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = initialTime.toEpochMilli())
     val colors = DatePickerDefaults.colors().copy(containerColor = CashTheme.colorScheme.surfaceContainer)
     DatePickerDialog(
         colors = colors,
