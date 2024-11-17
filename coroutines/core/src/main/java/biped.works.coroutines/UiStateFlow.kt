@@ -1,10 +1,14 @@
 package biped.works.coroutines
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.shareIn
 
 open class UiStateFlow<T>(initialValue: T) : Flow<T> {
 
@@ -52,4 +56,8 @@ class MutableUiStateFlow<T>(value: T) : UiStateFlow<T>(value) {
     }
 
     fun toUiStateFlow(): UiStateFlow<T> = this
+}
+
+fun <T> Flow<T>.asUiState(coroutineScope: CoroutineScope): SharedFlow<T> {
+    return shareIn(coroutineScope, SharingStarted.WhileSubscribed(3_000), 1)
 }
