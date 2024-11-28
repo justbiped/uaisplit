@@ -37,8 +37,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":transaction:statement"))
-    implementation(project(":transaction:transaction"))
+    implementation(projects.transaction.statement)
+    implementation(projects.transaction.transaction)
 
     implementation(project(":automation"))
     implementation(project(":features:profile"))
