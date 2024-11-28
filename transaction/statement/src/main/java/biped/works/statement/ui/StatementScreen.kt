@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
@@ -34,6 +33,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import biped.works.compose.animtation.LocalPadding
 import biped.works.compose.collectWithLifecycle
 import biped.works.statement.R
 import biped.works.statement.data.Statement
@@ -97,11 +97,12 @@ private fun Content(
     onTransactionClick: (String) -> Unit,
     onAddButtonClick: () -> Unit
 ) {
+    val bottomPadding = LocalPadding.current.calculateBottomPadding() + Dimens.normal
     Box(Modifier.fillMaxSize()) {
         FloatingActionButton(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(bottom = Dimens.normal, end = Dimens.normal),
+                .padding(bottom = bottomPadding, end = Dimens.normal),
             shape = RoundedCornerShape(Dimens.small),
             onClick = onAddButtonClick
         ) {
@@ -155,9 +156,6 @@ private fun getTopWindowInset() = with(LocalDensity.current) {
     val topInset = WindowInsets.systemBars.getTop(LocalDensity.current)
     topInset.toDp()
 }
-
-@Composable
-private fun getBottomPadding() = WindowInsets.navigationBars.getBottom(LocalDensity.current).dp
 
 fun showFetchFailToast(context: Context) {
     Toast.makeText(context, "Unable to update", Toast.LENGTH_SHORT).show()

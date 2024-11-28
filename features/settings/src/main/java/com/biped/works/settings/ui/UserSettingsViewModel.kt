@@ -7,6 +7,7 @@ import biped.works.coroutines.launchIO
 import com.biped.works.settings.ObserveUserSettingsUseCase
 import com.biped.works.settings.SaveUserSettingsUseCase
 import com.biped.works.settings.data.UserSettings
+import com.favoriteplaces.core.SystemCompliance
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
@@ -18,11 +19,12 @@ internal class UserSettingsViewModel @Inject constructor(
     private val saveUserSettingsUseCase: SaveUserSettingsUseCase,
 ) : ViewModel() {
 
-    private val _instruction = MutableUiStateFlow<Instruction>(Instruction.UpdateSettings())
+    private val _instruction = MutableUiStateFlow<UserSettingsInstruction>(UserSettingsInstruction.UserSettingsState())
     val instruction = _instruction.toUiStateFlow()
 
     init {
         loadUserSettings()
+        _instruction.update { copy(isDynamicColorSupported = SystemCompliance.isDynamicColorSupported()) }
     }
 
     private fun loadUserSettings() {
@@ -40,6 +42,6 @@ internal class UserSettingsViewModel @Inject constructor(
     }
 
     fun showUserProfile(userId: String) {
-        _instruction.sendEvent(Instruction.navigateToProfile())
+        _instruction.sendEvent(UserSettingsInstruction.navigateToProfile())
     }
 }

@@ -1,7 +1,6 @@
 package biped.works.locations.main
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -40,8 +39,8 @@ class MainComposeActivity : ComponentActivity() {
             }
 
             CashTheme(
-                themeSettings.colorScheme,
-                themeSettings.useDynamicColors
+                colorTheme = themeSettings.colorScheme,
+                useDynamicColors = themeSettings.useDynamicColors
             ) {
                 HomeScreen()
             }
