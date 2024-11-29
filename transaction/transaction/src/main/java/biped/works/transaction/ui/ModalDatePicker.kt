@@ -15,12 +15,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.components.ClickableTextField
-import java.time.Instant
 
 @Composable
 fun DatePickerTextField(
     onDateSelect: (Long) -> Unit,
-    initialTime: Long = Instant.now().toEpochMilli(),
+    initialTime: Long,
     label: @Composable (() -> Unit)? = null,
 ) {
     var openDatePicker by remember { mutableStateOf(false) }

@@ -111,7 +111,7 @@ fun TransactionPanel(
             }
             SmallSpacer()
             DatePickerTextField(
-                initialTime = form.due.asEpoch(),
+                initialTime = form.dueEpoch,
                 onDateSelect = {
                     form = form.copy(due = it.formatAsDate())
                 }

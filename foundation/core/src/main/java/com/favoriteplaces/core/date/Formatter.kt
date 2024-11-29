@@ -30,11 +30,13 @@ fun String.asEpoch(pattern: String = ISO_8601): Long {
             .toEpochMilli()
     } catch (error: Throwable) {
         Timber.e(error)
-        ZonedDateTime
-            .now()
-            .toLocalDate()
-            .atStartOfDay(UTC_ID)
-            .toInstant()
-            .toEpochMilli()
+        currentEpoch()
     }
 }
+
+fun currentEpoch(): Long = ZonedDateTime
+    .now()
+    .toLocalDate()
+    .atStartOfDay(UTC_ID)
+    .toInstant()
+    .toEpochMilli()

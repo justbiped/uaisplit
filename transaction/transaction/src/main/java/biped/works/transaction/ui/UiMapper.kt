@@ -17,7 +17,7 @@ fun Transaction.toUiModel() = TransactionUiModel(
 
 fun TransactionUiModel.toTransactionUpdate() = TransactionUpdate(
     id = if (id.isNotBlank()) id else null,
-    owner = owner,
+    owner = "aXTh7D9qGSNk1zjWtDrR",
     name = name,
     description = description,
     due = due,

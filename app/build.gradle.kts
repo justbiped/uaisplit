@@ -40,17 +40,17 @@ dependencies {
     implementation(projects.transaction.statement)
     implementation(projects.transaction.transaction)
 
-    implementation(project(":automation"))
-    implementation(project(":features:profile"))
-    implementation(project(":features:settings"))
-    implementation(project(":features:user"))
+    implementation(projects.automation)
+    implementation(projects.features.profile)
+    implementation(projects.features.settings)
+    implementation(projects.features.user)
 
-    implementation(project(":foundation:core"))
-    implementation(project(":foundation:theme"))
-    testImplementation(project(":foundation:test"))
+    implementation(projects.foundation.core)
+    implementation(projects.foundation.theme)
+    testImplementation(projects.foundation.test)
 
-    implementation(project(":coroutines:core"))
-    testImplementation(project(":coroutines:test"))
+    implementation(projects.coroutines.core)
+    testImplementation(projects.coroutines.test)
 
     implementation(libs.android.core)
     implementation(libs.coroutine.android)
