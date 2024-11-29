@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package biped.works.transaction.ui
 
 import androidx.compose.foundation.layout.Column
@@ -7,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -19,7 +20,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,18 +28,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import biped.works.compose.collectWithLifecycle
 import biped.works.transaction.R
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.TinySpacer
-import com.biped.locations.theme.components.DropDownItemSelector
 import com.biped.locations.theme.components.Loading
-import com.biped.locations.theme.components.MenuItem
 import com.biped.locations.theme.components.SmallTitle
 import com.biped.locations.theme.components.TextField
+import com.favoriteplaces.core.date.asEpoch
+import com.favoriteplaces.core.date.formatAsDate
 
 @Composable
 internal fun TransactionScreen(
@@ -103,11 +102,20 @@ fun TransactionPanel(
             Row {
                 CurrencySelector(
                     selected = uiModel.currency,
-                    onSelect = {}
+                    onSelect = { code -> form = form.copy(currency = code) }
                 )
                 TinySpacer()
-                TextField(value = uiModel.amount.toString(), onValueChange = {}, label = { Text("Amount") })
+                TextField(value = form.amount,
+                    onValueChange = { form = form.copy(amount = it) },
+                    label = { Text("Amount") })
             }
+            SmallSpacer()
+            DatePickerTextField(
+                initialTime = form.due.asEpoch(),
+                onDateSelect = {
+                    form = form.copy(due = it.formatAsDate())
+                }
+            )
         }
     }
 }
@@ -132,42 +140,7 @@ private fun TopAppbar(
     )
 }
 
-@Composable
-fun CurrencySelector(
-    selected: String = "",
-    onSelect: (String) -> Unit
-) {
-    val supportedCurrencies = listOf(
-        MenuItem(Currency.USD.code, displayText = Currency.USD.symbol, menuDisplayText = Currency.USD.toString()),
-        MenuItem(Currency.BRL.code, displayText = Currency.BRL.symbol, menuDisplayText = Currency.BRL.toString()),
-    )
-
-    val selectedCurrency by remember {
-        derivedStateOf {
-            supportedCurrencies.firstOrNull { it.key == selected } ?: supportedCurrencies.first()
-        }
-    }
-
-    DropDownItemSelector(
-        modifier = Modifier.width(100.dp),
-        label = { Text("Currency") },
-        items = supportedCurrencies,
-        selected = selectedCurrency,
-        onSelect = { onSelect(it.key) }
-    )
-}
-
-enum class Currency(
-    val code: String,
-    val symbol: String
-) {
-    BRL("BRL", "R$"),
-    USD("USD", "$");
-
-    override fun toString() = "$code $symbol"
-}
-
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun TransactionPane_Preview() {
     CashTheme {
@@ -176,8 +149,8 @@ fun TransactionPane_Preview() {
                 id = "24325dfe",
                 name = "Car Rent",
                 description = "For the trip from x to y",
-                due = "13 Feb 2024",
-                amount = 320.00,
+                due = "2024-01-01",
+                amount = "320.00",
                 currency = "R$"
             )
         )
