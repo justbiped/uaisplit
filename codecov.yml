@@ -10,6 +10,6 @@ coverage:
         threshold: 2%
         base: auto
         branches:
-          - master
+          - main
         informational: false
         only_pulls: false
