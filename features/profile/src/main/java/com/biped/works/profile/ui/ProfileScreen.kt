@@ -50,10 +50,10 @@ internal fun ProfileScreen(
     val state by rememberProfileState()
 
     viewModel.uiState.collectWithLifecycle { instruction ->
-        when (instruction) {
-            is ProfileUiState.UpdateProfile -> state.updateState(instruction)
-            is ProfileUiState.ProfileSaved -> state.showMessage(R.string.profile_saved_msg)
-        }
+        state.updateState(instruction)
+    }
+    viewModel.uiEvent.collectWithLifecycle {
+        state.showMessage(R.string.profile_saved_msg)
     }
 
     val interactor = object : ProfileInteractor {
