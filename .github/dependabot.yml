@@ -7,7 +7,7 @@ updates:
     rebase-strategy: "disabled"
     ignore:
       - dependency-name: "*"
-        update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
+        update-types: [ "version-update:semver-major"]
     groups:
       patch:
         applies-to: version-updates
