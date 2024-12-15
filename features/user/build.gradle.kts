@@ -21,7 +21,7 @@ dependencies {
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
-    implementation("com.squareup:kotlinpoet:1.16.0")
+    implementation("com.squareup:kotlinpoet:2.0.0")
 
 
     implementation(project(":foundation:core"))
