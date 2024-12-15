@@ -4,7 +4,7 @@ javaxInject = "1"
 kotlin = "2.0.0"
 coroutine = "1.7.3"
 
-lifecycle = "2.5.1"
+lifecycle = "2.8.7"
 
 retrofit = "2.9.0"
 okHttp = "4.10.0"
