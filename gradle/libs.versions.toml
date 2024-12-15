@@ -1,7 +1,7 @@
 [versions]
 agp = "8.5.2"
 javaxInject = "1"
-kotlin = "2.0.0"
+kotlin = "2.1.0"
 coroutine = "1.7.3"
 
 lifecycle = "2.5.1"
