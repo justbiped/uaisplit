@@ -5,6 +5,9 @@ updates:
     schedule:
       interval: "weekly"
     rebase-strategy: "disabled"
+    ignore:
+      - dependency-name: "*"
+        update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
     groups:
       patch:
         applies-to: version-updates
@@ -12,11 +15,3 @@ updates:
           - "*"
         update-types:
           - "patch"
-    ignore:
-      - dependency-name: "*"
-        update-types: [ "version-update:semver-major", "version-update:semver-minor"]
-#  - package-ecosystem: "github-actions"
-#    directory: "/"
-#    schedule:
-#      interval: "weekly"
-#    rebase-strategy: "disabled"
