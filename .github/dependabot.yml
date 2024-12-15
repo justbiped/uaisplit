@@ -5,9 +5,15 @@ updates:
     schedule:
       interval: "weekly"
     rebase-strategy: "disabled"
-
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    rebase-strategy: "disabled"
+    groups:
+      patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+#  - package-ecosystem: "github-actions"
+#    directory: "/"
+#    schedule:
+#      interval: "weekly"
+#    rebase-strategy: "disabled"
