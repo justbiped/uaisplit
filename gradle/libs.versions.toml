@@ -15,7 +15,7 @@ room = "2.6.1"
 navigation = "2.8.0"
 compose-compiler = "1.5.5"
 
-robolectricVersion = "4.9.2"
+robolectricVersion = "4.14.1"
 mockkVersion = "1.13.12"
 junit = "1.2.1"
 kover = "0.8.3"
