@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -41,7 +42,9 @@ import biped.works.statement.data.TimeSpan
 import biped.works.statement.data.Transaction
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
+import com.biped.locations.theme.SmallSpacer
 import com.biped.locations.theme.TinySpacer
+import com.biped.locations.theme.components.LargeHeadline
 import com.biped.locations.theme.components.Loading
 import java.time.YearMonth
 
@@ -131,7 +134,11 @@ private fun BalanceHeader(
             ),
         contentAlignment = Alignment.BottomCenter
     ) {
-        MonthSelector(onMonthSelected = onMonthSelected)
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            LargeHeadline(text = "$${statement.balance}")
+            SmallSpacer()
+            MonthSelector(onMonthSelected = onMonthSelected)
+        }
     }
 }
 
@@ -167,7 +174,7 @@ fun StatementUi_Preview() {
     CashTheme {
         StatementPanel(
             statement = Statement(
-                "Balance",
+                balance = "20.00",
                 transactions = listOf(
                     Transaction(
                         id = "",

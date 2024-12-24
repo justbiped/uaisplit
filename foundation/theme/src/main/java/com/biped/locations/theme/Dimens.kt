@@ -1,5 +1,6 @@
 package com.biped.locations.theme
 
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -57,6 +58,31 @@ fun ColumnScope.BigSpacer() {
 @Composable
 fun ColumnScope.HugeSpacer() {
     Spacer(modifier = Modifier.padding(top = Dimens.huge))
+}
+
+@Composable
+fun BoxScope.TinySpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.tiny))
+}
+
+@Composable
+fun BoxScope.SmallSpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.small))
+}
+
+@Composable
+fun BoxScope.NormalSpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.normal))
+}
+
+@Composable
+fun BoxScope.BigSpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.big))
+}
+
+@Composable
+fun BoxScope.HugeSpacer() {
+    Spacer(modifier = Modifier.padding(end = Dimens.huge))
 }
 
 object Dimens {
