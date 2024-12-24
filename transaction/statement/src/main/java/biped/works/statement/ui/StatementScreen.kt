@@ -29,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -84,7 +85,13 @@ private fun StatementPanel(
     val minHeight = getTopWindowInset() + 60.dp
     CollapsingLayout(
         minHeight = minHeight,
-        header = { BalanceHeader(statement, onMonthSelected = onMonthSelected) }) { insets ->
+        header = { collapsing ->
+            val balanceModifier = Modifier.alpha(1f - collapsing)
+            BalanceHeader(
+                balance = { LargeHeadline(modifier = balanceModifier, text = "$${statement.balance}") },
+                content = { MonthSelector(onMonthSelected = onMonthSelected) }
+            )
+        }) { insets ->
         when {
             isLoading -> Loading()
             isEmpty -> EmptyStatement(onAddButtonClick)
@@ -121,8 +128,8 @@ private fun Content(
 
 @Composable
 private fun BalanceHeader(
-    statement: Statement,
-    onMonthSelected: (YearMonth) -> Unit = {}
+    balance: @Composable () -> Unit,
+    content: @Composable () -> Unit = {},
 ) {
     Box(
         Modifier
@@ -135,9 +142,9 @@ private fun BalanceHeader(
         contentAlignment = Alignment.BottomCenter
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            LargeHeadline(text = "$${statement.balance}")
+            balance()
             SmallSpacer()
-            MonthSelector(onMonthSelected = onMonthSelected)
+            content()
         }
     }
 }
