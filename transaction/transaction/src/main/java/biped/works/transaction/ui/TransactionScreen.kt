@@ -18,6 +18,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -72,6 +75,8 @@ fun TransactionPanel(
     onNavigateUp: () -> Unit = {}
 ) {
     var form by remember { mutableStateOf(uiModel) }
+    var selectedIndex by remember { mutableStateOf(0) }
+    val options = listOf("Income", "Expense")
 
     Column(
         Modifier
@@ -85,6 +90,23 @@ fun TransactionPanel(
                 .fillMaxHeight()
                 .padding(horizontal = Dimens.small)
         ) {
+            SingleChoiceSegmentedButtonRow(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                options.forEachIndexed { index, label ->
+                    SegmentedButton(
+                        shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
+                        onClick = {
+                            selectedIndex = index
+                            //change amount
+                        },
+                        selected = index == selectedIndex
+                    ) {
+                        Text(label)
+                    }
+                }
+            }
+            SmallSpacer()
             TextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = form.name,
