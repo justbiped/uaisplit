@@ -55,10 +55,10 @@ class TestFlow<T>(
 
 class TestFlowSubject<T> private constructor(
     failureMetadata: FailureMetadata,
-    private val flow: TestFlow<T>
+    flow: TestFlow<T>?
 ) : Subject(failureMetadata, flow) {
 
-    private val events = flow.events
+    private val events = flow?.events ?: throw Exception("Test flow cannot be null mdfk")
     private val receivedInstances = events.map { it!!::class.java }
 
     fun lastEvent(): Subject {

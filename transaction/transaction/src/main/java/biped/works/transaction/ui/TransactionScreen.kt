@@ -37,7 +37,6 @@ import com.biped.locations.theme.TinySpacer
 import com.biped.locations.theme.components.Loading
 import com.biped.locations.theme.components.SmallTitle
 import com.biped.locations.theme.components.TextField
-import com.favoriteplaces.core.date.asEpoch
 import com.favoriteplaces.core.date.formatAsDate
 
 @Composable
@@ -105,8 +104,9 @@ fun TransactionPanel(
                     onSelect = { code -> form = form.copy(currency = code) }
                 )
                 TinySpacer()
-                TextField(value = form.amount,
-                    onValueChange = { form = form.copy(amount = it) },
+                TextField(
+                    value = form.formattedAmount(),
+                    onValueChange = { form = form.copy(amount = it.toDouble()) },
                     label = { Text("Amount") })
             }
             SmallSpacer()
@@ -150,7 +150,7 @@ fun TransactionPane_Preview() {
                 name = "Car Rent",
                 description = "For the trip from x to y",
                 due = "2024-01-01",
-                amount = "320.00",
+                amount = 320.00,
                 currency = "R$"
             )
         )

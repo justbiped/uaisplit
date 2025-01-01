@@ -11,12 +11,12 @@ fun Transaction.toUiModel() = TransactionUiModel(
     name = name,
     description = description,
     due = due,
-    amount = value.amount.toString(),
+    amount = value.amount,
     currency = value.currency
 )
 
 fun TransactionUiModel.toTransactionUpdate() = TransactionUpdate(
-    id = if (id.isNotBlank()) id else null,
+    id = id.ifBlank { null },
     owner = "aXTh7D9qGSNk1zjWtDrR",
     name = name,
     description = description,
