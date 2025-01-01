@@ -10,8 +10,12 @@ data class TransactionUiModel(
     val name: String = "",
     val description: String = "",
     val due: String = currentEpoch().formatAsDate(),
-    val amount: String = "",
+    val amount: Double = 0.0,
     val currency: String = ""
 ) {
     val dueEpoch = due.asEpoch()
+
+    fun formattedAmount() = amount.toString()
+
+    fun invertAmount() = copy(amount = amount * -1)
 }
