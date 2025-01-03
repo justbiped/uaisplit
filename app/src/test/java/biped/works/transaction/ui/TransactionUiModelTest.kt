@@ -4,7 +4,6 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 class TransactionUiModelTest {
-
     @Test
     fun `invert incoming transaction to debt`() {
         val uiModel = TransactionUiModel(amount = 10.0)
@@ -21,5 +20,23 @@ class TransactionUiModelTest {
         val debtUiModel = uiModel.invertAmount()
 
         assertThat(debtUiModel.amount).isEqualTo(10.0)
+    }
+
+    @Test
+    fun `keep debt transaction amount to be negative when setting a new amount`() {
+        val uiModel = TransactionUiModel(amount = -10.0)
+
+        val updatedUiModel = uiModel.setAmount("20.0")
+
+        assertThat(updatedUiModel.amount).isEqualTo(-20.0)
+    }
+
+    @Test
+    fun `keep incoming transaction amount to positive when setting a new amount`() {
+        val uiModel = TransactionUiModel(amount = 10.0)
+
+        val updatedUiModel = uiModel.setAmount("20.0")
+
+        assertThat(updatedUiModel.amount).isEqualTo(20.0)
     }
 }

@@ -23,6 +23,7 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -62,7 +63,8 @@ internal fun TransactionScreen(
         TransactionPanel(
             uiModel = state.uiModel,
             onNavigateUp = onNavigateUp,
-            onSave = viewModel::saveTransaction
+            onSave = viewModel::saveTransaction,
+            onTypeSelected = viewModel::onTransactionTypeSelected
         )
     }
 }
@@ -71,10 +73,11 @@ internal fun TransactionScreen(
 fun TransactionPanel(
     uiModel: TransactionUiModel,
     onSave: (TransactionUiModel) -> Unit = {},
-    onNavigateUp: () -> Unit = {}
+    onNavigateUp: () -> Unit = {},
+    onTypeSelected: (TransactionUiModel, Int) -> Unit = { _,_ -> }
 ) {
     var form by remember { mutableStateOf(uiModel) }
-    var selectedIndex by remember { mutableStateOf(0) }
+    val selectedIndex by remember { derivedStateOf { if (form.isIncoming) 0 else 1 } }
     val options = listOf("Income", "Expense")
 
     Column(
@@ -96,8 +99,7 @@ fun TransactionPanel(
                     SegmentedButton(
                         shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
                         onClick = {
-                            selectedIndex = index
-                            //change amount
+                            form = form.invertAmount()
                         },
                         selected = index == selectedIndex
                     ) {
@@ -128,7 +130,7 @@ fun TransactionPanel(
                 TinySpacer()
                 TextField(
                     value = form.formattedAmount(),
-                    onValueChange = { form = form.copy(amount = it.toDouble()) },
+                    onValueChange = { form = form.setAmount(it) },
                     label = { Text("Amount") })
             }
             SmallSpacer()
