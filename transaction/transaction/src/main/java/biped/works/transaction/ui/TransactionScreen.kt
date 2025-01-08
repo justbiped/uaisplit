@@ -79,7 +79,8 @@ fun TransactionPanel(
     onNavigateUp: () -> Unit = {}
 ) {
     var form by remember { mutableStateOf(uiModel) }
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by remember { mutableStateOf(if (form.amount >= 0) 0 else 1) }
+
     val options = enumValues<TransactionType>()
 
     Column(
