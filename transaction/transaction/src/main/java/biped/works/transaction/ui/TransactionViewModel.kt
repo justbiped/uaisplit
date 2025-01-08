@@ -52,9 +52,4 @@ internal class TransactionViewModel @Inject constructor(
         _instruction.updateState { copy(isLoading = false) }
         _instruction.sendEvent(TransactionInstruction.FailedToUpdate)
     }
-
-    fun onTransactionTypeSelected(uiModel: TransactionUiModel, selectedIndex: Int) {
-        val updatedUiModel = uiModel.copy(amount = uiModel.amount + 10) //temp
-        _instruction.updateState { copy(uiModel = updatedUiModel) }
-    }
 }

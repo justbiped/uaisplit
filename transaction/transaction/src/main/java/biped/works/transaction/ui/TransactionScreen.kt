@@ -62,8 +62,7 @@ internal fun TransactionScreen(
         TransactionPanel(
             uiModel = state.uiModel,
             onNavigateUp = onNavigateUp,
-            onSave = viewModel::saveTransaction,
-            onTypeSelected = viewModel::onTransactionTypeSelected
+            onSave = viewModel::saveTransaction
         )
     }
 }
@@ -77,8 +76,7 @@ enum class TransactionType(val title: String) {
 fun TransactionPanel(
     uiModel: TransactionUiModel,
     onSave: (TransactionUiModel) -> Unit = {},
-    onNavigateUp: () -> Unit = {},
-    onTypeSelected: (TransactionUiModel, Int) -> Unit = { _, _ -> }
+    onNavigateUp: () -> Unit = {}
 ) {
     var form by remember { mutableStateOf(uiModel) }
     var selectedIndex by remember { mutableStateOf(0) }
