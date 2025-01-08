@@ -23,7 +23,6 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -69,7 +68,7 @@ internal fun TransactionScreen(
     }
 }
 
-enum class TransactionType(val title: String){
+enum class TransactionType(val title: String) {
     INCOME("Income"),
     EXPENSE("Expense")
 }
@@ -79,10 +78,10 @@ fun TransactionPanel(
     uiModel: TransactionUiModel,
     onSave: (TransactionUiModel) -> Unit = {},
     onNavigateUp: () -> Unit = {},
-    onTypeSelected: (TransactionUiModel, Int) -> Unit = { _,_ -> }
+    onTypeSelected: (TransactionUiModel, Int) -> Unit = { _, _ -> }
 ) {
     var form by remember { mutableStateOf(uiModel) }
-    val selectedIndex by remember { derivedStateOf { if (form.isIncoming) 0 else 1 } }
+    var selectedIndex by remember { mutableStateOf(0) }
     val options = enumValues<TransactionType>()
 
     Column(
@@ -104,7 +103,10 @@ fun TransactionPanel(
                     SegmentedButton(
                         shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
                         onClick = {
-                            form = form.invertAmount()
+                            if (selectedIndex != index) {
+                                selectedIndex = index
+                                form = form.invertAmount()
+                            }
                         },
                         selected = index == selectedIndex
                     ) {

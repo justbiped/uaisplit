@@ -6,9 +6,9 @@ import org.junit.Test
 class TransactionUiModelTest {
     @Test
     fun `invert incoming transaction to debt`() {
-        val uiModel = TransactionUiModel(amount = 10.0)
+        val transaction = TransactionUiModel(amount = 10.0)
 
-        val debtUiModel = uiModel.invertAmount()
+        val debtUiModel = transaction.invertAmount()
 
         assertThat(debtUiModel.amount).isEqualTo(-10.0)
     }
@@ -33,10 +33,10 @@ class TransactionUiModelTest {
 
     @Test
     fun `keep incoming transaction amount to positive when setting a new amount`() {
-        val uiModel = TransactionUiModel(amount = 10.0)
+        val transaction = TransactionUiModel(amount = 10.0)
 
-        val updatedUiModel = uiModel.setAmount("20.0")
+        val newAmountTransaction = transaction.setAmount("20.0")
 
-        assertThat(updatedUiModel.amount).isEqualTo(20.0)
+        assertThat(newAmountTransaction.amount).isEqualTo(20.0)
     }
 }
