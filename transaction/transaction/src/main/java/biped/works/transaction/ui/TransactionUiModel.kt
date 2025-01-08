@@ -16,7 +16,7 @@ data class TransactionUiModel(
     val dueEpoch = due.asEpoch()
     val isIncoming = amount >= 0
 
-    fun formattedAmount() = amount.toString().replace("-", "")
+    fun formatAmount() = amount.toString().replace("-", "")
 
     fun invertAmount() = copy(amount = amount * -1)
 

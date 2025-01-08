@@ -69,6 +69,11 @@ internal fun TransactionScreen(
     }
 }
 
+enum class TransactionType(val title: String){
+    INCOME("Income"),
+    EXPENSE("Expense")
+}
+
 @Composable
 fun TransactionPanel(
     uiModel: TransactionUiModel,
@@ -78,7 +83,7 @@ fun TransactionPanel(
 ) {
     var form by remember { mutableStateOf(uiModel) }
     val selectedIndex by remember { derivedStateOf { if (form.isIncoming) 0 else 1 } }
-    val options = listOf("Income", "Expense")
+    val options = enumValues<TransactionType>()
 
     Column(
         Modifier
@@ -103,7 +108,7 @@ fun TransactionPanel(
                         },
                         selected = index == selectedIndex
                     ) {
-                        Text(label)
+                        Text(label.title)
                     }
                 }
             }
@@ -129,7 +134,7 @@ fun TransactionPanel(
                 )
                 TinySpacer()
                 TextField(
-                    value = form.formattedAmount(),
+                    value = form.formatAmount(),
                     onValueChange = { form = form.setAmount(it) },
                     label = { Text("Amount") })
             }

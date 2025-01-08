@@ -24,11 +24,11 @@ class TransactionUiModelTest {
 
     @Test
     fun `keep debt transaction amount to be negative when setting a new amount`() {
-        val uiModel = TransactionUiModel(amount = -10.0)
+        val transaction = TransactionUiModel(amount = -10.0)
 
-        val updatedUiModel = uiModel.setAmount("20.0")
+        val newAmountTransaction = transaction.setAmount("20.0")
 
-        assertThat(updatedUiModel.amount).isEqualTo(-20.0)
+        assertThat(newAmountTransaction.amount).isEqualTo(-20.0)
     }
 
     @Test
