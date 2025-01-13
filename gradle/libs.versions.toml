@@ -16,7 +16,7 @@ navigation = "2.8.5"
 compose-compiler = "1.5.5"
 
 robolectricVersion = "4.9.2"
-mockkVersion = "1.13.14"
+mockkVersion = "1.13.16"
 junit = "1.2.1"
 kover = "0.8.3"
 runtimeAndroid = "1.7.6"
