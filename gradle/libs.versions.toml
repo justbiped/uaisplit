@@ -66,7 +66,7 @@ lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-kt
 lifecycle-viewModel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 
 # Compose
-compose-bom = "androidx.compose:compose-bom:2024.09.03"
+compose-bom = "androidx.compose:compose-bom:2025.01.00"
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 
 compose-hilt = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt" }
@@ -84,7 +84,7 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-googlefonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts" }
 
-compose-coil = { group = "io.coil-kt", name = "coil-compose", version = "2.2.2" }
+compose-coil = { group = "io.coil-kt", name = "coil-compose", version = "2.7.0" }
 
 compose-test-junit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
