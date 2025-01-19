@@ -6,9 +6,7 @@ plugins {
 }
 
 android {
-    buildFeatures {
-        namespace = "com.biped.locations.theme"
-    }
+    namespace = "com.biped.locations.theme"
 }
 
 dependencies {

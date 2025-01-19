@@ -140,6 +140,6 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 biped-compose = { id = "biped.works.plugins.compose", version = "1.0.0" }
 biped-test = { id = "biped.works.plugins.test", version = "1.0.0" }
 
-ksp = { id = "com.google.devtools.ksp", version = "2.0.21-1.0.28" }
+ksp = { id = "com.google.devtools.ksp", version = "2.1.0-1.0.29" }
 
 dependencyUpdates = { id = "com.github.ben-manes.versions", version = "0.42.0" }

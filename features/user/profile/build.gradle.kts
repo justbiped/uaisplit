@@ -1,14 +1,14 @@
 plugins {
     apply(libs.plugins.android.library)
+    apply(libs.plugins.kotlin.android)
     apply(libs.plugins.hilt)
     apply(libs.plugins.ksp)
-    apply(libs.plugins.kotlin.serialization)
     apply(libs.plugins.biped.compose)
     apply(libs.plugins.biped.test)
 }
 
-android{
-    namespace = "biped.works.settings"
+android {
+    namespace = "biped.works.profile"
 }
 
 dependencies {
@@ -19,7 +19,6 @@ dependencies {
     implementation(libs.lifecycle.runtime)
 
     implementation(libs.navigation.ui)
-    implementation(libs.kotlin.serialization)
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
@@ -29,7 +28,6 @@ dependencies {
     devImplementation(project(":foundation:test"))
 
     implementation(project(":features:user:business"))
-    implementation(project(":features:user:profile"))
 
     implementation(project(":database"))
 

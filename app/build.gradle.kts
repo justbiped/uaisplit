@@ -41,9 +41,8 @@ dependencies {
     implementation(projects.transaction.transaction)
 
     implementation(projects.automation)
-    implementation(projects.features.profile)
+    implementation(projects.features.user.profile)
     implementation(projects.features.settings)
-    implementation(projects.features.user)
 
     implementation(projects.foundation.core)
     implementation(projects.foundation.theme)
