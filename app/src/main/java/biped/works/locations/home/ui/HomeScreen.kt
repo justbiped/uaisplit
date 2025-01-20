@@ -68,11 +68,10 @@ private fun rememberHomeState(
 fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 
     val state by rememberHomeState()
-
-    viewModel.instruction.collectWithLifecycle { instruction ->
-        when (instruction) {
-            is HomeInstruction.Navigate -> state.navigate(instruction.destination)
-            is HomeInstruction.Default -> state.default()
+    viewModel.uiState.collectWithLifecycle { state.default() }
+    viewModel.uiEvent.collectWithLifecycle { event ->
+        when (event) {
+            is HomeEvent.Navigate -> state.navigate(destination = event.destination)
         }
     }
 

@@ -1,24 +1,18 @@
 package com.biped.works.settings.ui
 
-import biped.works.coroutines.MutableUiStateFlow
 import com.biped.works.settings.data.UserSettings
+import com.favoriteplaces.core.SystemCompliance
 
-internal sealed interface UserSettingsInstruction {
-    data class UserSettingsState(
-        val settings: UserSettings = UserSettings(),
-        val isLoading: Boolean = false,
-        val isDynamicColorSupported: Boolean = false
-    ) : UserSettingsInstruction
+data class UserSettingsState(
+    val settings: UserSettings = UserSettings(),
+    val isLoading: Boolean = false,
+    val isDynamicColorSupported: Boolean = SystemCompliance.isDynamicColorSupported()
+)
 
-    data class Navigate(val destination: String) : UserSettingsInstruction
+internal sealed interface UserSettingsEvent {
+    data class Navigate(val destination: String) : UserSettingsEvent
 
     companion object {
         fun navigateToProfile() = Navigate("http://biped.works/profile")
     }
-}
-
-internal fun MutableUiStateFlow<UserSettingsInstruction>.update(
-    action: UserSettingsInstruction.UserSettingsState.() -> UserSettingsInstruction.UserSettingsState
-) {
-    (value as? UserSettingsInstruction.UserSettingsState)?.also { value = action(it) }
 }

@@ -1,6 +1,10 @@
 package biped.works.locations.home.ui
 
-sealed interface HomeInstruction {
-    object Default : HomeInstruction
-    data class Navigate(val destination: Any) : HomeInstruction
+import androidx.compose.runtime.Stable
+
+sealed interface HomeEvent {
+    data class Navigate(val destination: Any) : HomeEvent
 }
+
+@Stable
+object HomeUiState

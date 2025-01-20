@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import biped.works.compose.collectWithLifecycle
 import biped.works.transaction.R
 import com.biped.locations.theme.CashTheme
@@ -44,12 +45,11 @@ internal fun TransactionScreen(
     viewModel: TransactionViewModel,
     onNavigateUp: () -> Unit
 ) {
-    var state by remember { mutableStateOf(TransactionInstruction.State()) }
+    val state by viewModel.uiState.collectAsStateWithLifecycle(TransactionState())
 
-    viewModel.instruction.collectWithLifecycle { instruction ->
-        when (instruction) {
-            is TransactionInstruction.State -> state = instruction
-            is TransactionInstruction.FailedToUpdate -> print("show failure message")
+    viewModel.uiEvent.collectWithLifecycle { event ->
+        when (event) {
+            TransactionEvent.FailedToUpdate -> print("")
         }
     }
 

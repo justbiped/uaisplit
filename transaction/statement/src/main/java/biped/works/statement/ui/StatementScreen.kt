@@ -24,9 +24,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -35,6 +32,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import biped.works.compose.animtation.LocalPadding
 import biped.works.compose.collectWithLifecycle
 import biped.works.statement.R
@@ -50,16 +48,18 @@ import com.biped.locations.theme.components.Loading
 import java.time.YearMonth
 
 @Composable
-internal fun StatementScreen(viewModel: StatementViewModel, onNavigate: (destination: Any) -> Unit) {
-    var state by remember { mutableStateOf(StatementInstruction.State()) }
+internal fun StatementScreen(
+    viewModel: StatementViewModel,
+    onNavigate: (destination: Any) -> Unit
+) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle(StatementState())
     val context = LocalContext.current
 
-    viewModel.instruction.collectWithLifecycle { instruction ->
+    viewModel.uiEvent.collectWithLifecycle { instruction ->
         when (instruction) {
-            is StatementInstruction.State -> state = instruction
-            is StatementInstruction.OpenTransaction -> onNavigate(instruction.destination)
-            is StatementInstruction.AddTransaction -> onNavigate(instruction.destination)
-            is StatementInstruction.FailedToFetchStatement -> showFetchFailToast(context)
+            is StatementEvent.OpenTransaction -> onNavigate(instruction.destination)
+            is StatementEvent.AddTransaction -> onNavigate(instruction.destination)
+            is StatementEvent.FailedToFetchStatement -> showFetchFailToast(context)
         }
     }
 

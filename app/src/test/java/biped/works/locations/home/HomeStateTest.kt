@@ -1,21 +1,5 @@
 package biped.works.locations.home
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.navigation.testing.TestNavHostController
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import biped.works.compose.navigation.NavGraph
-import biped.works.compose.navigation.ProfileGraph
-import biped.works.locations.home.ui.HomeState
-import biped.works.statement.StatementGraph
-import biped.works.test.compose.testNavController
-import com.biped.works.settings.SettingsDestination
-import com.biped.works.settings.SettingsGraph
-import com.google.common.truth.Truth.assertThat
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-
 //@RunWith(AndroidJUnit4::class)
 //class HomeStateTest {
 

@@ -1,7 +1,6 @@
 package com.biped.works.settings.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -14,14 +13,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import biped.works.compose.collectWithLifecycle
 import com.biped.locations.theme.BigSpacer
@@ -32,37 +27,16 @@ import com.biped.works.profile.ProfileHeader
 import com.biped.works.settings.data.ThemeSettings
 import com.biped.works.settings.data.UserSettings
 
-@Stable
-private data class StateHolder(
-    private val navController: NavHostController,
-) {
-    var viewState by mutableStateOf(UserSettingsInstruction.UserSettingsState())
-
-    fun updateSettings(viewState: UserSettingsInstruction.UserSettingsState) {
-        this.viewState = viewState
-    }
-
-    fun navigateToProfile(route: String) {
-        navController.navigate(deepLink = Uri.parse(route))
-    }
-}
-
-@Composable
-private fun rememberSettingsState(navigator: NavHostController) = remember {
-    mutableStateOf(StateHolder(navigator))
-}
-
 @Composable
 internal fun UserSettingsScreen(
     viewModel: UserSettingsViewModel,
     navController: NavHostController
 ) {
-    val stateHolder by rememberSettingsState(navController)
+    val state = viewModel.uiState.collectAsStateWithLifecycle(UserSettingsState())
 
-    viewModel.instruction.collectWithLifecycle { instruction ->
-        when (instruction) {
-            is UserSettingsInstruction.UserSettingsState -> stateHolder.updateSettings(instruction)
-            is UserSettingsInstruction.Navigate -> stateHolder.navigateToProfile(instruction.destination)
+    viewModel.uiEvent.collectWithLifecycle { event ->
+        when (event) {
+            is UserSettingsEvent.Navigate -> navController.navigate(event.destination)
         }
     }
 
@@ -72,17 +46,17 @@ internal fun UserSettingsScreen(
         }
 
         override fun onThemeSettingsChanged(themeSettings: ThemeSettings) {
-            viewModel.changeThemeSettings(stateHolder.viewState.settings.copy(theme = themeSettings))
+            viewModel.changeThemeSettings(themeSettings)
         }
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
         UserSettingsUi(
-            userSettings = stateHolder.viewState.settings,
-            isDynamicColorSupported = stateHolder.viewState.isDynamicColorSupported,
+            userSettings = state.value.settings,
+            isDynamicColorSupported = state.value.isDynamicColorSupported,
             interactor = interactor
         )
-        LoadingIndicator(isLoading = stateHolder.viewState.isLoading)
+        LoadingIndicator(isLoading = state.value.isLoading)
     }
 }
 
