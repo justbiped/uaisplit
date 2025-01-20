@@ -1,4 +1,4 @@
-package com.biped.works.profile.ui
+package com.biped.works.profile
 
 //internal sealed interface Instruction {
 //    data class UpdateProfile(

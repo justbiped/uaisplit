@@ -28,7 +28,7 @@ import com.biped.locations.theme.BigSpacer
 import com.biped.locations.theme.CashTheme
 import com.biped.locations.theme.Dimens
 import com.biped.locations.theme.components.LargeLabel
-import com.biped.works.profile.ui.ProfileHeader
+import com.biped.works.profile.ProfileHeader
 import com.biped.works.settings.data.ThemeSettings
 import com.biped.works.settings.data.UserSettings
 

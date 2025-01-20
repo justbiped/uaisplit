@@ -1,4 +1,4 @@
-package com.biped.works.profile.ui
+package com.biped.works.profile
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable

@@ -1,13 +1,11 @@
-package com.biped.works.profile.ui
+package com.biped.works.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import biped.works.coroutines.asUiState
 import biped.works.coroutines.launchIO
-import com.biped.works.profile.ObserveProfileUseCase
-import com.biped.works.profile.SaveProfileUseCase
-import com.biped.works.profile.data.toDomain
-import com.biped.works.profile.data.toUiModel
+import biped.works.user.ObserveUserUseCase
+import biped.works.user.SaveProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +18,7 @@ import kotlinx.coroutines.flow.update
 
 @HiltViewModel
 internal class ProfileViewModel @Inject constructor(
-    private val observeProfile: ObserveProfileUseCase,
+    private val observeUser: ObserveUserUseCase,
     private val saveUser: SaveProfileUseCase
 ) : ViewModel() {
 
@@ -35,8 +33,8 @@ internal class ProfileViewModel @Inject constructor(
     }
 
     private fun loadUserProfile() {
-        observeProfile()
-            .onEach { profile -> _uiState.update { it.copy(uiModel = profile.toUiModel()) } }
+        observeUser()
+            .onEach { user -> _uiState.update { it.copy(uiModel = user.toProfile()) } }
             .launchIn(viewModelScope)
     }
 
@@ -44,7 +42,7 @@ internal class ProfileViewModel @Inject constructor(
         _uiState.update { it.copy(isLoading = true) }
 
         viewModelScope.launchIO {
-            saveUser(profile.toDomain())
+            saveUser(profile.toUser())
                 .onSuccess {
                     _uiState.update { it.copy(isLoading = false) }
                     _uiEvent.tryEmit(ProfileEvent.ProfileSaved)

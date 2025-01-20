@@ -1,4 +1,4 @@
-package com.biped.works.profile.ui
+package com.biped.works.profile
 
 data class UpdateProfile(
     val uiModel: ProfileUiModel = ProfileUiModel(),

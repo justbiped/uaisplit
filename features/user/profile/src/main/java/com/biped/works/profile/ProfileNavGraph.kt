@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import biped.works.compose.animtation.LocalAnimatedVisibilityProvider
 import biped.works.compose.navigation.ProfileGraph
-import com.biped.works.profile.ui.ProfileScreen
 
 fun NavGraphBuilder.profileNavGraph(
     navController: NavHostController
