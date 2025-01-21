@@ -14,10 +14,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -26,7 +24,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import biped.works.compose.animtation.LocalPadding
 import biped.works.compose.collectWithLifecycle
-import biped.works.compose.navigation.currentRouteState
 import biped.works.locations.home.HomeNavigation
 import biped.works.locations.home.NavigationGraph
 import biped.works.locations.main.BottomNavItem
@@ -36,70 +33,47 @@ import biped.works.statement.StatementGraph
 import com.biped.locations.theme.CashTheme
 import com.biped.works.settings.SettingsGraph
 
-@Stable
-internal data class HomeState(
-    val navController: NavHostController
-) {
-    val currentDestination: Any?
-        @Composable get() {
-            val currentRoute = navController.currentRouteState.value
-            return HomeNavigation.getDestination(currentRoute)
-        }
-
-    val showBottomBar: Boolean @Composable get() = HomeNavigation.contains(currentDestination)
-
-    fun default() {}
-
-    fun navigate(destination: Any) {
-        navController.navigate(destination) {
-            popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-            launchSingleTop = true
-            restoreState = true
-        }
-    }
-}
-
-@Composable
-private fun rememberHomeState(
-    navController: NavHostController = rememberNavController()
-) = remember { mutableStateOf(HomeState(navController)) }
-
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
+    val mainNavController = rememberNavController()
+    val currentDestination by mainNavController.currentDestinationState()
 
-    val state by rememberHomeState()
-    viewModel.uiState.collectWithLifecycle { state.default() }
     viewModel.uiEvent.collectWithLifecycle { event ->
         when (event) {
-            is HomeEvent.Navigate -> state.navigate(destination = event.destination)
+            is HomeEvent.Navigate -> mainNavController.navigateTo(event.destination)
         }
     }
 
-    HomeScreenUi(state = state, onRouteSelected = { viewModel.selectHomeDestination(it) })
+    HomeScreenUi(
+        currentDestination = currentDestination,
+        navigationGraph = { NavigationGraph(mainNavController) },
+        onRouteSelected = { viewModel.selectHomeDestination(it) })
 }
 
 @Composable
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 private fun HomeScreenUi(
-    state: HomeState,
-    onRouteSelected: (destination: Any) -> Unit = {}
+    currentDestination: Any?,
+    navigationGraph: @Composable () -> Unit,
+    onRouteSelected: (Any) -> Unit
 ) {
+    val showBottomBar = currentDestination != null
     Scaffold(
         bottomBar = {
             AnimatedVisibility(
-                visible = state.showBottomBar,
+                visible = showBottomBar,
                 enter = slideInVertically(spring()) { it },
                 exit = shrinkVertically() + slideOutVertically { it },
             ) {
                 BottomNavigation(
-                    currentRoute = state.currentDestination,
+                    currentDestination = currentDestination,
                     onSelectDestination = { onRouteSelected(it) })
             }
         }
     ) { innerPadding ->
         LocalPadding(innerPadding) {
             Column {
-                NavigationGraph(navController = state.navController)
+                navigationGraph()
             }
         }
     }
@@ -107,12 +81,13 @@ private fun HomeScreenUi(
 
 @Composable
 fun BottomNavigation(
-    currentRoute: Any?, onSelectDestination: (destination: Any) -> Unit = {}
+    currentDestination: Any?,
+    onSelectDestination: (destination: Any) -> Unit = {}
 ) {
     NavigationBar {
         HomeNavigation.destinations.forEach { destination ->
             val navItem = getMenuNavItem(destination)
-            val isSelected = destination == currentRoute
+            val isSelected = destination == currentDestination
             val icon = if (isSelected) navItem.selectedIcon else navItem.unselectedIcon
 
             NavigationBarItem(
@@ -132,11 +107,27 @@ private fun getMenuNavItem(destination: Any): BottomNavItem {
     }
 }
 
+@Composable
+private fun NavHostController.currentDestinationState() = produceState<Any?>(HomeNavigation.start) {
+    currentBackStackEntryFlow.collect { backStack ->
+        val route = backStack.destination.route.orEmpty()
+        value = HomeNavigation.getDestination(route)
+    }
+}
+
+private fun NavHostController.navigateTo(destination: Any) {
+    navigate(destination) {
+        popUpTo(graph.findStartDestination().id) { saveState = true }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
     CashTheme {
-        HomeScreenUi(rememberHomeState().value)
+        HomeScreenUi(HomeNavigation.start, {}, {})
     }
 }
 
@@ -144,7 +135,7 @@ fun HomeScreenPreview() {
 @Composable
 fun BottomBarPreview() {
     CashTheme {
-        BottomNavigation(currentRoute = HomeNavigation.destinations.first())
+        BottomNavigation(currentDestination = HomeNavigation.destinations.first())
     }
 }
 

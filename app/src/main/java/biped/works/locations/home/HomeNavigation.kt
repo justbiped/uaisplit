@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import biped.works.compose.animtation.LocalNavAnimatedVisibilityScope
 import biped.works.compose.animtation.LocalSharedTransitionScope
 import biped.works.statement.StatementGraph
 import biped.works.statement.statementNavGraph
@@ -18,6 +17,8 @@ object HomeNavigation {
         StatementGraph,
         SettingsGraph
     )
+
+    val start = destinations.first()
 
     fun contains(destination: Any?): Boolean = destinations.contains(destination)
 
@@ -32,7 +33,7 @@ fun NavigationGraph(navController: NavHostController) {
         CompositionLocalProvider(
             LocalSharedTransitionScope provides this
         ) {
-            NavHost(navController, startDestination = StatementGraph::class) {
+            NavHost(navController, startDestination = HomeNavigation.start::class) {
                 statementNavGraph(navController)
                 settingsNavGraph(navController)
             }
