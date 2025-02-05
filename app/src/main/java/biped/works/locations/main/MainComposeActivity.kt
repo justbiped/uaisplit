@@ -6,12 +6,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import biped.works.compose.LocalWindow
+import biped.works.compose.LocalWindowProvider
 import biped.works.compose.collectWithLifecycle
+import biped.works.compose.setStatusBarContrast
 import biped.works.locations.home.ui.HomeScreen
 import com.biped.locations.theme.CashTheme
 import com.biped.works.settings.data.ThemeSettings
@@ -38,11 +45,14 @@ class MainComposeActivity : ComponentActivity() {
                 }
             }
 
-            CashTheme(
-                colorTheme = themeSettings.colorScheme,
-                useDynamicColors = themeSettings.useDynamicColors
-            ) {
-                HomeScreen()
+            LocalWindowProvider(window) {
+                CashTheme(
+                    colorTheme = themeSettings.colorScheme,
+                    useDynamicColors = themeSettings.useDynamicColors
+                ) {
+                    LocalWindow.current?.setStatusBarContrast(MaterialTheme.colorScheme.background)
+                    HomeScreen()
+                }
             }
         }
     }
@@ -52,3 +62,4 @@ class MainComposeActivity : ComponentActivity() {
         navController.handleDeepLink(intent)
     }
 }
+
